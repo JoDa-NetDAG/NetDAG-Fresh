@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetDAG — Blog</title>
+  <meta name="description" content="Official NetDAG blog:  research, bonding curve mechanics, Guardian AI insights, ecosystem updates and long-form analysis." />
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare. com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="../js/main.js" defer></script>
+
+  <style>
+    /* Blog page-specific styles */
+    .blog-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    
+    .blog-card{
+      background: #0f1120;
+      border:  1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 28px;
+      box-shadow:  0 2px 12px rgba(0,0,0,.18);
+    }
+    
+    .blog-card h2{
+      margin:  0 0 14px;
+      color: var(--accent);
+    }
+    
+    .blog-meta{
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+    
+    .blog-card ul{
+      padding-left: 20px;
+    }
+    
+    .blog-card ul li{
+      margin-bottom:  8px;
+    }
+
+    /* Blog article styling */
+    .blog-article {
+      background: #0f1120;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    }
+    
+    .blog-article h2 {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+    
+    .blog-article p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    
+    .blog-article ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .blog-article ul li {
+      margin-bottom:  8px;
+      line-height: 1.6;
+    }
+
+    /* Hero tweaks for blog page */
+    .hero-blog{
+      background-image: url('../images/BondingCurve1.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    }
+    
+    .hero-blog .hero-overlay{
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .hero-blog .hero-title{
+      color: var(--accent);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+    }
+    
+    .hero-blog .hero-subtitle{
+      color: #000000;
+      background: rgba(255,255,255,.75);
+      padding: 6px 10px;
+      border-radius:  10px;
+      display: inline-block;
+      max-width: 780px;
+      font-size: 1.1rem;
+    }
+
+    .curve-section {
+      padding-top: 28px;
+    }
+  </style>
+</head>
+
+<body class="blog-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026). </span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="NetDAG home">
+        <img src="../images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../provenance.html">Provenance dApp</a></li>
+          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="../guardian.html">Guardian</a></li>
+          <li><a href="../dvpn.html">dVPN</a></li>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="../stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="../guardian.html">Guardian</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
+        <li><a href="../dvpn.html">dVPN</a></li>
+        <li><a href="whitepaper.html">Whitepaper</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="tokenomics.html">Tokenomics</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="ambassador.html">Ambassador</a></li>
+        <li><a href="charity.html">Charity</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="hero-banner hero-blog" id="main-content" role="main">
+    <div class="hero-overlay">
+      <h1 class="hero-title">NetDAG Blog</h1>
+      <p class="hero-subtitle">
+        Deep dives, bonding-curve mechanics, Guardian AI insights, real-life product authenticity
+        and ecosystem strategy — all in one place.
+      </p>
+    </div>
+  </main>
+
+  <!-- BLOG BODY -->
+  <section class="curve-section">
+    <div class="blog-wrap">
+
+      <!-- ============= NEWEST ARTICLE ON TOP ============= -->
+      
+      <!-- Article 5:  Guardian AI Staking -->
+      <article id="post-5" class="blog-article">
+        <p class="blog-meta">No 5: Published · Dec 2025 · Guardian AI Staking - Coming soon... </p>
+        <h2>The Neuron Guardian AI arrives soon — AI-powered protection that keeps NDG smarter, safer, and one step ahead. </h2>
+     
+        <p>
+          NetDAG will introduce Guardian-AI staking — a dynamic system where reward strength adapts 
+          to ecosystem performance, liquidity flow, and real-time market sentiment. Traditional fixed APR staking (30 days – 3 years) 
+          launches first as Phase 1. AI-enhanced staking (Phase 2) arrives after token launch.
+        </p>
+      </article>
+
+      <div class="section-separator"></div>
+
+      <!-- Article 4: RWA & Provenance -->
+      <article id="post-4" class="blog-article">
+        <p class="blog-meta">No 4: Published · Dec 2025 · RWA & Provenance</p>
+        <h2>Real-World Assets, Provenance &amp; Why We Want Brands Like Louis Vuitton, Rolex, Nike, Roche Products, Manuka Honey, Kobe Beef, etc - On-Chain</h2>
+
+        <p>
+          Everyone talks about "real-world assets" (RWA), but for most people it still feels
+          abstract. NetDAG's approach is simple: connect <strong>real products, real purchases
+          and real brand stories</strong> to on-chain proofs that anyone can verify.
+        </p>
+
+        <p>
+          Our provenance dApp is designed so that a sneaker drop from a brand like Nike could
+          carry a cryptographic history:  where it was produced, where it was shipped, which
+          campaign it belonged to, and who actually bought it — without exposing private
+          personal data. 
+        </p>
+
+        <p>
+          When those proofs are tied to NDG rewards, shopping stops being a passive act.
+          Every legitimate purchase becomes a signal that supports the ecosystem and unlocks
+          loyalty on-chain.  That's the bridge we're building between Web2 brands and a
+          stability-first Web3 economy.
+        </p>
+
+        <p>
+          Our early conversations with merchants and manufacturers focus on one thing: 
+          <strong>trust</strong>. They don't want casino-tokens, they want predictable rails.
+          That is exactly what the NetDAG bonding curve and Guardian are here to provide.
+        </p>
+      </article>
+
+      <div class="section-separator"></div>
+
+      <!-- Article 3: Bonding Curves vs. Order Books -->
+      <article id="post-3" class="blog-article">
+        <p class="blog-meta">No 3: Published · Nov 2025 · NetDAG Research</p>
+        <h2>Bonding Curves vs. Order Books — Why Predictable Liquidity Wins</h2>
+
+        <p>
+          Most crypto traders are used to the chaos of order books:  walls of bids and asks,
+          sudden gaps in liquidity, and prices that can move 20–30% in seconds when a big
+          market order hits. 
+        </p>
+
+        <p>
+          A <strong>bonding curve</strong> defines price using a mathematical function. 
+          Liquidity comes from a contract — not from disappearing limit orders. 
+        </p>
+
+        <p>NetDAG's curve is smooth, monotonic, and designed to resist manipulation. </p>
+
+        <ul>
+          <li><strong>Launch: </strong> Guaranteed pricing from day one</li>
+          <li><strong>Panic:</strong> Liquidity never vanishes</li>
+          <li><strong>Growth:</strong> Curve becomes harder to move over time</li>
+        </ul>
+
+        <p>
+          Over time this gives builders and long-term holders something order books rarely offer:
+          a <strong>transparent map of where price pressure will appear</strong>. You can plan
+          token allocations, staking products and integrations without praying that liquidity
+          is there when you need it.
+        </p>
+      </article>
+
+      <div class="section-separator"></div>
+
+      <!-- Article 2: Guardian AI -->
+      <article id="post-2" class="blog-article">
+        <p class="blog-meta">No 2: Published · Nov 2025 · NetDAG Guardian</p>
+        <h2>Inside NetDAG Guardian AI:  Proactive Liquidity &amp; Risk Signals</h2>
+
+        <p>
+          If the bonding curve is the <strong>math engine</strong>, Guardian is the
+          <strong>nervous system</strong>. It watches for unusual buying/selling,
+          wallet clustering, external liquidity shifts and macro red flags.
+        </p>
+
+        <ul>
+          <li>Speed &amp; size of trades</li>
+          <li>Whale accumulation or dispersal</li>
+          <li>Cross-venue liquidity pressure</li>
+          <li>Extreme market fear signals</li>
+        </ul>
+
+        <p>
+          Guardian provides clear, human-readable risk signals — not black-box trading.
+          At launch it will run in advisory mode only, showing what it <em>would</em> have done
+          so that the community can judge its behaviour before any automatic actions are enabled.
+        </p>
+
+        <p>
+          This approach lets NetDAG evolve a <strong>transparent risk culture</strong>:
+          people can see why alerts are triggered, how liquidity reacts and how policy
+          changes improve stability over time.
+        </p>
+      </article>
+
+      <div class="section-separator"></div>
+
+      <!-- Article 1: Shock Absorber -->
+      <article id="post-1" class="blog-article">
+        <p class="blog-meta">No 1: Published · Oct 2025 · Shock Absorber</p>
+        <h2>Why a "Mathematical Shock Absorber" Matters for Web3</h2>
+
+        <p>
+          NetDAG aims to behave like real infrastructure — reliable, robust and predictable.
+          A shock absorber smooths extreme moves and makes catastrophic crashes far harder. 
+        </p>
+
+        <ul>
+          <li>Staking + savings stability</li>
+          <li>dVPN / bandwidth pricing</li>
+          <li>Partnerships that depend on predictable liquidity</li>
+        </ul>
+
+        <p>
+          When partners plug into NetDAG, they are effectively plugging into a
+          <strong>pre-engineered risk profile</strong>. They don't have to guess what
+          happens if volume spikes or macrosentiment crashes — the curve and reserve
+          are already tuned to absorb those shocks.
+        </p>
+
+        <p>
+          That is the foundation you need if you want to host RWAs, loyalty points, or
+          real-world payments on-chain without dragging people into another volatility circus.
+        </p>
+      </article>
+
+      <!-- ADD NEW BLOG POSTS ABOVE ARTICLE 1 IF YOU WRITE MORE LATER -->
+    </div>
+  </section>
+
+  <!-- Bottom separator -->
+  <div class="section-separator"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
+          NetDAG builds next-gen infrastructure with math-backed stability.
+        </div>
+        <a href="vision.html" class="btn-explore-vision">Explore the Vision</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="../provenance.html">Provenance dApp</a></li>
+            <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="tokenomics.html">Tokenomics</a></li>
+            <li><a href="whitepaper.html">Whitepaper</a></li>
+            <li><a href="vision.html">Vision</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="ambassador.html">Ambassador Program</a></li>
+            <li><a href="charity.html">Charity</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r.php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+  </footer>
+
+  <script src="/js/buy-modals.js" defer></script>
+<script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetDAG — Ambassador Program</title>
+  <meta name="description" content="NetDAG Ambassador Program:  for creators, educators, and community leaders who want to promote a stability-first crypto economy." />
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="../js/main.js" defer></script>
+
+  <style>
+    /* Ambassador page-specific styles */
+    .amb-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+    
+    .page-title{
+      font-size: 2.1rem;
+      font-weight:  650;
+      margin:  0 0 8px;
+      color: #fff;
+    }
+    
+    .page-intro{
+      margin:  0 0 18px;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 0.96rem;
+      line-height:  1.7;
+    }
+
+    .amb-grid{
+      display: grid;
+      gap: 18px;
+    }
+    
+    @media(min-width: 900px){
+      .amb-grid{
+        grid-template-columns: minmax(0,1.1fr) minmax(0,0.9fr);
+        align-items: flex-start;
+      }
+    }
+
+    .amb-card{
+      background: #0f1120;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow:  0 2px 10px rgba(0,0,0,.18);
+    }
+    
+    .amb-card h2{
+      margin:  0 0 10px;
+      color: #fff;
+      font-size:  1.25rem;
+    }
+    
+    .amb-card h3{
+      margin: 0 0 8px;
+      color: #fff;
+      font-size:  1.02rem;
+    }
+    
+    .amb-text{
+      margin: 0 0 18px;
+      color: var(--text);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
+    .amb-list{
+      margin: 6px 0 18px;
+      padding-left: 18px;
+      color: var(--text);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    
+    .amb-list li+li{
+      margin-top: 8px;
+    }
+
+    .pill-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    
+    .pill{
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      font-size:  .8rem;
+      color: var(--muted);
+      background: rgba(15,23,42,.9);
+      white-space: nowrap;
+    }
+
+    .amb-callout{
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #10132a;
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .amb-steps{
+      margin:  6px 0 18px;
+      padding-left: 18px;
+      color: var(--text);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    
+    .amb-steps li+li{
+      margin-top: 8px;
+    }
+
+    .amb-faq{
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    .amb-faq details{
+      background: #0f1120;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+    
+    .amb-faq summary{
+      list-style: none;
+      color: #fff;
+      font-size:  .95rem;
+      font-weight: 550;
+    }
+    
+    .amb-faq summary::-webkit-details-marker{display: none;}
+    
+    .amb-faq p{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    .cta-box{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top:  10px;
+    }
+    
+    .cta-link{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: var(--accent);
+      color: #000;
+    }
+    
+    .cta-link.alt{
+      background: transparent;
+      color: #fff;
+    }
+
+    /* Hero styling */
+    .hero-ambassador{
+      background-image: url('../images/ndg13.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    }
+    
+    .hero-ambassador .hero-overlay{
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 0;
+    }
+    
+    .hero-ambassador .hero-title{
+      color: var(--accent);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom:  20px;
+    }
+    
+    .hero-ambassador .hero-subtitle{
+      color: #b20303;
+      max-width: 720px;
+      font-size: 1.1rem;
+    }
+
+    .curve-section{
+      padding-top: 28px;
+    }
+  </style>
+</head>
+
+<body class="ambassador-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="NetDAG home">
+        <img src="../images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../provenance.html">Provenance dApp</a></li>
+          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="../guardian.html">Guardian</a></li>
+          <li><a href="../no-gas.html">Easy Access</a></li>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="../stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="../guardian.html">Guardian</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
+        <li><a href="../no-gas.html">Easy Access</a></li>
+        <li><a href="whitepaper.html">Whitepaper</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="tokenomics.html">Tokenomics</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="ambassador.html">Ambassador</a></li>
+        <li><a href="charity.html">Charity</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="hero-banner hero-ambassador" id="main-content" role="main">
+    <div class="hero-overlay">
+      <h1 class="hero-title">NetDAG Ambassadors</h1>
+      <p class="hero-subtitle"></p>
+    </div>
+  </main>
+
+  <!-- CONTENT -->
+  <section class="curve-section">
+    <div class="amb-wrap">
+      <header>
+        <h1 class="page-title">Ambassador Program</h1>
+        <p class="page-intro">
+          The NetDAG Ambassador Program is a <strong>relationship, not a paid shill gig</strong>. 
+          If you genuinely believe in building a math-backed, real-utility crypto economy and want to help
+          explain it to others, we would love to hear from you.
+        </p>
+      </header>
+
+      <div class="amb-grid">
+        <!-- Left column -->
+        <div class="amb-main">
+          <article class="amb-card">
+            <h2>Who this is for</h2>
+            <p class="amb-text">We welcome people who already add value to their communities: </p>
+            <ul class="amb-list">
+              <li>Content creators (YouTube, TikTok, X, long-form writers, podcasters). </li>
+              <li>Community builders (Telegram/Discord admins, meetup organizers, local leaders).</li>
+              <li>Educators and explainers who enjoy turning complex topics into clear language.</li>
+              <li>Researchers / DeFi and infra nerds who want to test and stress-test our ideas.</li>
+            </ul>
+            <div class="pill-row">
+              <span class="pill">No pump-and-dump</span>
+              <span class="pill">No fake promises</span>
+              <span class="pill">Long-term mindset</span>
+            </div>
+          </article>
+
+          <article class="amb-card">
+            <h2>What NetDAG Ambassadors do</h2>
+            <ul class="amb-list">
+              <li><strong>Teach &amp; explain:</strong> create honest content about NetDAG, NDG, the bonding curve, Guardian, dVPN, and provenance.</li>
+              <li><strong>Host conversations:</strong> AMAs, spaces, meetups or private sessions for your local community.</li>
+              <li><strong>Give feedback:</strong> share what your audience actually understands, likes, or worries about.</li>
+              <li><strong>Spot partnerships:</strong> introduce projects, companies or communities that could benefit from NetDAG rails.</li>
+              <li><strong>Protect the vibe:</strong> help keep our ecosystem away from hype, scams, and unrealistic expectations.</li>
+            </ul>
+            <div class="amb-callout">
+              Ambassadorship is always <strong>opt-in and reversible</strong>. If at any point you feel misaligned with our direction,
+              we prefer an honest conversation over forced branding.
+            </div>
+          </article>
+
+          <article class="amb-card">
+            <h2>How it works</h2>
+            <ol class="amb-steps">
+              <li><strong>Introduce yourself:</strong> send us a short message or email with links to your work and communities.</li>
+              <li><strong>We talk:</strong> if there is a good fit, we schedule a call or async chat to align on values and expectations.</li>
+              <li><strong>Trial phase:</strong> we start with a small, low-pressure collaboration (content pieces, events, or experiments).</li>
+              <li><strong>Ongoing role:</strong> if it works for both sides, we define a longer-term ambassador path with clear goals.</li>
+            </ol>
+            <div class="amb-callout">
+              Ambassadorship is always <strong>opt-in and reversible</strong>.  If at any point you feel misaligned with our direction,
+              we prefer an honest conversation over forced branding.
+            </div>
+          </article>
+        </div>
+
+        <!-- Right column -->
+        <aside class="amb-card">
+          <h2>What we look for</h2>
+          <p class="amb-text">
+            There is no minimum follower count.  We care more about <strong>alignment and integrity</strong>: 
+          </p>
+          <ul class="amb-list">
+            <li>You are comfortable saying "I don't know" instead of inventing answers.</li>
+            <li>You are willing to highlight risks as well as opportunities.</li>
+            <li>You care about users more than short-term price action.</li>
+            <li>You are okay rejecting shady offers, even if they pay more.</li>
+          </ul>
+
+          <h3>What ambassadors can receive</h3>
+          <ul class="amb-list">
+            <li>NDG-denominated rewards tied to real impact (not pure follower numbers).</li>
+            <li>Early access to features, documents, and discussions.</li>
+            <li>Direct communication with the core contributors.</li>
+            <li>Visibility on the website and official channels where appropriate.</li>
+          </ul>
+
+          <div class="amb-callout">
+            Rewards are always <strong>transparent and capped</strong>. We do not sell private allocations
+            or guaranteed returns.  Ambassadors are partners, not insiders.
+          </div>
+
+          <h3>Quick questions</h3>
+          <div class="amb-faq">
+            <details>
+              <summary>Is this a paid job?</summary>
+              <p>
+                No. It is a flexible collaboration.  We may reward contributions, but we do not hire
+                people to "say only nice things" or to manufacture hype. 
+              </p>
+            </details>
+            <details>
+              <summary>Do I need to be a DeFi expert?</summary>
+              <p>
+                Basic crypto literacy helps, but you do not need to be a solidity engineer.
+                We can support you with materials, diagrams, and explanations.
+              </p>
+            </details>
+            <details>
+              <summary>Can I be an ambassador for other projects too?</summary>
+              <p>
+                Yes, as long as there is no conflict of interest and you stay transparent.
+                We will decline collaborations that promote obvious scams or pump-and-dump schemes.
+              </p>
+            </details>
+            <details>
+              <summary>How do I apply?</summary>
+              <p>
+                Use the contact options below. Share who you are, what you already do, and how you
+                imagine contributing.  Short and honest is better than a long sales pitch.
+              </p>
+            </details>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom separator -->
+  <div class="section-separator"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
+          NetDAG is not another short-term token.  We build next-gen infrastructure
+          for the real world — with math-backed stability and long-term commitment.
+          Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="vision.html" class="btn-explore-vision">Explore the Vision</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="../provenance.html">Provenance dApp</a></li>
+            <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="tokenomics.html">Tokenomics</a></li>
+            <li><a href="whitepaper.html">Whitepaper</a></li>
+            <li><a href="vision.html">Vision</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="ambassador.html">Ambassador Program</a></li>
+            <li><a href="charity.html">Charity</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r.php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+  </footer>
+
+  <script src="/js/buy-modals.js" defer></script>
+<script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

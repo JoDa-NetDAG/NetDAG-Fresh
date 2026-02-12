@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legal | NetDAG</title>
+  <meta name="description" content="Legal notice and disclaimers for NetDAG websites, apps, tokens, and materials." />
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="../js/main.js" defer></script>
+
+  <style>
+    /* Legal page-specific styles */
+    html { scroll-behavior: smooth; }
+
+    .hero-legal{
+      min-height: 42vh;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    
+    .hero-legal .hero-overlay{
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 40px;
+    }
+    
+    .hero-legal{
+      background-image: url('../images/ndg1.png');
+    }
+    
+    .hero-legal .hero-title{
+      margin-bottom: .4rem;
+      font-size:  clamp(2rem, 4vw, 3rem);
+      color: var(--accent);
+    }
+
+    .hero-legal .hero-subtitle{
+      color: #f3f3f3;
+      max-width: 720px;
+    }
+
+    .page-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+    
+    .legal-card{
+      background: rgba(17,24,39,0.85);
+      border: 1px solid rgba(59,130,246,0.18);
+      border-radius: 16px;
+      padding: 24px 26px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+      -webkit-backdrop-filter: blur(2px) saturate(1.1);
+      backdrop-filter: blur(2px) saturate(1.1);
+    }
+    
+    .legal-card h1{
+      font-size: 1.6rem;
+      margin:  0 0 18px;
+      color: #fff;
+    }
+    
+    .legal-card h2{
+      font-size:  1.18rem;
+      margin: 24px 0 8px;
+      color: #fff;
+    }
+    
+    .legal-card p{
+      margin: 0 0 18px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    
+    .legal-card ul{
+      margin: 0 0 18px 18px;
+      padding:  0;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    
+    .legal-card li+li{
+      margin-top: 6px;
+    }
+    
+    .legal-muted{
+      color: #a9acc0;
+      font-size: 0.9rem;
+    }
+    
+    .legal-note{
+      font-size: 0.88rem;
+      color: #9ca3c9;
+      margin-top: 4px;
+    }
+    
+    .legal-section-kicker{
+      font-size:  0.8rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body class="legal-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="NetDAG home">
+        <img src="../images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../provenance.html">Provenance dApp</a></li>
+          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="../guardian.html">Guardian</a></li>
+          <li><a href="../no-gas.html">Easy Access</a></li>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="../stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="../guardian.html">Guardian</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
+        <li><a href="../no-gas.html">Easy Access</a></li>
+        <li><a href="whitepaper.html">Whitepaper</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="tokenomics.html">Tokenomics</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="ambassador.html">Ambassador</a></li>
+        <li><a href="charity.html">Charity</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main id="main-content" class="hero-banner hero-legal">
+    <div class="hero-overlay">
+      <h1 class="hero-title">Legal Notice &amp; Disclaimers</h1>
+      <p class="hero-subtitle">
+        Please read this page carefully before using any NetDAG websites, interfaces, apps, or token-related services.
+      </p>
+    </div>
+  </main>
+
+  <!-- MAIN CONTENT -->
+  <section class="page-wrap">
+    <article class="legal-card" id="legal">
+      <h1>NetDAG Legal Notice</h1>
+      <p class="legal-muted">
+        This Legal Notice is a general information document.  It does not replace professional legal,
+        financial, or tax advice. The NetDAG ecosystem is still evolving; specific terms may be updated
+        or supplemented over time.
+      </p>
+
+      <section id="general">
+        <p class="legal-section-kicker">1. General Information</p>
+        <h2>NetDAG Project Overview</h2>
+        <p>
+          <strong>NetDAG</strong> is a technology initiative focused on building a stability-first crypto
+          economy using bonding-curve mechanics, AI-driven risk intelligence, privacy tools (such as dVPN),
+          and provenance infrastructure for real-world assets.  The website(s), dashboards, and interfaces
+          referred to collectively as "NetDAG Platform" are provided for informational and experimental use.
+        </p>
+        <p>
+          References to "we", "us", or "NetDAG" may include core contributors, developers, community members,
+          or other entities that contribute to the ecosystem. NetDAG is intended to operate in a
+          <strong>decentralized and community-driven manner</strong> over time.
+        </p>
+      </section>
+
+      <section id="no-advice">
+        <p class="legal-section-kicker">2. No Investment, Legal, or Tax Advice</p>
+        <h2>Information-Only Materials</h2>
+        <p>
+          All content made available via NetDAG — including websites, whitepapers, roadmaps, tokenomics,
+          blog posts, dashboards, and social media — is provided strictly for
+          <strong>informational and educational purposes only</strong>. 
+        </p>
+        <ul>
+          <li>Nothing on the NetDAG Platform constitutes financial, investment, legal, accounting, or tax advice. </li>
+          <li>No communication from NetDAG should be interpreted as a recommendation to buy, sell, or hold any asset.</li>
+          <li>You are solely responsible for your decisions and must conduct your own independent research.</li>
+        </ul>
+        <p class="legal-note">
+          You should always consult appropriately licensed professionals in your jurisdiction before making
+          any financial or legal decisions.
+        </p>
+      </section>
+
+      <section id="token">
+        <p class="legal-section-kicker">3. NDG Token Nature and Regulatory Status</p>
+        <h2>Utility Focus, No Guarantee of Classification</h2>
+        <p>
+          The <strong>NDG token</strong> is designed as a <strong>utility token</strong> intended to be used
+          within the NetDAG ecosystem (for example, access to features, incentives, governance participation,
+          or other protocol interactions). It is <strong>not</strong> intended to represent: 
+        </p>
+        <ul>
+          <li>Shares or equity in any company or legal entity;</li>
+          <li>Ownership rights to assets, revenue, or profits of any entity;</li>
+          <li>Debt or other financial instruments. </li>
+        </ul>
+        <p>
+          The legal and regulatory treatment of tokens varies by jurisdiction and may change over time.
+          NetDAG cannot guarantee how NDG will be classified in any specific country or region.
+          You are responsible for understanding and complying with the laws that apply to you.
+        </p>
+      </section>
+
+      <section id="no-offer">
+        <p class="legal-section-kicker">4. No Offer, Solicitation, or Distribution to Restricted Persons</p>
+        <h2>No Public Offering</h2>
+        <p>
+          Nothing on the NetDAG Platform shall be considered or construed as: 
+        </p>
+        <ul>
+          <li>An offer to sell, or a solicitation of an offer to buy, any securities or financial instruments;</li>
+          <li>A public offering or marketing of tokens or services in any jurisdiction;</li>
+          <li>Promotion directed at individuals or entities where such activities would be unlawful. </li>
+        </ul>
+        <p>
+          Access to certain features, token interactions, or presale mechanisms may be restricted or unavailable
+          to users in specific jurisdictions (for example where local regulations prohibit such participation).
+          Users are solely responsible for ensuring that they are <strong>not prohibited or restricted persons</strong>
+          under applicable sanctions, securities, or other regulatory regimes.
+        </p>
+      </section>
+
+      <section id="eligibility">
+        <p class="legal-section-kicker">5. User Eligibility and Responsibilities</p>
+        <h2>Who May Use NetDAG</h2>
+        <p>
+          By accessing or using the NetDAG Platform, you confirm that: 
+        </p>
+        <ul>
+          <li>You are at least the legal age of majority in your jurisdiction. </li>
+          <li>You have full power and authority to enter into and comply with these terms. </li>
+          <li>You are not accessing the Platform from a jurisdiction where such access or use is prohibited.</li>
+        </ul>
+        <p>
+          You agree that you will not use the Platform for any illegal activity, including but not limited to:
+          money laundering, terrorist financing, sanctions evasion, or fraudulent behavior.
+        </p>
+      </section>
+
+      <section id="risk">
+        <p class="legal-section-kicker">6. Digital Asset and Technology Risks</p>
+        <h2>High-Risk Environment</h2>
+        <p>
+          Interacting with blockchain systems, smart contracts, and digital assets (including NDG) involves
+          significant risks.  These may include, without limitation:
+        </p>
+        <ul>
+          <li>Extreme volatility in token prices and liquidity. </li>
+          <li>Permanent loss of tokens due to wallet loss, private key compromise, or user error.</li>
+          <li>Smart contract bugs, exploits, or protocol failures.</li>
+          <li>Network outages, congestion, or forks affecting transaction confirmation.</li>
+          <li>Unfavorable regulatory changes, restrictions, or enforcement actions.</li>
+        </ul>
+        <p class="legal-muted">
+          You should only use funds you can afford to lose in full. Past performance or simulations do not
+          guarantee future results. 
+        </p>
+      </section>
+
+      <section id="guardian">
+        <p class="legal-section-kicker">7. Guardian, AI, and Data Limitations</p>
+        <h2>No Guaranteed Outcomes from AI Components</h2>
+        <p>
+          NetDAG may use analytics, AI-assisted components (such as "Guardian" or Neuron), or other monitoring
+          tools to help the community better understand risk, liquidity, or market conditions. These systems
+          are <strong>experimental</strong> and: 
+        </p>
+        <ul>
+          <li>Do not guarantee accuracy, completeness, or timeliness of any signals or recommendations.</li>
+          <li>Do not remove or eliminate the risks of loss, manipulation, or volatility.</li>
+          <li>May fail, misinterpret data, or behave unpredictably due to technical or external factors.</li>
+        </ul>
+        <p>
+          Any insights or signals should be treated as informational only and never as investment or trading advice.
+        </p>
+      </section>
+
+      <section id="no-warranty">
+        <p class="legal-section-kicker">8. No Warranty</p>
+        <h2>"As Is" Basis</h2>
+        <p>
+          The NetDAG Platform, including any interfaces, smart contracts, tools, and content, is provided
+          on an <strong>"as is" and "as available"</strong> basis. NetDAG makes <strong>no warranties</strong>,
+          express or implied, including but not limited to: 
+        </p>
+        <ul>
+          <li>Accuracy, reliability, or completeness of information;</li>
+          <li>Fitness for a particular purpose or merchantability;</li>
+          <li>Non-infringement of third-party rights;</li>
+          <li>Continuous, uninterrupted, or secure access to the Platform. </li>
+        </ul>
+      </section>
+
+      <section id="liability">
+        <p class="legal-section-kicker">9. Limitation of Liability</p>
+        <h2>Extent of Responsibility</h2>
+        <p>
+          To the fullest extent permitted by applicable law, NetDAG, its contributors, developers, and affiliates
+          shall <strong>not be liable</strong> for any: 
+        </p>
+        <ul>
+          <li>Direct, indirect, incidental, special, punitive, or consequential damages;</li>
+          <li>Loss of profits, revenue, data, goodwill, or other intangible losses;</li>
+          <li>Damages arising from use or inability to use the Platform or tokens;</li>
+          <li>Unauthorized access, hacking, or security breaches affecting your accounts or wallets. </li>
+        </ul>
+        <p>
+          Where liability cannot be fully excluded, it shall be limited to the maximum extent allowed by law.
+        </p>
+      </section>
+
+      <section id="tax">
+        <p class="legal-section-kicker">10. Taxes and Reporting</p>
+        <h2>Your Tax Obligations</h2>
+        <p>
+          You are solely responsible for determining whether, and to what extent, any taxes apply to your
+          NetDAG-related activities, including acquiring, holding, or disposing of NDG or other assets,
+          and for reporting and remitting the correct amounts to the appropriate authorities.
+        </p>
+        <p>
+          NetDAG does not withhold or report taxes on your behalf and does not provide tax advice of any kind.
+        </p>
+      </section>
+
+      <section id="ip">
+        <p class="legal-section-kicker">11. Intellectual Property and Open-Source Components</p>
+        <h2>Rights in Content and Code</h2>
+        <p>
+          Unless explicitly stated otherwise, all branding elements (including the NetDAG name, logos,
+          visual identity, and site design), as well as original text, diagrams, and media on this website,
+          are protected by intellectual property rights owned or licensed by NetDAG.
+        </p>
+        <p>
+          Certain parts of the NetDAG codebase may use or reference <strong>open-source software</strong>
+          licensed under separate terms. Where applicable, those license terms will govern your use of those
+          specific components.
+        </p>
+        <p>
+          You may not reproduce, modify, publicly display, or distribute NetDAG content or trademarks without
+          prior written permission, except where such use is clearly permitted by applicable law.
+        </p>
+      </section>
+
+      <section id="links">
+        <p class="legal-section-kicker">12. Third-Party Links and Integrations</p>
+        <h2>External Services</h2>
+        <p>
+          The NetDAG Platform may contain links or integrations to third-party websites, applications, or
+          smart contracts (including exchanges, wallets, partners, or data providers). These are provided
+          solely for convenience. 
+        </p>
+        <ul>
+          <li>NetDAG does not control or endorse third-party services. </li>
+          <li>NetDAG is not responsible for the content, security, or policies of those services.</li>
+          <li>Your use of third-party services is entirely at your own risk and subject to their terms.</li>
+        </ul>
+      </section>
+
+      <section id="privacy">
+        <p class="legal-section-kicker">13. Privacy and Data Handling</p>
+        <h2>Minimal Collection Philosophy</h2>
+        <p>
+          NetDAG aims to minimize the collection of personal data and to rely, where possible, on on-chain
+          or pseudonymous interactions. However, some off-chain data (such as email addresses, analytics,
+          or support messages) may be processed to operate the Platform and communicate with users.
+        </p>
+        <p>
+          Any such data will be handled in line with applicable data protection laws and not sold to third
+          parties.  Separate privacy information may be provided in dedicated documents or notices.
+        </p>
+      </section>
+
+      <section id="forward-looking">
+        <p class="legal-section-kicker">14. Forward-Looking Statements</p>
+        <h2>Roadmaps and Expectations</h2>
+        <p>
+          Certain statements on the NetDAG Platform — including those regarding roadmap items, future features,
+          partnerships, or ecosystem growth — may be <strong>forward-looking statements</strong>. These are
+          inherently uncertain and subject to change due to technical, regulatory, market, or operational factors.
+        </p>
+        <p>
+          Actual outcomes may differ materially from any expressed or implied expectations. NetDAG does not
+          undertake any obligation to update such statements, except as required by law.
+        </p>
+      </section>
+
+      <section id="jurisdiction">
+        <p class="legal-section-kicker">15. Governing Law and Dispute Framework</p>
+        <h2>Local Variations</h2>
+        <p>
+          Because NetDAG aims to operate in a decentralized and cross-border context, there is no single,
+          definitive governing law for all interactions. To the extent that any relationship or dispute
+          must be evaluated under a specific legal system, the <strong>relevant law will typically be that
+          of the user's own jurisdiction</strong>, unless otherwise agreed or required. 
+        </p>
+        <p>
+          Nothing in this Legal Notice limits mandatory consumer or investor rights granted by applicable law.
+        </p>
+      </section>
+
+      <section id="changes">
+        <p class="legal-section-kicker">16. Changes to This Legal Notice</p>
+        <h2>Ongoing Updates</h2>
+        <p>
+          This Legal Notice may be updated, expanded, or otherwise modified from time to time, for example
+          to reflect new products, regulatory developments, or community governance decisions.
+        </p>
+        <p>
+          The <strong>most recent version</strong> will always be published on this page. Your continued use
+          of the NetDAG Platform after such changes constitutes acceptance of the updated terms.
+        </p>
+      </section>
+    </article>
+  </section>
+
+  <!-- Bottom separator -->
+  <div class="section-separator"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
+          NetDAG is not another short-term token.  We build next-gen infrastructure
+          for the real world — with math-backed stability and long-term commitment.
+          Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="vision. html" class="btn-explore-vision">Explore the Vision</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="../provenance.html">Provenance dApp</a></li>
+            <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="tokenomics.html">Tokenomics</a></li>
+            <li><a href="whitepaper.html">Whitepaper</a></li>
+            <li><a href="vision.html">Vision</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="ambassador.html">Ambassador Program</a></li>
+            <li><a href="charity.html">Charity</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r. php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+  </footer>
+
+  <script src="/js/buy-modals.js" defer></script>
+<script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

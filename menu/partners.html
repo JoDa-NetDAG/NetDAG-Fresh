@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetDAG — Partners</title>
+  <meta name="description" content="Partner with NetDAG to bring trust, stability, and real-world utility to your users.  Technology, exchanges, brands, NGOs—build with us." />
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare. com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="../js/main.js" defer></script>
+
+  <style>
+    /* Partners page-specific styles */
+    .p-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .p-card{
+      background:  #0f1120;
+      border:  1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      box-shadow:  0 2px 10px rgba(0,0,0,.18);
+    }
+    
+    .p-card h2{
+      margin:  0 0 12px;
+      color: #fff;
+      font-size:  1.35rem;
+    }
+    
+    .p-card h3{
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+    
+    .p-card p{
+      margin: 0 0 18px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .p-grid{
+      display: grid;
+      gap: 18px;
+    }
+    
+    @media(min-width: 980px){
+      .p-grid{
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .p-list{
+      list-style: none;
+      margin: 8px 0 18px;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    
+    .p-list li{
+      background: #0f1120;
+      border:  1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .tier-grid{
+      display: grid;
+      gap: 18px;
+    }
+    
+    @media(min-width: 980px){
+      .tier-grid{
+        grid-template-columns: repeat(3,1fr);
+      }
+    }
+    
+    .tier{
+      background: #0f1120;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+    }
+    
+    .tier h3{
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 1.08rem;
+    }
+    
+    .tier p{
+      margin: 0 0 18px;
+      color: var(--text);
+      font-size: 0.94rem;
+      line-height:  1.7;
+    }
+
+    .logos{
+      display: grid;
+      grid-template-columns: repeat(4,minmax(80px,1fr));
+      gap: 12px;
+    }
+    
+    .logo-box{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      min-height: 64px;
+      opacity: .85;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .cta-box{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    
+    .cta{
+      display: inline-flex;
+      gap: 10px;
+      align-items:  center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-decoration: none;
+      background: var(--accent);
+      color: #000;
+      border: 1px solid var(--border);
+    }
+    
+    .cta.alt{
+      background: transparent;
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .mini{
+      opacity: .95;
+      margin:  0 0 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .callout{
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      background: #10132a;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Hero styling */
+    .hero-partners{
+      background-image: url('../images/ndg2.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    }
+    
+    .hero-partners .hero-overlay{
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 0;
+    }
+    
+    .hero-partners .hero-title{
+      color: var(--accent);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+    }
+    
+    .hero-partners .hero-subtitle{
+      color: #f3f3f3;
+      max-width: 720px;
+      font-size: 1.1rem;
+    }
+
+    .curve-section{
+      padding-top: 28px;
+    }
+  </style>
+</head>
+
+<body class="partners-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026). </span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="NetDAG home">
+        <img src="../images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../provenance.html">Provenance dApp</a></li>
+          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="../guardian.html">Guardian</a></li>
+          <li><a href="../no-gas.html">Easy Access</a></li>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="../stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="../guardian.html">Guardian</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
+        <li><a href="../no-gas.html">Easy Access</a></li>
+        <li><a href="whitepaper.html">Whitepaper</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="tokenomics.html">Tokenomics</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="ambassador.html">Ambassador</a></li>
+        <li><a href="charity.html">Charity</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="hero-banner hero-partners" id="main-content" role="main">
+    <div class="hero-overlay">
+      <h1 class="hero-title">Partners &amp; Integrations</h1>
+      <p class="hero-subtitle">
+        Join us to bring trust, stability, and real utility to users worldwide — from exchanges and wallets
+        to brands and NGOs. 
+      </p>
+    </div>
+  </main>
+
+  <!-- BODY -->
+  <section class="curve-section">
+    <div class="p-wrap">
+
+      <article class="p-card">
+        <h2>Why Partner with NetDAG</h2>
+        <div class="p-grid">
+          <div>
+            <ul class="p-list">
+              <li><strong>Predictable Economics: </strong> The bonding curve smooths volatility and embeds liquidity. </li>
+              <li><strong>AI Stability Layer:</strong> The NetDAG Guardian monitors activity and proposes optimizations.</li>
+              <li><strong>Real-World Utility:</strong> Provenance (authenticity), dVPN (privacy), and more to come.</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="p-list">
+              <li><strong>On-Chain Transparency:</strong> Asset-backed reserves, visible parameters, DAO oversight.</li>
+              <li><strong>Impact by Default:</strong> Protocol-level charity contributions from network usage.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <section class="p-card">
+        <h2>Partner Tracks</h2>
+        <div class="tier-grid">
+          <div class="tier">
+            <h3>Technology</h3>
+            <p>
+              Exchanges, wallets, node providers, and infrastructure partners who want stability-first rails.
+            </p>
+            <ul class="p-list">
+              <li>Listings, custody, staking/vesting hooks. </li>
+              <li>SDKs &amp; APIs for Provenance and dVPN.</li>
+              <li>Co-development pilots and research.</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <h3>Enterprise &amp; Brands</h3>
+            <p>
+              Supply chain, retail, pharma, luxury, food, and logistics teams looking for verifiable provenance.
+            </p>
+            <ul class="p-list">
+              <li>Authenticity-as-a-Service (QR / barcode verifications).</li>
+              <li>Private data channels via dVPN.</li>
+              <li>Custom dashboards &amp; audit-friendly reporting.</li>
+            </ul>
+          </div>
+          <div class="tier">
+            <h3>NGOs &amp; Foundations</h3>
+            <p>
+              Social impact organizations that want transparent, on-chain funding flows.
+            </p>
+            <ul class="p-list">
+              <li>Charity pool disbursements with public addresses.</li>
+              <li>Program tracking and impact metrics.</li>
+              <li>Co-branded initiatives and campaigns.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="p-card">
+        <h2>How Integration Works</h2>
+        <div class="p-grid">
+          <div>
+            <ol class="p-list">
+              <li><strong>Discovery:</strong> Define goals, data flows, and milestones together.</li>
+              <li><strong>Technical Plan:</strong> Select SDKs/APIs, authentication, and sandbox or testnet access.</li>
+              <li><strong>Pilot: </strong> Run a limited-scope rollout with clear metrics and reporting.</li>
+              <li><strong>Scale:</strong> Harden, optimize, and expand to new regions, products, or user segments.</li>
+            </ol>
+          </div>
+          <div>
+            <div class="callout">
+              <strong>Security &amp; Compliance:</strong> Key integrations go through security review, on-chain audits
+              (where relevant), and governance sign-off for sensitive parameter changes.  We prefer careful growth over
+              rushed deployments.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="p-card">
+        <h2>Featured &amp; Ecosystem Logos</h2>
+        <p class="mini">
+          As NetDAG grows, we will highlight featured partners and maintain a broader ecosystem wall.
+          The goal is not to collect logos, but to nurture a small group of serious, long-term collaborators.
+        </p>
+        <div class="logos" aria-label="Partner logos">
+          <div class="logo-box">Your Logo</div>
+          <div class="logo-box">Your Logo</div>
+          <div class="logo-box">Your Logo</div>
+          <div class="logo-box">Your Logo</div>
+          <div class="logo-box">Your Logo</div>
+          <div class="logo-box">Your Logo</div>
+          <div class="logo-box">Your Logo</div>
+          <div class="logo-box">Your Logo</div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- Bottom separator -->
+  <div class="section-separator"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
+          NetDAG is not another short-term token.  We build next-gen infrastructure
+          for the real world — with math-backed stability and long-term commitment.
+          Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="vision.html" class="btn-explore-vision">Explore the Vision</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="../provenance.html">Provenance dApp</a></li>
+            <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="tokenomics.html">Tokenomics</a></li>
+            <li><a href="whitepaper.html">Whitepaper</a></li>
+            <li><a href="vision.html">Vision</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="ambassador.html">Ambassador Program</a></li>
+            <li><a href="charity.html">Charity</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r. php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+  </footer>
+
+  <script src="/js/buy-modals.js" defer></script>
+<script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

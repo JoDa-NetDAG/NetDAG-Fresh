@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buy NDG Tokens — NetDAG Presale</title>
+  <meta name="description" content="Join the NetDAG presale. Purchase NDG tokens at the lowest bonding curve price with BNB, USDT, or USDC." />
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="js/main.js" defer></script>
+ </head>
+
+ <body class="purchase-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026). </span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="index.html" title="NetDAG home">
+        <img src="images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="provenance.html">Provenance dApp</a></li>
+          <li><a href="bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
+          <li><a href="no-gas.html">Easy Access</a></li>
+          <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <button type="button" data-open-presale class="btn btn-primary">Buy NDG</button>
+          <a href="stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="guardian.html">Guardian</a></li>
+        <li><a href="provenance.html">Provenance</a></li>
+        <li><a href="no-gas.html">Easy Access</a></li>
+        <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+        <li><a href="menu/blog.html">Blog</a></li>
+        <li><a href="menu/vision.html">Vision</a></li>
+        <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+        <li><a href="menu/faq.html">FAQ</a></li>
+        <li><a href="menu/roadmap.html">Roadmap</a></li>
+        <li><a href="menu/ambassador.html">Ambassador</a></li>
+        <li><a href="menu/charity.html">Charity</a></li>
+        <li><a href="menu/partners.html">Partners</a></li>
+        <li><a href="menu/legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <button type="button" data-open-presale class="btn btn-primary nav-cta">Buy NDG</button>
+        <a href="stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Top separator -->
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- PURCHASE PAGE HERO -->
+    <section class="section purchase-hero">
+      <div class="section-inner">
+        <div class="hero-inner" style="text-align: center; max-width: 900px; margin: 0 auto;">
+          
+          <p class="hero-eyebrow" style="color: #ff9900;">PRESALE · Join Early</p>
+
+          <h1 class="hero-title" style="font-size: 4rem; color: #ffffff; margin-bottom: 20px;">
+            Secure Your <span style="color: #ff9900;">NDG Tokens</span>
+          </h1>
+
+          <p class="hero-kicker" style="font-size: 1.4rem; color: #cccccc; margin-bottom: 40px;">
+            Join the NetDAG presale and get the lowest bonding curve price. Purchase with BNB, USDT, or USDC in just a few clicks.
+          </p>
+
+          <button type="button" data-open-presale class="btn-cta-large" style="
+            background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 20px 50px;
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 153, 0, 0.4);
+          ">
+            <i class="fas fa-rocket" style="margin-right: 10px;"></i>
+            Join Presale Now
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- WHY BUY NDG -->
+    <section class="section section-content">
+      <div class="section-inner narrow">
+        <div class="content-block" style="text-align: center;">
+          
+          <h2 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 30px;">Why Buy NDG Tokens?</h2>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
+            
+            <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,153,0,0.2);">
+              <div style="font-size: 3rem; color: #ff9900; margin-bottom: 15px;">📈</div>
+              <h3 style="color: #ff9900; margin-bottom: 10px;">Bonding Curve Pricing</h3>
+              <p style="color: #cccccc;">Early buyers get the lowest prices. Each tier increases, rewarding conviction and reducing volatility.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,153,0,0.2);">
+              <div style="font-size: 3rem; color: #ff9900; margin-bottom: 15px;">🏦</div>
+              <h3 style="color: #ff9900; margin-bottom: 10px;">Math-Backed Liquidity</h3>
+              <p style="color: #cccccc;">22% permanent buy-back reserve ensures you can always exit at fair market value.</p>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,153,0,0.2);">
+              <div style="font-size: 3rem; color: #ff9900; margin-bottom: 15px;">⚡</div>
+              <h3 style="color: #ff9900; margin-bottom: 10px;">DAG Speed</h3>
+              <p style="color: #cccccc;">Instant finality and zero gas fees on mainnet. Transaction confirmed in seconds, not minutes.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- HOW TO BUY -->
+    <section class="section section-content" style="background: rgba(255,153,0,0.05);">
+      <div class="section-inner narrow">
+        <div class="content-block" style="text-align: center;">
+          
+          <h2 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 40px;">How to Buy NDG</h2>
+
+          <div style="display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto; text-align: left;">
+            
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+              <div style="
+                background: #ff9900;
+                color: #ffffff;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+              ">1</div>
+              <div>
+                <h3 style="color: #ffffff; margin-bottom: 5px;">Click "Join Presale"</h3>
+                <p style="color: #cccccc;">Open the presale modal by clicking any "Join Presale" or "Buy NDG" button.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+              <div style="
+                background: #ff9900;
+                color: #ffffff;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+              ">2</div>
+              <div>
+                <h3 style="color: #ffffff; margin-bottom: 5px;">Connect Your Wallet</h3>
+                <p style="color: #cccccc;">Choose MetaMask, WalletConnect, Trust Wallet, or Coinbase Wallet.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+              <div style="
+                background: #ff9900;
+                color: #ffffff;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+              ">3</div>
+              <div>
+                <h3 style="color: #ffffff; margin-bottom: 5px;">Choose Currency & Amount</h3>
+                <p style="color: #cccccc;">Select BNB, USDT, or USDC and enter how much you want to invest.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+              <div style="
+                background: #ff9900;
+                color: #ffffff;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+              ">4</div>
+              <div>
+                <h3 style="color: #ffffff; margin-bottom: 5px;">Confirm & Done!</h3>
+                <p style="color: #cccccc;">Review your purchase, confirm the transaction, and receive your NDG tokens instantly.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <button type="button" data-open-presale class="btn-cta-large" style="
+            background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 18px 45px;
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+          ">
+            Get Started Now
+          </button>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
+          NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment. Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy: DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, Easy Access.</em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="provenance.html">Provenance dApp</a></li>
+            <li><a href="bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="guardian.html">Guardian AI</a></li>
+            <li><a href="no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+            <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+            <li><a href="menu/vision.html">Vision</a></li>
+            <li><a href="menu/faq.html">FAQ</a></li>
+            <li><a href="menu/roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="menu/ambassador.html">Ambassador Program</a></li>
+            <li><a href="menu/charity.html">Charity</a></li>
+            <li><a href="menu/blog.html">Blog</a></li>
+            <li><a href="menu/partners.html">Partners</a></li>
+            <li><a href="menu/legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r.php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- PRESALE MODAL -->
+  <div id="presale-modal" class="presale-modal" hidden>
+    <div class="presale-modal-overlay" data-close-modal></div>
+    
+    <div class="presale-modal-content">
+      
+      <!-- Close Button -->
+      <button class="presale-modal-close" data-close-modal aria-label="Close modal">×</button>
+      
+      <!-- Modal Header -->
+      <div class="presale-header">
+        <h2 class="presale-title">Join NetDAG Presale</h2>
+        <p class="presale-subtitle">Secure your NDG tokens at the lowest bonding curve price</p>
+        
+        <!-- Price Tier Countdown -->
+        <div class="price-tier-banner">
+          <div class="tier-info">
+            <span class="current-price">Current Price: <strong>$0.025</strong> per NDG</span>
+            <span class="next-price">Next Tier: <strong>$0.030</strong></span>
+          </div>
+          <div class="tier-countdown">
+            <span class="countdown-label">Price increases in:</span>
+            <div class="countdown-timer">
+              <div class="time-unit">
+                <span class="time-value" id="days">00</span>
+                <span class="time-label">Days</span>
+              </div>
+              <div class="time-unit">
+                <span class="time-value" id="hours">00</span>
+                <span class="time-label">Hours</span>
+              </div>
+              <div class="time-unit">
+                <span class="time-value" id="minutes">00</span>
+                <span class="time-label">Mins</span>
+              </div>
+              <div class="time-unit">
+                <span class="time-value" id="seconds">00</span>
+                <span class="time-label">Secs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- STEP 1: Wallet Connection -->
+      <div class="presale-step" id="step-wallet">
+        <h3 class="step-title">Step 1: Connect Your Wallet</h3>
+        <p class="step-description">Choose your preferred wallet to continue</p>
+        
+        <div class="wallet-options">
+          <button class="wallet-btn" data-wallet="metamask">
+  <img src="images/wallets/metamask.png" alt="MetaMask" class="wallet-icon">
+  <span class="wallet-name">MetaMask</span>
+</button>
+
+<button class="wallet-btn" data-wallet="walletconnect">
+  <img src="images/wallets/walletconnect.png" alt="WalletConnect" class="wallet-icon">
+  <span class="wallet-name">WalletConnect</span>
+  </button>
+
+  <button class="wallet-btn" data-wallet="trustwallet">
+  <img src="images/wallets/trustwallet.png" alt="Trust Wallet" class="wallet-icon">
+  <span class="wallet-name">Trust Wallet</span>
+  </button>
+
+  <button class="wallet-btn" data-wallet="coinbase">
+  <img src="images/wallets/coinbase.png" alt="Coinbase Wallet" class="wallet-icon">
+  <span class="wallet-name">Coinbase</span>
+  </button>
+        </div>
+      </div>
+      
+      <!-- STEP 2: Connected - Purchase Form -->
+      <div class="presale-step" id="step-purchase" hidden>
+        
+        <!-- Wallet Info -->
+        <div class="wallet-connected">
+          <div class="wallet-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Wallet Connected</span>
+          </div>
+          <div class="wallet-address" id="wallet-address">0x0000...0000</div>
+          <button class="btn-disconnect" id="disconnect-wallet">Disconnect</button>
+        </div>
+        
+        <h3 class="step-title">Step 2: Choose Currency &amp; Amount</h3>
+        
+        <!-- Currency Selector -->
+        <div class="currency-selector">
+          <label class="currency-option">
+  <input type="radio" name="currency" value="BNB" checked>
+  <div class="currency-card">
+    <img src="images/crypto/bnb.png" alt="BNB" class="currency-icon">
+    <span class="currency-name">BNB</span>
+  </div>
+</label>
+
+<label class="currency-option">
+  <input type="radio" name="currency" value="USDT">
+  <div class="currency-card">
+    <img src="images/crypto/usdt.png" alt="USDT" class="currency-icon">
+    <span class="currency-name">USDT</span>
+  </div>
+</label>
+
+<label class="currency-option">
+  <input type="radio" name="currency" value="USDC">
+  <div class="currency-card">
+    <img src="images/crypto/usdc.png" alt="USDC" class="currency-icon">
+    <span class="currency-name">USDC</span>
+  </div>
+</label>
+        </div>
+        
+        <!-- Amount Input -->
+        <div class="amount-input-section">
+          <div class="input-group">
+            <label for="pay-amount" class="input-label">You Pay</label>
+            <div class="input-wrapper">
+              <input 
+                type="number" 
+                id="pay-amount" 
+                class="amount-input" 
+                placeholder="0.0" 
+                min="0.1" 
+                step="0.1"
+              >
+              <span class="input-currency" id="selected-currency">BNB</span>
+            </div>
+            <div class="input-hint">
+              Min: <span id="min-amount">0.1</span> | Max: <span id="max-amount">100</span> <span id="limit-currency">BNB</span>
+            </div>
+          </div>
+          
+          <!-- Conversion Arrow -->
+          <div class="conversion-arrow">
+            <i class="fas fa-arrow-down"></i>
+          </div>
+          
+          <div class="input-group">
+            <label class="input-label">You Receive</label>
+            <div class="receive-box">
+              <div class="receive-amount" id="receive-amount">0</div>
+              <div class="receive-currency">NDG</div>
+            </div>
+            <div class="input-hint">
+              ≈ $<span id="usd-value">0.00</span> USD
+            </div>
+          </div>
+        </div>
+        
+        <!-- Quick Amount Buttons -->
+        <div class="quick-amounts">
+          <button class="quick-btn" data-amount="0.5">0.5 <span class="quick-currency">BNB</span></button>
+          <button class="quick-btn" data-amount="1">1 <span class="quick-currency">BNB</span></button>
+          <button class="quick-btn" data-amount="5">5 <span class="quick-currency">BNB</span></button>
+          <button class="quick-btn" data-amount="10">10 <span class="quick-currency">BNB</span></button>
+        </div>
+        
+        <!-- Purchase Summary -->
+        <div class="purchase-summary">
+          <div class="summary-row">
+            <span class="summary-label">Exchange Rate</span>
+            <span class="summary-value">1 <span id="summary-currency">BNB</span> = <span id="exchange-rate">0</span> NDG</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Current Tier Price</span>
+            <span class="summary-value">$0.025 per NDG</span>
+          </div>
+        </div>
+        
+        <!-- Purchase Button -->
+        <button class="btn-purchase" id="btn-purchase">
+          <span class="btn-text">Confirm Purchase</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        
+      </div>
+      
+      <!-- STEP 3: Transaction Processing -->
+      <div class="presale-step" id="step-processing" hidden>
+        <div class="processing-content">
+          <div class="spinner-container">
+            <div class="spinner"></div>
+          </div>
+          <h3 class="processing-title">Processing Transaction...</h3>
+          <p class="processing-text">Please confirm the transaction in your wallet and wait for confirmation.</p>
+          <div class="processing-details">
+            <p>Sending: <strong><span id="tx-amount">0</span> <span id="tx-currency">BNB</span></strong></p>
+            <p>Receiving: <strong><span id="tx-ndg">0</span> NDG</strong></p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- STEP 4: Transaction Success -->
+      <div class="presale-step" id="step-success" hidden>
+        <div class="success-content">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3 class="success-title">Purchase Successful! 🎉</h3>
+          <p class="success-text">Your NDG tokens have been successfully purchased!</p>
+          
+          <div class="success-details">
+            <div class="detail-row">
+              <span class="detail-label">You Paid:</span>
+              <span class="detail-value"><span id="success-paid">0</span> <span id="success-currency">BNB</span></span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">You Received:</span>
+              <span class="detail-value highlight"><span id="success-ndg">0</span> NDG</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Transaction Hash:</span>
+              <span class="detail-value tx-hash" id="tx-hash">0x0000...0000</span>
+            </div>
+          </div>
+          
+          <div class="success-actions">
+            <a href="#" id="view-bscscan" class="btn-bscscan" target="_blank" rel="noopener">
+              <i class="fas fa-external-link-alt"></i>
+              View on BscScan
+            </a>
+            <button class="btn-buy-more" id="btn-buy-more">
+              Buy More NDG
+            </button>
+          </div>
+          
+          <button class="btn-close-success" data-close-modal>
+            Close
+          </button>
+        </div>
+      </div>
+      
+      <!-- STEP 5: Transaction Error -->
+      <div class="presale-step" id="step-error" hidden>
+        <div class="error-content">
+          <div class="error-icon">
+            <i class="fas fa-times-circle"></i>
+          </div>
+          <h3 class="error-title">Transaction Failed</h3>
+          <p class="error-text" id="error-message">Something went wrong. Please try again.</p>
+          
+          <div class="error-actions">
+            <button class="btn-try-again" id="btn-try-again">
+              Try Again
+            </button>
+            <button class="btn-cancel" data-close-modal>
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Presale Modal Script -->
+  <script src="js/presale-modal.js"></script>
+
+</body>
+</html>

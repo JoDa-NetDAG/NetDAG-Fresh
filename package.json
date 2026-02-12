@@ -1,0 +1,33 @@
+{
+  "name": "netdag",
+  "version": "1.0.0",
+  "description": "NetDAG - Static Frontend with Web3 Integration",
+  "main": "index.html",
+  "type": "commonjs",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoDa-NetDAG/NetDAG.git"
+  },
+  "keywords": [
+    "web3",
+    "ethereum",
+    "dag"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoDa-NetDAG/NetDAG/issues"
+  },
+  "homepage": "https://github.com/JoDa-NetDAG/NetDAG#readme",
+  "dependencies": {
+    "dotenv": "^17.2.4",
+    "ethers": "^6.16.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

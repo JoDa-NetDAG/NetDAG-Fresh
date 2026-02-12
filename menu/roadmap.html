@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetDAG — Roadmap</title>
+  <meta name="description" content="NetDAG roadmap:   from bonding-curve shock absorber and Neuron AI to dVPN, provenance RWA dApp, ecosystem growth and long-term governance." />
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="../js/main.js" defer></script>
+
+  <style>
+    /* Roadmap page-specific styles */
+    .road-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+    
+    .page-title{
+      font-size: 2.1rem;
+      font-weight: 650;
+      margin:  0 0 8px;
+      color: var(--accent);
+    }
+    
+    .page-intro{
+      margin:  0 0 18px;
+      color: var(--muted);
+      max-width: 820px;
+      font-size: 0.96rem;
+      line-height:  1.7;
+    }
+
+    .road-grid{
+      display: grid;
+      gap: 18px;
+    }
+    
+    @media(min-width: 900px){
+      .road-grid{
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        align-items: flex-start;
+      }
+    }
+
+    .road-phase{
+      background: #0f1120;
+      border:  1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .road-phase::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      top:  0;
+      bottom: 0;
+      width:  3px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      opacity: .8;
+    }
+    
+    .phase-label{
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
+    
+    .phase-title{
+      font-size: 1.15rem;
+      margin:  0 0 10px;
+      color: #fff;
+    }
+    
+    .phase-time{
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+
+    .road-phase p{
+      margin: 0 0 18px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height:  1.7;
+    }
+
+    .phase-list{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text);
+      font-size: .96rem;
+    }
+    
+    .phase-list li+li{
+      margin-top:  8px;
+    }
+
+    .road-meta{
+      background: rgba(15,17,32,.9);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.16);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    
+    .road-meta h3{
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #fff;
+    }
+    
+    .meta-note{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: .93rem;
+      line-height:  1.7;
+    }
+    
+    .meta-pill-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    
+    .meta-pill{
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      font-size:  .8rem;
+      color: var(--muted);
+      background: rgba(15,23,42,.9);
+      white-space: nowrap;
+    }
+
+    .road-timeline-caption{
+      margin: 8px 0 0;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .road-strip{
+      margin-top: 10px;
+      padding:  14px 16px;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      background: rgba(15,23,42,.75);
+      font-size: .9rem;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    /* Hero tweaks */
+    .hero-roadmap{
+      background-image: url('../images/ndg23.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    }
+    
+    .hero-roadmap .hero-overlay{
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+    }
+    
+    .hero-roadmap .hero-title{
+      color: #ff9900;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom:  20px;
+    }
+    
+    .hero-roadmap .hero-subtitle{
+      max-width: 720px;
+      color: #000000;
+      font-size: 1.1rem;
+    }
+
+    .curve-section{
+      padding-top: 28px;
+    }
+  </style>
+</head>
+
+<body class="roadmap-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="NetDAG home">
+        <img src="../images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../provenance.html">Provenance dApp</a></li>
+          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="../guardian.html">Guardian</a></li>
+          <li><a href="../no-gas.html">Easy Access</a></li>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="../stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="../guardian.html">Guardian</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
+        <li><a href="../no-gas.html">Easy Access</a></li>
+        <li><a href="whitepaper.html">Whitepaper</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="tokenomics.html">Tokenomics</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="ambassador.html">Ambassador</a></li>
+        <li><a href="charity.html">Charity</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="hero-banner hero-roadmap" id="main-content" role="main">
+    <div class="hero-overlay">
+      <h1 class="hero-title">NetDAG Roadmap</h1>
+      <p class="hero-subtitle">
+        From foundations and presale to dVPN, provenance, Guardian upgrades and
+        long-term governance — a stability-first path instead of hype dates.
+      </p>
+    </div>
+  </main>
+
+  <!-- ROADMAP CONTENT -->
+  <section class="curve-section">
+    <div class="road-wrap">
+      <header>
+        <h1 class="page-title">NetDAG Roadmap</h1>
+        <p class="page-intro">
+          NetDAG is a <strong>systemic DeFi / RWA project</strong> built on three pillars:
+          a financial engine (bonding-curve shock absorber), an AI brain (Neuron / Guardian),
+          and a physical dApp layer (provenance + retail integrations). This roadmap is
+          <strong>not a hype schedule</strong>; it is a sequence of real milestones that
+          connect those three pillars into one working system.
+        </p>
+      </header>
+
+      <div class="road-grid">
+        <!-- Phases / timeline -->
+        <div class="road-phases">
+
+          <article class="road-phase">
+            <p class="phase-label">Phase 0 · Foundations</p>
+            <h2 class="phase-title">Concept, math &amp; architecture</h2>
+            <p class="phase-time">Status: In motion</p>
+            <ul class="phase-list">
+              <li>Define NetDAG's core mission:  stability-first, real-world-linked crypto economy. </li>
+              <li>Formalise the three core pillars: Financial Engine, Neuron AI, Provenance dApp.</li>
+              <li>Design bonding-curve parameters and <strong>22% reserve "shock absorber"</strong>.</li>
+              <li>Mathematically validate the reserve + curve model and prepare partner-facing docs.</li>
+              <li>High-level architecture for Neuron AI, oracle feeds and provenance / RWA flows.</li>
+              <li>Brand identity, web presence and documentation structure (whitepaper, tokenomics).</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <p class="phase-label">Phase 1 · Launch</p>
+            <h2 class="phase-title">Presale, core contracts &amp; first guardian</h2>
+            <p class="phase-time">Status:  Upcoming</p>
+            <ul class="phase-list">
+              <li>Deploy NDG token, bonding-curve reserve and timelock / treasury contracts on BNB Chain.</li>
+              <li>Lock the permanent reserve on-chain and publish verifiable addresses and dashboards.</li>
+              <li>Run the initial presale with transparent curve-based price steps and supply caps.</li>
+              <li>Integrate oracles and monitoring so Neuron / Guardian can observe market conditions.</li>
+              <li>Launch Guardian (beta) in advisory mode with public risk and liquidity signals.</li>
+              <li>List NDG on the first DEX and enable curve-aware buy-back and arbitrage incentives.</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <p class="phase-label">Phase 2 · Network utilities</p>
+            <h2 class="phase-title">dVPN &amp; provenance / RWA dApp</h2>
+            <p class="phase-time">Status: Planned</p>
+            <ul class="phase-list">
+              <li>Release the first NetDAG dVPN client &amp; node stack with NDG-denominated bandwidth.</li>
+              <li>Launch the provenance dApp for verifying digital media and physical products.</li>
+              <li>Align the dApp design with existing standards (barcodes, QR, NFC) for easy adoption.</li>
+              <li>Pipe usage metrics (scans, sessions, nodes) into Neuron / Guardian for live analytics.</li>
+              <li>Create SDKs and docs so external teams can build on dVPN and provenance rails.</li>
+              <li>Experiment with NDG incentives for early users, node operators and verifiers.</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <p class="phase-label">Phase 3 · Ecosystem &amp; commerce</p>
+            <h2 class="phase-title">Real-world integration &amp; loyalty</h2>
+            <p class="phase-time">Status:  Planned</p>
+            <ul class="phase-list">
+              <li>Open affiliate and commerce bridges so Web2 / Web3 partners can plug into NetDAG.</li>
+              <li>Structure pilots where brands pay simple per-scan or per-session fees (no token risk).</li>
+              <li>Convert a portion of that real-world revenue into NDG buy-backs on the bonding curve.</li>
+              <li>Introduce staking and loyalty programs tied to verifiable activity, not pure speculation.</li>
+              <li>Launch community-led ecosystem projects that extend the dVPN and provenance stack.</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <p class="phase-label">Phase 4 · Guardian upgrade</p>
+            <h2 class="phase-title">From advisory to active defence</h2>
+            <p class="phase-time">Status:  Future</p>
+            <ul class="phase-list">
+              <li>Upgrade Guardian / Neuron from "read-only advisor" to carefully-limited on-chain actor.</li>
+              <li>Allow governance to tune risk thresholds, intervention rules and reserve usage policies.</li>
+              <li>Deploy more sophisticated anomaly detection and circuit-breaker style protections.</li>
+              <li>Expose full transparency dashboards for every Guardian action and outcome.</li>
+              <li>Offer opt-in user profiles (conservative / neutral / adventurous) for strategy preferences.</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <p class="phase-label">Phase 5 · Governance &amp; autonomy</p>
+            <h2 class="phase-title">NetDAG as self-sustaining infrastructure</h2>
+            <p class="phase-time">Status:  Vision</p>
+            <ul class="phase-list">
+              <li>Progressively hand control of key parameters to on-chain governance and the community.</li>
+              <li>Formalise NDG as the coordination asset across all NetDAG products and revenue flows.</li>
+              <li>Extend multi-chain support and cross-chain liquidity rails for the bonding-curve engine.</li>
+              <li>Grow a network of independent teams and partners building specialised apps on NetDAG.</li>
+              <li>Ensure long-term funding for public goods, audits and ecosystem maintenance.</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <!-- Meta / principles column -->
+        <aside class="road-meta">
+          <div>
+            <h3>How to read this roadmap</h3>
+            <p class="meta-note">
+              Phases are <strong>sequenced, not calendar-locked</strong>. Some will overlap, some may
+              be reordered by audits, regulation or partner feedback.  We prefer to <strong>ship quietly
+              and report honestly</strong> rather than publishing aggressive date promises.
+            </p>
+          </div>
+
+          <div>
+            <h3>Guiding principles</h3>
+            <p class="meta-note">Every step we take must respect these guardrails:</p>
+            <div class="meta-pill-row">
+              <span class="meta-pill">Stability before speculation</span>
+              <span class="meta-pill">On-chain transparency</span>
+              <span class="meta-pill">Security over speed</span>
+              <span class="meta-pill">Real usage &gt; fake volume</span>
+              <span class="meta-pill">RWA &amp; partner-friendly design</span>
+              <span class="meta-pill">Community alignment</span>
+            </div>
+          </div>
+
+          <div>
+            <h3>Partnership lens</h3>
+            <p class="meta-note">
+              NetDAG's ecosystem is built around three partner types: financial allies who
+              understand the reserve and curve, AI / data infrastructure that Neuron can rely on,
+              and real-world brands and manufacturers that care about provenance and anti-counterfeit.
+              This roadmap keeps all three in view. 
+            </p>
+          </div>
+
+          <div class="road-strip">
+            NetDAG is deliberately patient:  the goal is to build infrastructure that can survive
+            hype cycles, not chase them. If you are here only for a quick flip, this roadmap will
+            probably feel too slow — and that is by design. 
+          </div>
+        </aside>
+      </div>
+
+      <p class="road-timeline-caption">
+        A visual timeline graphic will be added here later, once the first contracts, audits
+        and pilot partnerships are live. Until then, this text is the canonical roadmap.
+      </p>
+    </div>
+  </section>
+
+  <!-- Bottom separator -->
+  <div class="section-separator"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.    </span>
+          NetDAG is not another short-term token.    We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment.  Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="vision.html" class="btn-explore-vision">Explore the Vision</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy:    DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy.   </em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="../provenance.html">Provenance dApp</a></li>
+            <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="tokenomics.html">Tokenomics</a></li>
+            <li><a href="whitepaper.html">Whitepaper</a></li>
+            <li><a href="vision.html">Vision</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="ambassador.html">Ambassador Program</a></li>
+            <li><a href="charity.html">Charity</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r. php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+  </footer>
+
+  <script src="/js/buy-modals.js" defer></script>
+<script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetDAG — Tokenomics</title>
+  <meta name="description" content="NetDAG Tokenomics:   1B max supply with presale, permanent reserve lock for bonding-curve stability, staking/vesting, partnerships, ecosystem incentives, and team alignment." />
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  
+  <script>
+    window.NDG_STAKING_ADDRESS = "0x25604d152FD6878fb6193d3c6F45f9D1A458378d";
+    window.NDG_CHAIN_ID_HEX = "0x61"; // testnet
+    NDG_STAKING_ADDRESS = window.NDG_STAKING_ADDRESS;
+    NDG_CHAIN_ID_HEX = window.NDG_CHAIN_ID_HEX;
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers. umd.min.js"></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/staking-readonly.js" defer></script>
+  <script src="../js/staking-write.js" defer></script>
+
+  <style>
+    /* Tokenomics page-specific styles */
+    .tok-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+    
+    .tok-card{
+      background: #0f1120;
+      border:  1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      box-shadow:  0 2px 10px rgba(0,0,0,.18);
+    }
+    
+    .tok-card h2{
+      margin:  0 0 10px;
+      color: #fff;
+    }
+    
+    .tok-grid{
+      display: grid;
+      gap: 16px;
+    }
+    
+    @media(min-width: 980px){
+      .tok-grid{
+        grid-template-columns: 1.1fr .9fr;
+      }
+    }
+
+    /* Pie chart */
+    .pie-wrap{
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .token-pie{
+      width: 260px;
+      height: 260px;
+      border-radius:  50%;
+      background: 
+        conic-gradient(
+          #F59E0B 0% 50%,   /* 50% Presale */
+          #22C55E 50% 72%,  /* 22% Permanent Reserve */
+          #3B82F6 72% 82%,  /* 10% Staking/Vesting */
+          #A855F7 82% 92%,  /* 10% Partnerships */
+          #EC4899 92% 97%,  /* 5% Ecosystem */
+          #F43F5E 97% 100%  /* 3% Team */
+        );
+      position: relative;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,.22);
+    }
+    
+    .token-pie::after{
+      content: "";
+      position: absolute;
+      inset: 18%;
+      background: #0f1120;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+    }
+    
+    .pie-legend{
+      display: grid;
+      gap: 8px;
+      min-width: 260px;
+    }
+    
+    .leg{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    
+    .dot{
+      width: 14px;
+      height: 14px;
+      border-radius:  3px;
+      border: 1px solid var(--border);
+    }
+    
+    .d-presale{background:#F59E0B}
+    .d-reserve{background:#22C55E}
+    .d-stake{background:#3B82F6}
+    .d-partner{background:#A855F7}
+    .d-eco{background:#EC4899}
+    .d-team{background:#F43F5E}
+
+    /* Tables */
+    .data-table th small{opacity:8;font-weight:600}
+    .note{color:#aeb3c2;font-size:.95rem;margin-top:8px}
+
+    /* Staking cards */
+    .stake-grid{
+      display: grid;
+      gap: 14px;
+    }
+    
+    @media(min-width:900px){
+      .stake-grid{
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
+    
+    .stake-card{
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(15,23,42,0.95);
+      padding: 16px 18px;
+    }
+    
+    .stake-label{
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
+    
+    .stake-title{
+      font-size: 1.02rem;
+      margin: 0 0 6px;
+      color: #fff;
+    }
+    
+    .stake-meta{
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin:  0 0 6px;
+    }
+    
+    .stake-points{
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+    
+    .stake-points li+li{margin-top: 4px;}
+    
+    .stake-sublist {
+      margin-left: 20px;
+      list-style-type: disc;
+    }
+
+    .stake-footer{
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Hero specific */
+    .hero-token{
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    }
+
+    .hero-token .hero-overlay{
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .hero-token .hero-title{
+      color: var(--accent);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+    }
+
+    .hero-token .hero-subtitle{
+      max-width: 720px;
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    /* Guardian staking split layout */
+    .stake-grid--split{
+      display: grid;
+      gap: 16px;
+    }
+
+    @media (min-width: 900px){
+      .stake-grid--split{
+        grid-template-columns: 1.05fr 1px 1.25fr;
+        align-items: stretch;
+      }
+    }
+
+    @media (max-width: 899px){
+      .stake-divider{ display: none; }
+    }
+
+    .stake-divider{
+      width: 1px;
+      border-radius: 900px;
+      background: rgba(255,153,0,0.35);
+      box-shadow: 
+        0 0 18px rgba(255,153,0,0.25),
+        0 0 2px rgba(255,153,0,0.35);
+    }
+
+    .stake-form,
+    .stake-summary{
+      min-height: 20px;
+    }
+
+    .stake-summary{
+      padding-left: 16px;
+    }
+
+    .stake-summary .stake-stats{
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .stake-input-row{
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .stake-input{
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.3);
+      color: #fff;
+    }
+
+    .stake-select{
+      width: 100%;
+      padding:  10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.3);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .stake-apr-display{
+      background: rgba(255,153,0,0.1);
+      border-color: rgba(255,153,0,0.3);
+    }
+
+    .stake-actions{
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .stake-helper{
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .stake-tag{
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .stake-intro{
+      margin-bottom: 20px;
+      color: var(--muted);
+    }
+
+    .stake-summary-title{
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .stake-stats dt{
+      font-weight: bold;
+      padding: 8px 0 4px 0;
+    }
+    
+    .stake-stats dd{
+      margin: 0 0 8px 0;
+      padding: 0 0 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stake-summary-note{
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .ro-status{
+      color: #ff9900;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .ro-refresh-btn{
+      margin-top: 10px;
+    }
+
+    .ro-index-wrapper{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ro-index-label{
+      color: #f2cc79;
+      font-size: 14px;
+    }
+
+    .ro-index-input{
+      width: 80px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      background: #0f1120;
+      color: #fff;
+    }
+
+    .ro-index-max{
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .feature-image{
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 100vh;
+      object-fit: cover;
+    }
+
+    .feature-section{
+      padding: 0;
+      margin: 12px 0 0;
+    }
+
+    .tok-card h2.section-header{
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+
+    .curve-section{
+      padding-top: 28px;
+    }
+
+    .hero-token-bg{
+      background-image: url('../images/ndg7.png');
+    }
+  </style>
+</head>
+
+<body class="tokenomics-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026). </span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity. </span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="NetDAG home">
+        <img src="../images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../provenance.html">Provenance dApp</a></li>
+          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="../guardian.html">Guardian</a></li>
+          <li><a href="../no-gas.html">Easy Access</a></li>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="../stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="../guardian.html">Guardian</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
+        <li><a href="../no-gas.html">Easy Access</a></li>
+        <li><a href="whitepaper.html">Whitepaper</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="tokenomics.html">Tokenomics</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="ambassador.html">Ambassador</a></li>
+        <li><a href="charity.html">Charity</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <button type="button" data-ndg-open class="btn btn-primary">Buy NDG</button>
+        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="hero-banner hero-token hero-token-bg" id="main-content">
+    <div class="hero-overlay">
+      <h1 class="hero-title">NetDAG Tokenomics</h1>
+      <p class="hero-subtitle">
+        A stability-first token design:   1B capped supply, a permanent bonding-curve reserve,
+        usage-linked incentives and transparent, long-term-aligned allocations.
+      </p>
+    </div>
+  </main>
+
+  <!-- BODY -->
+  <section class="curve-section">
+    <div class="tok-wrap">
+
+      <!-- Overview -->
+      <article class="tok-card">
+        <h2 class="section-header">Overview</h2>
+        <p>
+          <strong>Max Supply:</strong> 1,000,000,000 NDG<br/>
+          <strong>Presale Price (start):</strong> $0.025<br/>
+          <strong>Listing: </strong> Upon presale completion (up to 500M tokens are available during presale).<br/>
+          <strong>Stability: </strong> 22% of supply is <em>locked forever</em> in the on-chain bonding-curve reserve
+          — our mathematical shock absorber for deep, continuous liquidity.
+        </p>
+      </article>
+
+      <div class="section-separator"></div>
+
+      <!-- Distribution -->
+      <section class="tok-card">
+        <h2 class="section-header">Distribution</h2>
+        <div class="tok-grid">
+          <div class="pie-wrap">
+            <div class="token-pie" role="img" aria-label="Token allocation pie chart"></div>
+            <div class="pie-legend" aria-label="Legend">
+              <div class="leg"><span class="dot d-presale"></span><strong>50%</strong>&nbsp;Presale</div>
+              <div class="leg"><span class="dot d-reserve"></span><strong>22%</strong>&nbsp;Permanent locked Reserve</div>
+              <div class="leg"><span class="dot d-stake"></span><strong>10%</strong>&nbsp;Staking &amp; Vesting</div>
+              <div class="leg"><span class="dot d-partner"></span><strong>10%</strong>&nbsp;Partnerships &amp; Marketing</div>
+              <div class="leg"><span class="dot d-eco"></span><strong>5%</strong>&nbsp;Ecosystem Incentives</div>
+              <div class="leg"><span class="dot d-team"></span><strong>3%</strong>&nbsp;Team &amp; Core Contributors</div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Allocation</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Presale</td>
+                  <td><strong>50%</strong></td>
+                  <td>Starts at <strong>$0.025</strong>; up to 500M tokens available. </td>
+                </tr>
+                <tr>
+                  <td>Permanent Reserve</td>
+                  <td><strong>22%</strong></td>
+                  <td>Locked forever on-chain for bonding-curve liquidity.</td>
+                </tr>
+                <tr>
+                  <td>Staking &amp; Vesting</td>
+                  <td><strong>10%</strong></td>
+                  <td>HODL rewards; emissions aligned to network health.</td>
+                </tr>
+                <tr>
+                  <td>Partnerships</td>
+                  <td><strong>10%</strong></td>
+                  <td>Strategic unlock on milestone completion.</td>
+                </tr>
+                <tr>
+                  <td>Ecosystem Incentives</td>
+                  <td><strong>5%</strong></td>
+                  <td>Gradual unlock linked to real network activity.</td>
+                </tr>
+                <tr>
+                  <td>Team</td>
+                  <td><strong>3%</strong></td>
+                  <td>2-year lock with linear unlock thereafter.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="note">Exact on-chain parameters will be published with audits prior to activation.</p>
+      </section>
+
+      <div class="section-separator"></div>
+
+      <!-- Staking & Release -->
+      <section class="tok-card">
+        <h2 class="section-header">Staking &amp; Release Model</h2>
+
+        <div class="stake-grid">
+          <div class="stake-card">
+            <p class="stake-label">Core Rewards</p>
+            <h3 class="stake-title">Staking / Vesting Pool</h3>
+            <p class="stake-meta">
+              <strong>Lock: </strong> 30 days · <strong>Release:</strong> 20% per month × 5 months
+            </p>
+            <ul class="stake-points">
+              <li>Initial 30-day lock to align with long-term holders. </li>
+              <li>Linear monthly unlock over 5 months for predictable supply.</li>
+              <li>Released balances can be re-staked to compound rewards.</li>
+              <li><strong>Staking Durations & Rewards:</strong></li>
+            </ul>
+              <ul class="stake-sublist">
+                <li>30 days → 6% APR</li>
+                <li>6 months → 10% APR</li>
+                <li>12 months → 15% APR</li>
+                <li>2 years → 22% APR</li>
+                <li>3 years → 30% APR</li>
+              </ul>
+          </div>
+
+          <div class="stake-card">
+            <p class="stake-label">Strategic Growth</p>
+            <h3 class="stake-title">Partnerships &amp; Integration</h3>
+            <p class="stake-meta">
+              <strong>Lock:</strong> Milestone-based · <strong>Release:</strong> Strategic unlocks
+            </p>
+            <ul class="stake-points">
+              <li>Allocated to exchanges and key integrations.</li>
+              <li>Each unlock tied to published milestone. </li>
+              <li>Monthly unlock cap to avoid sell-pressure.</li>
+            </ul>
+          </div>
+
+          <div class="stake-card">
+            <p class="stake-label">Usage Incentives</p>
+            <h3 class="stake-title">Ecosystem Incentives</h3>
+            <p class="stake-meta">
+              <strong>Lock:</strong> Usage-linked · <strong>Release: </strong> Programmatic trickle
+            </p>
+            <ul class="stake-points">
+              <li>Rewards for dVPN, Provenance and ecosystem apps.</li>
+              <li>Emission based on verifiable on-chain KPIs.</li>
+              <li>Future:   Guardian AI dynamic staking. </li>
+            </ul>
+          </div>
+
+          <div class="stake-card">
+            <p class="stake-label">Alignment</p>
+            <h3 class="stake-title">Team &amp; Core Contributors</h3>
+            <p class="stake-meta">
+              <strong>Lock:</strong> 2 years · <strong>Release:</strong> Linear after lock
+            </p>
+            <ul class="stake-points">
+              <li>Strict timelocks prevent early dumping.</li>
+              <li>Linear vesting aligns with ecosystem success.</li>
+              <li>Tracked via public dashboards.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="stake-footer">
+          The <strong>Permanent Reserve (22%)</strong> is locked forever and not part of any vesting stream.
+        </p>
+      </section>
+
+      <div class="section-separator"></div>
+
+      <!-- Burn Mechanism -->
+      <section class="tok-card">
+        <h2 class="section-header">NDG Burn Mechanism — Balanced Deflation Model</h2>
+
+        <p>The NDG token uses a sustainable deflation model designed to support long-term value while ensuring liquidity and ecosystem stability.</p>
+
+        <h3>1) Voluntary Holder Burns</h3>
+        <p>Any NDG holder may burn their own tokens at any time via the on-chain <code>burn()</code> function.  Burns are optional and never required. </p>
+
+        <h3>2) Revenue Buy-Back & Burn (10%)</h3>
+        <p>NetDAG allocates <strong>10% of all ecosystem revenue</strong> toward buying NDG on the open market and burning it permanently.</p>
+
+        <h3>3) Treasury Burn (1% Quarterly)</h3>
+        <p>The NetDAG Treasury may burn up to <strong>1% of its NDG holdings every quarter</strong>. </p>
+
+        <h3>4) Transparency</h3>
+        <p>All burns are announced publicly and permanently verifiable on-chain.</p>
+      </section>
+
+      <div class="section-separator"></div>
+
+      <!-- Guardian Staking Interface -->
+      <section id="stake-guardian" class="tok-card stake-guardian">
+        <p class="stake-tag">Guardian staking · tech preview</p>
+        <h3 class="stake-title">Stake NDG — Guardian Pool (live soon)</h3>
+        <p class="stake-intro">
+          Connect your wallet, choose a lock period, and stake NDG directly into the Guardian pool.
+        </p>
+
+        <div class="stake-grid--split">
+          <!-- LEFT:  FORM -->
+          <div class="stake-form">
+            <label for="stake-amount" class="stake-label">Amount to stake</label>
+            <div class="stake-input-row">
+              <input id="stake-amount" type="number" min="0" step="0.0001" placeholder="0.0" class="stake-input"/>
+              <button type="button" class="btn btn-outline" id="stake-max">Max</button>
+            </div>
+
+            <label for="stake-lock" class="stake-label">Lock period</label>
+            <select id="stake-lock" class="stake-select">
+              <option value="0">30 days · 6% APR</option>
+              <option value="1">6 months · 10% APR</option>
+              <option value="2">12 months · 15% APR</option>
+              <option value="3">2 years · 22% APR</option>
+              <option value="4">3 years · 30% APR</option>
+            </select>
+
+            <label for="stake-apr" class="stake-label">Current APR</label>
+            <input id="stake-apr" class="stake-input stake-apr-display" type="text" value="6% APR" disabled />
+
+            <div class="stake-actions">
+              <button type="button" class="btn btn-primary js-stake-ndg">Stake NDG</button>
+              <button type="button" class="btn btn-outline js-unstake-ndg">Unstake &amp; Claim</button>
+            </div>
+
+            <p class="stake-helper">Switch to the correct network. </p>
+          </div>
+
+          <!-- DIVIDER -->
+          <div class="stake-divider" aria-hidden="true"></div>
+
+          <!-- RIGHT: SUMMARY -->
+          <div class="stake-summary">
+            <h4 class="stake-summary-title">Your position</h4>
+            <div id="ro-status" class="ro-status">Not connected</div>
+
+            <button id="ro-refresh" type="button" class="btn btn-outline ro-refresh-btn">Refresh</button>
+
+            <div class="ro-index-wrapper">
+              <label for="ro-index" class="ro-index-label">Stake index: </label>
+              <input id="ro-index" type="number" min="0" step="1" value="0" class="ro-index-input" />
+              <span id="ro-index-max" class="ro-index-max">/ —</span>
+            </div>
+
+            <dl class="stake-stats">
+              <dt>CURRENT STAKE</dt>
+              <dd><span id="ro-current-stake">0</span> NDG</dd>
+              <dt>PENDING REWARDS</dt>
+              <dd><span id="ro-pending">0</span> NDG</dd>
+              <dt>UNLOCK TIME</dt>
+              <dd><span id="ro-unlock">-</span></dd>
+            </dl>
+            
+            <p class="stake-summary-note">
+              Live values will update once your wallet is connected and you have an active stake.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-separator"></div>
+
+      <!-- Listing note -->
+      <section class="tok-card">
+        <h2 class="section-header">Listing</h2>
+        <p>
+          Listing occurs when the presale is complete and contracts are live with audit reports.
+          During presale, up to <strong>500,000,000 NDG</strong> are available according to the bonding-curve schedule.
+        </p>
+      </section>
+
+      <div class="section-separator"></div>
+
+      <!-- Feature image -->
+      <section aria-label="Feature image" class="feature-section">
+        <img src="../images/ndg20.png" alt="Tokenomics visual" class="feature-image">
+      </section>
+    </div>
+  </section>
+
+  <!-- Bottom separator -->
+  <div class="section-separator"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.   </span>
+          NetDAG is not another short-term token.   We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment.  Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="vision. html" class="btn-explore-vision">Explore the Vision</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="../provenance.html">Provenance dApp</a></li>
+            <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="tokenomics.html">Tokenomics</a></li>
+            <li><a href="whitepaper.html">Whitepaper</a></li>
+            <li><a href="vision.html">Vision</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="ambassador.html">Ambassador Program</a></li>
+            <li><a href="charity.html">Charity</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r. php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+  </footer>
+
+  <script src="/js/buy-modals.js" defer></script>
+<script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+# secrets
+.env
+
+# legacy archives
+_legacy/
+
+# node
+node_modules/
+
+# editor
+.vscode/
+.DS_Store
