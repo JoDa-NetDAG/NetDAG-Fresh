@@ -147,4 +147,51 @@ keystore/
 
 # Editor
 .vscode/
+.
+
+# ========================================
+# NetDAG Presale Specific Ignores
+# ========================================
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables (NEVER commit these!)
+.env
+.env.local
+.env.*.local
+
+# Hardhat files
+cache/
+artifacts/
+typechain/
+typechain-types/
+
+# Deployment files with sensitive data
+deployment-mainnet.json
+
+# Coverage
+coverage/
+coverage.json
+
+# Build files
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Local test files
+test-results/
