@@ -293,7 +293,8 @@ async function connectWalletConnect() {
       throw new Error('WalletConnect library not loaded. Please refresh the page.');
     }
     
-    // Create WalletConnect Provider
+    // Create WalletConnect Provider (v1.x)
+    // Note: When upgrading to WalletConnect v2, use EthereumProvider directly
     walletConnectProvider = new WalletConnectProvider.default({
       rpc: {
         56: 'https://bsc-dataseed.binance.org/',
@@ -375,8 +376,8 @@ async function switchNetwork(provider = window.ethereum) {
             chainId: PRESALE_CONFIG.network.chainId,
             chainName: PRESALE_CONFIG.network.chainName,
             nativeCurrency: {
-              name: 'Test BNB',
-              symbol: 'tBNB',
+              name: 'BNB',
+              symbol: 'BNB',
               decimals: 18,
             },
             rpcUrls: [PRESALE_CONFIG.network.rpcUrl],
