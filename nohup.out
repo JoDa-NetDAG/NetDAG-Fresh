@@ -1,0 +1,13 @@
+127.0.0.1 - - [17/Feb/2026 20:19:21] "GET /purchase-ndg.html HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /purchase-ndg.html HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /css/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/ndg-logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/wallets/metamask.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/wallets/walletconnect.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/wallets/trustwallet.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /js/presale-modal.js HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /js/main.js HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/wallets/coinbase.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/crypto/bnb.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/crypto/usdt.png HTTP/1.1" 200 -
+127.0.0.1 - - [17/Feb/2026 20:19:30] "GET /images/crypto/usdc.png HTTP/1.1" 200 -
