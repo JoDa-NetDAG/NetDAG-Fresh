@@ -25,6 +25,7 @@ const PRESALE_CONFIG = {
 };
 
 const PRESALE_CONTRACT = '0x74d469c0eEd89b0F17189c824C95622C680f803E';
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 let walletConnected = false;
 let userAddress = null;
@@ -226,19 +227,46 @@ function copyReferralLink() {
   const input = document.getElementById('referral-link');
   if (!input) return;
   
-  input.select();
-  input.setSelectionRange(0, 99999); // For mobile devices
+  const linkValue = input.value;
   
-  try {
-    document.execCommand('copy');
-    alert('✅ Referral link copied! Share it to earn 5% bonuses.');
-  } catch (err) {
-    // Fallback for modern browsers
-    navigator.clipboard.writeText(input.value).then(() => {
-      alert('✅ Referral link copied! Share it to earn 5% bonuses.');
+  // Try modern Clipboard API first
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(linkValue).then(() => {
+      showCopySuccess();
     }).catch(() => {
-      alert('❌ Failed to copy. Please copy manually.');
+      // Fallback to deprecated method
+      fallbackCopy(input);
     });
+  } else {
+    // Fallback for older browsers
+    fallbackCopy(input);
+  }
+}
+
+function fallbackCopy(input) {
+  try {
+    input.select();
+    input.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand('copy');
+    showCopySuccess();
+  } catch (err) {
+    console.error('Copy failed:', err);
+    // Show manual copy message
+    input.select();
+  }
+}
+
+function showCopySuccess() {
+  // Simple success indication - could be enhanced with toast notification
+  const copyBtn = event?.target;
+  if (copyBtn) {
+    const originalText = copyBtn.textContent;
+    copyBtn.textContent = '✅ Copied!';
+    copyBtn.style.background = '#00cc00';
+    setTimeout(() => {
+      copyBtn.textContent = originalText;
+      copyBtn.style.background = '';
+    }, 2000);
   }
 }
 
@@ -346,7 +374,7 @@ async function executePurchase() {
   
   try {
     // Use detected referrer or zero address
-    const referrer = referrerAddress || '0x0000000000000000000000000000000000000000';
+    const referrer = referrerAddress || ZERO_ADDRESS;
     
     // For actual smart contract integration, use:
     // if (selectedCurrency === 'BNB') {
@@ -459,6 +487,7 @@ async function buyWithBNB(bnbAmount, referrer) {
 
 /**
  * Purchase NDG with stablecoin (USDT or USDC)
+ * Note: USDT and USDC on BSC use 18 decimals (verified for BSC mainnet)
  * @param {string} currency - 'USDT' or 'USDC'
  * @param {number} amount - Amount to spend
  * @param {string} referrer - Referrer address (or zero address)
