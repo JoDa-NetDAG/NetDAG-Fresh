@@ -70,12 +70,13 @@
       border-radius:  50%;
       background: 
         conic-gradient(
-          #F59E0B 0% 50%,   /* 50% Presale */
-          #22C55E 50% 72%,  /* 22% Permanent Reserve */
-          #3B82F6 72% 82%,  /* 10% Staking/Vesting */
-          #A855F7 82% 92%,  /* 10% Partnerships */
-          #EC4899 92% 97%,  /* 5% Ecosystem */
-          #F43F5E 97% 100%  /* 3% Team */
+          #F59E0B 0% 60%,   /* 60% Presale */
+          #22C55E 60% 82%,  /* 22% Permanent Reserve */
+          #EC4899 82% 85%,  /* 3% Gas Sponsorship */
+          #3B82F6 85% 91%,  /* 6% Staking/Vesting */
+          #A855F7 91% 96%,  /* 5% Partnerships */
+          #10B981 96% 98%,  /* 2% Ecosystem */
+          #F43F5E 98% 100%  /* 2% Team */
         );
       position: relative;
       border: 1px solid var(--border);
@@ -114,9 +115,10 @@
     
     .d-presale{background:#F59E0B}
     .d-reserve{background:#22C55E}
+    .d-gas{background:#EC4899}
     .d-stake{background:#3B82F6}
     .d-partner{background:#A855F7}
-    .d-eco{background:#EC4899}
+    .d-eco{background:#10B981}
     .d-team{background:#F43F5E}
 
     /* Tables */
@@ -402,12 +404,12 @@
       <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026). </span>
       <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity. </span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs. </span>
 
       <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
       <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
     </div>
   </div>
 
@@ -494,7 +496,7 @@
         <p>
           <strong>Max Supply:</strong> 1,000,000,000 NDG<br/>
           <strong>Presale Price (start):</strong> $0.025<br/>
-          <strong>Listing: </strong> Upon presale completion (up to 500M tokens are available during presale).<br/>
+          <strong>Listing: </strong> Upon presale completion (up to 600M tokens are available during presale).<br/>
           <strong>Stability: </strong> 22% of supply is <em>locked forever</em> in the on-chain bonding-curve reserve
           — our mathematical shock absorber for deep, continuous liquidity.
         </p>
@@ -509,12 +511,13 @@
           <div class="pie-wrap">
             <div class="token-pie" role="img" aria-label="Token allocation pie chart"></div>
             <div class="pie-legend" aria-label="Legend">
-              <div class="leg"><span class="dot d-presale"></span><strong>50%</strong>&nbsp;Presale</div>
+              <div class="leg"><span class="dot d-presale"></span><strong>60%</strong>&nbsp;Presale</div>
               <div class="leg"><span class="dot d-reserve"></span><strong>22%</strong>&nbsp;Permanent locked Reserve</div>
-              <div class="leg"><span class="dot d-stake"></span><strong>10%</strong>&nbsp;Staking &amp; Vesting</div>
-              <div class="leg"><span class="dot d-partner"></span><strong>10%</strong>&nbsp;Partnerships &amp; Marketing</div>
-              <div class="leg"><span class="dot d-eco"></span><strong>5%</strong>&nbsp;Ecosystem Incentives</div>
-              <div class="leg"><span class="dot d-team"></span><strong>3%</strong>&nbsp;Team &amp; Core Contributors</div>
+              <div class="leg"><span class="dot d-gas"></span><strong>3%</strong>&nbsp;Gas Sponsorship</div>
+              <div class="leg"><span class="dot d-stake"></span><strong>6%</strong>&nbsp;Staking &amp; Vesting</div>
+              <div class="leg"><span class="dot d-partner"></span><strong>5%</strong>&nbsp;Partnerships &amp; Marketing</div>
+              <div class="leg"><span class="dot d-eco"></span><strong>2%</strong>&nbsp;Ecosystem Incentives</div>
+              <div class="leg"><span class="dot d-team"></span><strong>2%</strong>&nbsp;Team &amp; Core Contributors</div>
             </div>
           </div>
 
@@ -530,8 +533,8 @@
               <tbody>
                 <tr>
                   <td>Presale</td>
-                  <td><strong>50%</strong></td>
-                  <td>Starts at <strong>$0.025</strong>; up to 500M tokens available. </td>
+                  <td><strong>60%</strong></td>
+                  <td>Starts at <strong>$0.025</strong>; up to 600M tokens available. Unsold → Treasury</td>
                 </tr>
                 <tr>
                   <td>Permanent Reserve</td>
@@ -539,24 +542,29 @@
                   <td>Locked forever on-chain for bonding-curve liquidity.</td>
                 </tr>
                 <tr>
+                  <td>Gas Sponsorship</td>
+                  <td><strong>3%</strong></td>
+                  <td>ERC-4337 gas subsidies for zero-friction onboarding.</td>
+                </tr>
+                <tr>
                   <td>Staking &amp; Vesting</td>
-                  <td><strong>10%</strong></td>
-                  <td>HODL rewards; emissions aligned to network health.</td>
+                  <td><strong>6%</strong></td>
+                  <td>HODL rewards; limited pool ensures sustainable APY.</td>
                 </tr>
                 <tr>
                   <td>Partnerships</td>
-                  <td><strong>10%</strong></td>
-                  <td>Strategic unlock on milestone completion.</td>
+                  <td><strong>5%</strong></td>
+                  <td>Strategic unlock on milestone completion → Treasury.</td>
                 </tr>
                 <tr>
                   <td>Ecosystem Incentives</td>
-                  <td><strong>5%</strong></td>
-                  <td>Gradual unlock linked to real network activity.</td>
+                  <td><strong>2%</strong></td>
+                  <td>Gradual unlock linked to real network activity → Treasury.</td>
                 </tr>
                 <tr>
                   <td>Team</td>
-                  <td><strong>3%</strong></td>
-                  <td>2-year lock with linear unlock thereafter.</td>
+                  <td><strong>2%</strong></td>
+                  <td>Multi-year vesting to ensure long-term alignment.</td>
                 </tr>
               </tbody>
             </table>
@@ -575,6 +583,12 @@
           <div class="stake-card">
             <p class="stake-label">Core Rewards</p>
             <h3 class="stake-title">Staking / Vesting Pool</h3>
+            <p class="stake-meta">
+              <strong>6% (60M NDG)</strong> allocated for staking rewards and vesting schedules.
+            </p>
+            <p class="stake-meta">
+              <em>Note: Staking rewards are distributed from a limited pool. The staking contract will only accept new stakes if sufficient rewards remain available, ensuring sustainable APY for all participants.</em>
+            </p>
             <p class="stake-meta">
               <strong>Lock: </strong> 30 days · <strong>Release:</strong> 20% per month × 5 months
             </p>
@@ -597,12 +611,15 @@
             <p class="stake-label">Strategic Growth</p>
             <h3 class="stake-title">Partnerships &amp; Integration</h3>
             <p class="stake-meta">
-              <strong>Lock:</strong> Milestone-based · <strong>Release:</strong> Strategic unlocks
+              <strong>5% (50M NDG)</strong> allocated to strategic partnerships.
+            </p>
+            <p class="stake-meta">
+              <strong>Lock:</strong> Milestone-based · <strong>Release:</strong> Goes to Treasury
             </p>
             <ul class="stake-points">
               <li>Allocated to exchanges and key integrations.</li>
               <li>Each unlock tied to published milestone. </li>
-              <li>Monthly unlock cap to avoid sell-pressure.</li>
+              <li>Managed strategically through Treasury for maximum ecosystem benefit.</li>
             </ul>
           </div>
 
@@ -610,18 +627,24 @@
             <p class="stake-label">Usage Incentives</p>
             <h3 class="stake-title">Ecosystem Incentives</h3>
             <p class="stake-meta">
-              <strong>Lock:</strong> Usage-linked · <strong>Release: </strong> Programmatic trickle
+              <strong>2% (20M NDG)</strong> allocated to ecosystem development.
+            </p>
+            <p class="stake-meta">
+              <strong>Lock:</strong> Usage-linked · <strong>Release: </strong> Goes to Treasury
             </p>
             <ul class="stake-points">
               <li>Rewards for dVPN, Provenance and ecosystem apps.</li>
-              <li>Emission based on verifiable on-chain KPIs.</li>
-              <li>Future:   Guardian AI dynamic staking. </li>
+              <li>Development grants and community initiatives.</li>
+              <li>Managed through Treasury for strategic deployment.</li>
             </ul>
           </div>
 
           <div class="stake-card">
             <p class="stake-label">Alignment</p>
             <h3 class="stake-title">Team &amp; Core Contributors</h3>
+            <p class="stake-meta">
+              <strong>2% (20M NDG)</strong> allocated to core team members with multi-year vesting to ensure long-term commitment and alignment with ecosystem success.
+            </p>
             <p class="stake-meta">
               <strong>Lock:</strong> 2 years · <strong>Release:</strong> Linear after lock
             </p>
@@ -635,6 +658,42 @@
 
         <p class="stake-footer">
           The <strong>Permanent Reserve (22%)</strong> is locked forever and not part of any vesting stream.
+        </p>
+      </section>
+
+      <div class="section-separator"></div>
+
+      <!-- Gas Sponsorship -->
+      <section class="tok-card">
+        <h2 class="section-header">🚀 Gas Sponsorship (3% - 30M NDG)</h2>
+        <p>
+          NetDAG eliminates blockchain barriers with <strong>30 million NDG reserved for gas subsidies</strong>.
+          Using ERC-4337 account abstraction and Biconomy Paymaster, users can transact without holding BNB for gas fees.
+        </p>
+        <ul>
+          <li><strong>Zero Gas Transactions:</strong> New users interact with NetDAG without technical friction</li>
+          <li><strong>Social Login Integration:</strong> Email/Google login with sponsored transactions</li>
+          <li><strong>Sustainability:</strong> Pool refills from transaction fees to maintain accessibility</li>
+          <li><strong>Smart Limits:</strong> Prevents abuse while ensuring legitimate users always have access</li>
+        </ul>
+      </section>
+
+      <div class="section-separator"></div>
+
+      <!-- Treasury Management -->
+      <section class="tok-card">
+        <h2 class="section-header">🏦 Treasury Management</h2>
+        <p>
+          The NetDAG Treasury holds strategic reserves for long-term ecosystem development and stability.
+        </p>
+        <h3>Treasury Holdings:</h3>
+        <ul>
+          <li><strong>Unsold Presale Tokens:</strong> Any tokens not sold during presale phases</li>
+          <li><strong>Partnerships Allocation (5% - 50M NDG):</strong> Strategic collaborations, exchange listings, integrations</li>
+          <li><strong>Ecosystem Fund (2% - 20M NDG):</strong> Development grants, community initiatives, emergency reserves</li>
+        </ul>
+        <p>
+          <em>Treasury is CEO-controlled and allocated strategically for maximum ecosystem benefit including exchange listings, marketing campaigns, development funding, and operational needs.</em>
         </p>
       </section>
 
@@ -736,8 +795,11 @@
       <section class="tok-card">
         <h2 class="section-header">Listing</h2>
         <p>
+          <strong>60% (600M NDG)</strong> available through 9-tier presale with progressive pricing.
+          <em>Any unsold tokens after presale completion will be transferred to the Treasury for strategic ecosystem deployment.</em>
+        </p>
+        <p>
           Listing occurs when the presale is complete and contracts are live with audit reports.
-          During presale, up to <strong>500,000,000 NDG</strong> are available according to the bonding-curve schedule.
         </p>
       </section>
 
