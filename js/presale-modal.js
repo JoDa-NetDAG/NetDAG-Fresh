@@ -41,9 +41,12 @@ function checkReferrer() {
   const urlParams = new URLSearchParams(window.location.search);
   const ref = urlParams.get('ref');
   
-  if (ref && /^0x[a-fA-F0-9]{40}$/.test(ref)) {
+  // Validate referrer address format and checksum
+  if (ref && ethers && ethers.utils && ethers.utils.isAddress(ref)) {
     referrerAddress = ref;
     showReferrerBanner(ref);
+  } else if (ref) {
+    console.warn('Invalid referrer address format:', ref);
   }
 }
 
@@ -223,32 +226,33 @@ function generateReferralLink(userAddress) {
   }
 }
 
-function copyReferralLink() {
+function copyReferralLink(event) {
   const input = document.getElementById('referral-link');
   if (!input) return;
   
   const linkValue = input.value;
+  const button = event?.currentTarget;
   
   // Try modern Clipboard API first
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(linkValue).then(() => {
-      showCopySuccess();
+      showCopySuccess(button);
     }).catch(() => {
       // Fallback to deprecated method
-      fallbackCopy(input);
+      fallbackCopy(input, button);
     });
   } else {
     // Fallback for older browsers
-    fallbackCopy(input);
+    fallbackCopy(input, button);
   }
 }
 
-function fallbackCopy(input) {
+function fallbackCopy(input, button) {
   try {
     input.select();
     input.setSelectionRange(0, 99999); // For mobile devices
     document.execCommand('copy');
-    showCopySuccess();
+    showCopySuccess(button);
   } catch (err) {
     console.error('Copy failed:', err);
     // Show manual copy message
@@ -256,18 +260,20 @@ function fallbackCopy(input) {
   }
 }
 
-function showCopySuccess() {
-  // Simple success indication - could be enhanced with toast notification
-  const copyBtn = event?.target;
-  if (copyBtn) {
-    const originalText = copyBtn.textContent;
-    copyBtn.textContent = '✅ Copied!';
-    copyBtn.style.background = '#00cc00';
-    setTimeout(() => {
-      copyBtn.textContent = originalText;
-      copyBtn.style.background = '';
-    }, 2000);
-  }
+function showCopySuccess(button) {
+  if (!button) return;
+  
+  // Visual feedback on the button
+  const originalText = button.textContent;
+  const originalBg = button.style.background;
+  
+  button.textContent = '✅ Copied!';
+  button.style.background = '#00cc00';
+  
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.style.background = originalBg;
+  }, 2000);
 }
 
 function disconnectWallet() {
@@ -487,7 +493,8 @@ async function buyWithBNB(bnbAmount, referrer) {
 
 /**
  * Purchase NDG with stablecoin (USDT or USDC)
- * Note: USDT and USDC on BSC use 18 decimals (verified for BSC mainnet)
+ * Note: BSC BEP-20 versions of USDT and USDC use 18 decimals (BSC-specific)
+ *       This differs from ERC-20 versions which typically use 6 decimals
  * @param {string} currency - 'USDT' or 'USDC'
  * @param {number} amount - Amount to spend
  * @param {string} referrer - Referrer address (or zero address)
@@ -585,6 +592,12 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Check for referrer on page load
   checkReferrer();
+  
+  // Copy referral link button
+  const copyReferralBtn = document.getElementById('copy-referral-btn');
+  if (copyReferralBtn) {
+    copyReferralBtn.addEventListener('click', copyReferralLink);
+  }
   
   // Open modal
   document.querySelectorAll('[data-open-presale]').forEach(btn => {
