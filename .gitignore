@@ -192,6 +192,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+nohup.out
 
 # Local test files
 test-results/
