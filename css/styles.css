@@ -6398,3 +6398,21 @@ body.ndg-modal-open {
   }
 }
 }
+/* =========================
+   Wallet Error Styles
+   ========================= */
+.wallet-error {
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff4444;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  color: #ff6666;
+  font-size: 0.9em;
+  display: none;
+}
+
+.wallet-error::before {
+  content: '⚠️ ';
+  margin-right: 8px;
+}

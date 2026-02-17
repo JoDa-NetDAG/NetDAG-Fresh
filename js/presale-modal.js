@@ -17,10 +17,10 @@ const PRESALE_CONFIG = {
     USDC: 1
   },
   network: {
-    chainId: '0x38',
-    chainName: 'BNB Smart Chain',
-    rpcUrl: 'https://bsc-dataseed.binance.org/',
-    blockExplorer: 'https://bscscan.com'
+    chainId: '0x61', // 97 in hex - BSC Testnet
+    chainName: 'BNB Smart Chain Testnet',
+    rpcUrl: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+    blockExplorer: 'https://testnet.bscscan.com'
   }
 };
 
@@ -32,6 +32,9 @@ let userAddress = null;
 let selectedCurrency = 'BNB';
 let countdownInterval = null;
 let referrerAddress = null;
+let isConnecting = false;
+let currentProvider = null; // Store the active provider
+let walletConnectProvider = null; // Store WalletConnect instance
 
 // ============================================
 // MODAL CONTROLS
@@ -150,29 +153,70 @@ function updateCountdown() {
 // ============================================
 
 async function connectWallet(walletType) {
+  // Prevent multiple simultaneous connections
+  if (isConnecting) {
+    console.log('Connection already in progress...');
+    return;
+  }
+  
+  isConnecting = true;
+  
   try {
     if (walletType === 'metamask') {
       await connectMetaMask();
+    } else if (walletType === 'trustwallet') {
+      await connectTrustWallet();
+    } else if (walletType === 'coinbase') {
+      await connectCoinbaseWallet();
+    } else if (walletType === 'walletconnect') {
+      await connectWalletConnect();
     } else {
-      alert(walletType.charAt(0).toUpperCase() + walletType.slice(1) + ' integration coming soon!');
+      throw new Error(`Wallet type "${walletType}" not supported.`);
     }
   } catch (error) {
     console.error('Wallet connection error:', error);
-    showError(error.message || 'Failed to connect wallet');
+    
+    // User-friendly error messages
+    let errorMessage = 'Failed to connect wallet.';
+    
+    if (error.code === 4001) {
+      errorMessage = 'Connection rejected. Please approve the connection in your wallet.';
+    } else if (error.code === -32002) {
+      errorMessage = 'Wallet is already open. Please check your wallet extension and approve the connection.';
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    showError(errorMessage);
+  } finally {
+    isConnecting = false;
   }
 }
 
 async function connectMetaMask() {
   if (typeof window.ethereum === 'undefined') {
-    throw new Error('MetaMask is not installed. Please install MetaMask and try again.');
+    throw new Error('No wallet extension found. Please install MetaMask.');
   }
   
-  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-  userAddress = accounts[0];
+  let provider = window.ethereum;
   
-  const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+  // Handle multiple wallet extensions installed
+  if (window.ethereum.providers?.length) {
+    provider = window.ethereum.providers.find(p => p.isMetaMask);
+    if (!provider) {
+      throw new Error('MetaMask not found. Please install MetaMask or try another wallet.');
+    }
+  } else if (!window.ethereum.isMetaMask) {
+    throw new Error('MetaMask not detected. Please install MetaMask or use another wallet option.');
+  }
+  
+  const accounts = await provider.request({ method: 'eth_requestAccounts' });
+  userAddress = accounts[0];
+  currentProvider = provider;
+  
+  const chainId = await provider.request({ method: 'eth_chainId' });
   if (chainId !== PRESALE_CONFIG.network.chainId) {
-    await switchNetwork();
+    await switchNetwork(provider);
   }
   
   walletConnected = true;
@@ -180,23 +224,168 @@ async function connectMetaMask() {
   showStep('step-purchase');
 }
 
-async function switchNetwork() {
+async function connectTrustWallet() {
+  if (typeof window.ethereum === 'undefined') {
+    throw new Error('No wallet extension found. Please install Trust Wallet.');
+  }
+  
+  let provider = window.ethereum;
+  
+  // Handle multiple wallet extensions
+  if (window.ethereum.providers?.length) {
+    provider = window.ethereum.providers.find(p => p.isTrust || p.isTrustWallet);
+    if (!provider) {
+      throw new Error('Trust Wallet not found. Please install Trust Wallet or try another wallet.');
+    }
+  } else if (!(window.ethereum.isTrust || window.ethereum.isTrustWallet)) {
+    throw new Error('Trust Wallet not detected. Please install Trust Wallet or use another wallet option.');
+  }
+  
+  const accounts = await provider.request({ method: 'eth_requestAccounts' });
+  userAddress = accounts[0];
+  currentProvider = provider;
+  
+  const chainId = await provider.request({ method: 'eth_chainId' });
+  if (chainId !== PRESALE_CONFIG.network.chainId) {
+    await switchNetwork(provider);
+  }
+  
+  walletConnected = true;
+  updateWalletUI();
+  showStep('step-purchase');
+}
+
+async function connectCoinbaseWallet() {
+  if (typeof window.ethereum === 'undefined') {
+    throw new Error('No wallet extension found. Please install Coinbase Wallet.');
+  }
+  
+  let provider = window.ethereum;
+  
+  // Handle multiple wallet extensions
+  if (window.ethereum.providers?.length) {
+    provider = window.ethereum.providers.find(p => p.isCoinbaseWallet || p.isWalletLink);
+    if (!provider) {
+      throw new Error('Coinbase Wallet not found. Please install Coinbase Wallet or try another wallet.');
+    }
+  } else if (!(window.ethereum.isCoinbaseWallet || window.ethereum.isWalletLink)) {
+    throw new Error('Coinbase Wallet not detected. Please install Coinbase Wallet or use another wallet option.');
+  }
+  
+  const accounts = await provider.request({ method: 'eth_requestAccounts' });
+  userAddress = accounts[0];
+  currentProvider = provider;
+  
+  const chainId = await provider.request({ method: 'eth_chainId' });
+  if (chainId !== PRESALE_CONFIG.network.chainId) {
+    await switchNetwork(provider);
+  }
+  
+  walletConnected = true;
+  updateWalletUI();
+  showStep('step-purchase');
+}
+
+async function connectWalletConnect() {
   try {
-    await window.ethereum.request({
+    // Check if WalletConnect library is loaded
+    if (typeof WalletConnectProvider === 'undefined') {
+      throw new Error('WalletConnect library not loaded. Please refresh the page.');
+    }
+    
+    // Create WalletConnect Provider
+    walletConnectProvider = new WalletConnectProvider.default({
+      rpc: {
+        56: 'https://bsc-dataseed.binance.org/',
+        97: 'https://data-seed-prebsc-1-s1.binance.org:8545/', // BSC Testnet
+      },
+      chainId: 97, // Default to BSC Testnet
+      qrcodeModalOptions: {
+        mobileLinks: [
+          'metamask',
+          'trust',
+          'rainbow',
+          'argent',
+          'imtoken',
+          'pillar',
+        ],
+      },
+    });
+    
+    // Enable session (displays QR Code modal)
+    const accounts = await walletConnectProvider.enable();
+    userAddress = accounts[0];
+    currentProvider = walletConnectProvider;
+    
+    // Check chain ID
+    const chainId = await walletConnectProvider.request({ method: 'eth_chainId' });
+    const chainIdHex = typeof chainId === 'string' ? chainId : `0x${chainId.toString(16)}`;
+    
+    if (chainIdHex !== PRESALE_CONFIG.network.chainId) {
+      await switchNetwork(walletConnectProvider);
+    }
+    
+    // Subscribe to accounts change
+    walletConnectProvider.on('accountsChanged', (accounts) => {
+      if (accounts.length === 0) {
+        disconnectWallet();
+      } else {
+        userAddress = accounts[0];
+        updateWalletUI();
+      }
+    });
+    
+    // Subscribe to chainId change
+    walletConnectProvider.on('chainChanged', (chainId) => {
+      window.location.reload();
+    });
+    
+    // Subscribe to session disconnection
+    walletConnectProvider.on('disconnect', (code, reason) => {
+      disconnectWallet();
+    });
+    
+    walletConnected = true;
+    updateWalletUI();
+    showStep('step-purchase');
+    
+  } catch (error) {
+    // Clean up if user closed QR modal
+    if (walletConnectProvider) {
+      await walletConnectProvider.disconnect();
+      walletConnectProvider = null;
+    }
+    throw error;
+  }
+}
+
+async function switchNetwork(provider = window.ethereum) {
+  try {
+    await provider.request({
       method: 'wallet_switchEthereumChain',
       params: [{ chainId: PRESALE_CONFIG.network.chainId }],
     });
   } catch (switchError) {
+    // This error code indicates that the chain has not been added to the wallet
     if (switchError.code === 4902) {
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [{
-          chainId: PRESALE_CONFIG.network.chainId,
-          chainName: PRESALE_CONFIG.network.chainName,
-          rpcUrls: [PRESALE_CONFIG.network.rpcUrl],
-          blockExplorerUrls: [PRESALE_CONFIG.network.blockExplorer]
-        }]
-      });
+      try {
+        await provider.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: PRESALE_CONFIG.network.chainId,
+            chainName: PRESALE_CONFIG.network.chainName,
+            nativeCurrency: {
+              name: 'Test BNB',
+              symbol: 'tBNB',
+              decimals: 18,
+            },
+            rpcUrls: [PRESALE_CONFIG.network.rpcUrl],
+            blockExplorerUrls: [PRESALE_CONFIG.network.blockExplorer]
+          }]
+        });
+      } catch (addError) {
+        throw new Error('Failed to add BSC Testnet to your wallet.');
+      }
     } else {
       throw switchError;
     }
@@ -276,9 +465,16 @@ function showCopySuccess(button) {
   }, 2000);
 }
 
-function disconnectWallet() {
+async function disconnectWallet() {
+  // Disconnect WalletConnect if active
+  if (walletConnectProvider) {
+    await walletConnectProvider.disconnect();
+    walletConnectProvider = null;
+  }
+  
   walletConnected = false;
   userAddress = null;
+  currentProvider = null;
   resetModalToStep1();
 }
 
@@ -556,8 +752,27 @@ function showSuccess(paidAmount, receivedNDG, txHash) {
 }
 
 function showError(message) {
-  showStep('step-error');
-  setTextContent('error-message', message);
+  // Find or create error display element
+  let errorDiv = document.getElementById('wallet-error');
+  
+  if (!errorDiv) {
+    errorDiv = document.createElement('div');
+    errorDiv.id = 'wallet-error';
+    errorDiv.className = 'wallet-error';
+    
+    const walletStep = document.getElementById('step-wallet');
+    if (walletStep) {
+      walletStep.insertBefore(errorDiv, walletStep.firstChild);
+    }
+  }
+  
+  errorDiv.textContent = message;
+  errorDiv.style.display = 'block';
+  
+  // Auto-hide after 5 seconds
+  setTimeout(() => {
+    errorDiv.style.display = 'none';
+  }, 5000);
 }
 
 function buyMore() {
