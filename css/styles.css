@@ -6274,3 +6274,127 @@ body.ndg-modal-open {
     font-size: 1.5rem;
   }
 }
+
+/* =========================
+   Referral System Styles
+   ========================= */
+
+.referral-box {
+  background: linear-gradient(135deg, #1a1f3a 0%, #0f1120 100%);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.referral-box h3 {
+  color: #ffffff;
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+}
+
+.referral-box p {
+  color: var(--muted);
+  margin: 0 0 15px 0;
+}
+
+.referral-link-container {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.referral-link-container input {
+  flex: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.referral-link-container input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.referral-link-container button {
+  padding: 12px 24px;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.referral-link-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4);
+}
+
+.referral-link-container button:active {
+  transform: translateY(0);
+}
+
+.referral-stats {
+  color: var(--muted);
+  font-size: 0.9em;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+.referral-banner {
+  background: linear-gradient(90deg, #ff9900 0%, #ffbb33 100%);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #000;
+  font-weight: bold;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.referral-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bonus-tag {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  .referral-link-container {
+    flex-direction: column;
+  }
+  
+  .referral-link-container button {
+    width: 100%;
+  }
+  
+  .referral-badge {
+    font-size: 0.9rem;
+  }
+}
+}
