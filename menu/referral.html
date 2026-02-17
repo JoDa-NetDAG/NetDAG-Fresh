@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetDAG — Referral Program</title>
+  <meta name="description" content="Earn 5% NDG tokens on every referral. Share NetDAG with friends and earn rewards automatically when they participate in the presale." />
+  <link rel="icon" href="../images/favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  
+  <script>
+    window.NDG_STAKING_ADDRESS = "0x25604d152FD6878fb6193d3c6F45f9D1A458378d";
+    window.NDG_CHAIN_ID_HEX = "0x61"; // testnet
+    NDG_STAKING_ADDRESS = window.NDG_STAKING_ADDRESS;
+    NDG_CHAIN_ID_HEX = window.NDG_CHAIN_ID_HEX;
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
+  <script src="../js/main.js" defer></script>
+
+  <style>
+    /* Referral page-specific styles */
+    .hero-referral {
+      background-image: url('../images/ndg15.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+    }
+
+    .hero-referral .hero-overlay {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .hero-referral .hero-title {
+      color: var(--accent);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 20px;
+    }
+
+    .hero-referral .hero-subtitle {
+      max-width: 720px;
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    .curve-section {
+      padding-top: 28px;
+      background: #050714;
+    }
+
+    .referral-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 16px;
+    }
+
+    .referral-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .referral-header h2 {
+      color: var(--accent);
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    .referral-header p {
+      color: #aeb3c2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .referral-steps {
+      display: grid;
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .ref-step {
+      background: #0f1120;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .ref-step > div {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .ref-step h3 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    .ref-step p {
+      color: #e5e7eb;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .ref-example {
+      background: linear-gradient(135deg, #1a1f3a 0%, #0f1120 100%);
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 50px;
+    }
+
+    .ref-example h3 {
+      margin: 0 0 20px;
+      color: var(--accent);
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .ref-example-grid {
+      display: grid;
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .ref-example-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .ref-example-row.blue-bg {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .ref-example-row.green-bg {
+      background: rgba(34, 197, 94, 0.2);
+    }
+
+    .ref-example-row span {
+      color: #aeb3c2;
+    }
+
+    .ref-example-row strong {
+      color: #fff;
+    }
+
+    .ref-example-row.green-bg strong {
+      color: #22C55E;
+      font-size: 1.2rem;
+    }
+
+    .ref-example p {
+      text-align: center;
+      color: #aeb3c2;
+      margin: 20px 0 0;
+      font-size: 0.95rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      margin-bottom: 50px;
+    }
+
+    .benefit-card {
+      background: #0f1120;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .benefit-card h4 {
+      margin: 0 0 8px;
+      color: #fff;
+    }
+
+    .benefit-card p {
+      color: #e5e7eb;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .benefit-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .fair-play-rules {
+      background: #0f1120;
+      border: 1px solid rgba(251, 146, 60, 0.3);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 50px;
+    }
+
+    .fair-play-rules h3 {
+      margin: 0 0 16px;
+      color: #FB923C;
+      font-size: 1.4rem;
+    }
+
+    .fair-play-rules ul {
+      color: #e5e7eb;
+      line-height: 1.8;
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .cta-section {
+      text-align: center;
+      background: linear-gradient(135deg, var(--accent) 0%, #6366f1 100%);
+      border-radius: 16px;
+      padding: 40px 20px;
+    }
+
+    .cta-section h3 {
+      margin: 0 0 16px;
+      color: #fff;
+      font-size: 1.8rem;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 0 24px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-tokenomics-view {
+      display: inline-block;
+      background: #fff;
+      color: #3b82f6;
+      font-weight: 700;
+      padding: 14px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .btn-tokenomics-view:hover {
+      background: #f0f0f0;
+    }
+
+    .section-separator {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 40px 0;
+    }
+  </style>
+</head>
+
+<body class="referral-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="../index.html" title="NetDAG home">
+        <img src="../images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../provenance.html">Provenance dApp</a></li>
+          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="../guardian.html">Guardian</a></li>
+          <li><a href="../no-gas.html">Easy Access</a></li>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+
+        <div class="header-ctas">
+          <a href="../purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="../stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="../guardian.html">Guardian</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
+        <li><a href="../no-gas.html">Easy Access</a></li>
+        <li><a href="whitepaper.html">Whitepaper</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="tokenomics.html">Tokenomics</a></li>
+        <li><a href="referral.html">Referral</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="ambassador.html">Ambassador</a></li>
+        <li><a href="charity.html">Charity</a></li>
+        <li><a href="partners.html">Partners</a></li>
+        <li><a href="legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+        <button type="button" data-ndg-open class="btn btn-primary">Buy NDG</button>
+        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <main class="hero-banner hero-referral" id="main-content">
+    <div class="hero-overlay">
+      <h1 class="hero-title">Earn 5% on Every Referral</h1>
+      <p class="hero-subtitle">
+        Share NetDAG with friends and earn NDG tokens automatically. 
+        No limits, instant rewards, lifetime tracking.
+      </p>
+    </div>
+  </main>
+
+  <!-- BODY -->
+  <section class="curve-section">
+    <div class="referral-wrap">
+      
+      <header class="referral-header">
+        <h2>How Referrals Work</h2>
+        <p>
+          NetDAG's referral system is built directly into the presale smart contract. 
+          When someone purchases using your link, you automatically receive 5% bonus tokens.
+        </p>
+      </header>
+
+      <!-- 3-STEP PROCESS -->
+      <div class="referral-steps">
+        <!-- Step 1 -->
+        <div class="ref-step">
+          <div>
+            <div style="font-size: 3rem; color: var(--accent);">📱</div>
+            <div>
+              <h3>1. Get Your Referral Link</h3>
+              <p>
+                Connect your wallet on the purchase page. Your unique referral link will be generated 
+                automatically, containing your wallet address as the referrer.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="ref-step">
+          <div>
+            <div style="font-size: 3rem; color: var(--accent);">🔗</div>
+            <div>
+              <h3>2. Share with Friends</h3>
+              <p>
+                Share your link on social media, messaging apps, or email. When someone clicks your link 
+                and purchases NDG, the smart contract automatically links them to your address.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="ref-step">
+          <div>
+            <div style="font-size: 3rem; color: var(--accent);">💰</div>
+            <div>
+              <h3>3. Earn 5% Automatically</h3>
+              <p>
+                When your referral completes their purchase, you instantly receive 5% of their NDG amount 
+                as a bonus. No claims needed—it's sent directly to your wallet.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXAMPLE CALCULATION -->
+      <div class="ref-example">
+        <h3>💡 Example Calculation</h3>
+        <div class="ref-example-grid">
+          <div class="ref-example-row blue-bg">
+            <span>Your friend purchases:</span>
+            <strong>100,000 NDG</strong>
+          </div>
+          <div class="ref-example-row blue-bg">
+            <span>They receive:</span>
+            <strong style="color: #22C55E;">100,000 NDG</strong>
+          </div>
+          <div class="ref-example-row green-bg">
+            <span>You earn (5%):</span>
+            <strong>5,000 NDG 🎉</strong>
+          </div>
+        </div>
+        <p>
+          <em>Both parties win—no cost to your referral!</em>
+        </p>
+      </div>
+
+      <!-- BENEFITS GRID -->
+      <h3 style="color: var(--accent); font-size: 1.8rem; margin-bottom: 24px; text-align: center;">
+        Why Refer?
+      </h3>
+      <div class="benefits-grid">
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🚀</div>
+          <h4>No Limits</h4>
+          <p>
+            Refer as many people as you want. There's no cap on your earnings.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <h4>Instant Credit</h4>
+          <p>
+            Bonus tokens are credited immediately when your referral completes purchase.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">📊</div>
+          <h4>Stackable Rewards</h4>
+          <p>
+            Referral bonuses stack with tier pricing—maximize your returns.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">🔒</div>
+          <h4>Smart Contract</h4>
+          <p>
+            Built into the presale contract—transparent, automatic, trustless.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- FAIR PLAY RULES -->
+      <div class="fair-play-rules">
+        <h3>📋 Fair Play Rules</h3>
+        <ul>
+          <li><strong>No self-referrals:</strong> You cannot refer yourself or use multiple wallets to game the system.</li>
+          <li><strong>Referral must precede purchase:</strong> The referral link must be used before the purchase transaction.</li>
+          <li><strong>One referrer per purchase:</strong> Each purchase can only be linked to one referral address.</li>
+          <li><strong>Vesting may apply:</strong> Referral bonuses may be subject to vesting schedules depending on amount.</li>
+          <li><strong>KYC compliance:</strong> Large referral earnings may require identity verification to prevent abuse.</li>
+        </ul>
+      </div>
+
+      <!-- CTA SECTION -->
+      <div class="cta-section">
+        <h3>Ready to Start Earning?</h3>
+        <p>
+          Connect your wallet on the purchase page to get your unique referral link and start sharing NetDAG today.
+        </p>
+        <a href="../purchase-ndg.html" class="btn-tokenomics-view">
+          Get Your Referral Link →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Bottom separator -->
+  <div class="section-separator"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.</span>
+          NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment. Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="vision.html" class="btn-explore-vision">Explore the Vision</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy: DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy.</em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="../provenance.html">Provenance dApp</a></li>
+            <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="tokenomics.html">Tokenomics</a></li>
+            <li><a href="whitepaper.html">Whitepaper</a></li>
+            <li><a href="vision.html">Vision</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="ambassador.html">Ambassador Program</a></li>
+            <li><a href="charity.html">Charity</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r.php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="/js/buy-modals.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>
