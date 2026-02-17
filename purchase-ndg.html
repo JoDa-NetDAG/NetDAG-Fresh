@@ -8,6 +8,7 @@
   <link rel="icon" href="images/favicon.ico" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
   <script src="js/main.js" defer></script>
  </head>
 
@@ -440,6 +441,19 @@
           </div>
           <div class="wallet-address" id="wallet-address">0x0000...0000</div>
           <button class="btn-disconnect" id="disconnect-wallet">Disconnect</button>
+        </div>
+        
+        <!-- Referral Link Section -->
+        <div id="referral-section" style="display: none;">
+          <div class="referral-box">
+            <h3>🎁 Your Referral Link</h3>
+            <p>Share this link and earn 5% on every purchase!</p>
+            <div class="referral-link-container">
+              <input type="text" id="referral-link" readonly value="">
+              <button id="copy-referral-btn">📋 Copy</button>
+            </div>
+            <p class="referral-stats">Earn 5% NDG tokens on every referral purchase</p>
+          </div>
         </div>
         
         <h3 class="step-title">Step 2: Choose Currency &amp; Amount</h3>
