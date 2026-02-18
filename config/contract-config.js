@@ -1,26 +1,26 @@
 // Configuration for BNB Chain TESTNET (BSC Testnet)
 
 export const CONTRACT_CONFIG = {
-  // Your TESTNET contract addresses
+  // Contract Addresses
+  TOKEN_CONTRACT: '0xf8E886791E26DFD9195C1225b4Ca6458725DAe50',
+  PRESALE_CONTRACT: '0x74d469c0eEd89b0F17189c824C95622C680f803E',
+  VESTING_VAULT: '0x0aC817497d482629879d9c44fF226C033c5f64D4',
   STAKING_CONTRACT: '0x7730dCD24b93F171A7B7B85FcDB4193E94614D70',
-  TOKEN_CONTRACT: '0x35730a53211cB79186a07B84dc0e6a3412E31A57',
 
-  // BNB Chain TESTNET settings
-  CHAIN_ID: 97, // 97 = BSC TESTNET
+  // Network Config
+  CHAIN_ID: 97,
   NETWORK_NAME: 'BNB Smart Chain Testnet',
+  RPC_URL: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+  EXPLORER_URL: 'https://testnet.bscscan.com',
+
+  // Legacy settings (for backward compatibility)
   CURRENCY_SYMBOL: 'tBNB',
   CURRENCY_DECIMALS: 18,
-
-  // RPC URLs for BSC TESTNET (no stray spaces)
-  RPC_URL: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
   RPC_URL_BACKUP: [
     'https://data-seed-prebsc-2-s1.binance.org:8545/',
     'https://data-seed-prebsc-1-s2.binance.org:8545/',
     'https://data-seed-prebsc-2-s2.binance.org:8545/',
   ],
-
-  // Block explorer for TESTNET
-  EXPLORER_URL: 'https://testnet.bscscan.com',
   EXPLORER_NAME: 'BscScan Testnet',
 };
 
