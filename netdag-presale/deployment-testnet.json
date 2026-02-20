@@ -1,0 +1,18 @@
+{
+  "network": "BSC Testnet",
+  "timestamp": "2026-02-18T22:22:59.365Z",
+  "contracts": {
+    "NDGToken": "0x7Cc0B687F812B74035E626E92918F2274C3083F1",
+    "VestingVault": "0x80995a285A1613F1A1F63817CC8f88AfB0aC87c3",
+    "PresaleWithVesting": "0x72DA63be282a57d207407c7c795D16961bB3e25a",
+    "MockBNBPriceFeed": "0x9C9DFBA325BFa8E07409D4784f71aCf45D97E900",
+    "MockUSDT": "0xD6A08dC67148c7c93D230496F141aE0E25Ac5256",
+    "MockUSDC": "0xAc32F5dAb49579285A3465A8907F88708E32e23e",
+    "MockBUSD": "0xF473c8E2b6d7E19E3eB532B9Ce92c02b38DA5945"
+  },
+  "config": {
+    "liquidityFund": "0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318",
+    "bnbPrice": "$600",
+    "presaleAllocation": "400000000.0 NDG"
+  }
+}

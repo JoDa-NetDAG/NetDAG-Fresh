@@ -1,0 +1,17 @@
+
+
+## WALLETS
+- New Treasury: 0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318
+- Testing: 0x8834aa98987c170c0f36e087a7ffa08070c1ad4bB (former treasury, hold tBNB now)
+
+
+✅ NDG Token:            0x7Cc0B687F812B74035E626E92918F2274C3083F1
+   Total Supply:         1,000,000,000 NDG = Created and disbursed Only.
+
+✅ VestingVault:         0x80995a285A1613F1A1F63817CC8f88AfB0aC87c3
+   Balance:              600,000,000 NDG (for everything presale)
+
+✅ PresaleWithVesting:   0x72DA63be282a57d207407c7c795D16961bB3e25a
+
+✅ Treasury Wallet:      0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318
+   Balance:              400,000,000 NDG (Holds tokens for every other thing)

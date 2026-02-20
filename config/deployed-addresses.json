@@ -1,0 +1,10 @@
+{
+  "network": "bsc-testnet",
+  "chainId": 97,
+  "contracts": {
+    "token": "0xf8E886791E26DFD9195C1225b4Ca6458725DAe50",
+    "presale": "0x74d469c0eEd89b0F17189c824C95622C680f803E",
+    "vesting": "0x0aC817497d482629879d9c44fF226C033c5f64D4",
+    "staking": "0x7730dCD24b93F171A7B7B85FcDB4193E94614D70"
+  }
+}

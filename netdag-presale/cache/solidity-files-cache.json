@@ -1,17 +1,18 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\contracts\\MockERC20.sol": {
-      "lastModificationDate": 1769860932044,
-      "contentHash": "20575775b0cbd02ea22f6efadb6dd113",
-      "sourceName": "contracts/MockERC20.sol",
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\mocks\\MockERC20.sol": {
+      "lastModificationDate": 1771000323478,
+      "contentHash": "424421b1d98c25773e369e411079628a",
+      "sourceName": "contracts/mocks/MockERC20.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -38,17 +39,18 @@
         "MockERC20"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
-      "lastModificationDate": 1769899197029,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
+      "lastModificationDate": 1770300675320,
       "contentHash": "3ae5166c6827a9cf1a7a462d1632b464",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -77,17 +79,18 @@
         "ERC20"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
-      "lastModificationDate": 1769899197258,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol": {
+      "lastModificationDate": 1770300675585,
       "contentHash": "df36f7051335cd1e748b1b6463b7fdd3",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -112,17 +115,18 @@
         "IERC20"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
-      "lastModificationDate": 1769899196861,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
+      "lastModificationDate": 1770300676121,
       "contentHash": "f07feb4a44b1a4872370da5aa70e8e46",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -147,17 +151,18 @@
         "Context"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
-      "lastModificationDate": 1769899197267,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
+      "lastModificationDate": 1770300675555,
       "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -184,17 +189,18 @@
         "IERC20Metadata"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\utils\\SafeERC20.sol": {
-      "lastModificationDate": 1769899197675,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\utils\\SafeERC20.sol": {
+      "lastModificationDate": 1770300675654,
       "contentHash": "1b5d667d3740d866eca0352758e59827",
       "sourceName": "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -223,17 +229,18 @@
         "SafeERC20"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol": {
-      "lastModificationDate": 1769899196799,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol": {
+      "lastModificationDate": 1770300676069,
       "contentHash": "211ffd288c1588ba8c10eae668ca3c66",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -258,17 +265,18 @@
         "Address"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Permit.sol": {
-      "lastModificationDate": 1769899197269,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Permit.sol": {
+      "lastModificationDate": 1770300675571,
       "contentHash": "525fcdad8d171312933f47baf01d1ed8",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -293,17 +301,18 @@
         "IERC20Permit"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\contracts\\Presale.sol": {
-      "lastModificationDate": 1769893223199,
-      "contentHash": "df4f3970259c0495066b6fab2ec20831",
-      "sourceName": "contracts/Presale.sol",
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\VestingVault.sol": {
+      "lastModificationDate": 1771451610140,
+      "contentHash": "a68b77d2a7e425b1625a63131a216314",
+      "sourceName": "contracts/VestingVault.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -323,63 +332,31 @@
       "imports": [
         "@openzeppelin/contracts/access/Ownable.sol",
         "@openzeppelin/contracts/security/ReentrancyGuard.sol",
-        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol",
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol"
       ],
       "versionPragmas": [
-        "^0.8.0"
+        "^0.8.17"
       ],
       "artifacts": [
         "AggregatorV3Interface",
-        "Presale"
+        "IERC20Metadata",
+        "INDGToken",
+        "VestingVault"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\security\\ReentrancyGuard.sol": {
-      "lastModificationDate": 1769899197669,
-      "contentHash": "1535f8c0c68463f8c1b5239f7584e71f",
-      "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ReentrancyGuard"
-      ]
-    },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
-      "lastModificationDate": 1769899197641,
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
+      "lastModificationDate": 1770300671218,
       "contentHash": "5a20b2cad87ddb61c7a3a6af21289e28",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -406,17 +383,137 @@
         "Ownable"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\contracts\\NDGToken.sol": {
-      "lastModificationDate": 1769860433369,
-      "contentHash": "d9ec593aa60c6bb0d44061e946de8f8b",
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\security\\ReentrancyGuard.sol": {
+      "lastModificationDate": 1770300675051,
+      "contentHash": "1535f8c0c68463f8c1b5239f7584e71f",
+      "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ReentrancyGuard"
+      ]
+    },
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\PresaleWithVesting.sol": {
+      "lastModificationDate": 1771451610207,
+      "contentHash": "c5ece1863f78cf4461db706f75238e16",
+      "sourceName": "contracts/PresaleWithVesting.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "@openzeppelin/contracts/security/Pausable.sol",
+        "@openzeppelin/contracts/token/ERC20/IERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.17"
+      ],
+      "artifacts": [
+        "AggregatorV3Interface",
+        "IERC20Metadata",
+        "IVestingVault",
+        "PresaleWithVesting"
+      ]
+    },
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\security\\Pausable.sol": {
+      "lastModificationDate": 1770300675022,
+      "contentHash": "25c8108f36fdd472bc78d4c4af240c11",
+      "sourceName": "@openzeppelin/contracts/security/Pausable.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Pausable"
+      ]
+    },
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\NDGToken.sol": {
+      "lastModificationDate": 1771451610072,
+      "contentHash": "b4daa1fc959fa05f16c9aae01519324b",
       "sourceName": "contracts/NDGToken.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -444,17 +541,18 @@
         "NDGToken"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG\\netdag-presale\\contracts\\MockV3Aggregator.sol": {
-      "lastModificationDate": 1769860433369,
-      "contentHash": "3bce23eee3edce297fa8944b29aac43d",
-      "sourceName": "contracts/MockV3Aggregator.sol",
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\mocks\\MockV3Aggregator.sol": {
+      "lastModificationDate": 1771000118624,
+      "contentHash": "25cf8cc78a71f5805068d89034217465",
+      "sourceName": "contracts/mocks/MockV3Aggregator.sol",
       "solcConfig": {
         "version": "0.8.17",
         "settings": {
           "optimizer": {
-            "enabled": false,
+            "enabled": true,
             "runs": 200
           },
+          "viaIR": true,
           "outputSelection": {
             "*": {
               "*": [
@@ -476,7 +574,6 @@
         "^0.8.17"
       ],
       "artifacts": [
-        "AggregatorV3Interface",
         "MockV3Aggregator"
       ]
     }

@@ -4,392 +4,851 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NetDAG — Tokenomics</title>
-  <meta name="description" content="NetDAG Tokenomics:   1B max supply with presale, permanent reserve lock for bonding-curve stability, staking/vesting, partnerships, ecosystem incentives, and team alignment." />
+  <meta name="description" content="NetDAG Tokenomics: 1B max supply with 9-tier presale ($0.006-$0.160), 22% bonding curve reserve, 5% referral rewards, and strategic token distribution." />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   
   <script>
-    window.NDG_STAKING_ADDRESS = "0x25604d152FD6878fb6193d3c6F45f9D1A458378d";
-    window.NDG_CHAIN_ID_HEX = "0x61"; // testnet
-    NDG_STAKING_ADDRESS = window.NDG_STAKING_ADDRESS;
-    NDG_CHAIN_ID_HEX = window.NDG_CHAIN_ID_HEX;
+    // Updated Contract Addresses - Version 2.0
+    window.NDG_TOKEN_ADDRESS = "0xf8E886791E26DFD9195C1225b4Ca6458725DAe50";
+    window.NDG_PRESALE_ADDRESS = "[PENDING DEPLOYMENT]";
+    window.NDG_VESTING_ADDRESS = "[PENDING DEPLOYMENT]";
+    window.NDG_STAKING_ADDRESS = "[PENDING DEPLOYMENT]";
+    window.NDG_TREASURY_ADDRESS = "0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318";
+    window.NDG_CHAIN_ID_HEX = "0x61"; // BSC Testnet
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers. umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
   <script src="../js/main.js" defer></script>
-  <script src="../js/staking-readonly.js" defer></script>
-  <script src="../js/staking-write.js" defer></script>
 
   <style>
-    /* Tokenomics page-specific styles */
-    .tok-wrap{
-      max-width: 1100px;
+    /* ========================================
+       MODERN TOKENOMICS PAGE STYLES
+    ======================================== */
+    
+    .tok-wrap {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 40px 0 60px;
+      padding: 40px 20px 60px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 40px;
     }
     
-    .tok-card{
-      background: #0f1120;
-      border:  1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 24px;
-      box-shadow:  0 2px 10px rgba(0,0,0,.18);
+    .tok-card {
+      background: linear-gradient(135deg, #0f1120 0%, #1a1d35 100%);
+      border: 1px solid rgba(255, 153, 0, 0.2);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(255, 153, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
-    .tok-card h2{
-      margin:  0 0 10px;
-      color: #fff;
+    .tok-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.4),
+        0 0 60px rgba(255, 153, 0, 0.1);
     }
     
-    .tok-grid{
-      display: grid;
-      gap: 16px;
+    .tok-card h2 {
+      margin: 0 0 24px;
+      color: #ff9900;
+      font-size: 1.8rem;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 12px;
     }
     
-    @media(min-width: 980px){
-      .tok-grid{
-        grid-template-columns: 1.1fr .9fr;
-      }
+    .tok-card h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #ff9900, transparent);
+      border-radius: 2px;
     }
 
-    /* Pie chart */
-    .pie-wrap{
-      display: flex;
-      gap: 22px;
-      align-items: center;
-      flex-wrap: wrap;
+    /* ========================================
+       TIER PRICING TABLE (NEW)
+    ======================================== */
+    
+    .tier-table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
     }
     
-    .token-pie{
-      width: 260px;
-      height: 260px;
-      border-radius:  50%;
-      background: 
-        conic-gradient(
-          #F59E0B 0% 50%,   /* 50% Presale */
-          #22C55E 50% 72%,  /* 22% Permanent Reserve */
-          #3B82F6 72% 82%,  /* 10% Staking/Vesting */
-          #A855F7 82% 92%,  /* 10% Partnerships */
-          #EC4899 92% 97%,  /* 5% Ecosystem */
-          #F43F5E 97% 100%  /* 3% Team */
-        );
-      position: relative;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 12px rgba(0,0,0,.22);
+    .tier-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
     }
     
-    .token-pie::after{
-      content: "";
-      position: absolute;
-      inset: 18%;
-      background: #0f1120;
-      border-radius: 50%;
-      border: 1px solid var(--border);
+    .tier-table thead {
+      background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);
     }
     
-    .pie-legend{
-      display: grid;
-      gap: 8px;
-      min-width: 260px;
+    .tier-table th {
+      padding: 16px;
+      text-align: left;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
-    .leg{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--muted);
+    .tier-table tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.2s ease;
+    }
+    
+    .tier-table tbody tr:hover {
+      background: rgba(255, 153, 0, 0.08);
+    }
+    
+    .tier-table tbody tr:last-child {
+      border-bottom: none;
+    }
+    
+    .tier-table td {
+      padding: 16px;
+      color: #e0e0e0;
       font-size: 0.95rem;
     }
     
-    .dot{
-      width: 14px;
-      height: 14px;
-      border-radius:  3px;
-      border: 1px solid var(--border);
+    .tier-table .tier-name {
+      font-weight: 700;
+      color: #ff9900;
     }
     
-    .d-presale{background:#F59E0B}
-    .d-reserve{background:#22C55E}
-    .d-stake{background:#3B82F6}
-    .d-partner{background:#A855F7}
-    .d-eco{background:#EC4899}
-    .d-team{background:#F43F5E}
+    .tier-table .tier-price {
+      font-weight: 600;
+      color: #4ade80;
+    }
+    
+    .tier-table .tier-allocation {
+      color: #60a5fa;
+    }
 
-    /* Tables */
-    .data-table th small{opacity:8;font-weight:600}
-    .note{color:#aeb3c2;font-size:.95rem;margin-top:8px}
+    /* ========================================
+       REFERRAL CARD (NEW)
+    ======================================== */
+    
+    .referral-card {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border: 2px solid #22c55e;
+      border-radius: 16px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+    
+    .referral-icon {
+      font-size: 2.5rem;
+      color: #22c55e;
+      margin-bottom: 16px;
+    }
+    
+    .referral-title {
+      font-size: 1.5rem;
+      color: #22c55e;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .referral-desc {
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    
+    .referral-highlight {
+      background: rgba(34, 197, 94, 0.15);
+      border-left: 4px solid #22c55e;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+    
+    .referral-highlight strong {
+      color: #22c55e;
+      font-size: 1.1rem;
+    }
 
-    /* Staking cards */
-    .stake-grid{
+    /* ========================================
+       DISTRIBUTION PIE CHART (CORRECTED)
+    ======================================== */
+    
+    .pie-wrap {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 32px 0;
+    }
+    
+    .token-pie {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: 
+        conic-gradient(
+          #F59E0B 0% 60%,      /* 60% Presale & Referral */
+          #10B981 60% 82%,     /* 22% Bonding Curve Reserve 🛡️ */
+          #22C55E 82% 88%,     /* 6% Staking */
+          #3B82F6 88% 93%,     /* 5% Partnerships */
+          #A855F7 93% 96%,     /* 3% Gas-Free */
+          #EC4899 96% 98%,     /* 2% Ecosystem */
+          #F43F5E 98% 100%     /* 2% Team */
+        );
+      position: relative;
+      border: 2px solid rgba(255, 153, 0, 0.3);
+      box-shadow: 
+        0 0 40px rgba(255, 153, 0, 0.2),
+        0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .token-pie::after {
+      content: "";
+      position: absolute;
+      inset: 20%;
+      background: #0f1120;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 153, 0, 0.2);
+    }
+    
+    .pie-legend {
       display: grid;
-      gap: 14px;
+      gap: 12px;
+      min-width: 300px;
     }
     
-    @media(min-width:900px){
-      .stake-grid{
-        grid-template-columns: repeat(2,minmax(0,1fr));
-      }
+    .leg {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #e0e0e0;
+      font-size: 1rem;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
     }
     
-    .stake-card{
+    .leg:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      flex-shrink: 0;
+    }
+    
+    .d-presale { background: #F59E0B; }
+    .d-bonding { background: #10B981; }
+    .d-stake { background: #22C55E; }
+    .d-partner { background: #3B82F6; }
+    .d-gasfree { background: #A855F7; }
+    .d-eco { background: #EC4899; }
+    .d-team { background: #F43F5E; }
+
+    /* ========================================
+       INFO BOXES (NEW)
+    ======================================== */
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+    
+    .info-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 153, 0, 0.2);
       border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(15,23,42,0.95);
-      padding: 16px 18px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
     }
     
-    .stake-label{
-      font-size: 0.78rem;
-      letter-spacing: 0.16em;
+    .info-box:hover {
+      border-color: #ff9900;
+      transform: translateY(-2px);
+    }
+    
+    .info-label {
+      font-size: 0.85rem;
       text-transform: uppercase;
-      color: var(--accent-2);
+      letter-spacing: 1px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    
+    .info-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ff9900;
       margin-bottom: 4px;
     }
     
-    .stake-title{
-      font-size: 1.02rem;
-      margin: 0 0 6px;
-      color: #fff;
-    }
-    
-    .stake-meta{
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin:  0 0 6px;
-    }
-    
-    .stake-points{
-      margin: 0;
-      padding-left: 18px;
-      font-size: 0.92rem;
-      color: var(--text);
-    }
-    
-    .stake-points li+li{margin-top: 4px;}
-    
-    .stake-sublist {
-      margin-left: 20px;
-      list-style-type: disc;
+    .info-sub {
+      font-size: 0.9rem;
+      color: #cbd5e1;
     }
 
-    .stake-footer{
-      margin-top: 12px;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    /* Hero specific */
-    .hero-token{
+    /* ========================================
+       HERO SECTION
+    ======================================== */
+    
+    .hero-token {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       min-height: 100vh;
     }
 
-    .hero-token .hero-overlay{
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
+    .hero-token .hero-overlay {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 120px;  /* ✅ CHANGED from 0 to 120px */
+  padding-bottom: 60px; /* ✅ CHANGED from 0 to 60px for balance */
+}
 
-    .hero-token .hero-title{
+    .hero-token .hero-title {
       color: var(--accent);
       font-size: clamp(2.5rem, 5vw, 4rem);
       margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(255, 153, 0, 0.3);
     }
 
-    .hero-token .hero-subtitle{
-      max-width: 720px;
+    .hero-token .hero-subtitle {
+      max-width: 800px;
       margin-top: 10px;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+    }
+
+    .hero-token-bg {
+      background-image: url('../images/ndg7.png');
+    }
+
+    /* ========================================
+       TREASURY SECTION (NEW)
+    ======================================== */
+    
+    .treasury-section {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      border: 2px solid #8b5cf6;
+      border-radius: 16px;
+      padding: 32px;
+      margin: 24px 0;
+    }
+    
+    .treasury-title {
+      font-size: 1.6rem;
+      color: #a78bfa;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .treasury-flow {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .treasury-item {
+      background: rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #8b5cf6;
+      padding: 16px 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .treasury-item-label {
+      color: #e0e7ff;
+      font-weight: 600;
+    }
+    
+    .treasury-item-value {
+      color: #a78bfa;
+      font-weight: 700;
       font-size: 1.1rem;
     }
 
-    /* Guardian staking split layout */
-    .stake-grid--split{
-      display: grid;
-      gap: 16px;
+    /* ========================================
+       BONDING CURVE HIGHLIGHT (NEW)
+    ======================================== */
+    
+    .bonding-highlight {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+      border: 2px solid #10b981;
+      border-radius: 16px;
+      padding: 28px;
+      margin: 32px 0;
+    }
+    
+    .bonding-highlight h3 {
+      color: #10b981;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+    
+    .bonding-highlight p {
+      color: #d1fae5;
+      line-height: 1.8;
+      font-size: 1.05rem;
     }
 
-    @media (min-width: 900px){
-      .stake-grid--split{
-        grid-template-columns: 1.05fr 1px 1.25fr;
-        align-items: stretch;
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    
+    @media (max-width: 768px) {
+      .tok-card {
+        padding: 24px 16px;
+      }
+      
+      .pie-wrap {
+        flex-direction: column;
+      }
+      
+      .token-pie {
+        width: 240px;
+        height: 240px;
+      }
+      
+      .tier-table th,
+      .tier-table td {
+        padding: 12px 8px;
+        font-size: 0.85rem;
+      }
+      
+      .info-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 899px){
-      .stake-divider{ display: none; }
-    }
-
-    .stake-divider{
-      width: 1px;
-      border-radius: 900px;
-      background: rgba(255,153,0,0.35);
-      box-shadow: 
-        0 0 18px rgba(255,153,0,0.25),
-        0 0 2px rgba(255,153,0,0.35);
-    }
-
-    .stake-form,
-    .stake-summary{
-      min-height: 20px;
-    }
-
-    .stake-summary{
-      padding-left: 16px;
-    }
-
-    .stake-summary .stake-stats{
-      margin-top: 14px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .stake-input-row{
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .stake-input{
-      flex: 1;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.3);
-      color: #fff;
-    }
-
-    .stake-select{
-      width: 100%;
-      padding:  10px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.3);
-      color: #fff;
-      margin-bottom: 12px;
-    }
-
-    .stake-apr-display{
-      background: rgba(255,153,0,0.1);
-      border-color: rgba(255,153,0,0.3);
-    }
-
-    .stake-actions{
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .stake-helper{
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-
-    .stake-tag{
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .stake-intro{
-      margin-bottom: 20px;
-      color: var(--muted);
-    }
-
-    .stake-summary-title{
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-
-    .stake-stats dt{
-      font-weight: bold;
-      padding: 8px 0 4px 0;
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
-    .stake-stats dd{
-      margin: 0 0 8px 0;
-      padding: 0 0 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+    .tok-card {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    .tok-card:nth-child(1) { animation-delay: 0.1s; }
+    .tok-card:nth-child(2) { animation-delay: 0.2s; }
+    .tok-card:nth-child(3) { animation-delay: 0.3s; }
+    .tok-card:nth-child(4) { animation-delay: 0.4s; }
+
+    /* ========================================
+       FEATURE IMAGE
+    ======================================== */
+    
+    .feature-image-section {
+      margin: 40px 0;
     }
 
-    .stake-summary-note{
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 12px;
+    /* ========================================
+       TIER TABLE TOTAL ROW
+    ======================================== */
+    
+    .tier-table-total {
+      background: rgba(255, 153, 0, 0.1);
+      font-weight: 700;
     }
 
-    .ro-status{
+    /* ========================================
+       INLINE STYLE REPLACEMENTS
+    ======================================== */
+    
+    .text-orange { color: #ff9900; font-weight: 700; }
+    .text-green { color: #22c55e; font-weight: 600; }
+    .text-green-bold { color: #22c55e; font-weight: 700; }
+    .text-green-strong { color: #22c55e; font-weight: 700; }
+    .text-blue { color: #3b82f6; font-weight: 600; }
+    .text-purple { color: #a855f7; font-weight: 600; }
+    .text-pink { color: #ec4899; font-weight: 600; }
+    
+    strong.text-green { color: #22c55e; font-weight: 600; }
+    
+    strong.text-green-bonus { color: #22c55e; }
+    
+    .mb-24 { margin-bottom: 24px; }
+    .mb-12 { margin-bottom: 12px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-32 { margin-top: 32px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-20 { margin-top: 20px; }
+    
+    .p-16 { padding: 16px; }
+    .p-20 { padding: 20px; }
+    .p-12 { padding: 12px 8px; }
+    
+    .bg-orange-10 { background: rgba(255, 153, 0, 0.1); }
+    .bg-black-30 { background: rgba(0, 0, 0, 0.3); }
+    .bg-green-10 { background: rgba(34, 197, 94, 0.1); }
+    .bg-yellow-10 { background: rgba(251, 191, 36, 0.1); }
+    .bg-purple-10 { background: rgba(139, 92, 246, 0.1); }
+    
+    .border-orange { border-left: 4px solid #ff9900; }
+    .border-green { border-left: 4px solid #22c55e; }
+    .border-yellow { border-left: 4px solid #fbbf24; }
+    .border-purple { border: 1px solid #8b5cf6; }
+    
+    .rounded-8 { border-radius: 8px; }
+    .rounded-12 { border-radius: 12px; }
+    
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+    
+    .font-weight-700 { font-weight: 700; }
+    .font-weight-600 { font-weight: 600; }
+    
+    .font-mono { font-family: monospace; }
+    .font-size-90 { font-size: 0.9rem; }
+    .font-size-95 { font-size: 0.95rem; }
+    .font-size-110 { font-size: 1.1rem; }
+    .font-size-120 { font-size: 1.2rem; }
+    
+    .line-height-17 { line-height: 1.7; }
+    .line-height-18 { line-height: 1.8; }
+    
+    .w-100 { width: 100%; }
+    .w-40 { width: 40%; }
+    
+    .info-value-pink { color: #ec4899; }
+    .info-value-green { color: #22c55e; }
+    .info-value-blue { color: #3b82f6; }
+    .info-value-purple { color: #a855f7; }
+    
+    table { border-collapse: collapse; }
+    td { padding: 12px 8px; }
+    tr { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    tr:last-child { border-bottom: none; }
+    
+    .key-features-title {
       color: #ff9900;
-      font-size: 14px;
-      margin-top: 12px;
     }
-
-    .ro-refresh-btn{
-      margin-top: 10px;
+    
+    .feature-box {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(255, 153, 0, 0.1);
+      border-left: 4px solid #ff9900;
+      border-radius: 8px;
     }
-
-    .ro-index-wrapper{
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 10px;
-      flex-wrap: wrap;
+    
+    .feature-box ul {
+      margin: 12px 0 0 20px;
+      color: #cbd5e1;
+      line-height: 1.8;
     }
-
-    .ro-index-label{
-      color: #f2cc79;
-      font-size: 14px;
+    
+    .success-highlight {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border-left: 4px solid #22c55e;
+      border-radius: 8px;
     }
-
-    .ro-index-input{
-      width: 80px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #333;
-      background: #0f1120;
-      color: #fff;
+    
+    .success-highlight strong {
+      color: #22c55e;
     }
-
-    .ro-index-max{
-      color: #aaa;
-      font-size: 13px;
+    
+    .warning-highlight {
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(251, 191, 36, 0.1);
+      border-left: 4px solid #fbbf24;
+      border-radius: 8px;
     }
-
-    .feature-image{
-      display: block;
+    
+    .warning-highlight strong {
+      color: #fbbf24;
+    }
+    
+    .allocation-details {
+      margin-top: 32px;
+      padding: 20px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid #8b5cf6;
+      border-radius: 12px;
+    }
+    
+    .contract-table {
       width: 100%;
-      height: auto;
-      max-height: 100vh;
-      object-fit: cover;
+      color: #cbd5e1;
     }
-
-    .feature-section{
-      padding: 0;
-      margin: 12px 0 0;
+    
+    .contract-table tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-
-    .tok-card h2.section-header{
+    
+    .contract-table td {
+      padding: 12px 8px;
+    }
+    
+    .contract-table td:first-child {
+      width: 40%;
+    }
+    
+    .contract-table td strong {
+      font-weight: 700;
+    }
+    
+    .contract-address {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #22c55e;
+      text-decoration: none;
+    }
+    
+    .contract-address:hover {
+      text-decoration: underline;
+    }
+    
+    .contract-address-pending {
+      color: #fbbf24;
+    }
+    
+    .contract-address-treasury {
+      color: #a78bfa;
+    }
+    
+    .contract-table-wrap {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    
+    .allocation-details h3 {
+      color: #a78bfa;
       margin-bottom: 16px;
-      color: var(--accent);
+    }
+    
+    .treasury-timeline {
+      margin-top: 24px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+    }
+    
+    .treasury-timeline-title {
+      color: #a78bfa;
+    }
+    
+    .treasury-timeline-list {
+      margin: 12px 0 0 20px;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    
+    .treasury-commitment {
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border-left: 4px solid #22c55e;
+      border-radius: 8px;
+    }
+    
+    .treasury-commitment-title {
+      color: #22c55e;
+    }
+    
+    .treasury-description {
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    
+    .bonus-highlight {
+      color: #22c55e;
+      font-size: 1.2rem;
     }
 
-    .curve-section{
-      padding-top: 28px;
-    }
+    /* ========================================
+   FOOTER BOTTOM CENTERING
+======================================== */
 
-    .hero-token-bg{
-      background-image: url('../images/ndg7.png');
+.footer-bottom {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+    
+    .text-green-highlight {
+      color: #22c55e;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    /* ========================================
+   FEATURE IMAGE STYLING
+======================================== */
+
+.feature-image-img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+    .text-light-gray {
+      color: #cbd5e1;
+    }
+    
+    .value-highlight {
+      margin-top: 16px;
+      padding: 12px;
+      background: rgba(34, 197, 94, 0.1);
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .staking-benefits-box {
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid #22c55e;
+      border-radius: 12px;
+    }
+    
+    table tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    table tr:last-child {
+      border-bottom: none;
+    }
+    
+    .allocation-table tr,
+    .vesting-table tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .allocation-table tr:last-child,
+    .vesting-table tr:last-child {
+      border-bottom: none;
+    }
+    
+    .vesting-example-title {
+      color: #ff9900;
+      margin-bottom: 16px;
+    }
+    
+    .vesting-example-box {
+      margin-top: 24px;
+      padding: 24px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid #8b5cf6;
+      border-radius: 12px;
+    }
+    
+    .vesting-table {
+      width: 100%;
+      color: #cbd5e1;
+    }
+    
+    .vesting-table tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .vesting-table tr:last-child {
+      border-bottom: none;
+    }
+    
+    .vesting-table td {
+      padding: 12px 8px;
+    }
+    
+    .vesting-total-highlight {
+      color: #ff9900;
+      font-weight: 700;
+    }
+    
+    .vesting-tge {
+      color: #22c55e;
+      font-weight: 600;
+    }
+    
+    .vesting-three-months {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+    
+    .vesting-six-months {
+      color: #a855f7;
+      font-weight: 600;
+    }
+    
+    .vesting-nine-months {
+      color: #ec4899;
+      font-weight: 600;
+    }
+    
+    .staking-description {
+      margin-bottom: 24px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    
+    .border-green22 {
+      border-left: 4px solid #22c55e;
+    }
+    
+    .border-blue3b {
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .border-purple8b {
+      border-left: 4px solid #8b5cf6;
+    }
+    
+    .border-ec4899 {
+      border-left: 4px solid #ec4899;
+    }
+    
+    .staking-benefits-list {
+      margin: 12px 0 0 20px;
+      color: #cbd5e1;
+      line-height: 1.8;
     }
   </style>
 </head>
@@ -399,15 +858,17 @@
   <!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
     <div class="ticker-track" data-ticker>
-      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026). </span>
-      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
-      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity. </span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
-
-      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
-      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
-      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+      <span>🎯 <strong>9-Tier Presale</strong> starting at $0.006 per NDG</span>
+      <span>🚀 <strong>Listing Price: $0.75</strong> — up to 125x from Tier 1!</span>
+      <span>🎁 <strong>5% Referral Bonus</strong> on every purchase</span>
+      <span>🛡️ <strong>22% Bonding Curve Reserve</strong> — Permanent lock for stability</span>
+      <span>💎 <strong>600M NDG</strong> available during presale</span>
+      
+      <span>🎯 <strong>9-Tier Presale</strong> starting at $0.006 per NDG</span>
+      <span>🚀 <strong>Listing Price: $0.75</strong> — up to 125x from Tier 1!</span>
+      <span>🎁 <strong>5% Referral Bonus</strong> on every purchase</span>
+      <span>🛡️ <strong>22% Bonding Curve Reserve</strong> — Permanent lock for stability</span>
+      <span>💎 <strong>600M NDG</strong> available during presale</span>
     </div>
   </div>
 
@@ -478,280 +939,429 @@
     <div class="hero-overlay">
       <h1 class="hero-title">NetDAG Tokenomics</h1>
       <p class="hero-subtitle">
-        A stability-first token design:   1B capped supply, a permanent bonding-curve reserve,
-        usage-linked incentives and transparent, long-term-aligned allocations.
+        Strategic 9-tier presale with 5% referral rewards • 22% permanent bonding curve reserve • 
+        600M NDG allocation • Listing at $0.75 • Math-backed stability for long-term growth
       </p>
     </div>
   </main>
 
   <!-- BODY -->
-  <section class="curve-section">
+  <section class="tok-section">
     <div class="tok-wrap">
 
-      <!-- Overview -->
+      <!-- KEY METRICS -->
       <article class="tok-card">
-        <h2 class="section-header">Overview</h2>
-        <p>
-          <strong>Max Supply:</strong> 1,000,000,000 NDG<br/>
-          <strong>Presale Price (start):</strong> $0.025<br/>
-          <strong>Listing: </strong> Upon presale completion (up to 500M tokens are available during presale).<br/>
-          <strong>Stability: </strong> 22% of supply is <em>locked forever</em> in the on-chain bonding-curve reserve
-          — our mathematical shock absorber for deep, continuous liquidity.
-        </p>
+        <h2>🎯 Key Metrics</h2>
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="info-label">Total Supply</div>
+            <div class="info-value">1B</div>
+            <div class="info-sub">NDG Tokens</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Presale Allocation</div>
+            <div class="info-value">600M</div>
+            <div class="info-sub">60% of Supply</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Starting Price</div>
+            <div class="info-value">$0.006</div>
+            <div class="info-sub">Tier 1</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">Listing Price</div>
+            <div class="info-value">$0.75</div>
+            <div class="info-sub">125x from Tier 1</div>
+          </div>
+        </div>
       </article>
 
-      <div class="section-separator"></div>
-
-      <!-- Distribution -->
-      <section class="tok-card">
-        <h2 class="section-header">Distribution</h2>
-        <div class="tok-grid">
-          <div class="pie-wrap">
-            <div class="token-pie" role="img" aria-label="Token allocation pie chart"></div>
-            <div class="pie-legend" aria-label="Legend">
-              <div class="leg"><span class="dot d-presale"></span><strong>50%</strong>&nbsp;Presale</div>
-              <div class="leg"><span class="dot d-reserve"></span><strong>22%</strong>&nbsp;Permanent locked Reserve</div>
-              <div class="leg"><span class="dot d-stake"></span><strong>10%</strong>&nbsp;Staking &amp; Vesting</div>
-              <div class="leg"><span class="dot d-partner"></span><strong>10%</strong>&nbsp;Partnerships &amp; Marketing</div>
-              <div class="leg"><span class="dot d-eco"></span><strong>5%</strong>&nbsp;Ecosystem Incentives</div>
-              <div class="leg"><span class="dot d-team"></span><strong>3%</strong>&nbsp;Team &amp; Core Contributors</div>
-            </div>
-          </div>
-
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Allocation</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Presale</td>
-                  <td><strong>50%</strong></td>
-                  <td>Starts at <strong>$0.025</strong>; up to 500M tokens available. </td>
-                </tr>
-                <tr>
-                  <td>Permanent Reserve</td>
-                  <td><strong>22%</strong></td>
-                  <td>Locked forever on-chain for bonding-curve liquidity.</td>
-                </tr>
-                <tr>
-                  <td>Staking &amp; Vesting</td>
-                  <td><strong>10%</strong></td>
-                  <td>HODL rewards; emissions aligned to network health.</td>
-                </tr>
-                <tr>
-                  <td>Partnerships</td>
-                  <td><strong>10%</strong></td>
-                  <td>Strategic unlock on milestone completion.</td>
-                </tr>
-                <tr>
-                  <td>Ecosystem Incentives</td>
-                  <td><strong>5%</strong></td>
-                  <td>Gradual unlock linked to real network activity.</td>
-                </tr>
-                <tr>
-                  <td>Team</td>
-                  <td><strong>3%</strong></td>
-                  <td>2-year lock with linear unlock thereafter.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <p class="note">Exact on-chain parameters will be published with audits prior to activation.</p>
-      </section>
-
-      <div class="section-separator"></div>
-
-      <!-- Staking & Release -->
-      <section class="tok-card">
-        <h2 class="section-header">Staking &amp; Release Model</h2>
-
-        <div class="stake-grid">
-          <div class="stake-card">
-            <p class="stake-label">Core Rewards</p>
-            <h3 class="stake-title">Staking / Vesting Pool</h3>
-            <p class="stake-meta">
-              <strong>Lock: </strong> 30 days · <strong>Release:</strong> 20% per month × 5 months
-            </p>
-            <ul class="stake-points">
-              <li>Initial 30-day lock to align with long-term holders. </li>
-              <li>Linear monthly unlock over 5 months for predictable supply.</li>
-              <li>Released balances can be re-staked to compound rewards.</li>
-              <li><strong>Staking Durations & Rewards:</strong></li>
-            </ul>
-              <ul class="stake-sublist">
-                <li>30 days → 6% APR</li>
-                <li>6 months → 10% APR</li>
-                <li>12 months → 15% APR</li>
-                <li>2 years → 22% APR</li>
-                <li>3 years → 30% APR</li>
-              </ul>
-          </div>
-
-          <div class="stake-card">
-            <p class="stake-label">Strategic Growth</p>
-            <h3 class="stake-title">Partnerships &amp; Integration</h3>
-            <p class="stake-meta">
-              <strong>Lock:</strong> Milestone-based · <strong>Release:</strong> Strategic unlocks
-            </p>
-            <ul class="stake-points">
-              <li>Allocated to exchanges and key integrations.</li>
-              <li>Each unlock tied to published milestone. </li>
-              <li>Monthly unlock cap to avoid sell-pressure.</li>
-            </ul>
-          </div>
-
-          <div class="stake-card">
-            <p class="stake-label">Usage Incentives</p>
-            <h3 class="stake-title">Ecosystem Incentives</h3>
-            <p class="stake-meta">
-              <strong>Lock:</strong> Usage-linked · <strong>Release: </strong> Programmatic trickle
-            </p>
-            <ul class="stake-points">
-              <li>Rewards for dVPN, Provenance and ecosystem apps.</li>
-              <li>Emission based on verifiable on-chain KPIs.</li>
-              <li>Future:   Guardian AI dynamic staking. </li>
-            </ul>
-          </div>
-
-          <div class="stake-card">
-            <p class="stake-label">Alignment</p>
-            <h3 class="stake-title">Team &amp; Core Contributors</h3>
-            <p class="stake-meta">
-              <strong>Lock:</strong> 2 years · <strong>Release:</strong> Linear after lock
-            </p>
-            <ul class="stake-points">
-              <li>Strict timelocks prevent early dumping.</li>
-              <li>Linear vesting aligns with ecosystem success.</li>
-              <li>Tracked via public dashboards.</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="stake-footer">
-          The <strong>Permanent Reserve (22%)</strong> is locked forever and not part of any vesting stream.
+      <!-- 9-TIER PRESALE STRUCTURE -->
+      <article class="tok-card">
+        <h2>📊 9-Tier Presale Structure</h2>
+        <p class="mb-24 text-light-gray">
+          NetDAG's presale features a <strong class="text-orange">progressive 9-tier pricing model</strong> 
+          designed to reward early supporters while ensuring fair price discovery. Each tier lasts 30 days or 
+          until sold out, whichever comes first.
         </p>
-      </section>
-
-      <div class="section-separator"></div>
-
-      <!-- Burn Mechanism -->
-      <section class="tok-card">
-        <h2 class="section-header">NDG Burn Mechanism — Balanced Deflation Model</h2>
-
-        <p>The NDG token uses a sustainable deflation model designed to support long-term value while ensuring liquidity and ecosystem stability.</p>
-
-        <h3>1) Voluntary Holder Burns</h3>
-        <p>Any NDG holder may burn their own tokens at any time via the on-chain <code>burn()</code> function.  Burns are optional and never required. </p>
-
-        <h3>2) Revenue Buy-Back & Burn (10%)</h3>
-        <p>NetDAG allocates <strong>10% of all ecosystem revenue</strong> toward buying NDG on the open market and burning it permanently.</p>
-
-        <h3>3) Treasury Burn (1% Quarterly)</h3>
-        <p>The NetDAG Treasury may burn up to <strong>1% of its NDG holdings every quarter</strong>. </p>
-
-        <h3>4) Transparency</h3>
-        <p>All burns are announced publicly and permanently verifiable on-chain.</p>
-      </section>
-
-      <div class="section-separator"></div>
-
-      <!-- Guardian Staking Interface -->
-      <section id="stake-guardian" class="tok-card stake-guardian">
-        <p class="stake-tag">Guardian staking · tech preview</p>
-        <h3 class="stake-title">Stake NDG — Guardian Pool (live soon)</h3>
-        <p class="stake-intro">
-          Connect your wallet, choose a lock period, and stake NDG directly into the Guardian pool.
-        </p>
-
-        <div class="stake-grid--split">
-          <!-- LEFT:  FORM -->
-          <div class="stake-form">
-            <label for="stake-amount" class="stake-label">Amount to stake</label>
-            <div class="stake-input-row">
-              <input id="stake-amount" type="number" min="0" step="0.0001" placeholder="0.0" class="stake-input"/>
-              <button type="button" class="btn btn-outline" id="stake-max">Max</button>
-            </div>
-
-            <label for="stake-lock" class="stake-label">Lock period</label>
-            <select id="stake-lock" class="stake-select">
-              <option value="0">30 days · 6% APR</option>
-              <option value="1">6 months · 10% APR</option>
-              <option value="2">12 months · 15% APR</option>
-              <option value="3">2 years · 22% APR</option>
-              <option value="4">3 years · 30% APR</option>
-            </select>
-
-            <label for="stake-apr" class="stake-label">Current APR</label>
-            <input id="stake-apr" class="stake-input stake-apr-display" type="text" value="6% APR" disabled />
-
-            <div class="stake-actions">
-              <button type="button" class="btn btn-primary js-stake-ndg">Stake NDG</button>
-              <button type="button" class="btn btn-outline js-unstake-ndg">Unstake &amp; Claim</button>
-            </div>
-
-            <p class="stake-helper">Switch to the correct network. </p>
-          </div>
-
-          <!-- DIVIDER -->
-          <div class="stake-divider" aria-hidden="true"></div>
-
-          <!-- RIGHT: SUMMARY -->
-          <div class="stake-summary">
-            <h4 class="stake-summary-title">Your position</h4>
-            <div id="ro-status" class="ro-status">Not connected</div>
-
-            <button id="ro-refresh" type="button" class="btn btn-outline ro-refresh-btn">Refresh</button>
-
-            <div class="ro-index-wrapper">
-              <label for="ro-index" class="ro-index-label">Stake index: </label>
-              <input id="ro-index" type="number" min="0" step="1" value="0" class="ro-index-input" />
-              <span id="ro-index-max" class="ro-index-max">/ —</span>
-            </div>
-
-            <dl class="stake-stats">
-              <dt>CURRENT STAKE</dt>
-              <dd><span id="ro-current-stake">0</span> NDG</dd>
-              <dt>PENDING REWARDS</dt>
-              <dd><span id="ro-pending">0</span> NDG</dd>
-              <dt>UNLOCK TIME</dt>
-              <dd><span id="ro-unlock">-</span></dd>
-            </dl>
+        
+        <div class="tier-table-wrap">
+          <table class="tier-table">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Price (USD)</th>
+                <th>Allocation</th>
+                <th>Duration</th>
+                <th>vs Listing</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tier-name">Tier 1</td>
+                <td class="tier-price">$0.006</td>
+                <td class="tier-allocation">108M NDG</td>
+                <td>30 days</td>
+                <td class="text-green">125x 🚀</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 2</td>
+                <td class="tier-price">$0.012</td>
+                <td class="tier-allocation">84M NDG</td>
+                <td>30 days</td>
+                <td class="text-green">62.5x 🚀</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 3</td>
+                <td class="tier-price">$0.018</td>
+                <td class="tier-allocation">72M NDG</td>
+                <td>30 days</td>
+                <td class="text-green">41.7x 🔥</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 4</td>
+                <td class="tier-price">$0.024</td>
+                <td class="tier-allocation">66M NDG</td>
+                <td>30 days</td>
+                <td class="text-green">31.3x 🔥</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 5</td>
+                <td class="tier-price">$0.030</td>
+                <td class="tier-allocation">60M NDG</td>
+                <td>30 days</td>
+                <td class="text-green">25x 💎</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 6</td>
+                <td class="tier-price">$0.054</td>
+                <td class="tier-allocation">54M NDG</td>
+                <td>30 days</td>
+                <td class="text-green">13.9x 💎</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 7</td>
+                <td class="tier-price">$0.084</td>
+                <td class="tier-allocation">48M NDG</td>
+                <td>30 days</td>
+                <td class="text-blue">8.9x ⚡</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 8</td>
+                <td class="tier-price">$0.120</td>
+                <td class="tier-allocation">36M NDG</td>
+                <td>30 days</td>
+                <td class="text-blue">6.3x ⚡</td>
+              </tr>
+              <tr>
+                <td class="tier-name">Tier 9</td>
+                <td class="tier-price">$0.160</td>
+                <td class="tier-allocation">30M NDG</td>
+                <td>30 days</td>
+                <td class="text-purple">4.7x ✨</td>
+              </tr>
+              <tr class="tier-table-total">
+                <td>TOTAL</td> 
+                <td colspan="2" class="text-orange">600,000,000 NDG</td>
+                <td></td>  <td></td>
+              </tr>
             
-            <p class="stake-summary-note">
-              Live values will update once your wallet is connected and you have an active stake.
-            </p>
+              <strong>Automatic Advancement:</strong> Tiers advance after 30 days OR when sold out</li>
+
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="feature-box">
+          <strong class="key-features-title">📌 Key Features:</strong>
+          <ul>
+            <li><strong>Progressive Pricing:</strong> Each tier increases in price, rewarding early adopters</li>
+            <li><strong>Automatic Advancement:</strong> Tiers advance after 30 days OR when sold out</li>
+            <li><strong>Rollover Mechanism:</strong> Unsold tokens from each tier roll to the next tier</li>
+            <li><strong>100% TGE Unlock:</strong> Immediate access of purchased tokens at listing</li>
+            
+          </ul>
+        </div>
+      </article>
+
+      <!-- REFERRAL SYSTEM -->
+      <article class="tok-card">
+        <h2>🎁 Referral Rewards Program</h2>
+        <div class="referral-card">
+          <div class="referral-icon">🤝</div>
+          <div class="referral-title">Earn 5% Bonus on Every Referral</div>
+          <div class="referral-desc">
+            Share NetDAG with your network and earn <strong class="text-green-bonus">5% bonus tokens</strong> 
+            on every purchase made through your referral link. Bonuses are awarded immediately—no vesting!
+          </div>
+          
+          <div class="referral-highlight">
+            <strong>Example:</strong> Your friend buys $1,000 worth of NDG<br>
+            → They get their tokens based on current tier price<br>
+            → You instantly receive <span class="bonus-highlight">5% bonus tokens</span> ($50 worth)<br>
+            → Both of you benefit from the ecosystem growth! 🚀
+          </div>
+          
+          <div class="success-highlight">
+              <strong>✅ Benefits:</strong>
+              <ul>
+              <li><strong>Immediate Rewards:</strong> Bonus tokens unlocked instantly (no vesting period)</li>
+              <li><strong>Unlimited Referrals:</strong> No cap on how much you can earn</li>
+              <li><strong>Transparent Tracking:</strong> All referrals recorded on-chain</li>
+              <li><strong>Win-Win Model:</strong> Your referrals don't pay extra—bonus comes from presale allocation</li>
+            </ul>
           </div>
         </div>
-      </section>
+      </article>
 
-      <div class="section-separator"></div>
+      <!-- DISTRIBUTION -->
+      <article class="tok-card">
+        <h2>🎨 Token Distribution</h2>
+        <div class="pie-wrap">
+          <div class="token-pie" role="img" aria-label="Token allocation pie chart"></div>
+          <div class="pie-legend" aria-label="Legend">
+            <div class="leg">
+              <span class="dot d-presale"></span>
+              <strong>60%</strong>&nbsp;Presale & Referral (600M NDG)
+            </div>
+            <div class="leg">
+              <span class="dot d-bonding"></span>
+              <strong>22%</strong>&nbsp;Bonding Curve Reserve (220M NDG) 🛡️
+            </div>
+            <div class="leg">
+              <span class="dot d-stake"></span>
+              <strong>6%</strong>&nbsp;Staking Rewards (60M NDG)
+            </div>
+            <div class="leg">
+              <span class="dot d-partner"></span>
+              <strong>5%</strong>&nbsp;Partnerships (50M NDG)
+            </div>
+            <div class="leg">
+              <span class="dot d-gasfree"></span>
+              <strong>3%</strong>&nbsp;Gas-Free Pool (30M NDG)
+            </div>
+            <div class="leg">
+              <span class="dot d-eco"></span>
+              <strong>2%</strong>&nbsp;Ecosystem Incentives (20M NDG)
+            </div>
+            <div class="leg">
+              <span class="dot d-team"></span>
+              <strong>2%</strong>&nbsp;Team (20M NDG, 2-year lock)
+            </div>
+          </div>
+        </div>
+        
+        <div class="allocation-details">
+          <h3>📌 Allocation Details</h3>
+          <table class="allocation-table">
+            <tr>
+              <td><strong>Presale (60%)</strong></td>
+              <td>9-tier structure, 5% referral rewards, 40% TGE, 60% vested</td>
+            </tr>
+            <tr>
+              <td><strong>Bonding Curve (22%)</strong></td>
+              <td>🛡️ PERMANENT LOCK - Mathematical liquidity guarantee</td>
+            </tr>
+            <tr>
+              <td><strong>Staking (6%)</strong></td>
+              <td>Rewards for long-term holders (6-30% APR)</td>
+            </tr>
+            <tr>
+              <td><strong>Partnerships (5%)</strong></td>
+              <td>Strategic integrations, milestone-based release</td>
+            </tr>
+            <tr>
+              <td><strong>Gas-Free Pool (3%)</strong></td>
+              <td>Enable zero-gas transactions for users</td>
+            </tr>
+            <tr>
+              <td><strong>Ecosystem (2%)</strong></td>
+              <td>dVPN, Provenance, Guardian rewards, Participation</td>
+            </tr>
+            <tr>
+              <td><strong>Team (2%)</strong></td>
+              <td>2-year lock, linear vesting after</td>
+            </tr>
+          </table>
+        </div>
+      </article>
 
-      <!-- Listing note -->
-      <section class="tok-card">
-        <h2 class="section-header">Listing</h2>
-        <p>
-          Listing occurs when the presale is complete and contracts are live with audit reports.
-          During presale, up to <strong>500,000,000 NDG</strong> are available according to the bonding-curve schedule.
+      <!-- BONDING CURVE HIGHLIGHT -->
+      <article class="tok-card">
+        <div class="bonding-highlight">
+          <h3>🛡️ 22% Bonding Curve Reserve — Our Stability Guarantee</h3>
+          <p>
+            Unlike typical presales that dump liquidity into AMMs and hope for the best, NetDAG implements a 
+            <strong>mathematically-backed bonding curve reserve</strong>. This 220M NDG (22% of total supply) 
+            is <strong>permanently locked</strong> in our on-chain bonding curve contract—never to be withdrawn, 
+            sold, or manipulated.
+          </p>
+          <br>
+          <p>
+            <strong>What this means for you:</strong> Deep, continuous liquidity for buying and selling. 
+            No rug pulls. No liquidity crises. Just pure math ensuring your NDG tokens maintain stable, 
+            predictable value backed by real reserves. This is our commitment to <strong>stability-first tokenomics</strong>.
+          </p>
+        </div>
+      </article>
+
+      <!-- TREASURY MANAGEMENT -->
+      <article class="tok-card">
+        <h2>🏦 Treasury Management (Unsold Tokens)</h2>
+        <div class="treasury-section">
+          <div class="treasury-title">Post-Presale Redistribution Plan</div>
+          <p class="treasury-description">
+            Any unsold tokens after the 9-month presale period will be transferred to the Treasury 
+            and redistributed according to this strategic plan to maximize ecosystem value:
+          </p>
+          
+          <div class="treasury-flow">
+            <div class="treasury-item">
+              <span class="treasury-item-label">🛡️ Bonding Curve Reserve</span>
+              <span class="treasury-item-value">20%</span>
+            </div>
+            <div class="treasury-item">
+              <span class="treasury-item-label">💎 Staking Rewards Pool</span>
+              <span class="treasury-item-value">10%</span>
+            </div>
+            <div class="treasury-item">
+              <span class="treasury-item-label">⚡ Gas-Free Transaction Pool</span>
+              <span class="treasury-item-value">10%</span>
+            </div>
+            <div class="treasury-item">
+              <span class="treasury-item-label">🔧 Treasury Operations</span>
+              <span class="treasury-item-value">10%</span>
+            </div>
+            <div class="treasury-item">
+              <span class="treasury-item-label">🔥 Strategic Reserve (Resale or Burn)</span>
+              <span class="treasury-item-value">50%</span>
+            </div>
+          </div>
+          
+          <div class="treasury-timeline">
+              <strong class="treasury-timeline-title">⏰ Timeline:</strong>
+              <ul class="treasury-timeline-list">
+              <li><strong>Months 1-9:</strong> Active presale period (9 tiers)</li>
+              <li><strong>Month 10:</strong> Optional CEO extension (up to 12 months total)</li>
+              <li><strong>Months 10-12:</strong> 50% strategic reserve can be resold (max 3 months)</li>
+              <li><strong>After Month 12:</strong> All remaining unsold tokens MUST be burned</li>
+            </ul>
+          </div>
+          
+          <div class="treasury-commitment">
+            <strong class="treasury-commitment-title">✅ Transparency Commitment:</strong><br>
+            All Treasury actions will be publicly announced and permanently verifiable on-chain via BSCScan.
+          </div>
+        </div>
+      </article>
+
+      <!-- STAKING -->
+      <article class="tok-card">
+        <h2>💎 Staking Rewards</h2>
+        <p class="staking-description">
+          Stake your NDG tokens to earn passive rewards while supporting network security and decentralization.
         </p>
+        
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="info-label">30 Days</div>
+            <div class="info-value">6%</div>
+            <div class="info-sub">APR</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">6 Months</div>
+            <div class="info-value">10%</div>
+            <div class="info-sub">APR</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">12 Months</div>
+            <div class="info-value">15%</div>
+            <div class="info-sub">APR</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">2 Years</div>
+            <div class="info-value">22%</div>
+            <div class="info-sub">APR</div>
+          </div>
+          <div class="info-box">
+            <div class="info-label">3 Years</div>
+            <div class="info-value info-value-green">30%</div>
+            <div class="info-sub">APR 🌟</div>
+          </div>
+        </div>
+        
+        <div class="staking-benefits-box">
+          <strong class="text-green">✅ Staking Benefits:</strong>
+          <ul class="staking-benefits-list">
+            <li><strong>Flexible Durations:</strong> Choose lock periods from 30 days to 3 years</li>
+            <li><strong>Compound Rewards:</strong> Re-stake earnings to maximize returns</li>
+            <li><strong>Guardian Integration:</strong> Future AI-powered dynamic staking</li>
+            <li><strong>Governance Rights:</strong> Staked tokens = voting power (coming soon)</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- CONTRACT ADDRESSES -->
+      <article class="tok-card">
+        <h2>📍 Contract Addresses (BSC Testnet)</h2>
+        <div class="contract-table-wrap">
+          <table class="contract-table">
+            <tr>
+              <td><strong>Contract</strong></td>
+              <td><strong>Address</strong></td>
+            </tr>
+            <tr>
+              <td>NDG Token</td>
+              <td>
+                <a href="https://testnet.bscscan.com/address/0xf8E886791E26DFD9195C1225b4Ca6458725DAe50" 
+                   target="_blank" rel="noopener noreferrer" class="contract-address">
+                  0xf8E8...DAe50 ↗
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Presale</td>
+              <td class="contract-address-pending">
+                [PENDING DEPLOYMENT]
+              </td>
+            </tr>
+            <tr>
+              <td>Vesting Vault</td>
+              <td class="contract-address-pending">
+                [PENDING DEPLOYMENT]
+              </td>
+            </tr>
+            <tr>
+              <td>Staking</td>
+              <td class="contract-address-pending">
+                [PENDING DEPLOYMENT]
+              </td>
+            </tr>
+            <tr>
+              <td>Treasury</td>
+              <td>
+                <a href="https://testnet.bscscan.com/address/0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318" 
+                   target="_blank" rel="noopener noreferrer" class="contract-address contract-address-treasury">
+                  0xF6b3...1B318 ↗
+                </a>
+              </td>
+            </tr>
+          </table>
+          
+          <div class="warning-highlight">
+            <strong>⚠️ Note:</strong> New contracts (Presale v2, Vesting v2, Staking v2) 
+            are currently being deployed with enhanced features. Addresses will be updated here immediately after deployment.
+          </div>
+        </div>
+      </article>
+
+      <!-- FEATURE IMAGE -->
+      <section aria-label="Feature image" class="feature-image-section">
+        <img src="../images/ndg20.png" alt="NetDAG Tokenomics Visualization" class="feature-image-img">
       </section>
 
-      <div class="section-separator"></div>
-
-      <!-- Feature image -->
-      <section aria-label="Feature image" class="feature-section">
-        <img src="../images/ndg20.png" alt="Tokenomics visual" class="feature-image">
-      </section>
     </div>
   </section>
-
-  <!-- Bottom separator -->
-  <div class="section-separator"></div>
 
   <!-- FOOTER -->
   <footer class="site-footer-gray" role="contentinfo">
@@ -762,10 +1372,11 @@
     <div class="footer-banner">
       <div class="footer-banner-inner">
         <div class="banner-tagline">
-          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.   </span>
-          NetDAG is not another short-term token.   We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment.  Join the ecosystem and let your wealth grow with real utility.
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.</span>
+          NetDAG is not another short-term token. We build next-gen infrastructure for the real world — 
+          with math-backed stability and long-term commitment. Join the ecosystem and let your wealth grow with real utility.
         </div>
-        <a href="vision. html" class="btn-explore-vision">Explore the Vision</a>
+        <a href="vision.html" class="btn-explore-vision">Explore the Vision</a>
       </div>
     </div>
 
@@ -778,7 +1389,8 @@
             <span class="footer-brand-name">NetDAG</span>
           </div>
           <p class="footer-brand-tagline">
-            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+            <em>A stability-first crypto economy: DAG speed, bonding-curve liquidity, 
+            real world on-chain Provenance, Guardian AI, dVPN privacy.</em>
           </p>
         </div>
 
@@ -821,15 +1433,19 @@
         <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
         <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
         <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.facebook.com/r. php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.facebook.com/r.php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
         <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
         <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
       </div>
 
+      <div class="footer-bottom">
+        <p>© 2026 NetDAG. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
   <script src="/js/buy-modals.js" defer></script>
-<script src="/js/ndg-buy-loader.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
 
 </body>
 </html>

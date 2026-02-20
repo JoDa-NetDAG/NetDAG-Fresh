@@ -1,0 +1,25 @@
+📝 PROJECT STATUS SUMMARY - 2026-02-19
+✅ COMPLETED:
+1. Deployment (BSC Testnet):
+
+✅ NDG Token: 0x7Cc0B687F812B74035E626E92918F2274C3083F1 (1B supply)
+✅ VestingVault: 0x80995a285A1613F1A1F63817CC8f88AfB0aC87c3
+✅ PresaleWithVesting: 0x72DA63be282a57d207407c7c795D16961bB3e25a
+✅ Mock Tokens: USDT, USDC, BUSD deployed
+✅ Mock BNB Price Feed: 0x9C9DFBA325BFa8E07409D4784f71aCf45D97E900
+2. Token Allocation (CORRECTED):
+
+✅ VestingVault: 600M NDG (for presale) ✅
+✅ Treasury: 400M NDG (team/liquidity) ✅
+3. Presale Verified:
+
+✅ Status: ACTIVE
+✅ Current Tier: 0 of 9 (Tier 1)
+✅ Price: $0.006 per NDG
+✅ Available: 108M NDG in Tier 1
+4. Scripts Created:
+
+scripts/fix-transfer.js - Check vault balance
+scripts/fix-allocation.js - Fixed 600M/400M allocation
+scripts/simple-check.js - Check presale status
+scripts/test-purchase.js - READY TO RUN ⏸️

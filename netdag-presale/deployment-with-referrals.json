@@ -1,0 +1,22 @@
+{
+  "network": "bscTestnet",
+  "deployer": "0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318",
+  "timestamp": "2026-02-16",
+  "contracts": {
+    "NDGToken": "0x5872d0f8F7D2f77B3dae8A17E47863501aE84B60",
+    "VestingVault": "0x05F1E500757689e2AC0F8CAfeF8972738c873a4b",
+    "PresaleWithVesting": "0x470C714fd4B2a7EE9988680738F0aC25558A8c77",
+    "BNBPriceFeed": "0x2677da7D2FDc48f614B11c678A0B22Db5C43eD1b",
+    "MockUSDT": "0x355F8ba76F1f4314f8dF8C290C0C90109F5311B0",
+    "MockUSDC": "0x2f8cF078cC08F56f843fDf08a3706DF1EBba68aa",
+    "MockBUSD": "0xf7a2850B50fdc7566Cc5875336Ad12B02b152558"
+  },
+  "referralEnabled": true,
+  "referralBonus": "5%",
+  "testResults": {
+    "totalRaisedUSD": "110",
+    "totalAllocatedNDG": "11916",
+    "referralBonusesNDG": "916",
+    "purchases": 2
+  }
+}

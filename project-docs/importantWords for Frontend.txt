@@ -1,0 +1,16 @@
+📅 REVISED BONDING CURVE TIMELINE:
+Phase	Bonding Curve Status	Purpose
+1. Presale	❌ Inactive	Fixed tier pricing
+2. Post-Presale → Pre-Listing	✅ ACTIVE	Anti-dump protection before exchange listing
+3. Mainnet Listing	✅ Active	Ongoing price stability
+🎯 WHY THIS MATTERS:
+✅ Bonding curve acts as a safety net between presale end and CEX listing
+✅ Prevents early participants from panic selling before mainnet
+✅ Provides mathematical price floor during the critical transition period
+✅ Gives NDG an extra edge for quality preservation
+💡 IMPLICATION:
+The bonding curve contract must be:
+
+✅ Fully developed and audited BEFORE presale ends
+✅ Ready to activate immediately after presale completion
+✅ Loaded with the 22% permanent reserve (220M NDG)
