@@ -1,0 +1,112 @@
+<!-- ============================================
+     CONTACT US MODAL (GLOBAL)
+     NetDAG Contact Form
+     ============================================ -->
+<div id="contactModal" class="contact-modal" aria-hidden="true">
+    
+    <!-- Backdrop -->
+    <div class="contact-modal-backdrop" data-contact-close></div>
+    
+    <!-- Modal Card -->
+    <div class="contact-modal-card" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+        
+        <!-- Close Button -->
+        <button class="contact-modal-close" type="button" aria-label="Close" data-contact-close>
+            ×
+        </button>
+        
+        <!-- Header -->
+        <div class="contact-modal-header">
+            <h2 class="contact-modal-title" id="contactModalTitle">📧 Contact NetDAG</h2>
+            <p class="contact-modal-subtitle">Have a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+        
+        <!-- Form -->
+        <form id="contactForm" class="contact-form" autocomplete="off">
+            
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="contactName" class="form-label">Your Name <span class="required">*</span></label>
+                <input 
+                    type="text" 
+                    id="contactName" 
+                    name="name" 
+                    class="form-input" 
+                    placeholder="John Doe"
+                    required
+                    minlength="2"
+                    maxlength="100"
+                >
+                <span class="form-error" id="nameError"></span>
+            </div>
+            
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="contactEmail" class="form-label">Email Address <span class="required">*</span></label>
+                <input 
+                    type="email" 
+                    id="contactEmail" 
+                    name="email" 
+                    class="form-input" 
+                    placeholder="you@example.com"
+                    required
+                >
+                <span class="form-error" id="emailError"></span>
+            </div>
+            
+            <!-- Subject Field -->
+            <div class="form-group">
+                <label for="contactSubject" class="form-label">Subject <span class="required">*</span></label>
+                <input 
+                    type="text" 
+                    id="contactSubject" 
+                    name="subject" 
+                    class="form-input" 
+                    placeholder="How can we help you?"
+                    required
+                    minlength="3"
+                    maxlength="200"
+                >
+                <span class="form-error" id="subjectError"></span>
+            </div>
+            
+            <!-- Message Field -->
+            <div class="form-group">
+                <label for="contactMessage" class="form-label">Message <span class="required">*</span></label>
+                <textarea 
+                    id="contactMessage" 
+                    name="message" 
+                    class="form-textarea" 
+                    placeholder="Your message here..."
+                    required
+                    minlength="10"
+                    maxlength="5000"
+                    rows="5"
+                ></textarea>
+                <span class="form-error" id="messageError"></span>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="form-actions">
+                <button type="submit" class="contact-submit-btn" id="contactSubmit">
+                    <span class="btn-text">Send Message</span>
+                    <span class="btn-loader" style="display: none;">
+                        <svg class="spinner" viewBox="0 0 50 50">
+                            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            
+            <!-- Status Message -->
+            <div class="form-status" id="formStatus" style="display: none;">
+                <div class="status-content">
+                    <span class="status-icon"></span>
+                    <span class="status-message"></span>
+                </div>
+            </div>
+            
+        </form>
+        
+    </div>
+</div>
