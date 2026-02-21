@@ -1,4 +1,5 @@
-require("@nomiclabs/hardhat-waffle");
+require("@nomicfoundation/hardhat-ethers");
+require("@nomicfoundation/hardhat-chai-matchers");
 // require("@nomiclabs/hardhat-etherscan");
 require('dotenv').config();
 

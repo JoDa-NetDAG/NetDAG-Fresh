@@ -37,7 +37,7 @@ interface IVestingVault {
 
 /**
  * @title PresaleWithVesting
- * @notice Presale contract with 5-tier system and $0.01 anchor pricing
+ * @notice Presale contract with 9-tier system and $0.01 anchor pricing
  * @dev All tokens are recorded in VestingVault during presale, transferred at TGE
  */
 contract PresaleWithVesting is Ownable, ReentrancyGuard, Pausable {

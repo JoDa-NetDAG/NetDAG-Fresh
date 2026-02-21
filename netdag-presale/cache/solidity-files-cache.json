@@ -420,8 +420,8 @@
       ]
     },
     "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\PresaleWithVesting.sol": {
-      "lastModificationDate": 1771451610207,
-      "contentHash": "c5ece1863f78cf4461db706f75238e16",
+      "lastModificationDate": 1771623687626,
+      "contentHash": "732a9b301e47eb8007459de2aef0d7cf",
       "sourceName": "contracts/PresaleWithVesting.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -503,7 +503,7 @@
       ]
     },
     "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\NDGToken.sol": {
-      "lastModificationDate": 1771451610072,
+      "lastModificationDate": 1771627399604,
       "contentHash": "b4daa1fc959fa05f16c9aae01519324b",
       "sourceName": "contracts/NDGToken.sol",
       "solcConfig": {
