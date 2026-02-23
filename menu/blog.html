@@ -7,7 +7,8 @@
   <meta name="description" content="Official NetDAG blog:  research, bonding curve mechanics, Guardian AI insights, ecosystem updates and long-form analysis." />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../css/styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare. com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/contact-modal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <script src="../js/main.js" defer></script>
 
   <style>
@@ -79,24 +80,26 @@
       line-height: 1.6;
     }
 
-    /* Hero tweaks for blog page */
-    .hero-blog{
-      background-image: url('../images/BondingCurve1.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      min-height: 100vh;
-    }
-    
-    .hero-blog .hero-overlay{
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+   /* Hero tweaks for blog page */
+.hero-blog{
+  background-image: url('../images/BondingCurve1.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 50vh;  /* ← CHANGED: Half the screen height */
+  padding-top: 200px;  /* ← NEW: Space from navbar */
+}
+
+.hero-blog .hero-overlay{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 60px;  /* ← NEW: Space at bottom */
+}
     
     .hero-blog .hero-title{
       color: var(--accent);
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(3.5rem, 5vw, 4rem);
       margin-bottom: 20px;
     }
     
@@ -124,12 +127,12 @@
       <span>💧 Presale begins <strong>14 Feb 2026</strong> (14. 02.2026). </span>
       <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs. </span>
+      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs. </span>
 
       <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
       <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
     </div>
   </div>
 
@@ -207,158 +210,372 @@
   </main>
 
   <!-- BLOG BODY -->
-  <section class="curve-section">
-    <div class="blog-wrap">
+<section class="curve-section">
+  <div class="blog-wrap">
 
-      <!-- ============= NEWEST ARTICLE ON TOP ============= -->
+    <!-- ============= NEWEST ARTICLE ON TOP ============= -->
+
+<!-- Article 7: 22% Reserve Fund -->
+<article id="reserve-fund" class="blog-article">
+  <p class="blog-meta">Published · Jan 2026 · NetDAG Economics · Price Protection</p>
+  <h2>22% Reserve Fund Explained: Your Price Protection Shield</h2>
+
+  <p>
+    Most crypto projects have <strong>zero reserves</strong>. When panic hits, there's nothing 
+    to catch the fall. NetDAG is different: we permanently lock <strong>22% of all presale 
+    revenue</strong> into a buyback reserve — a mathematical safety net that protects your investment.
+  </p>
+
+  <p><strong>How the reserve works:</strong></p>
+  
+  <ul>
+    <li><strong>Permanent lock:</strong> 22% of every dollar raised stays in the reserve forever</li>
+    <li><strong>Buyback power:</strong> When price drops below curve equilibrium, reserve activates</li>
+    <li><strong>Automatic stabilization:</strong> Guardian AI monitors and triggers buybacks strategically</li>
+    <li><strong>Transparent reporting:</strong> Reserve balance visible on-chain in real-time</li>
+    <li><strong>No team access:</strong> Smart contract controlled — no human can drain it</li>
+  </ul>
+
+  <p><strong>Real-world scenario:</strong></p>
+  
+  <p>
+    Imagine a market crash drops Bitcoin 40% overnight. Most tokens follow, some crash 60-80%. 
+    NDG holders panic and start selling. Here's what happens:
+  </p>
+  
+  <ol>
+    <li>Price drops below bonding curve equilibrium</li>
+    <li>Guardian AI detects unusual selling pressure</li>
+    <li>Reserve fund automatically buys NDG at curve price</li>
+    <li>Selling pressure is absorbed, preventing cascading crash</li>
+    <li>Price stabilizes faster than tokens without reserves</li>
+  </ol>
+
+  <p>
+    This isn't about eliminating volatility — crypto markets move, and NDG will too. 
+    But the reserve acts like <strong>shock absorbers on a car</strong>: you still feel bumps, 
+    but you don't get thrown through the windshield.
+  </p>
+
+  <p><strong>Why 22% specifically?</strong></p>
+  
+  <p>
+    We modeled various stress scenarios: exchange hacks, regulatory shocks, macro crashes, 
+    whale dumps. A 22% reserve provides meaningful protection without over-collateralizing 
+    to the point where it limits growth capital. It's the mathematical sweet spot between 
+    safety and efficiency.
+  </p>
+
+  <p>
+    Compare this to algorithmic stablecoins that failed (Terra/Luna, Iron Finance) — they 
+    had <strong>zero real reserves</strong>, only circular token mechanics. When confidence 
+    broke, there was nothing to stop the death spiral.
+  </p>
+
+  <p>
+    NetDAG isn't a stablecoin, but we borrowed the lesson: <strong>real reserves, 
+    real protection</strong>. Math you can trust when everything else is burning.
+  </p>
+  
+  <p>
+    <strong>The bottom line:</strong> Your investment is backed by actual capital, not just 
+    promises. That's the foundation of stability-first crypto.
+  </p>
+</article>
+
+<div class="section-separator"></div>
+
+     <!-- Article 6: No Wallets, No Seed Phrases -->
+<article id="easy-access" class="blog-article">
+  <p class="blog-meta">Published · Jan 2026 · NetDAG Easy Access · User Experience</p>
+  <h2>Why NetDAG Doesn't Need Wallets or Seed Phrases</h2>
+
+  <p>
+    <em>"Write down these 12 words. Don't lose them. Don't photograph them. If you forget them, 
+    your money is gone forever. Also, don't click phishing links. And never share your private key. 
+    Good luck!"</em>
+  </p>
+
+  <p>
+    This is how crypto onboards normal people. Then we wonder why adoption is stuck at 5% of the population.
+  </p>
+
+  <p>
+    NetDAG's <strong>Easy Access</strong> system eliminates the friction that keeps billions of 
+    people out of Web3:
+  </p>
+
+  <ul>
+    <li><strong>No seed phrases to lose:</strong> Your account uses familiar email/phone recovery</li>
+    <li><strong>No gas fees:</strong> NetDAG covers transaction costs for basic operations</li>
+    <li><strong>No wallet downloads:</strong> Access directly through web or mobile app</li>
+    <li><strong>No blockchain jargon:</strong> Interface feels like PayPal or Venmo</li>
+    <li><strong>No anxiety:</strong> Standard account recovery if you forget credentials</li>
+  </ul>
+
+  <p><strong>How is this possible? Isn't it less secure?</strong></p>
+  
+  <p>
+    No. We use <strong>smart contract abstraction</strong> — your assets are still on-chain, 
+    still yours, but the complexity is hidden. Behind the scenes, NetDAG handles:
+  </p>
+  
+  <ul>
+    <li>Multi-signature wallet creation (you control signing, we assist recovery)</li>
+    <li>Social recovery options (trusted contacts can help restore access)</li>
+    <li>Biometric authentication (fingerprint/face ID on mobile)</li>
+    <li>Hardware security module (HSM) backup for enterprise users</li>
+  </ul>
+
+  <p>
+    Think of it like Gmail: you don't need to understand SMTP, POP3, or email servers. 
+    You just log in and send messages. But the infrastructure behind it is still robust and decentralized.
+  </p>
+
+  <p><strong>But what about "not your keys, not your crypto"?</strong></p>
+  
+  <p>
+    That's fair criticism — and we address it with <strong>progressive security</strong>:
+  </p>
+  
+  <ul>
+    <li><strong>Basic users:</strong> Easy Access with email/phone recovery (like Coinbase)</li>
+    <li><strong>Advanced users:</strong> Optional self-custody with full key control</li>
+    <li><strong>Power users:</strong> Hardware wallet integration (Ledger, Trezor)</li>
+    <li><strong>Institutions:</strong> Multi-sig + cold storage options</li>
+  </ul>
+
+  <p>
+    You choose your security level based on comfort and expertise. A grandmother buying 
+    $50 of NDG doesn't need the same setup as a DAO treasury managing $5M.
+  </p>
+
+  <p><strong>Real-world impact:</strong></p>
+  
+  <p>
+    When we pilot-tested Easy Access with non-crypto users, onboarding time dropped from 
+    <strong>45 minutes to 2 minutes</strong>. Account creation success rate went from 
+    60% to 94%. These aren't small improvements — they're the difference between mass 
+    adoption and staying a niche tech toy.
+  </p>
+
+  <p>
+    If we want real-world brands (Nike, Rolex, pharmaceutical companies) to integrate 
+    blockchain provenance, we can't ask their customers to learn MetaMask first. 
+    The tech must disappear.
+  </p>
+
+  <p>
+    <strong>The vision:</strong> Web3 should feel like web2 — but with better ownership, 
+    transparency, and control. NetDAG Easy Access is how we get there.
+  </p>
+  
+  <p>
+    No more seed phrases. No more gas anxiety. Just crypto that works like the internet should.
+  </p>
+</article>
+
+<div class="section-separator"></div>
+    
+    <!-- Article 5: Guardian AI Staking -->
+    <article id="guardian-ai" class="blog-article">
+      <p class="blog-meta">Published · Dec 2025 · Guardian AI · Dynamic Staking</p>
+      <h2>Guardian AI Staking - Coming soon...</h2>
+   
+      <p>
+        The Neuron Guardian AI arrives soon – Phase 1 launches with fixed lockups; 
+        dynamic Guardian staking follows later.
+      </p>
       
-      <!-- Article 5:  Guardian AI Staking -->
-      <article id="post-5" class="blog-article">
-        <p class="blog-meta">No 5: Published · Dec 2025 · Guardian AI Staking - Coming soon... </p>
-        <h2>The Neuron Guardian AI arrives soon — AI-powered protection that keeps NDG smarter, safer, and one step ahead. </h2>
-     
-        <p>
-          NetDAG will introduce Guardian-AI staking — a dynamic system where reward strength adapts 
-          to ecosystem performance, liquidity flow, and real-time market sentiment. Traditional fixed APR staking (30 days – 3 years) 
-          launches first as Phase 1. AI-enhanced staking (Phase 2) arrives after token launch.
-        </p>
-      </article>
+      <p>
+        NetDAG will introduce Guardian-AI staking — a dynamic system where reward strength adapts 
+        to ecosystem performance, liquidity flow, and real-time market sentiment. Traditional fixed 
+        APR staking (30 days – 3 years) launches first as Phase 1. AI-enhanced staking (Phase 2) 
+        arrives after token launch.
+      </p>
+      
+      <p>
+        <strong>Phase 1:</strong> Fixed APR options (up to 30%) with lockup periods from 30 days to 3 years.
+        Early stakers benefit from the highest rates before supply expands.
+      </p>
+      
+      <p>
+        <strong>Phase 2:</strong> Guardian AI monitors staking health, liquidity depth, and market sentiment 
+        to dynamically adjust rewards. This keeps staking attractive without draining reserves during stress periods.
+      </p>
+    </article>
 
-      <div class="section-separator"></div>
+    <div class="section-separator"></div>
 
-      <!-- Article 4: RWA & Provenance -->
-      <article id="post-4" class="blog-article">
-        <p class="blog-meta">No 4: Published · Dec 2025 · RWA & Provenance</p>
-        <h2>Real-World Assets, Provenance &amp; Why We Want Brands Like Louis Vuitton, Rolex, Nike, Roche Products, Manuka Honey, Kobe Beef, etc - On-Chain</h2>
+    <!-- Article 4: RWA & Provenance -->
+    <article id="provenance" class="blog-article">
+      <p class="blog-meta">Published · Dec 2025 · NetDAG Provenance</p>
+      <h2>Real-World Assets, Provenance & Why We Want Brands Like Louis Vuitton, Rolex, Nike...</h2>
 
-        <p>
-          Everyone talks about "real-world assets" (RWA), but for most people it still feels
-          abstract. NetDAG's approach is simple: connect <strong>real products, real purchases
-          and real brand stories</strong> to on-chain proofs that anyone can verify.
-        </p>
+      <p>
+        Everyone talks about "real-world assets" (RWA), but for most people it still feels
+        abstract. NetDAG's approach is simple: connect <strong>real products, real purchases
+        and real brand stories</strong> to on-chain proofs that anyone can verify.
+      </p>
 
-        <p>
-          Our provenance dApp is designed so that a sneaker drop from a brand like Nike could
-          carry a cryptographic history:  where it was produced, where it was shipped, which
-          campaign it belonged to, and who actually bought it — without exposing private
-          personal data. 
-        </p>
+      <p>
+        Our provenance dApp is designed so that a sneaker drop from a brand like Nike could
+        carry a cryptographic history: where it was produced, where it was shipped, which
+        campaign it belonged to, and who actually bought it — without exposing private
+        personal data.
+      </p>
 
-        <p>
-          When those proofs are tied to NDG rewards, shopping stops being a passive act.
-          Every legitimate purchase becomes a signal that supports the ecosystem and unlocks
-          loyalty on-chain.  That's the bridge we're building between Web2 brands and a
-          stability-first Web3 economy.
-        </p>
+      <p>
+        When those proofs are tied to NDG rewards, shopping stops being a passive act.
+        Every legitimate purchase becomes a signal that supports the ecosystem and unlocks
+        loyalty on-chain. That's the bridge we're building between Web2 brands and a
+        stability-first Web3 economy.
+      </p>
 
-        <p>
-          Our early conversations with merchants and manufacturers focus on one thing: 
-          <strong>trust</strong>. They don't want casino-tokens, they want predictable rails.
-          That is exactly what the NetDAG bonding curve and Guardian are here to provide.
-        </p>
-      </article>
+      <p>
+        <strong>Examples of products we're targeting:</strong>
+      </p>
+      
+      <ul>
+        <li><strong>Luxury fashion:</strong> Louis Vuitton, Gucci, Hermès — fight counterfeits with verifiable proof</li>
+        <li><strong>Premium watches:</strong> Rolex, Patek Philippe — every serial number becomes an NFT</li>
+        <li><strong>Athletic gear:</strong> Nike, Adidas — limited editions with on-chain authenticity</li>
+        <li><strong>Pharmaceuticals:</strong> Roche, Pfizer — prevent fake medicine with supply chain transparency</li>
+        <li><strong>Specialty foods:</strong> Manuka Honey, Kobe Beef — prove origin and quality</li>
+      </ul>
 
-      <div class="section-separator"></div>
+      <p>
+        Our early conversations with merchants and manufacturers focus on one thing: 
+        <strong>trust</strong>. They don't want casino-tokens, they want predictable rails.
+        That is exactly what the NetDAG bonding curve and Guardian are here to provide.
+      </p>
+    </article>
 
-      <!-- Article 3: Bonding Curves vs. Order Books -->
-      <article id="post-3" class="blog-article">
-        <p class="blog-meta">No 3: Published · Nov 2025 · NetDAG Research</p>
-        <h2>Bonding Curves vs. Order Books — Why Predictable Liquidity Wins</h2>
+    <div class="section-separator"></div>
 
-        <p>
-          Most crypto traders are used to the chaos of order books:  walls of bids and asks,
-          sudden gaps in liquidity, and prices that can move 20–30% in seconds when a big
-          market order hits. 
-        </p>
+    <!-- Article 3: Bonding Curves vs. Order Books -->
+    <article id="bonding-curves" class="blog-article">
+      <p class="blog-meta">Published · Nov 2025 · NetDAG Research · Why Predictable Liquidity Wins</p>
+      <h2>Bonding Curves vs. Order Books</h2>
 
-        <p>
-          A <strong>bonding curve</strong> defines price using a mathematical function. 
-          Liquidity comes from a contract — not from disappearing limit orders. 
-        </p>
+      <p>
+        Most crypto traders are used to the chaos of order books: walls of bids and asks,
+        sudden gaps in liquidity, and prices that can move 20–30% in seconds when a big
+        market order hits.
+      </p>
 
-        <p>NetDAG's curve is smooth, monotonic, and designed to resist manipulation. </p>
+      <p>
+        A <strong>bonding curve</strong> defines price using a mathematical function. 
+        Liquidity comes from a contract — not from disappearing limit orders.
+      </p>
 
-        <ul>
-          <li><strong>Launch: </strong> Guaranteed pricing from day one</li>
-          <li><strong>Panic:</strong> Liquidity never vanishes</li>
-          <li><strong>Growth:</strong> Curve becomes harder to move over time</li>
-        </ul>
+      <p>NetDAG's curve is smooth, monotonic, and designed to resist manipulation.</p>
 
-        <p>
-          Over time this gives builders and long-term holders something order books rarely offer:
-          a <strong>transparent map of where price pressure will appear</strong>. You can plan
-          token allocations, staking products and integrations without praying that liquidity
-          is there when you need it.
-        </p>
-      </article>
+      <ul>
+        <li><strong>Launch:</strong> Guaranteed pricing from day one — no waiting for market makers</li>
+        <li><strong>Panic:</strong> Liquidity never vanishes — the curve absorbs selling pressure</li>
+        <li><strong>Growth:</strong> Price becomes harder to move as supply increases</li>
+        <li><strong>Transparency:</strong> Everyone sees the same price formula — no hidden spreads</li>
+      </ul>
 
-      <div class="section-separator"></div>
+      <p>
+        This gives builders and long-term holders something order books rarely offer:
+        a <strong>transparent map of where price pressure will appear</strong>. You can plan
+        token allocations, staking products and integrations without praying that liquidity
+        is there when you need it.
+      </p>
+      
+      <p>
+        <strong>The math advantage:</strong> While traditional markets can see "flash crashes" when 
+        order books empty, NetDAG's bonding curve ensures there's always a buyer and seller at the 
+        mathematically determined price. No circuit breakers needed.
+      </p>
+    </article>
 
-      <!-- Article 2: Guardian AI -->
-      <article id="post-2" class="blog-article">
-        <p class="blog-meta">No 2: Published · Nov 2025 · NetDAG Guardian</p>
-        <h2>Inside NetDAG Guardian AI:  Proactive Liquidity &amp; Risk Signals</h2>
+    <div class="section-separator"></div>
 
-        <p>
-          If the bonding curve is the <strong>math engine</strong>, Guardian is the
-          <strong>nervous system</strong>. It watches for unusual buying/selling,
-          wallet clustering, external liquidity shifts and macro red flags.
-        </p>
+    <!-- Article 2: Guardian AI -->
+    <article id="guardian-risk" class="blog-article">
+      <p class="blog-meta">Published · Oct 2025 · NetDAG Research</p>
+      <h2>Inside NetDAG Guardian: Protecting Liquidity & Risk Signals</h2>
 
-        <ul>
-          <li>Speed &amp; size of trades</li>
-          <li>Whale accumulation or dispersal</li>
-          <li>Cross-venue liquidity pressure</li>
-          <li>Extreme market fear signals</li>
-        </ul>
+      <p>
+        If the bonding curve is the <strong>math engine</strong>, Guardian is the
+        <strong>nervous system</strong>. It watches for unusual buying/selling,
+        wallet clustering, external liquidity shifts and macro red flags.
+      </p>
 
-        <p>
-          Guardian provides clear, human-readable risk signals — not black-box trading.
-          At launch it will run in advisory mode only, showing what it <em>would</em> have done
-          so that the community can judge its behaviour before any automatic actions are enabled.
-        </p>
+      <p><strong>What Guardian monitors:</strong></p>
+      
+      <ul>
+        <li><strong>Trade patterns:</strong> Speed & size of transactions that deviate from normal</li>
+        <li><strong>Whale activity:</strong> Large wallet accumulation or sudden dispersal</li>
+        <li><strong>Cross-venue pressure:</strong> Liquidity signals from other markets</li>
+        <li><strong>Market sentiment:</strong> Extreme fear or greed indicators</li>
+        <li><strong>Reserve health:</strong> Ensures the 22% buyback fund stays optimized</li>
+      </ul>
 
-        <p>
-          This approach lets NetDAG evolve a <strong>transparent risk culture</strong>:
-          people can see why alerts are triggered, how liquidity reacts and how policy
-          changes improve stability over time.
-        </p>
-      </article>
+      <p>
+        Guardian provides clear, human-readable risk signals — not black-box trading.
+        At launch it will run in <strong>advisory mode only</strong>, showing what it <em>would</em> have done
+        so that the community can judge its behavior before any automatic actions are enabled.
+      </p>
 
-      <div class="section-separator"></div>
+      <p>
+        This approach lets NetDAG evolve a <strong>transparent risk culture</strong>:
+        people can see why alerts are triggered, how liquidity reacts and how policy
+        changes improve stability over time.
+      </p>
+      
+      <p>
+        Think of Guardian as your co-pilot: it doesn't take control, but it gives you early warnings 
+        when turbulence is ahead. Eventually, with community approval, it can nudge parameters 
+        automatically — but always with full transparency and override options.
+      </p>
+    </article>
 
-      <!-- Article 1: Shock Absorber -->
-      <article id="post-1" class="blog-article">
-        <p class="blog-meta">No 1: Published · Oct 2025 · Shock Absorber</p>
-        <h2>Why a "Mathematical Shock Absorber" Matters for Web3</h2>
+    <div class="section-separator"></div>
 
-        <p>
-          NetDAG aims to behave like real infrastructure — reliable, robust and predictable.
-          A shock absorber smooths extreme moves and makes catastrophic crashes far harder. 
-        </p>
+    <!-- Article 1: Shock Absorber (original, no link from index) -->
+    <article id="shock-absorber" class="blog-article">
+      <p class="blog-meta">Published · Oct 2025 · NetDAG Foundation</p>
+      <h2>Why a "Mathematical Shock Absorber" Matters for Web3</h2>
 
-        <ul>
-          <li>Staking + savings stability</li>
-          <li>dVPN / bandwidth pricing</li>
-          <li>Partnerships that depend on predictable liquidity</li>
-        </ul>
+      <p>
+        NetDAG aims to behave like real infrastructure — reliable, robust and predictable.
+        A shock absorber smooths extreme moves and makes catastrophic crashes far harder.
+      </p>
 
-        <p>
-          When partners plug into NetDAG, they are effectively plugging into a
-          <strong>pre-engineered risk profile</strong>. They don't have to guess what
-          happens if volume spikes or macrosentiment crashes — the curve and reserve
-          are already tuned to absorb those shocks.
-        </p>
+      <p><strong>What benefits from stability:</strong></p>
+      
+      <ul>
+        <li><strong>Staking & savings:</strong> Predictable returns without price panic</li>
+        <li><strong>dVPN / bandwidth pricing:</strong> Services that need consistent token value</li>
+        <li><strong>Partnerships:</strong> Businesses that depend on reliable liquidity</li>
+        <li><strong>RWA integration:</strong> Real-world brands need stable pricing rails</li>
+      </ul>
 
-        <p>
-          That is the foundation you need if you want to host RWAs, loyalty points, or
-          real-world payments on-chain without dragging people into another volatility circus.
-        </p>
-      </article>
+      <p>
+        When partners plug into NetDAG, they are effectively plugging into a
+        <strong>pre-engineered risk profile</strong>. They don't have to guess what
+        happens if volume spikes or macro sentiment crashes — the curve and reserve
+        are already tuned to absorb those shocks.
+      </p>
 
-      <!-- ADD NEW BLOG POSTS ABOVE ARTICLE 1 IF YOU WRITE MORE LATER -->
-    </div>
-  </section>
+      <p>
+        That is the foundation you need if you want to host RWAs, loyalty points, or
+        real-world payments on-chain without dragging people into another volatility circus.
+      </p>
+      
+      <p>
+        <strong>The infrastructure mindset:</strong> Just like the internet doesn't crash when 
+        millions of users log on simultaneously, NetDAG is designed to handle stress without breaking. 
+        That's what separates infrastructure from speculation.
+      </p>
+    </article>
+
+  </div>
+</section>
 
   <!-- Bottom separator -->
   <div class="section-separator"></div>
@@ -397,8 +614,7 @@
           <ul>
             <li><a href="../provenance.html">Provenance dApp</a></li>
             <li><a href="../bonding-curve.html">Bonding Curve</a></li>
-            <li><a href="../guardian.html">Guardian AI</a></li>
-            <li><a href="../no-gas.html">Easy Access</a></li>
+            <li><a href="../guardian.html">Guardian AI</a></li>            <li><a href="../no-gas.html">Easy Access</a></li>
           </ul>
         </div>
 
@@ -436,8 +652,69 @@
         <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
       </div>
 
+      <div class="footer-bottom-blue">
+        <p class="footer-bottom-text">
+          <a href="#" data-contact-open class="footer-contact-link">📧 Contact</a> |
+          Copyright: NetDAG 2026 | Built with care
+        </p>
+      </div>
+
   </footer>
 
+  <!-- BEGIN OF CONTACT MODAL -->
+  <div id="contactModal" class="ndg-modal" aria-hidden="true">
+    <div class="ndg-modal-backdrop" data-contact-close></div>
+    <div class="ndg-modal-content">
+      <button class="ndg-modal-close" data-contact-close aria-label="Close">×</button>
+
+      <div class="ndg-modal-header">
+        <h2>📧 Get in Touch</h2>
+        <p>Send us a message and we'll respond within 3 working days.</p>
+      </div>
+
+      <form id="contactForm" class="contact-form">
+        <!-- First Name -->
+        <div class="contact-form-group">
+          <label for="contactFirstName" class="contact-label">First Name *</label>
+          <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
+            placeholder="Enter your first name">
+        </div>
+
+        <!-- Last Name -->
+        <div class="contact-form-group">
+          <label for="contactLastName" class="contact-label">Last Name *</label>
+          <input type="text" id="contactLastName" name="lastName" class="contact-input" required
+            placeholder="Enter your last name">
+        </div>
+
+        <!-- Email -->
+        <div class="contact-form-group">
+          <label for="contactEmail" class="contact-label">Email *</label>
+          <input type="email" id="contactEmail" name="email" class="contact-input" required
+            placeholder="your.email@example.com">
+        </div>
+
+        <!-- Message -->
+        <div class="contact-form-group">
+          <label for="contactMessage" class="contact-label">Message *</label>
+          <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
+            placeholder="How can we help you?"></textarea>
+        </div>
+
+        <!-- Status Message -->
+        <div id="contactStatus" class="contact-status"></div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="contact-submit-btn">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+<!-- END OF CONTACT MODAL -->
+
+ <script src="../js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
 <script src="/js/ndg-buy-loader.js" defer></script>
 

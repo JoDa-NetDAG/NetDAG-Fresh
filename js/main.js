@@ -393,49 +393,64 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 /* ============================================
-   ROTATING HEADLINES - Auto Carousel
+   ROTATING HEADLINES - Slide Left/Right (Simplified)
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', function() {
   
-  // Get all headlines and dots
   const headlines = document.querySelectorAll('.rotating-headlines .headline');
   const dots = document.querySelectorAll('.headline-dots .dot');
   
-  // Check if elements exist
   if (headlines.length === 0 || dots.length === 0) {
     console.log('Rotating headlines not found on this page');
     return;
   }
   
+  console.log(`Found ${headlines.length} headlines and ${dots.length} dots`);
+  
   let currentIndex = 0;
   let rotationInterval;
   let isPaused = false;
   
-  // Function to show specific headline
+  // Show specific headline
   function showHeadline(index) {
-    // Remove active class from all
-    headlines.forEach(h => h.classList.remove('active'));
+    // Validate index
+    if (index >= headlines.length) {
+      console.error(`Index ${index} out of range, resetting to 0`);
+      index = 0;
+    }
+    
+    console.log(`Showing headline ${index}: "${headlines[index].textContent.substring(0, 30)}..."`);
+    
+    // Remove active from all
+    headlines.forEach(h => {
+      h.classList.remove('active', 'exiting');
+    });
     dots.forEach(d => d.classList.remove('active'));
     
-    // Add active class to current
-    headlines[index].classList.add('active');
-    dots[index].classList.add('active');
+    // Mark current as exiting (if not first load)
+    if (currentIndex !== index) {
+      headlines[currentIndex].classList.add('exiting');
+    }
     
-    currentIndex = index;
+    // Activate new headline and dot
+    setTimeout(() => {
+      headlines[index].classList.add('active');
+      dots[index].classList.add('active');
+      currentIndex = index;
+    }, 50);
   }
   
-  // Function to show next headline
+  // Next headline
   function nextHeadline() {
     if (isPaused) return;
-    
     let nextIndex = (currentIndex + 1) % headlines.length;
     showHeadline(nextIndex);
   }
   
-  // Start auto-rotation (5 seconds)
+  // Start rotation
   function startRotation() {
-    rotationInterval = setInterval(nextHeadline, 6000); // 5000ms = 5 seconds
+    rotationInterval = setInterval(nextHeadline, 8000);
   }
   
   // Stop rotation
@@ -443,28 +458,23 @@ document.addEventListener('DOMContentLoaded', function() {
     clearInterval(rotationInterval);
   }
   
-  // Click on dots to navigate
+  // Dot clicks
   dots.forEach((dot, index) => {
     dot.addEventListener('click', function() {
-      showHeadline(index);
       stopRotation();
-      startRotation(); // Restart timer after manual click
+      showHeadline(index);
+      setTimeout(startRotation, 1000);
     });
   });
   
-  // Pause on hover over headlines
-  const rotatingContainer = document.querySelector('.rotating-headlines');
+  // Hover pause
+  const container = document.querySelector('.rotating-headlines');
+  container.addEventListener('mouseenter', () => { isPaused = true; });
+  container.addEventListener('mouseleave', () => { isPaused = false; });
   
-  rotatingContainer.addEventListener('mouseenter', function() {
-    isPaused = true;
-  });
-  
-  rotatingContainer.addEventListener('mouseleave', function() {
-    isPaused = false;
-  });
-  
-  // Start the rotation
+  // Initialize
+  showHeadline(0);
   startRotation();
   
-  console.log('✅ Rotating headlines initialized - 5 second intervals');
+  console.log('✅ Rotating headlines initialized - 8 second intervals');
 });

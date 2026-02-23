@@ -2304,230 +2304,6 @@ main {
   filter: blur(40px);
 }
 
-/* ===  DVPN SECTION  === */
-.section-dvpn-preview {
-  position: relative;
-  width: 100%;
-  min-height: 120vh;                 /* Fills the screen just like the others */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.dvpn-bg-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  min-height: 100vh;                 /* Ensures bg fills the section */
-  height: 100%;
-  z-index: 0;
-   transform: translateY(-50px);
-  overflow: hidden;
-}
-
-.dvpn-preview-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;                 /* Use 'cover' for full screen and same effect as Tokenomics! */
-  object-position: center;
-  display: block;
-  opacity: 0.46;
-}
-
-.section-dvpn-preview .section-overlay {
-  position: absolute;
-  inset: 0;
-  background: transparent;           /* Or very light overlay if you need text readability */
-  z-index: 1;
-  pointer-events: none;
-}
-
-.dvpn-preview-content {
-  position: relative;
-  z-index: 2;
-  margin: 0 auto;
-  padding: 72px 18px 66px 18px;
-  max-width: 900px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.dvpn-title {
-  font-size: 4rem;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-  margin-bottom: 22px;
-}
-
-.dvpn-title .accent-orange {
-  color: #ff9900;
-}
-
-.dvpn-lead {
-  font-size: 1.17rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 33px;
-  line-height: 1.52;
-}
-
-.btn-dvpn-explore {
-  display: inline-block;
-  background: #ff9900;
-  color: #222;
-  font-weight: 700;
-  padding: 14px 44px;
-  border-radius: 7px;
-  text-decoration: none;
-  font-size: 1.1rem;
-  letter-spacing: 0.01em;
-  transition: background .17s, color .17s;
-  border: none;
-  box-shadow: 0 3px 12px rgba(255,153,0,0.09);
-  margin-top: 8px;
-}
-.btn-dvpn-explore:hover,
-.btn-dvpn-explore:focus {
-  background: #ffaa2b;
-  color: #181200;
-  outline: none;
-}
-
-/* Responsive for mobile/tablet */
-@media (max-width: 900px) {
-  .dvpn-title { font-size: 2.3rem; }
-  .dvpn-lead { font-size: 1.02rem; }
-  .btn-dvpn-explore { padding: 12px 18px; font-size: 1rem; }
-}
-
-/* ===  BLOG SECTION  === */
-.section-blog-preview {
-  background: linear-gradient(180deg, #1a1a22 0%, #161722 100%);
-  padding: 58px 0 20px 0;
-  width: 100%;
-  color: #eee;
-}
-
-.blog-preview-heading {
-  text-align: center;
-  color: #ff9900;
-  font-size: 2.2rem;
-  font-weight: 900;
-  letter-spacing: 0.01em;
-  margin-bottom: 6px;
-}
-
-.blog-preview-subheading {
-  text-align: center;
-  color: #fff;
-  font-size: 1.1rem;
-  opacity: .82;
-  margin-bottom: 34px;
-  font-weight: 500;
-}
-
-.blog-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
-  gap: 22px 20px;
-  justify-content: center;
-  width: 100%;
-  max-width: 1600px;
-  margin: 0 auto 34px auto;
-}
-
-.blog-preview-card {
-  display: flex;
-  flex-direction: column;
-  background: #181e3a;
-  border-radius: 16px;
-  box-shadow: 0 1px 12px rgba(32,32,112,0.09);
-  padding: 22px 24px 20px 24px;
-  color: #fff;
-  opacity: 0.95;
-  border: 2px solid transparent;
-  text-decoration: none;
-  transition: border-color .13s, box-shadow .18s, background .14s;
-  min-width: 0;
-}
-.blog-preview-card .card-title {
-  font-size: 1.13rem;
-  font-weight: bold;
-  color: #ff9900;
-  margin-bottom: 3px;
-  letter-spacing: 0.01em;
-}
-.blog-preview-card .card-meta {
-  font-size: 0.92rem;
-  color: #f3e7ce;
-  opacity: 0.78;
-  font-weight: 500;
-  margin-bottom: 13px;
-}
-.blog-preview-card .card-desc {
-  font-size: 1.02rem;
-  color: #fff;
-  opacity: 0.88;
-  font-weight: 500;
-}
-
-.blog-preview-card.highlight {
-  background: #151932;
-  border-color: #ff9900;
-  box-shadow: 0 3px 18px #ff99004a;
-}
-
-.blog-preview-card:hover,
-.blog-preview-card:focus {
-  border-color: #ffaa55;
-  background: #25254a;
-}
-.blog-preview-card:active {
-  border-color: #ba6b00;
-}
-
-.blog-preview-grid a {
-  outline: none;
-}
-
-.blog-preview-actions {
-  text-align: left;
-  margin-top: 26px;
-}
-
-.blog-btn-viewall {
-  background: #ff9900;
-  color: #191b18;
-  padding: 10px 32px;
-  font-weight: 900;
-  border-radius: 19px;
-  font-size: 1.1rem;
-  text-decoration: none;
-  letter-spacing: 0.01em;
-  box-shadow: 0 3px 17px rgba(255,153,0,0.12);
-  transition: background .12s, color .12s;
-}
-.blog-btn-viewall:hover, .blog-btn-viewall:focus {
-  background: #ffaa2b;
-  color: #191700;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .blog-preview-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  .blog-preview-subheading {
-    font-size: 1rem;
-  }
-}
-
 .post-blog-action-panels {
   background: linear-gradient(180deg, #181c22 60%, #191820 100%);
   padding: 48px 0 30px 0;
@@ -4478,306 +4254,6 @@ body.ndg-modal-open {
   }
 }
 
-/* ============================================
-   GASLESS CRYPTO HERO SECTION - Full Screen
-   ============================================ */
-
-.gasless-hero-section {
-  position: relative;
-  width: 100%;
-  height: 120vh; /* Full screen height */
-  min-height: 600px;
-  background-image: url('../images/Gasless1.png'); /* Your background image */
-  background-size: cover;
-  background-position: center;
-  background-attachment: scroll; /* FIXED: Now scrolls with page */
-  display: flex;
-  align-items: center;
-  justify-content: center; /* FIXED: Center alignment */
-  padding: 0 80px;
-  overflow: hidden;
-}
-
-/* Dark overlay for text readability */
-.gasless-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
-  z-index: 1;
-}
-
-/* Content container */
-.gasless-hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  color: #ffffff;
-  text-align: center; /* FIXED: Center aligned */
-}
-
-/* White headline part - SAME SIZE as orange now */
-.gasless-title-white {
-  font-size: 6rem; /* FIXED: Changed from 3.5rem to 5rem */
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 10px;
-  line-height: 1.2;
-}
-
-/* Orange headline part */
-.gasless-title-orange {
-  font-size: 6rem; /* Same as white */
-  font-weight: bold;
-  color: #ff9900;
-  margin-bottom: 30px;
-  line-height: 1.2;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-/* Description text */
-.gasless-description {
-  font-size: 1.2rem;
-  color: #ffffff;
-  line-height: 1.8;
-  margin-bottom: 40px;
-  max-width: 700px;
-  margin-left: auto; /* FIXED: Center the paragraph */
-  margin-right: auto; /* FIXED: Center the paragraph */
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
-
-/* Learn More Button */
-.gasless-learn-btn {
-  display: inline-block;
-  padding: 15px 40px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  background-color: #ff9900;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4);
-}
-
-.gasless-learn-btn:hover {
-  background-color: #ffaa00;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 153, 0, 0.6);
-}
-
-/* Mobile Responsive */
-@media (max-width: 1024px) {
-  .gasless-hero-section {
-    padding: 0 40px;
-  }
-  
-  .gasless-title-white {
-    font-size: 3.5rem;
-  }
-  
-  .gasless-title-orange {
-    font-size: 3.5rem;
-  }
-  
-  .gasless-description {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .gasless-hero-section {
-    padding: 0 20px;
-    height: 80vh;
-  }
-  
-  .gasless-title-white {
-    font-size: 2.5rem;
-  }
-  
-  .gasless-title-orange {
-    font-size: 2.5rem;
-  }
-  
-  .gasless-description {
-    font-size: 1.1rem;
-  }
-  
-  .gasless-learn-btn {
-    padding: 12px 30px;
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .gasless-title-white {
-    font-size: 1.8rem;
-  }
-  
-  .gasless-title-orange {
-    font-size: 1.8rem;
-  }
-  
-  .gasless-description {
-    font-size: 1rem;
-  }
-}
-
-/* ============================================
-   NO-GAS.HTML (EASY ACCESS) - SPECIFIC STYLES
-   ============================================ */
-
-/* Hero Title - 4.5rem and Orange */
-.dvpn-page .hero-title.dvpn-title {
-  font-size: 4.5rem;
-  color: #ff9900;
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-
-/* Hero Title Highlight Span - Also Orange */
-.dvpn-page .hero-title-highlight {
-  color: #ff9900;
-}
-
-/* Hero Eyebrow - Orange Accent */
-.dvpn-page .hero-eyebrow {
-  color: #ff9900;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-}
-
-/* Hero Kicker - White, Larger */
-.dvpn-page .hero-kicker {
-  font-size: 1.5rem;
-  color: #ffffff;
-  line-height: 1.6;
-  margin-bottom: 40px;
-  max-width: 700px;
-}
-
-/* Hero Image Container */
-.dvpn-hero-image {
-  margin-top: 40px;
-  text-align: center;
-}
-
-.dvpn-hero-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 20px 60px rgba(255, 153, 0, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.dvpn-hero-image img:hover {
-  transform: scale(1.02);
-}
-
-/* Info Card Styling */
-.dvpn-info-card h2,
-.dvpn-how-card h2 {
-  font-size: 2.5rem;
-  color: #ffffff;
-  margin-bottom: 25px;
-  border-left: 5px solid #ff9900;
-  padding-left: 20px;
-}
-
-.dvpn-info-card h3,
-.dvpn-how-card h3 {
-  font-size: 1.8rem;
-  color: #ff9900;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-
-.dvpn-info-card p,
-.dvpn-how-card p {
-  font-size: 1.2rem;
-  color: #cccccc;
-  line-height: 1.8;
-  margin-bottom: 20px;
-}
-
-/* Ordered List Styling */
-.dvpn-list {
-  list-style: none;
-  counter-reset: item;
-  padding-left: 0;
-}
-
-.dvpn-list li {
-  counter-increment: item;
-  margin-bottom: 30px;
-  padding-left: 60px;
-  position: relative;
-  font-size: 1.1rem;
-  color: #cccccc;
-  line-height: 1.8;
-}
-
-.dvpn-list li::before {
-  content: counter(item);
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: #ff9900;
-  color: #ffffff;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.3rem;
-}
-
-.dvpn-list li strong {
-  color: #ffffff;
-  display: block;
-  margin-bottom: 8px;
-  font-size: 1.3rem;
-}
-
-/* Unordered Advantages List */
-.dvpn-advantages {
-  list-style: none;
-  padding-left: 0;
-}
-
-.dvpn-advantages li {
-  padding-left: 35px;
-  position: relative;
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-  color: #cccccc;
-  line-height: 1.8;
-}
-
-.dvpn-advantages li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #ff9900;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.dvpn-advantages li strong {
-  color: #ffffff;
-  font-weight: 600;
-}
 
 /* Comparison Table Styling */
 .comparison-table {
@@ -4818,36 +4294,6 @@ body.ndg-modal-open {
   font-weight: 600;
 }
 
-/* Image Captions */
-.dvpn-caption {
-  text-align: center;
-  color: #cccccc;
-  font-size: 1.1rem;
-  margin-top: 20px;
-  font-style: italic;
-  line-height: 1.6;
-}
-
-/* Feature Images */
-.dvpn-feature-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* Fullscreen Section Images */
-.dvpn-fullscreen-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.dvpn-fullscreen-figure {
-  margin: 0;
-  padding: 0;
-}
-
 /* Content Blocks - Better Spacing */
 .content-block {
   background: rgba(255, 255, 255, 0.03);
@@ -4855,59 +4301,6 @@ body.ndg-modal-open {
   border-radius: 15px;
   border: 1px solid rgba(255, 153, 0, 0.2);
 }
-
-/* Mobile Responsive */
-@media (max-width: 1024px) {
-  .dvpn-page .hero-title.dvpn-title {
-    font-size: 3.5rem;
-  }
-
-  .dvpn-page .hero-kicker {
-    font-size: 1.3rem;
-  }
-
-  .dvpn-info-card h2,
-  .dvpn-how-card h2 {
-    font-size: 2rem;
-  }
-
-  .content-block {
-    padding: 35px;
-  }
-}
-
-@media (max-width: 768px) {
-  .dvpn-page .hero-title.dvpn-title {
-    font-size: 2.5rem;
-  }
-
-  .dvpn-page .hero-eyebrow {
-    font-size: 0.9rem;
-  }
-
-  .dvpn-page .hero-kicker {
-    font-size: 1.2rem;
-  }
-
-  .dvpn-info-card h2,
-  .dvpn-how-card h2 {
-    font-size: 1.8rem;
-  }
-
-  .dvpn-info-card h3,
-  .dvpn-how-card h3 {
-    font-size: 1.5rem;
-  }
-
-  .dvpn-list li {
-    padding-left: 50px;
-  }
-
-  .dvpn-list li::before {
-    width: 35px;
-    height: 35px;
-    font-size: 1.1rem;
-  }
 
   .content-block {
     padding: 25px;
@@ -4918,26 +4311,8 @@ body.ndg-modal-open {
     padding: 12px;
     font-size: 1rem;
   }
-}
 
-@media (max-width: 480px) {
-  .dvpn-page .hero-title.dvpn-title {
-    font-size: 2rem;
-  }
 
-  .dvpn-page .hero-kicker {
-    font-size: 1.1rem;
-  }
-
-  .dvpn-info-card h2,
-  .dvpn-how-card h2 {
-    font-size: 1.6rem;
-  }
-
-  .dvpn-list li {
-    font-size: 1rem;
-    padding-left: 45px;
-  }
 
   .content-block {
     padding: 20px;
@@ -4952,7 +4327,7 @@ body.ndg-modal-open {
   .comparison-table td {
     padding: 10px 8px;
   }
-}
+
 
 /* ============================================
    SOCIAL LOGIN & PAYMENT METHODS SECTION
@@ -5269,111 +4644,6 @@ body.ndg-modal-open {
 
   .btn-join-presale {
     padding: 15px 35px;
-    font-size: 1.1rem;
-  }
-}
-
-/* ============================================
-   NO-GAS.HTML (EASY ACCESS) - HERO CENTERING
-   ============================================ */
-
-/* Center entire hero content */
-.dvpn-page .hero-inner {
-  text-align: center;
-}
-
-/* Hero Eyebrow - Centered */
-.dvpn-page .hero-eyebrow {
-  color: #ff9900;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  text-align: center; /* Center */
-}
-
-/* Hero Title - 4.5rem, Orange, Centered */
-.dvpn-page .hero-title.dvpn-title {
-  font-size: 4.5rem;
-  color: #ff9900;
-  font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 20px;
-  text-align: center; /* Center */
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1000px; /* Constrain width for better readability */
-}
-
-/* Hero Title Highlight Span - Also Orange */
-.dvpn-page .hero-title-highlight {
-  color: #ff9900;
-}
-
-/* Hero Kicker - White, Larger, Centered */
-.dvpn-page .hero-kicker {
-  font-size: 1.5rem;
-  color: #ffffff;
-  line-height: 1.6;
-  margin-bottom: 40px;
-  text-align: center; /* Center */
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 800px; /* Constrain width for better readability */
-}
-
-/* Hero Image Container - Centered */
-.dvpn-hero-image {
-  margin-top: 40px;
-  text-align: center; /* Center */
-}
-
-.dvpn-hero-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 20px 60px rgba(255, 153, 0, 0.3);
-  transition: transform 0.3s ease;
-  margin: 0 auto; /* Center the image itself */
-  display: block; /* Make it a block element for centering */
-}
-
-.dvpn-hero-image img:hover {
-  transform: scale(1.02);
-}
-
-/* Mobile Responsive */
-@media (max-width: 1024px) {
-  .dvpn-page .hero-title.dvpn-title {
-    font-size: 3.5rem;
-  }
-
-  .dvpn-page .hero-kicker {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .dvpn-page .hero-title.dvpn-title {
-    font-size: 2.5rem;
-  }
-
-  .dvpn-page .hero-eyebrow {
-    font-size: 0.9rem;
-  }
-
-  .dvpn-page .hero-kicker {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .dvpn-page .hero-title.dvpn-title {
-    font-size: 2rem;
-  }
-
-  .dvpn-page .hero-kicker {
     font-size: 1.1rem;
   }
 }
@@ -6415,4 +5685,322 @@ body.ndg-modal-open {
 .wallet-error::before {
   content: '⚠️ ';
   margin-right: 8px;
+}
+
+/* =========================
+   Contact/Copyright/Build with care centered
+   ========================= */
+.footer-bottom-blue {
+  text-align: center;
+  padding: 20px;
+  font-size: 11px;
+  color: #ff9900;
+}
+
+.footer-bottom-blue p {
+  margin: 0;
+}
+
+/* Container for rotating headlines */
+.rotating-headlines {
+  position: relative;
+  min-height: 150px; /* Adjust based on your text height */
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Individual headlines - default state (off-screen right) */
+.rotating-headlines .headline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 1.5s ease-in-out;
+}
+
+/* Active headline - visible and centered */
+.rotating-headlines .headline.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Exiting headline - slides out left */
+.rotating-headlines .headline.exiting {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+/* ===  BLOG SECTION  === */
+.section-blog-preview {
+  background: linear-gradient(180deg, #1a1a22 0%, #161722 100%);
+  padding: 58px 0 20px 0;
+  width: 100%;
+  color: #eee;
+}
+
+.blog-preview-heading {
+  text-align: center;
+  color: #ff9900;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+
+.blog-preview-subheading {
+  text-align: center;
+  color: #fff;
+  font-size: 1.1rem;
+  opacity: .82;
+  margin-bottom: 34px;
+  font-weight: 500;
+}
+
+/* FIXED GRID - 2 rows × 3 columns */
+.blog-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 34px auto;
+  padding: 0 20px;
+}
+
+.blog-preview-card {
+  display: flex;
+  flex-direction: column;
+  background: #181e3a;
+  border-radius: 16px;
+  box-shadow: 0 1px 12px rgba(32,32,112,0.09);
+  padding: 22px 24px 20px 24px;
+  color: #fff;
+  opacity: 0.95;
+  border: 2px solid transparent;
+  text-decoration: none;
+  transition: border-color .13s, box-shadow .18s, background .14s;
+  min-width: 0;
+  min-height: 220px;
+}
+
+.blog-preview-card .card-title {
+  font-size: 1.13rem;
+  font-weight: bold;
+  color: #ff9900;
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.blog-preview-card .card-meta {
+  font-size: 0.92rem;
+  color: #f3e7ce;
+  opacity: 0.78;
+  font-weight: 500;
+  margin-bottom: 13px;
+}
+
+.blog-preview-card .card-desc {
+  font-size: 1.02rem;
+  color: #fff;
+  opacity: 0.88;
+  font-weight: 500;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.blog-preview-card.highlight {
+  background: #151932;
+  border-color: #ff9900;
+  box-shadow: 0 3px 18px #ff99004a;
+}
+
+.blog-preview-card:hover,
+.blog-preview-card:focus {
+  border-color: #ffaa55;
+  background: #25254a;
+  transform: translateY(-2px);
+}
+
+.blog-preview-card:active {
+  border-color: #ba6b00;
+}
+
+.blog-preview-grid a {
+  outline: none;
+}
+
+.blog-preview-actions {
+  text-align: center;
+  margin-top: 26px;
+}
+
+.blog-btn-viewall {
+  background: #ff9900;
+  color: #191b18;
+  padding: 12px 36px;
+  font-weight: 900;
+  border-radius: 19px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  box-shadow: 0 3px 17px rgba(255,153,0,0.12);
+  transition: background .12s, color .12s, transform .2s;
+  display: inline-block;
+}
+
+.blog-btn-viewall:hover, 
+.blog-btn-viewall:focus {
+  background: #ffaa2b;
+  color: #191700;
+  transform: scale(1.05);
+}
+
+/* Responsive - Tablets (2 columns) */
+@media (max-width: 1200px) {
+  .blog-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+  }
+}
+
+/* Responsive - Mobile (1 column) */
+@media (max-width: 768px) {
+  .blog-preview-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 15px;
+  }
+  
+  .blog-preview-heading {
+    font-size: 1.8rem;
+  }
+  
+  .blog-preview-subheading {
+    font-size: 1rem;
+  }
+  
+  .blog-preview-card {
+    min-height: auto;
+  }
+}
+
+/* ===  GASLESS HERO SECTION  === */
+.gasless-hero-section {
+  position: relative;
+  background-image: url('../images/Gasless1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 120vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: subtleRotate 20s ease-in-out infinite;
+}
+
+/* Very subtle rotation animation */
+@keyframes subtleRotate {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0.5deg);
+  }
+  75% {
+    transform: rotate(-0.5deg);
+  }
+}
+
+.gasless-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.gasless-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Small header - gray-white */
+.gasless-title-white {
+  font-size: 5.5rem;
+  font-weight: 900;
+  color: rgba(235, 238, 246, 0.92);
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+
+/* Main title - orange, same size as provenance */
+.gasless-title-orange {
+  font-size: clamp(5.5rem, 4vw, 5.5rem);
+  font-weight: 900;
+  color: #ff9900;
+  margin-bottom: 24px;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+/* Description - matches provenance lead */
+.gasless-description {
+  font-size: 1.25rem;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+
+.gasless-learn-btn {
+  background: #ff9900;
+  color: #191b18;
+  padding: 14px 40px;
+  font-weight: 900;
+  border-radius: 19px;
+  font-size: 1.15rem;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  box-shadow: 0 3px 17px rgba(255,153,0,0.12);
+  transition: background .12s, color .12s, transform .2s;
+  display: inline-block;
+}
+
+.gasless-learn-btn:hover,
+.gasless-learn-btn:focus {
+  background: #ffaa2b;
+  color: #191700;
+  transform: scale(1.05);
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .gasless-hero-section {
+    min-height: 80vh;
+  }
+  
+  .gasless-title-white {
+    font-size: 1rem;
+  }
+  
+  .gasless-title-orange {
+    font-size: 2rem;
+  }
+  
+  .gasless-description {
+    font-size: 1.1rem;
+  }
 }

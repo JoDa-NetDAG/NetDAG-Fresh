@@ -7,6 +7,7 @@
   <meta name="description" content="Partner with NetDAG to bring trust, stability, and real-world utility to your users.  Technology, exchanges, brands, NGOs—build with us." />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/contact-modal.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare. com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <script src="../js/main.js" defer></script>
 
@@ -480,8 +481,69 @@
         <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
       </div>
 
+      <div class="footer-bottom-blue">
+        <p class="footer-bottom-text">
+          <a href="#" data-contact-open class="footer-contact-link">📧 Contact</a> |
+          Copyright: NetDAG 2026 | Built with care
+        </p>
+      </div>
+
   </footer>
 
+  <!-- BEGIN OF CONTACT MODAL -->
+  <div id="contactModal" class="ndg-modal" aria-hidden="true">
+    <div class="ndg-modal-backdrop" data-contact-close></div>
+    <div class="ndg-modal-content">
+      <button class="ndg-modal-close" data-contact-close aria-label="Close">×</button>
+
+      <div class="ndg-modal-header">
+        <h2>📧 Get in Touch</h2>
+        <p>Send us a message and we'll respond within 3 working days.</p>
+      </div>
+
+      <form id="contactForm" class="contact-form">
+        <!-- First Name -->
+        <div class="contact-form-group">
+          <label for="contactFirstName" class="contact-label">First Name *</label>
+          <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
+            placeholder="Enter your first name">
+        </div>
+
+        <!-- Last Name -->
+        <div class="contact-form-group">
+          <label for="contactLastName" class="contact-label">Last Name *</label>
+          <input type="text" id="contactLastName" name="lastName" class="contact-input" required
+            placeholder="Enter your last name">
+        </div>
+
+        <!-- Email -->
+        <div class="contact-form-group">
+          <label for="contactEmail" class="contact-label">Email *</label>
+          <input type="email" id="contactEmail" name="email" class="contact-input" required
+            placeholder="your.email@example.com">
+        </div>
+
+        <!-- Message -->
+        <div class="contact-form-group">
+          <label for="contactMessage" class="contact-label">Message *</label>
+          <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
+            placeholder="How can we help you?"></textarea>
+        </div>
+
+        <!-- Status Message -->
+        <div id="contactStatus" class="contact-status"></div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="contact-submit-btn">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+<!-- END OF CONTACT MODAL -->
+ 
+<script src="../js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
 <script src="/js/ndg-buy-loader.js" defer></script>
 
