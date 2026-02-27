@@ -14,23 +14,23 @@ export default async function handler(req, res) {
   }
 
   let transporter = nodemailer.createTransport({
-  host: "smtp.zoho.eu",      // uses your env var
-  port: "465",   // uses your env var
-  secure: "true", // true for SSL (465), false for TLS (587)
-  auth: {
-    user: info@netdag.com,
-    pass: "U9Un7Y8xiDrB",
-  },
-});
+    host: "smtp zoho.eu", // e.g. 'smtp.zoho.eu'
+    port: 465, // 465 or 587
+    secure: true, // true for 465, false for 587
+    auth: {
+      user: process.env.ZOHO_SMTP_USER,    // your Zoho email
+      pass: process.env.ZOHO_SMTP_PASS,    // your Zoho app password
+    },
+  });
 
   try {
     await transporter.sendMail({
       from: '"Website Contact" <info@netdag.com>', // sender address
-      to: "info@netdag.com",                       // receiver (your Zoho inbox)
+      to: "info@netdag.com", // receiver (your Zoho inbox)
       subject: "New Contact Form Submission",
       text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nMessage:\n${message}`,
       replyTo: email,
-    });true
+    });
     res.status(200).json({ success: true, message: "Email sent!" });
   } catch (error) {
     res.status(500).json({ success: false, message: "Mail failed", error: error.message });
