@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NetDAG — FAQ</title>
-  <meta name="description" content="Frequently asked questions about NetDAG:   bonding curve, Guardian AI, Provenance dApp, dVPN, tokenomics, presale, security and more." />
+  <meta name="description" content="Frequently asked questions about NetDAG: bonding curve, Guardian AI, Provenance dApp, dVPN, tokenomics, presale, security and more." />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/contact-modal.css">
@@ -12,40 +12,153 @@
   <script src="../js/main.js" defer></script>
 
   <style>
-    /* FAQ page-specific styles */
+    /* =========================================================
+       FAQ — Modern rebuild (page-scoped)
+       - Adds: hero image tag + overlay (you can swap the image)
+       - Fixes: broken h2 tag in your markup
+       - Adds: more relevant FAQs (gas-free, staking, wallets, taxes, scams)
+       - Beautify: glowing cards, icons, accordion-style details
+       ========================================================= */
+
+    body.faq-page{
+      background: var(--bg, #050714);
+      color: var(--muted, #e0e0e0);
+    }
+
+    /* Hero */
+    .hero-faq{
+      position: relative;
+      min-height: 50vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #070914;
+    }
+
+    /* HERO IMAGE TAG (you can replace src any time) */
+    .hero-faq .hero-media{
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-faq .hero-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.02);
+    }
+
+    .hero-faq::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 16% 20%, rgba(255,153,0,.22), transparent 55%),
+        radial-gradient(circle at 82% 30%, rgba(120,160,255,.18), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.78));
+      pointer-events:none;
+    }
+
+    .hero-faq .hero-overlay{
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 118px 16px 68px;
+      text-align: center;
+    }
+
+    .hero-faq .hero-title{
+      color: #ff9900;
+      font-size: clamp(2.2rem, 5.2vw, 4rem);
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 16px 44px rgba(0,0,0,.55);
+      font-weight: 900;
+    }
+
+    .hero-faq .hero-subtitle{
+      max-width: 820px;
+      color: rgba(255,255,255,.92);
+      font-size: 1.05rem;
+      margin: 0 auto;
+      line-height: 1.85;
+      text-shadow: 0 12px 36px rgba(0,0,0,.55);
+    }
+
+    .hero-chip-row{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      font-size: .92rem;
+      white-space: nowrap;
+    }
+    .hero-chip i{ color: var(--accent, #ff9900); }
+
+    /* Body */
+    .curve-section{ padding-top: 24px; }
     .faq-wrap{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 0 60px;
+      padding: 34px 16px 66px;
       display: flex;
       flex-direction: column;
       gap: 26px;
     }
 
-    .faq-header{
-      margin-bottom: 8px;
+    .faq-header{ margin-bottom: 2px; }
+    .faq-kicker{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      color: rgba(255,255,255,.85);
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .82rem;
+      margin-bottom: 10px;
     }
-    
+    .faq-kicker i{ color: var(--accent, #ff9900); }
+
     .faq-title{
-      font-size: 2.3rem;
-      font-weight: 650;
-      margin:  0 0 8px;
+      font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+      font-weight: 900;
+      margin: 0 0 10px;
       color: #fff;
+      letter-spacing: -0.01em;
     }
-    
     .faq-sub{
-      margin:  0 0 14px;
-      color: var(--muted);
-      max-width: 760px;
+      margin: 0;
+      color: rgba(233,238,247,.78);
+      max-width: 900px;
       font-size: 0.98rem;
+      line-height: 1.8;
     }
 
     .faq-grid{
       display: grid;
       gap: 14px;
     }
-    
-    @media(min-width: 900px){
+    @media (min-width: 950px){
       .faq-grid{
         grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr);
         align-items: flex-start;
@@ -53,80 +166,103 @@
     }
 
     .faq-card{
-      background:  #0f1120;
-      border:  1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px 22px 24px;
-      box-shadow:  0 2px 12px rgba(0,0,0,.2);
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px 18px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.50);
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-card::before{
+      content:"";
+      position:absolute;
+      inset:-60px -60px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255,153,0,.16), rgba(255,153,0,0) 65%);
+      opacity: .6;
+      pointer-events:none;
     }
 
     .faq-card h2{
-      margin:  0 0 10px;
-      font-size: 1.35rem;
+      margin: 0 0 12px;
+      font-size: 1.18rem;
       color: #fff;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      letter-spacing: -0.01em;
     }
+    .faq-card h2 i{ color: var(--accent, #ff9900); }
 
+    /* Q/A accordion */
     .faq-list{
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 12px;
     }
 
-    .faq-item-title{
-      font-weight: 600;
-      font-size: 0.98rem;
-      margin: 0 0 4px;
-      color: #fff;
+    details.faq-item{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 12px 12px;
     }
-    
-    .faq-item-body{
-      margin: 0 0 14px;
-      font-size: 0.92rem;
-      color: var(--text);
-      line-height: 1.6;
+    details.faq-item[open]{
+      background: rgba(255,153,0,.06);
+      border-color: rgba(255,153,0,.18);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
     }
+
+    details.faq-item summary{
+      cursor: pointer;
+      list-style: none;
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      color: rgba(255,255,255,.92);
+      font-weight: 800;
+      font-size: .98rem;
+    }
+
+    details.faq-item summary::-webkit-details-marker{ display:none; }
+
+    .faq-q-ico{
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(127,176,255,.10);
+      border: 1px solid rgba(127,176,255,.22);
+      color: rgba(160,190,255,.95);
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+
+    .faq-a{
+      margin: 10px 0 0;
+      color: rgba(233,238,247,.80);
+      line-height: 1.75;
+      font-size: .94rem;
+    }
+    .faq-a strong{ color: rgba(255,255,255,.92); }
 
     .faq-bullets{
-      margin: 6px 0 0;
+      margin: 10px 0 0;
       padding-left: 18px;
-      font-size: 0.92rem;
-      color: var(--text);
+      color: rgba(233,238,247,.80);
+      font-size: .94rem;
+      line-height: 1.7;
     }
-    
-    .faq-bullets li+li{
-      margin-top: 18px;
-    }
+    .faq-bullets li+li{ margin-top: 10px; }
 
-    /* Hero for FAQ page */
-    .hero-faq{
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      min-height: 100vh;
-      background-image: url('../images/faq. png');
-    }
-    
-    .hero-faq .hero-overlay{
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding-top: 0;
-    }
-    
-    .hero-faq .hero-title{
-      color: #ff9900;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom: 20px;
-    }
-    
-    .hero-faq .hero-subtitle{
-      max-width: 720px;
-      color: #f3f3f3;
-      font-size: 1.1rem;
-    }
-
-    .curve-section{
-      padding-top: 24px;
+    /* Minor spacing */
+    @media (max-width: 700px){
+      .hero-faq .hero-overlay{ padding: 110px 16px 54px; }
+      .faq-wrap{ padding: 30px 16px 60px; }
     }
   </style>
 </head>
@@ -162,7 +298,7 @@
           <li><a href="../provenance.html">Provenance dApp</a></li>
           <li><a href="../bonding-curve.html">Bonding Curve</a></li>
           <li><a href="../guardian.html">Guardian</a></li>
-           <li><a href="../no-gas.html">Easy Access</a></li>
+          <li><a href="../no-gas.html">Easy Access</a></li>
           <li><a href="whitepaper.html">Whitepaper</a></li>
         </ul>
 
@@ -187,10 +323,10 @@
 
       <ul class="menu-list">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../bonding-curve.html">Bonding Curve</a></li>
         <li><a href="../guardian.html">Guardian</a></li>
-        <li><a href="../provenance.html">Provenance</a></li>
-         <li><a href="../no-gas.html">Easy Access</a></li>
+        <li><a href="../no-gas.html">Easy Access</a></li>
         <li><a href="whitepaper.html">Whitepaper</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="vision.html">Vision</a></li>
@@ -204,20 +340,34 @@
       </ul>
 
       <div class="mobile-ctas">
-        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
-      </div>
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
     </div>
   </div>
 
   <!-- HERO -->
   <main class="hero-banner hero-faq" id="main-content" role="main">
+    <!-- HERO IMAGE TAG (swap this src to any image you want) -->
+    <div class="hero-media" aria-hidden="true">
+      <img src="../images/faq.png" alt="">
+    </div>
+
     <div class="hero-overlay">
       <h1 class="hero-title">Frequently Asked Questions</h1>
       <p class="hero-subtitle">
-        Learn how the NetDAG ecosystem works – from bonding-curve stability and Guardian AI,
-        to Provenance dApp, dVPN, tokenomics and the NDG presale.
+        Practical answers about NetDAG — bonding-curve stability, Guardian AI, Provenance, dVPN privacy,
+        gas-free Easy Access, tokenomics, presale and safety.
       </p>
+
+      <div class="hero-chip-row" aria-label="Topics covered">
+        <span class="hero-chip"><i class="fa-solid fa-coins" aria-hidden="true"></i> Bonding Curve</span>
+        <span class="hero-chip"><i class="fa-solid fa-brain" aria-hidden="true"></i> Guardian AI</span>
+        <span class="hero-chip"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> Provenance</span>
+        <span class="hero-chip"><i class="fa-solid fa-lock" aria-hidden="true"></i> dVPN Privacy</span>
+        <span class="hero-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Gas‑free UX</span>
+      </div>
     </div>
   </main>
 
@@ -226,156 +376,216 @@
     <div class="faq-wrap">
 
       <header class="faq-header">
-        <h2> style="margin-bottom: 16px; color: var(--accent);">Key questions at a glance</h2>
+        <div class="faq-kicker"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> FAQ</div>
+        <h2 class="faq-title">Key questions at a glance</h2>
         <p class="faq-sub">
-          These answers are intentionally short and practical.  For more depth,
-          check the whitepaper and the dedicated pages for Bonding Curve, Guardian,
-          Provenance and dVPN.
+          These answers are intentionally short and practical. For more depth, read the Whitepaper and visit the dedicated pages for
+          Bonding Curve, Guardian, Provenance, and Easy Access.
         </p>
       </header>
 
       <div class="faq-grid">
         <!-- Left column -->
         <article class="faq-card">
-          <h2>Core mechanics &amp; buying NDG</h2>
+          <h2><i class="fa-solid fa-wallet" aria-hidden="true"></i> Core mechanics, presale &amp; NDG</h2>
 
           <div class="faq-list">
-            <div>
-              <p class="faq-item-title">What is the NetDAG Bonding Curve?</p>
-              <p class="faq-item-body">
-                It is a mathematical pricing curve where NDG price is linked to
-                circulating supply.  Buys move the price smoothly up the curve and
-                burns move it back down, helping keep liquidity predictable instead
-                of spiky.
-              </p>
-            </div>
 
-            <div>
-              <p class="faq-item-title">What happens after I buy NDG?</p>
-              <p class="faq-item-body">
-                After your payment is confirmed, the smart contract sends NDG
-                directly to the wallet address you used for the purchase.  You see
-                a transaction confirmation and the tokens are immediately secured
-                on the blockchain.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></span>
+                What is the NetDAG bonding curve?
+              </summary>
+              <div class="faq-a">
+                It’s a mathematical pricing mechanism where NDG price relates to circulating supply. Buys move price smoothly up the curve, and sells/burns move it down—designed to keep liquidity more predictable than thin order books.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">How do I receive the NDG I paid for?</p>
-              <p class="faq-item-body">
-                You connect your wallet before buying.  Once the transaction is
-                mined, the contract delivers your NDG to that same wallet
-                automatically — no manual claim, no waiting and no intermediaries.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></span>
+                What happens after I buy NDG?
+              </summary>
+              <div class="faq-a">
+                After your transaction is confirmed, NDG is delivered to the wallet address used in the purchase. You can verify delivery on-chain via the transaction hash.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">When is the presale and how does it work?</p>
-              <p class="faq-item-body">
-                The presale is planned for early February 2026. The exact date will be announced soon.
-                During the presale, a limited supply of NDG will be sold along the 
-                NetDAG Bonding Curve — meaning early participants enter at lower prices while 
-                a portion of every purchase automatically strengthens long-term backing and liquidity.
-              </p>
-            </div>
-            
-            <div>
-              <p class="faq-item-title">How does NDG burning work?</p>
-              <p class="faq-item-body">
-                NDG burns come from three sources: voluntary user burns, 
-                10% protocol revenue buy-back & burn, and quarterly treasury burns.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-address-card"></i></span>
+                How do I receive the NDG I paid for?
+              </summary>
+              <div class="faq-a">
+                You connect a wallet before buying. Once the transaction is mined, the contract transfers NDG to that same wallet automatically—no manual claim process.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">How much NDG is burned? </p>
-              <p class="faq-item-body">
-                NetDAG burns 10% of ecosystem revenue and up to 1% of 
-                treasury-held NDG every quarter.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span>
+                When is the presale and how does it work?
+              </summary>
+              <div class="faq-a">
+                The presale is planned for early 2026 (see the ticker for current messaging). NDG is sold along the bonding curve: early participants enter at lower prices, and purchases contribute to long-term backing and liquidity.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">Why does NetDAG burn tokens?</p>
-              <p class="faq-item-body">
-                To increase scarcity over time, align NDG value with real platform usage, 
-                and support a sustainable deflation curve. 
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-fire"></i></span>
+                How do burns work and why burn NDG?
+              </summary>
+              <div class="faq-a">
+                Burns are intended to reduce supply over time and align NDG value with real platform usage.
+                <ul class="faq-bullets">
+                  <li><strong>Protocol buy-back &amp; burn:</strong> a share of ecosystem revenue can be used to buy NDG and burn it (when enabled by policy).</li>
+                  <li><strong>Treasury burns:</strong> periodic burns may occur depending on governance decisions and treasury health.</li>
+                  <li><strong>Voluntary burns:</strong> users may burn NDG in certain flows (if supported).</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-piggy-bank"></i></span>
+                Is staking available, and what does staking do?
+              </summary>
+              <div class="faq-a">
+                Staking is designed to reward long-term participation and can support network health (depending on implementation).
+                If/when staking is enabled, always use official links and verify contract addresses before depositing.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-scale-balanced"></i></span>
+                Is NetDAG a stablecoin?
+              </summary>
+              <div class="faq-a">
+                No. NetDAG is building a <strong>stability-first</strong> ecosystem, but NDG is still a crypto asset and can fluctuate. The goal is to reduce fragility and panic dynamics—not to promise a fixed price.
+              </div>
+            </details>
+
           </div>
         </article>
 
         <!-- Right column -->
         <article class="faq-card">
-          <h2>Guardian, dVPN, Provenance &amp; safety</h2>
-          
+          <h2><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Guardian, Easy Access, dVPN, Provenance &amp; safety</h2>
+
           <div class="faq-list">
-            <div>
-              <p class="faq-item-title">What is the NetDAG Guardian (AI layer)?</p>
-              <p class="faq-item-body">
-                Guardian is an AI-assisted risk layer that watches on-chain data
-                and market conditions. It can trigger or suggest predefined safety
-                rules to protect liquidity and protocol health instead of relying
-                only on human reactions.
-              </p>
-            </div>
 
-            <div>
-              <p class="faq-item-title">How does the decentralised VPN (dVPN) work?</p>
-              <p class="faq-item-body">
-                The dVPN turns community bandwidth into a privacy network.  Nodes
-                relay encrypted traffic and earn rewards, while users route their
-                data without trusting a single central provider.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
+                What is Guardian AI (and what is it not)?
+              </summary>
+              <div class="faq-a">
+                Guardian is an AI-assisted risk intelligence layer. It focuses on detecting unhealthy patterns (concentration, liquidity drains, exploit signals).
+                It is <strong>not</strong> “a promise of profit” and not a magic price-control tool.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">What is the NetDAG Provenance dApp? </p>
-              <p class="faq-item-body">
-                It lets brands and creators bind products to verifiable on-chain
-                IDs using barcodes, QR or NFC tags. Scanning the code shows origin,
-                authenticity and ownership history.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-bolt"></i></span>
+                What does “gas‑free” mean in Easy Access?
+              </summary>
+              <div class="faq-a">
+                “Gas‑free” means the user experience can show <strong>$0 gas</strong> when transactions are sponsored (for example by an app paymaster).
+                Under the hood, transactions still happen on-chain—fees are simply handled in the background.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">How does NetDAG approach security?</p>
-              <p class="faq-item-body">
-                Contracts are designed around battle-tested DeFi patterns:  audits,
-                multi-sig treasuries and clear separation between user funds and
-                protocol fees. The Guardian layer also monitors for unusual
-                behaviour and can activate safeguards.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-key"></i></span>
+                Do I need a wallet or seed phrase to use NetDAG?
+              </summary>
+              <div class="faq-a">
+                Not always. Easy Access is designed so users can onboard with familiar sign-in methods.
+                Advanced users can still use standard wallets. Recovery options depend on the onboarding method you choose.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">Is NetDAG compliant with regulations?</p>
-              <p class="faq-item-body">
-                NetDAG focuses on infrastructure and utility, not guaranteed
-                returns.  The team works with legal advisors and aims to follow
-                evolving guidance on token classification, AML/KYC for on- and
-                off-ramps, and consumer protection.  Details still depend on each
-                user's country. 
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
+                How does the decentralised VPN (dVPN) work?
+              </summary>
+              <div class="faq-a">
+                The dVPN turns community bandwidth into a privacy network. Nodes relay encrypted traffic and can earn rewards, while users route data without trusting a single central provider.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">How does the charity or social-impact model work?</p>
-              <p class="faq-item-body">
-                A transparent share of protocol revenue is planned for a dedicated
-                charity wallet. The community can help choose causes and all
-                distributions are traceable on-chain.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-fingerprint"></i></span>
+                What is the Provenance dApp?
+              </summary>
+              <div class="faq-a">
+                Provenance lets brands and creators bind products to verifiable on-chain IDs via QR/NFC. Scanning shows authenticity signals, origin, and (optionally) ownership or certification history.
+              </div>
+            </details>
 
-            <div>
-              <p class="faq-item-title">How can I get involved or get help?</p>
-              <p class="faq-item-body">
-                You can join as a community member, builder, node operator or
-                partner. Use the official links on the site, read the whitepaper
-                and roadmap, and contact us if you have questions.
-              </p>
-            </div>
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-user-shield"></i></span>
+                How does NetDAG approach security?
+              </summary>
+              <div class="faq-a">
+                NetDAG aims to use standard security practices: audits where appropriate, multi-sig custody for treasuries, careful permission boundaries, and continuous monitoring.
+                Always verify domains, links, and contract addresses from official sources.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                How do I avoid scams and fake NDG links?
+              </summary>
+              <div class="faq-a">
+                <ul class="faq-bullets">
+                  <li>Only use links from <strong>your official site</strong> and verified socials.</li>
+                  <li>Never share seed phrases or private keys—no admin will ask.</li>
+                  <li>Double-check token contract addresses and transaction prompts.</li>
+                  <li>If something feels rushed (“limited time, send now”), treat it as suspicious.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-gavel"></i></span>
+                Is NetDAG compliant with regulations?
+              </summary>
+              <div class="faq-a">
+                NetDAG focuses on infrastructure and utility, not guaranteed returns. Requirements vary by country.
+                For any on/off-ramps or partner services, compliance (including AML/KYC) may apply depending on jurisdiction.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-hand-holding-heart"></i></span>
+                How does the charity / social-impact model work?
+              </summary>
+              <div class="faq-a">
+                A transparent share of protocol revenue may be allocated to a dedicated charity wallet. The community can help choose causes, and distributions can be tracked on-chain.
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>
+                <span class="faq-q-ico" aria-hidden="true"><i class="fa-solid fa-envelope"></i></span>
+                How can I get involved or get help?
+              </summary>
+              <div class="faq-a">
+                Join as a community member, builder, node operator, or partner. Use the official links on the site, read the Whitepaper/Roadmap, and use the Contact form for questions.
+              </div>
+            </details>
+
           </div>
         </article>
       </div>
@@ -395,7 +605,7 @@
       <div class="footer-banner-inner">
         <div class="banner-tagline">
           <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
-          NetDAG is not another short-term token.  We build next-gen infrastructure
+          NetDAG is not another short-term token. We build next-gen infrastructure
           for the real world — with math-backed stability and long-term commitment.
           Join the ecosystem and let your wealth grow with real utility.
         </div>
@@ -405,14 +615,14 @@
 
     <div class="footer-main">
       <div class="footer-columns">
-        
+
         <div class="footer-col footer-brand-col">
           <div class="footer-brand-logo">
             <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
             <span class="footer-brand-name">NetDAG</span>
           </div>
           <p class="footer-brand-tagline">
-            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+            <em>A stability-first crypto economy: DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy.</em>
           </p>
         </div>
 
@@ -481,50 +691,43 @@
       </div>
 
       <form id="contactForm" class="contact-form">
-        <!-- First Name -->
         <div class="contact-form-group">
           <label for="contactFirstName" class="contact-label">First Name *</label>
           <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
             placeholder="Enter your first name">
         </div>
 
-        <!-- Last Name -->
         <div class="contact-form-group">
           <label for="contactLastName" class="contact-label">Last Name *</label>
           <input type="text" id="contactLastName" name="lastName" class="contact-input" required
             placeholder="Enter your last name">
         </div>
 
-        <!-- Email -->
         <div class="contact-form-group">
           <label for="contactEmail" class="contact-label">Email *</label>
           <input type="email" id="contactEmail" name="email" class="contact-input" required
             placeholder="your.email@example.com">
         </div>
 
-        <!-- Message -->
         <div class="contact-form-group">
           <label for="contactMessage" class="contact-label">Message *</label>
           <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
             placeholder="How can we help you?"></textarea>
         </div>
 
-        <!-- Status Message -->
         <div id="contactStatus" class="contact-status"></div>
 
-        <!-- Submit Button -->
         <button type="submit" class="contact-submit-btn">
           Send Message
         </button>
       </form>
     </div>
   </div>
+  <!-- END OF CONTACT MODAL -->
 
-<!-- END OF CONTACT MODAL -->
-
- <script src="../js/contact-modal.js" defer></script>
+  <script src="../js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
-<script src="/js/ndg-buy-loader.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
 
 </body>
 </html>

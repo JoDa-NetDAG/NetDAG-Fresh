@@ -28,6 +28,174 @@
 
   <!-- Main JS -->
   <script src="js/main.js" defer></script>
+
+<style>
+/* MOBILE NAVBAR FIX - Inline for index.html */
+@media (max-width: 900px) {
+  /* Hide desktop nav links */
+  .nav-links {
+    display: none !important;
+  }
+  
+  /* Force header to be horizontal */
+  .site-header .header-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 20px !important;
+    flex-wrap: nowrap !important;
+  }
+  
+  /* Brand section */
+  .site-header .brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .site-header .brand-logo {
+    height: 45px !important;
+    width: auto !important;
+  }
+  
+  .site-header .brand-text {
+    font-size: 2.5rem !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Nav right section */
+  .site-header .nav-right {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Hamburger menu button */
+  .site-header .menu-toggle {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    padding: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+  }
+  
+  /* Hamburger lines */
+  .site-header .menu-toggle .burger-line {
+    display: block !important;
+    width: 28px !important;
+    height: 3px !important;
+    background: #ff9900 !important;
+    border-radius: 2px !important;
+  }
+  
+  /* Hide CTA buttons on mobile */
+  .site-header .header-ctas {
+    display: none !important;
+  }
+
+  /* ========================================
+     HERO & PREVIEW SECTIONS - 2.5rem STANDARD
+     ======================================== */
+
+  /* Main Hero - Rotating headlines */
+  .rotating-headlines .headline {
+    font-size: 2.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Hero subtitle */
+  .hero-subtitle {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Gasless Crypto Section */
+  .gasless-title-white,
+  .gasless-title-orange {
+    font-size: 2.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .gasless-description {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Provenance Section */
+  .provenance-title {
+    font-size: 2.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .provenance-subtitle {
+    font-size: 1.8rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .provenance-description {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Bonding Curve Section */
+  .bonding-curve-title {
+    font-size: 2.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .bonding-curve-title-accent {
+    font-size: 1.8rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .bonding-curve-description {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Guardian Preview Section */
+  .guardian-title {
+    font-size: 2.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .guardian-title .accent-orange {
+    font-size: 1.8rem !important;
+  }
+
+  /* Tokenomics Preview Section */
+  .tokenomics-title {
+    font-size: 2.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .tokenomics-title .accent-orange {
+    font-size: 1.8rem !important;
+  }
+
+  .tokenomics-lead,
+  .tokenomics-description {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Blog Preview Heading */
+  .blog-preview-heading {
+    font-size: 2.5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .blog-preview-subheading {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+}
+</style>
+
 </head>
 
 <body class="home-page" id="top">
@@ -67,21 +235,22 @@
         </ul>
 
         <!-- Hamburger menu button -->
-        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu"
-          aria-label="Open menu">
-          <span class="burger-line" aria-hidden="true"></span>
-          <span class="burger-line" aria-hidden="true"></span>
-          <span class="burger-line" aria-hidden="true"></span>
-        </button>
-      </div>
+              <!-- Hamburger menu button -->
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu"
+        aria-label="Open menu">
+        <span class="burger-line" aria-hidden="true"></span>
+        <span class="burger-line" aria-hidden="true"></span>
+        <span class="burger-line" aria-hidden="true"></span>
+      </button>
+
       <!-- CTAs -->
       <div class="header-ctas">
         <a href="purchase-ndg.html" class="btn">Join Presale</a>
         <a href="stake-ndg.html" class="btn btn-ghost">Stake NDG</a>
       </div>
-
     </div>
-  </header>
+  </div>
+</header>
 
   <!-- MENU PANEL (mobile drawer) -->
   <div id="site-menu" class="site-menu" hidden aria-hidden="true">
@@ -90,9 +259,9 @@
 
       <ul class="menu-list">
         <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance</a></li>
         <li><a href="bonding-curve.html">Bonding Curve</a></li>
         <li><a href="guardian.html">Guardian</a></li>
-        <li><a href="provenance.html">Provenance</a></li>
         <li><a href="no-gas.html">Easy Access</a></li>
         <li><a href="menu/whitepaper.html">Whitepaper</a></li>
         <li><a href="menu/blog.html">Blog</a></li>
@@ -105,6 +274,11 @@
         <li><a href="menu/partners.html">Partners</a></li>
         <li><a href="menu/legal.html">Legal</a></li>
       </ul>
+      <div class="mobile-ctas">
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
     </div>
   </div>
 
@@ -114,12 +288,12 @@
 
     <!-- HERO -->
     <section class="section section-hero">
-      <img src="../images/ndg21.png" alt="" class="hero-bg-image">
+      <img src="../images/ndg21b.png" alt="" class="hero-bg-image">
       <div class="hero-content">
         </h1>
 
         <div class="rotating-headlines">
-          <h1 class="headline">End Counterfeits Forever with NetDAG scan App</h1>
+          <h1 class="headline">End Counterfeits Forever with NetDAG scan dApp</h1>
           <h1 class="headline">No Wallet. No Gas Fees. No Seed Phrases. Just Crypto</h1>
           <h1 class="headline">Built-In Price Protection with 22% Reserve Fund</h1>
           <h1 class="headline">AI Security agent + DAG lightning speed Transactions</h1>
@@ -157,7 +331,10 @@
           </div>
 
           <!-- Early bird message -->
-          <p class="presale-early-message"> Early participants secure the lowest Bonding Curve entry rates.
+          <p class="presale-early-message">
+  Early participants secure the lowest Bonding Curve entry rates.
+</p>
+<p class="presale-tagline">Empowering a Decentralized Future - NetDAG</p>
             <!-- Action buttons -->
         </div>
       </div>
@@ -222,7 +399,7 @@
           <p class="early-curve-subtitle">
             Early participants secure the lowest Bonding Curve entry rates.<br>
           </p>
-          <a href="#" class="btn-curve-buy" data-ndg-open>Connect wallet to Buy</a>
+          <a href="purchase-ndg.html" class="btn-curve-buy">Connect wallet to Buy</a>
           <div class="presale-info-announcement">
             Presale begins on 28 February 2026.
           </div>
@@ -340,8 +517,7 @@
     <!-- GUARDIAN PREVIEW SECTION -->
     <section class="section guardian-preview" id="guardian-preview">
       <div class="guardian-bg-image">
-        <img src="images/ndg-neuron.png" alt="NetDAG Neuron Guardian illustration" class="guardian-fullscreen-bg" />
-        <div class="guardian-heartbeat-splash" aria-hidden="true"></div>
+        <img src="images/ndg-neuron-c.png" alt="NetDAG Neuron Guardian illustration" class="guardian-fullscreen-bg" />
       </div>
       <div class="section-overlay"></div>
       <!-- Centered Content -->
@@ -660,10 +836,13 @@
       </div>
     </section>
 
-    <!-- Other sections unchanged... -->
-    <div class="section-separator" aria-hidden="true"></div>
+</main>
 
-  </main>
+<!-- Footer shell wrapper (container) -->
+<div class="footer-shell">
+
+  <!-- Separator directly before footer -->
+  <div class="site-separator" id="footer-separator" aria-hidden="true"></div>
 
   <!-- FOOTER - Blue gradient design -->
   <footer class="site-footer-gray" role="contentinfo">
@@ -765,6 +944,8 @@
 
     </div>
   </footer>
+
+</div>
 
   <script src="https://unpkg.com/@walletconnect/web3modal@2.7.1/dist/index.umd.js"></script>
 

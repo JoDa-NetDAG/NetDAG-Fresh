@@ -10,9 +10,636 @@
   <link rel="stylesheet" href="css/contact-modal.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <script src="js/main.js" defer></script>
+
+  <style>
+    /* =========================================================
+       NO-GAS PAGE — INLINE (clean + predictable)
+       - Positions hero background (Gasless2.png) and hero text
+       - Fixes navbar alignment for this page only
+       - Ensures the separator under the hero is visible and not “banded”
+       - Sizes the hero heading on mobile
+       ========================================================= */
+
+    /* ---------- NAVBAR COORDINATION (no-gas page only) ---------- */
+    body.nogas-page .nav-right{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: nowrap;
+    }
+
+    body.nogas-page .nav-links{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: nowrap;
+    }
+
+    body.nogas-page .nav-links a{
+      font-size: 0.92rem;
+      padding: 8px 8px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1180px){
+      body.nogas-page .nav-links{
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        -webkit-scrollbar-width: none;
+        scrollbar-width: none;
+      }
+      body.nogas-page .nav-links::-webkit-scrollbar{ 
+        display: none; 
+      }
+    }
+
+    /* ---------- HERO (No-Gas) ---------- */
+    .nogas-hero{
+      position: relative;
+      min-height: 110vh;
+      overflow: hidden;
+      display: grid;
+      align-items: center;
+      isolation: isolate; /* keep background layering contained */
+    }
+
+    .nogas-hero-bg{
+      position: absolute;
+      inset: 0;
+      background-image: url("images/Gasless2.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center top;
+      z-index: 0;
+
+      /* “Jack up” the image */
+      transform: translateY(-10%);
+      bottom: -1px; /* avoids a thin seam at the bottom */
+      pointer-events: none;
+    }
+
+    /* keep content above background */
+    .nogas-hero .section-inner{
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Center and move the text block */
+    .nogas-hero .nogas-hero-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 90px 16px;
+      transform: translateY(-90px); /* more negative = higher */
+    }
+
+    .nogas-hero .nogas-eyebrow{
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .nogas-hero .nogas-title{
+      color: #fff;
+      text-align: center;
+      margin: 0;
+    }
+
+    .nogas-hero .nogas-title-highlight{
+      color: #ff9900;
+    }
+
+    /* Mobile tuning */
+    @media (max-width: 900px){
+      .nogas-hero .nogas-hero-inner{
+        padding: 72px 14px;
+        transform: translateY(-90px); /* tweak: -70, -90, -110 */
+      }
+
+      .nogas-hero-bg{ transform: translateY(-2%); }
+
+      /* Mobile hero heading sizing */
+      .nogas-hero .nogas-title{
+        font-size: clamp(1.85rem, 6.6vw, 2.55rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+    }
+
+    @media (max-width: 420px){
+      .nogas-hero .nogas-title{
+        font-size: 1.75rem;
+        line-height: 1.06;
+      }
+    }
+
+    /* ---------- SEPARATOR FIX (right after hero) ---------- */
+    /* Do NOT restyle the global separator gradient; just prevent overlap/banding */
+    .nogas-hero + .site-separator{
+      position: relative;
+      z-index: 10;      /* paint above hero edge */
+      padding-top: 1px; /* prevents margin collapse through the separator */
+    }
+
+    .nogas-hero + .site-separator + *{
+      margin-top: 0;
+    }
+
+/* =========================================================
+   NO-GAS — MODERN GLOW PACK (for the two sections you sent)
+   Apply by pasting into no-gas.html (preferably at the END of
+   your inline <style> so it wins).
+   Scope: only affects .nogas-why and .nogas-how sections.
+   ========================================================= */
+
+:root{
+  --ng-bg: #0b0d12;
+  --ng-card: rgba(255,255,255,.04);
+  --ng-border: rgba(255,255,255,.08);
+  --ng-text: rgba(233,238,247,.88);
+  --ng-text-dim: rgba(233,238,247,.72);
+  --ng-orange: #ff9900;
+  --ng-blue: #7fb0ff;
+}
+
+/* ---------- SECTION BACKDROP GLOWS ---------- */
+.nogas-why,
+.nogas-how{
+  position: relative;
+  isolation: isolate;
+}
+
+.nogas-why::before,
+.nogas-how::before{
+  content:"";
+  position:absolute;
+  inset: -120px -40px;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,153,0,.18) 0%, rgba(255,153,0,0) 55%),
+    radial-gradient(circle at 82% 30%, rgba(127,176,255,.16) 0%, rgba(127,176,255,0) 60%),
+    radial-gradient(circle at 55% 85%, rgba(255,153,0,.10) 0%, rgba(255,153,0,0) 55%);
+  filter: blur(10px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Keep section content above glows */
+.nogas-why .section-inner,
+.nogas-how .section-inner{
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- TITLES ---------- */
+.nogas-section-title,
+.nogas-how-title{
+  color: var(--ng-orange);
+  text-shadow: 0 0 22px rgba(255,153,0,.18);
+  letter-spacing: .2px;
+}
+
+.nogas-how-subtitle{
+  color: var(--ng-text-dim);
+  max-width: 70ch;
+  margin: 10px auto 0;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   WHY GASLESS MATTERS — glow grid/cards
+   ========================================================= */
+
+.nogas-glow-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .nogas-glow-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 640px){
+  .nogas-glow-grid{ grid-template-columns: 1fr; }
+}
+
+.nogas-glow-card{
+  position: relative;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 18px 18px 16px;
+
+  box-shadow:
+    0 18px 46px rgba(0,0,0,.52),
+    0 0 0 1px rgba(255,153,0,.08),
+    0 0 34px rgba(255,153,0,.10);
+
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+@media (hover:hover){
+  .nogas-glow-card:hover{
+    transform: translateY(-6px);
+    border-color: rgba(255,153,0,.22);
+    box-shadow:
+      0 24px 62px rgba(0,0,0,.60),
+      0 0 0 1px rgba(255,153,0,.18),
+      0 0 46px rgba(255,153,0,.16);
+  }
+}
+
+.nogas-glow-head{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.nogas-glow-icon{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,153,0,.10);
+  border: 1px solid rgba(255,153,0,.22);
+  box-shadow: 0 0 26px rgba(255,153,0,.18);
+  color: var(--ng-orange);
+}
+
+.nogas-glow-title{
+  margin: 0;
+  color: rgba(255,255,255,.95);
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.nogas-glow-lead{
+  margin: 0 0 10px;
+  color: rgba(255,255,255,.86);
+  font-weight: 600;
+}
+
+.nogas-glow-text{
+  margin: 0 0 10px;
+  color: var(--ng-text);
+  line-height: 1.65;
+}
+
+.nogas-chip-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.nogas-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: .9rem;
+  color: rgba(255,255,255,.86);
+
+  background: rgba(127,176,255,.08);
+  border: 1px solid rgba(127,176,255,.18);
+  box-shadow: 0 0 22px rgba(127,176,255,.10);
+}
+
+.nogas-benefits{
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--ng-text);
+}
+
+.nogas-benefits li{
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.nogas-benefits strong{
+  color: var(--ng-orange);
+  font-weight: 700;
+}
+
+/* =========================================================
+   HOW IT WORKS — steps cards + mini chips
+   ========================================================= */
+
+.nogas-how-grid{
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  margin-top: 18px;
+  align-items: start;
+}
+
+@media (max-width: 980px){
+  .nogas-how-grid{ grid-template-columns: 1fr; }
+}
+
+.nogas-steps{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.nogas-step-card{
+  position: relative;
+  border-radius: 18px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 18px 18px 16px;
+
+  box-shadow:
+    0 18px 46px rgba(0,0,0,.50),
+    0 0 0 1px rgba(255,255,255,.04);
+
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+@media (hover:hover){
+  .nogas-step-card:hover{
+    transform: translateY(-4px);
+    border-color: rgba(255,153,0,.18);
+    box-shadow:
+      0 24px 62px rgba(0,0,0,.58),
+      0 0 0 1px rgba(255,153,0,.12);
+  }
+}
+
+.nogas-step-badge{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  height: 32px;
+  min-width: 42px;
+  padding: 0 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,153,0,.12);
+  border: 1px solid rgba(255,153,0,.25);
+  color: var(--ng-orange);
+  font-weight: 800;
+}
+
+.nogas-step-icon{
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  background: rgba(127,176,255,.08);
+  border: 1px solid rgba(127,176,255,.18);
+  color: var(--ng-blue);
+  box-shadow: 0 0 26px rgba(127,176,255,.12);
+}
+
+.nogas-step-title{
+  margin: 0 0 8px;
+  color: rgba(255,255,255,.95);
+  font-weight: 800;
+}
+
+.nogas-step-text{
+  margin: 0 0 10px;
+  color: var(--ng-text);
+  line-height: 1.65;
+}
+
+.nogas-mini-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.nogas-mini{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: .9rem;
+  color: rgba(255,255,255,.82);
+
+  background: rgba(255,153,0,.07);
+  border: 1px solid rgba(255,153,0,.18);
+  box-shadow: 0 0 22px rgba(255,153,0,.10);
+}
+
+/* Visual side (keeps your SVG looking like a “card”) */
+.nogas-visual-figure{
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 18px 46px rgba(0,0,0,.52);
+}
+
+.nogas-flow-svg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.nogas-visual-caption{
+  padding: 12px 14px 14px;
+  color: var(--ng-text-dim);
+  line-height: 1.5;
+}
+
+.nogas-visual-callout{
+  margin-top: 14px;
+  border-radius: 18px;
+  background: rgba(255,153,0,.07);
+  border: 1px solid rgba(255,153,0,.18);
+  padding: 14px 14px 12px;
+  box-shadow: 0 0 34px rgba(255,153,0,.12);
+}
+
+.nogas-callout-title{
+  margin: 0 0 6px;
+  color: rgba(255,255,255,.95);
+  font-weight: 900;
+}
+
+.nogas-callout-text{
+  margin: 0;
+  color: var(--ng-text);
+  line-height: 1.6;
+}
+
+/* =========================
+   GASLESS HERO — FULLSCREEN
+   ========================= */
+
+.gasless-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;   /* was height: 100vh */
+  height: auto;        /* allow it to size naturally */
+  overflow: visible;   /* was hidden (can trap iOS scroll) */
+}
+
+/* Background Image */
+.gasless-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Overlay */
+.gasless-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.75)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding: 20px;
+}
+
+/* Content */
+.gasless-content {
+  text-align: center;
+  color: #ffffff;
+  max-width: 800px;
+}
+
+/* Kicker */
+.gasless-kicker {
+  display: inline-block;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: #ff9900;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+/* Title */
+.gasless-title {
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: #ff9900;
+  margin-bottom: 15px;
+  text-shadow: 0 0 25px rgba(255, 153, 0, 0.6);
+}
+
+/* Subtitle */
+.gasless-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  opacity: 0.95;
+}
+
+/* Description */
+.gasless-description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+.gasless-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: #ff9900;
+  color: #000;
+}
+
+.btn-primary:hover {
+  background: #ffaa22;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #ff9900;
+  color: #ff9900;
+}
+
+.btn-ghost:hover {
+  background: #ff9900;
+  color: #000;
+}
+
+/* =========================
+   OPTIONAL: Subtle Zoom Animation
+   ========================= */
+
+.gasless-bg {
+  animation: gaslessZoom 14s ease-in-out infinite alternate;
+}
+
+@keyframes gaslessZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+/* =========================
+   MOBILE OPTIMIZATION
+   ========================= */
+
+@media (max-width: 768px) {
+  .gasless-title {
+    font-size: 2.5rem;
+  }
+
+  .gasless-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .gasless-description {
+    font-size: 0.95rem;
+  }
+}
+
+.gasless-overlay{
+  background: transparent !important;
+}
+  </style>
 </head>
 
-<body class="dvpn-page" id="top">
+<body class="nogas-page" id="top">
 
   <!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
@@ -25,7 +652,7 @@
       <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
       <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
     </div>
   </div>
 
@@ -54,10 +681,9 @@
         </button>
 
         <div class="header-ctas">
-  <a href="purchase-ndg.html" class="btn">Join Presale</a>
-  <a href="stake-ndg.html" class="btn btn-primary">Stake NDG</a>
-  </div>
-
+          <a href="purchase-ndg.html" class="btn">Join Presale</a>
+          <a href="stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+        </div>
       </div>
     </div>
   </header>
@@ -69,9 +695,9 @@
 
       <ul class="menu-list">
         <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance</a></li>
         <li><a href="bonding-curve.html">Bonding Curve</a></li>
         <li><a href="guardian.html">Guardian</a></li>
-        <li><a href="provenance.html">Provenance</a></li>
         <li><a href="no-gas.html">Gasless Experience</a></li>
         <li><a href="menu/whitepaper.html">Whitepaper</a></li>
         <li><a href="menu/blog.html">Blog</a></li>
@@ -86,9 +712,10 @@
       </ul>
 
       <div class="mobile-ctas">
-        <a href="buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-        <a href="stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
-      </div>
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
     </div>
   </div>
 
@@ -97,24 +724,16 @@
     <div class="site-separator" aria-hidden="true"></div>
 
     <!-- GASLESS HERO SECTION -->
-    <section class="section dvpn-hero" id="dvpn">
-      <div class="section-overlay" aria-hidden="true"></div>
+    <section class="section nogas-hero" id="nogas">
+      <div class="nogas-hero-bg" aria-hidden="true"></div>
+
       <div class="section-inner">
-        <div class="hero-inner">
-          
-          <p class="hero-eyebrow">SIMPLICITY · NetDAG Gasless Experience</p>
+        <div class="hero-inner nogas-hero-inner">
+          <p class="hero-eyebrow nogas-eyebrow">SIMPLICITY: NetDAG Gasless Experience</p>
 
-          <h1 class="hero-title dvpn-title">
-            No Wallet. No Seed Phrases. <span class="hero-title-highlight">No Gas Fees.</span>
+          <h1 class="hero-title nogas-title">
+            No Wallet. No Seed <span class="nogas-title-highlight">Phrases. No Gas Fees.</span>
           </h1>
-
-          <p class="hero-kicker">
-            Crypto as easy as email — sign up in seconds, transact for free, forever.
-          </p>
-
-          <div class="dvpn-hero-image">
-            <img src="images/Gasless2.png" alt="NetDAG Gasless Experience – crypto without complexity" />
-          </div>
         </div>
       </div>
     </section>
@@ -123,94 +742,301 @@
     <div class="site-separator" aria-hidden="true"></div>
 
     <!-- WHY GASLESS MATTERS -->
-    <section class="section section-content dvpn-info">
+    <section class="section section-content nogas-why" id="why-gasless">
       <div class="section-inner narrow">
-        <div class="content-block dvpn-info-card">
-          
-          <h2>Why Gasless Matters</h2>
+        <div class="content-block nogas-why-card">
 
-          <p>
-            Traditional crypto is unnecessarily complicated. MetaMask, seed phrases, gas fees—these barriers 
-            keep 99% of people locked out. NetDAG removes every obstacle between you and blockchain technology.
-          </p>
+          <h2 class="nogas-section-title">Why Gasless Matters</h2>
 
-          <ol class="dvpn-list">
-            <li>
-              <strong>No Wallet Required — Sign Up Like Email:</strong>
-              Log in with Google, email, or social accounts. NetDAG creates a secure, non-custodial wallet 
-              in the background—you never see the complexity. It's as easy as signing up for Netflix.
-            </li>
-            <li>
-              <strong>No Seed Phrases — Easy Recovery:</strong>
-              Forget writing down 12-24 word passwords on paper. With NetDAG, you recover your account 
-              with email, phone, or biometric verification—just like your Gmail account. Never lose access again.
-            </li>
-            <li>
-              <strong>Zero Gas Fees — NetDAG Pays for You:</strong>
-              Every transaction—buying, selling, staking, transferring—is 100% free. NetDAG allocates 3% of 
-              our supply (30 million NDG) to sponsor all blockchain fees permanently. You focus on using crypto, 
-              not paying for it.
-            </li>
-          </ol>
+          <div class="nogas-glow-grid">
 
+            <article class="nogas-glow-card">
+              <header class="nogas-glow-head">
+                <span class="nogas-glow-icon" aria-hidden="true">
+                  <i class="fa-solid fa-envelope-open-text"></i>
+                </span>
+                <h3 class="nogas-glow-title">Crypto as easy as email</h3>
+              </header>
+
+              <p class="nogas-glow-lead">Sign up in seconds, transact for free, forever.</p>
+
+              <p class="nogas-glow-text">
+                No browser extension. No “gas token” needed just to click a button. No secret phrase anxiety.
+                Just a modern onboarding flow that feels like Web2, while keeping Web3 ownership underneath.
+              </p>
+
+              <div class="nogas-chip-row" aria-label="Experience highlights">
+                <span class="nogas-chip"><i class="fa-solid fa-user-check"></i> Web2 login</span>
+                <span class="nogas-chip"><i class="fa-solid fa-cube"></i> Web3 ownership</span>
+                <span class="nogas-chip"><i class="fa-solid fa-bolt"></i> $0 gas shown</span>
+              </div>
+            </article>
+
+            <article class="nogas-glow-card">
+              <header class="nogas-glow-head">
+                <span class="nogas-glow-icon" aria-hidden="true">
+                  <i class="fa-solid fa-road-barrier"></i>
+                </span>
+                <h3 class="nogas-glow-title">Friction is the real enemy</h3>
+              </header>
+
+              <p class="nogas-glow-text">
+                Traditional crypto is unnecessarily complicated. Wallet downloads, seed phrases, and gas fees create a maze before a user can do anything useful.
+                That’s why adoption stalls: it’s not that people hate crypto — they hate friction.
+              </p>
+
+              <p class="nogas-glow-text">
+                NetDAG’s “Easy Access” experience is designed to remove those blockers. You log in with an email or a familiar provider like Google, your wallet is created
+                automatically in the background, and transactions can be sponsored so you don’t see gas.
+              </p>
+
+              <p class="nogas-glow-text">
+                The goal is simple: <strong>make your first on-chain action feel as natural as your first click in any app.</strong>
+              </p>
+            </article>
+
+            <article class="nogas-glow-card">
+              <header class="nogas-glow-head">
+                <span class="nogas-glow-icon" aria-hidden="true">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </span>
+                <h3 class="nogas-glow-title">What you get (in plain English)</h3>
+              </header>
+
+              <ul class="nogas-benefits">
+                <li>
+                  <strong>No Wallet Required — Sign Up Like Email:</strong>
+                  Log in with email or social accounts. An embedded wallet is created behind the scenes. You can still view your address and balance — but you’re not forced
+                  to “be a crypto expert” to start.
+                </li>
+                <li>
+                  <strong>No Seed Phrases — Recovery That Matches Real Life:</strong>
+                  Instead of handing new users a 12–24 word phrase and calling it “security,” modern embedded wallets can support account recovery via email/SMS/device-based verification
+                  (depending on the chosen setup). This dramatically reduces the most common failure mode in crypto: lost access.
+                </li>
+                <li>
+                  <strong>Zero Gas Fees (for the user) — Gas Sponsorship:</strong>
+                  The user can see $0.00 gas at checkout because a paymaster can sponsor fees in the background. You click “Confirm” and move on — no need to buy BNB just to pay network costs.
+                </li>
+              </ul>
+            </article>
+
+          </div>
         </div>
       </div>
     </section>
 
     <div class="site-separator" aria-hidden="true"></div>
 
-    <!-- GASLESS IMAGE #1 -->
-    <section class="section curve-section" aria-label="Gasless technology">
-      <div class="section-inner">
-        <div class="curve-container">
-          <figure class="dvpn-figure">
-            <img
-              src="images/Gasless3.png"
-              alt="Account Abstraction and Biconomy Paymaster technology"
-              class="dvpn-feature-img" />
-            <figcaption class="dvpn-caption">
-              Powered by Account Abstraction (ERC-4337) and Biconomy Paymaster — enterprise-grade security without the complexity.
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
+   <!-- =========================
+   GASLESS HERO — FULLSCREEN
+   ========================= -->
+<section class="gasless-hero" aria-label="Gasless technology">
+
+  <!-- Background Image -->
+  <img
+    src="images/Gasless4.png"
+    alt="Gasless UX powered by ERC-4337, Bundler and Paymaster"
+    class="gasless-bg"/>
+
+  <!-- Overlay + Content -->
+  <div class="gasless-overlay">
+    <div class="gasless-content">
+
+      <h1 class="gasless-title">
+        Gasless UX
+      </h1>
+    </div>
+  </div>
+
+</section>
 
     <div class="site-separator" aria-hidden="true"></div>
 
     <!-- HOW IT WORKS -->
-    <section class="section section-content dvpn-how">
+    <section class="section section-content nogas-how" id="how-it-works">
       <div class="section-inner narrow">
-        <div class="content-block dvpn-how-card">
-          
-          <h2>How It Works</h2>
+        <div class="content-block nogas-how-wrap">
 
-          <h3>Step 1: Sign Up (30 Seconds)</h3>
-          <p>
-            Click "Sign Up with Google" (or email, Apple, Facebook). NetDAG creates your secure wallet 
-            automatically using Account Abstraction technology. No downloads. No seed phrases. No confusion.
-          </p>
+          <header class="nogas-how-header">
+            <h2 class="nogas-how-title">How It Works (1‑2‑3)</h2>
+            <p class="nogas-how-subtitle">
+              Here’s the experience in plain English — what you do, what you see, and what NetDAG handles for you.
+            </p>
+          </header>
 
-          <h3>Step 2: Buy NDG (One Click)</h3>
-          <p>
-            Purchase NDG tokens with credit card, Apple Pay, Google Pay, or existing crypto. No need to 
-            "bridge" funds or understand gas fees. We handle the blockchain complexity behind the scenes.
-          </p>
+          <div class="nogas-how-grid">
 
-          <h3>Step 3: Use NetDAG Ecosystem (100% Free)</h3>
-          <p>
-            Scan products with the Provenance dApp. Stake your NDG. Transfer tokens to friends. Every single 
-            transaction is gasless—NetDAG covers the blockchain fees using our dedicated Partnership fund.
-          </p>
+            <div class="nogas-steps">
+              <article class="nogas-step-card nogas-step-card--web2">
+                <div class="nogas-step-badge">1</div>
+                <div class="nogas-step-icon" aria-hidden="true"><i class="fa-brands fa-google"></i></div>
+                <h3 class="nogas-step-title">Continue with Email / Google</h3>
+                <p class="nogas-step-text">
+                  Sign in like a normal app. Google login uses a familiar OAuth-style flow — fast, secure, and instantly recognizable.
+                </p>
 
-          <h3>The NetDAG Advantage</h3>
-          <ul class="dvpn-advantages">
-            <li><strong>Account Abstraction (ERC-4337):</strong> Your wallet is a smart contract that operates invisibly—all the power, none of the hassle.</li>
-            <li><strong>Biconomy Paymaster:</strong> Industry-leading gasless technology used by Coinbase and Polygon. Battle-tested and secure.</li>
-            <li><strong>Social Recovery:</strong> Lost your password? Recover with email or trusted contacts—no seed phrase nightmare.</li>
-            <li><strong>Non-Custodial Security:</strong> You own your funds. NetDAG never holds your tokens—we just make them easier to use.</li>
-            <li><strong>Permanent Gas Sponsorship:</strong> 30 million NDG tokens fund millions of free transactions. This isn't a trial—it's forever.</li>
-          </ul>
+                <div class="nogas-mini-row">
+                  <span class="nogas-mini"><i class="fa-solid fa-user-check"></i> Web2 familiarity</span>
+                  <span class="nogas-mini"><i class="fa-solid fa-lock"></i> Secure session</span>
+                </div>
+              </article>
+
+              <article class="nogas-step-card nogas-step-card--wallet">
+                <div class="nogas-step-badge">2</div>
+                <div class="nogas-step-icon" aria-hidden="true"><i class="fa-solid fa-wallet"></i></div>
+                <h3 class="nogas-step-title">Wallet created automatically</h3>
+                <p class="nogas-step-text">
+                  An embedded wallet is generated in the background. You get a wallet address and NDG balance without being forced to manage a seed phrase.
+                </p>
+
+                <div class="nogas-mini-row">
+                  <span class="nogas-mini"><i class="fa-solid fa-key"></i> No seed phrase</span>
+                  <span class="nogas-mini"><i class="fa-solid fa-fingerprint"></i> Modern recovery</span>
+                </div>
+              </article>
+
+              <article class="nogas-step-card nogas-step-card--gas">
+                <div class="nogas-step-badge">3</div>
+                <div class="nogas-step-icon" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
+                <h3 class="nogas-step-title">Buy / Stake / Transfer with $0 gas shown</h3>
+                <p class="nogas-step-text">
+                  Transactions can be sponsored by a paymaster. The app can also batch actions so the UX feels instant and streamlined.
+                </p>
+
+                <div class="nogas-mini-row">
+                  <span class="nogas-mini"><i class="fa-solid fa-receipt"></i> $0 fees shown</span>
+                  <span class="nogas-mini"><i class="fa-solid fa-layer-group"></i> Batched actions</span>
+                </div>
+              </article>
+            </div>
+
+            <aside class="nogas-how-visual" aria-label="Onboarding flow visual">
+              <figure class="nogas-visual-figure">
+                <svg class="nogas-flow-svg" viewBox="0 0 980 560" role="img" aria-label="Visual flow: Login → Embedded Wallet → Gas Sponsored Transactions">
+                  <defs>
+                    <linearGradient id="ngStroke" x1="0" x2="1">
+                      <stop offset="0" stop-color="#ff9900" stop-opacity="0.85"/>
+                      <stop offset="1" stop-color="#7fb0ff" stop-opacity="0.75"/>
+                    </linearGradient>
+                    <linearGradient id="ngFill" x1="0" x2="1">
+                      <stop offset="0" stop-color="#0b0f16" stop-opacity="0.85"/>
+                      <stop offset="1" stop-color="#0b0f16" stop-opacity="0.65"/>
+                    </linearGradient>
+                    <filter id="ngGlow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="10" result="blur"/>
+                      <feColorMatrix in="blur" type="matrix"
+                        values="1 0 0 0 0
+                                0 1 0 0 0
+                                0 0 1 0 0
+                                0 0 0 0.35 0" result="glow"/>
+                      <feMerge>
+                        <feMergeNode in="glow"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <rect x="22" y="22" width="936" height="516" rx="28" fill="url(#ngFill)" stroke="rgba(255,255,255,0.12)" />
+
+                  <text x="60" y="90" fill="rgba(255,255,255,0.92)" font-size="26" font-weight="700">
+                    Easy Access Flow
+                  </text>
+                  <text x="60" y="122" fill="rgba(255,255,255,0.70)" font-size="16">
+                    Login → wallet appears → actions feel instant (gas sponsored when enabled)
+                  </text>
+
+                  <g filter="url(#ngGlow)">
+                    <rect x="70" y="180" width="250" height="170" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(127,176,255,0.35)" />
+                    <text x="105" y="230" fill="#7fb0ff" font-size="16" font-weight="700">1) Login</text>
+                    <text x="105" y="262" fill="rgba(255,255,255,0.86)" font-size="22" font-weight="800">Email / Google</text>
+                    <text x="105" y="294" fill="rgba(255,255,255,0.72)" font-size="14">Familiar Web2 sign-in</text>
+                    <circle cx="265" cy="230" r="20" fill="rgba(127,176,255,0.14)" stroke="rgba(127,176,255,0.35)"/>
+                    <text x="257" y="237" fill="#7fb0ff" font-size="16" font-weight="900">G</text>
+                  </g>
+
+                  <g filter="url(#ngGlow)">
+                    <rect x="365" y="180" width="250" height="170" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,153,0,0.35)" />
+                    <text x="400" y="230" fill="#ff9900" font-size="16" font-weight="700">2) Wallet</text>
+                    <text x="400" y="262" fill="rgba(255,255,255,0.86)" font-size="22" font-weight="800">Embedded</text>
+                    <text x="400" y="294" fill="rgba(255,255,255,0.72)" font-size="14">Auto-created • No seed phrase</text>
+                    <rect x="545" y="210" width="44" height="44" rx="14" fill="rgba(255,153,0,0.12)" stroke="rgba(255,153,0,0.35)"/>
+                    <path d="M557 228h20v16h-20z" fill="none" stroke="#ff9900" stroke-width="2"/>
+                    <path d="M557 226c0-6 20-6 20 0" fill="none" stroke="#ff9900" stroke-width="2"/>
+                  </g>
+
+                  <g filter="url(#ngGlow)">
+                    <rect x="660" y="180" width="250" height="170" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,153,0,0.35)" />
+                    <text x="695" y="230" fill="#ff9900" font-size="16" font-weight="700">3) Actions</text>
+                    <text x="695" y="262" fill="rgba(255,255,255,0.86)" font-size="22" font-weight="800">$0 Gas Shown</text>
+                    <text x="695" y="294" fill="rgba(255,255,255,0.72)" font-size="14">Paymaster can sponsor fees</text>
+                    <circle cx="860" cy="230" r="20" fill="rgba(255,153,0,0.12)" stroke="rgba(255,153,0,0.35)"/>
+                    <path d="M855 216l-6 18h10l-6 20" fill="none" stroke="#ff9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+
+                  <path d="M320 265h45" stroke="url(#ngStroke)" stroke-width="6" stroke-linecap="round"/>
+                  <path d="M615 265h45" stroke="url(#ngStroke)" stroke-width="6" stroke-linecap="round"/>
+
+                  <path d="M360 252l18 13-18 13" fill="none" stroke="url(#ngStroke)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M655 252l18 13-18 13" fill="none" stroke="url(#ngStroke)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <figcaption class="nogas-visual-caption">
+                  Login → wallet appears → actions feel instant (gas sponsored when enabled).
+                </figcaption>
+              </figure>
+
+              <div class="nogas-visual-callout">
+                <h4 class="nogas-callout-title">No wallet feeling. No gas feeling.</h4>
+                <p class="nogas-callout-text">
+                  The user journey stays simple, while the Web3 plumbing runs quietly underneath.
+                </p>
+              </div>
+            </aside>
+
+          </div>
+
+          <div class="nogas-tech">
+            <h3 class="nogas-tech-title">So what powers this?</h3>
+
+            <p class="nogas-tech-text">
+              NetDAG’s Easy Access is built with modern Web3 infrastructure patterns — the same direction the industry is moving as a whole.
+              For authentication, services like <strong>Google</strong> enable “Continue with Google” onboarding.
+            </p>
+
+            <p class="nogas-tech-text">
+              For wallet creation, embedded wallet providers (examples include <strong>Privy</strong> and <strong>Magic</strong>) can generate wallets inside the app experience.
+              Users can interact immediately, while advanced users can still choose more traditional setups when desired.
+            </p>
+
+            <p class="nogas-tech-text">
+              For gasless transactions, <strong>Account Abstraction (ERC‑4337)</strong> enables smart accounts that can submit operations through a bundler.
+              A <strong>paymaster</strong> can then sponsor gas so users don’t need to own BNB just to move tokens.
+              Infrastructure platforms like <strong>Biconomy</strong> provide tooling in this category (smart accounts, bundlers, paymasters).
+            </p>
+
+            <p class="nogas-tech-text">
+              Finally, platforms that focus on complete onboarding flows — wallet + login + gas sponsorship patterns — can simplify integration.
+              A good example category is <strong>Openfort</strong>, which emphasizes smooth “gasless transactions” UX patterns for consumer apps.
+            </p>
+
+            <div class="nogas-tech-chips" aria-label="Core components">
+              <span class="nogas-tech-chip"><i class="fa-solid fa-id-badge"></i> Social login</span>
+              <span class="nogas-tech-chip"><i class="fa-solid fa-wallet"></i> Embedded wallet</span>
+              <span class="nogas-tech-chip"><i class="fa-solid fa-cube"></i> ERC‑4337 smart account</span>
+              <span class="nogas-tech-chip"><i class="fa-solid fa-truck-fast"></i> Bundler</span>
+              <span class="nogas-tech-chip"><i class="fa-solid fa-hand-holding-dollar"></i> Paymaster</span>
+            </div>
+
+            <h3 class="nogas-adv-title">The NetDAG Advantage</h3>
+            <ul class="nogas-adv-list">
+              <li><strong>Embedded wallets:</strong> Wallet is created in the background — no wallet setup friction.</li>
+              <li><strong>Social login:</strong> Email / Google / Apple / SMS-style onboarding that people already understand.</li>
+              <li><strong>ERC‑4337 account abstraction:</strong> Smart accounts unlock batching, automation, and cleaner confirmations.</li>
+              <li><strong>Paymasters:</strong> Gas can be sponsored so the user sees $0 gas at checkout.</li>
+              <li><strong>User-first security:</strong> The experience is simplified, but transaction authorization remains user-driven.</li>
+            </ul>
+          </div>
 
         </div>
       </div>
@@ -218,153 +1044,104 @@
 
     <div class="site-separator" aria-hidden="true"></div>
 
-      <!-- SOCIAL LOGIN SECTION (Accurate) -->
-<section class="section section-content social-login-section">
-  <div class="section-inner narrow">
-    <div class="content-block social-login-card">
-      
-      <h2>Sign Up In Seconds — No Wallet Required</h2>
-      
-      <p class="social-intro">
-        Forget MetaMask, seed phrases, and wallet downloads. Sign up with accounts you already have—NetDAG creates your secure crypto wallet automatically using Account Abstraction technology.
-      </p>
+    <!-- SOCIAL LOGIN SECTION -->
+    <section class="section section-content social-login-section">
+      <div class="section-inner narrow">
+        <div class="content-block social-login-card">
 
-      <!-- Social Login Options (Supported by Biconomy) -->
-      <div class="login-methods-container">
-        <h3>🔐 Login With</h3>
-        <div class="login-icons-grid">
-          
-          <div class="login-icon-card">
-            <div class="login-icon google-icon">
-              <i class="fab fa-google"></i>
+          <h2>Sign Up In Seconds — No Wallet Required</h2>
+
+          <p class="social-intro">
+            Forget seed phrases and wallet downloads. Sign up with accounts you already have — NetDAG creates your wallet automatically
+            and takes care of the complexity behind the scenes.
+          </p>
+
+          <div class="login-methods-container">
+            <h3>🔐 Login With</h3>
+            <div class="login-icons-grid">
+
+              <div class="login-icon-card">
+                <div class="login-icon google-icon">
+                  <i class="fab fa-google"></i>
+                </div>
+                <span class="login-label">Google</span>
+              </div>
+
+              <div class="login-icon-card">
+                <div class="login-icon apple-icon">
+                  <i class="fab fa-apple"></i>
+                </div>
+                <span class="login-label">Apple</span>
+              </div>
+
+              <div class="login-icon-card">
+                <div class="login-icon telegram-icon">
+                  <i class="fab fa-telegram"></i>
+                </div>
+                <span class="login-label">Telegram</span>
+              </div>
+
+              <div class="login-icon-card">
+                <div class="login-icon email-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span class="login-label">Email</span>
+              </div>
+
+              <div class="login-icon-card">
+                <div class="login-icon facebook-icon">
+                  <i class="fab fa-facebook-f"></i>
+                </div>
+                <span class="login-label">Facebook</span>
+              </div>
+
+              <div class="login-icon-card">
+                <div class="login-icon fingerprint-icon">
+                  <i class="fas fa-fingerprint"></i>
+                </div>
+                <span class="login-label">Biometric</span>
+              </div>
+
             </div>
-            <span class="login-label">Google</span>
           </div>
 
-          <div class="login-icon-card">
-            <div class="login-icon apple-icon">
-              <i class="fab fa-apple"></i>
-            </div>
-            <span class="login-label">Apple</span>
+          <div class="what-happens-box">
+            <h3>✨ What Happens Next?</h3>
+            <ol class="process-steps">
+              <li><strong>Click one button</strong> — choose Email / Google / Apple / your preferred login method.</li>
+              <li><strong>Wallet creation</strong> — an embedded smart wallet is created automatically (no seed phrase required to start).</li>
+              <li><strong>Fund or buy</strong> — purchase NDG via enabled rails (card/Apple Pay/Google Pay/crypto routes).</li>
+              <li><strong>Use NetDAG</strong> — stake, transfer, and interact with dApps with gas sponsorship where enabled.</li>
+            </ol>
           </div>
 
-          <div class="login-icon-card">
-            <div class="login-icon telegram-icon">
-              <i class="fab fa-telegram"></i>
-            </div>
-            <span class="login-label">Telegram</span>
-          </div>
-
-          <div class="login-icon-card">
-            <div class="login-icon email-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <span class="login-label">Email</span>
-          </div>
-
-          <div class="login-icon-card">
-            <div class="login-icon facebook-icon">
-              <i class="fab fa-facebook-f"></i>
-            </div>
-            <span class="login-label">Facebook</span>
-          </div>
-
-          <div class="login-icon-card">
-            <div class="login-icon fingerprint-icon">
-              <i class="fas fa-fingerprint"></i>
-            </div>
-            <span class="login-label">Biometric</span>
+          <div class="tech-note">
+            <p>
+              <strong>Important:</strong> “Gasless” means the user doesn’t have to worry about gas. Network fees still exist — they can be paid by a paymaster
+              so onboarding and everyday actions stay frictionless.
+            </p>
           </div>
 
         </div>
       </div>
+    </section>
 
-      <!-- What Happens Next -->
-      <div class="what-happens-box">
-        <h3>✨ What Happens Next?</h3>
-        <ol class="process-steps">
-          <li>
-            <strong>Click one button</strong> — Choose Google, Apple, or your preferred login method.
-          </li>
-          <li>
-            <strong>Instant wallet creation</strong> — NetDAG creates a secure, non-custodial smart wallet for you using Account Abstraction (invisible, automatic).
-          </li>
-          <li>
-            <strong>Buy NDG with crypto</strong> — Transfer BNB, USDT, or other crypto to purchase NDG—completely gasless.
-          </li>
-          <li>
-            <strong>You're done!</strong> — Start using the Provenance dApp, stake NDG, or transfer tokens—all 100% gasless forever.
-          </li>
-        </ol>
-      </div>
-
-      <div class="tech-note">
-        <p>
-          <strong>Powered by Biconomy:</strong> Industry-leading Account Abstraction and Paymaster technology. 
-          The same infrastructure trusted by Coinbase and Polygon.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>  
-    
     <div class="site-separator" aria-hidden="true"></div>
 
-     <!-- TECHNOLOGY PARTNERS / POWERED BY SECTION -->
+    <!-- TECHNOLOGY PARTNERS / POWERED BY SECTION -->
     <section class="partners-section" aria-label="Technology Partners">
-      
-      <!-- Title and Subtitle (Centered Container) -->
+
       <div class="section-inner">
-        <h2 class="partners-title">Powered By Industry Leaders</h2>
+        <h2 class="partners-title">Built With the Best Tools Available</h2>
         <p class="partners-subtitle">
-          NetDAG combines best-in-class infrastructure to deliver a seamless, secure crypto experience.
+          NetDAG combines best‑in‑class infrastructure to deliver a seamless, secure crypto experience.
+          <em>Logos shown may represent categories and example services used across the ecosystem.</em>
         </p>
       </div>
 
-      <!-- FULL SCREEN Logo Ticker (No Container) -->
       <div class="logo-ticker-container">
         <div class="logo-ticker">
-          
-          <!-- First Set of Logos (14 companies) -->
-          <div class="logo-item">
-            <img src="images/bitcoinnews.png" alt="Bitcoin News" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/binance.png" alt="BNB Chain" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/icobench.png" alt="ICO Bench" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/biconomy.png" alt="Biconomy" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/telegram.png" alt="Telegram" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/github.png" alt="GitHub" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/techbullion.png" alt="TechBullion" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/applepay.png" alt="Apple" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/coinmarketcap.png" alt="CoinMarketCap" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/googlepay.png" alt="Google Pay" class="partner-logo">
-          </div>
-          <div class="logo-item">
-            <img src="images/ipfs.png" alt="IPFS" class="partner-logo">
-          </div>
-          <div class="logo-item">
-              <img src="images/transak.png" alt="Transak" class="partner-logo">
-            </div>
 
-          <!-- Duplicate Set for Seamless Loop -->
           <div class="logo-item">
             <img src="images/bitcoinnews.png" alt="Bitcoin News" class="partner-logo">
           </div>
@@ -387,7 +1164,7 @@
             <img src="images/techbullion.png" alt="TechBullion" class="partner-logo">
           </div>
           <div class="logo-item">
-            <img src="images/applepay.png" alt="Apple" class="partner-logo">
+            <img src="images/applepay.png" alt="Apple Pay" class="partner-logo">
           </div>
           <div class="logo-item">
             <img src="images/coinmarketcap.png" alt="CoinMarketCap" class="partner-logo">
@@ -397,15 +1174,51 @@
           </div>
           <div class="logo-item">
             <img src="images/ipfs.png" alt="IPFS" class="partner-logo">
-          </div> 
+          </div>
           <div class="logo-item">
-              <img src="images/transak.png" alt="Transak" class="partner-logo">
-            </div>
+            <img src="images/transak.png" alt="Transak" class="partner-logo">
+          </div>
+
+          <div class="logo-item">
+            <img src="images/bitcoinnews.png" alt="Bitcoin News" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/binance.png" alt="BNB Chain" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/icobench.png" alt="ICO Bench" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/biconomy.png" alt="Biconomy" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/telegram.png" alt="Telegram" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/github.png" alt="GitHub" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/techbullion.png" alt="TechBullion" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/applepay.png" alt="Apple Pay" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/coinmarketcap.png" alt="CoinMarketCap" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/googlepay.png" alt="Google Pay" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/ipfs.png" alt="IPFS" class="partner-logo">
+          </div>
+          <div class="logo-item">
+            <img src="images/transak.png" alt="Transak" class="partner-logo">
+          </div>
 
         </div>
       </div>
 
-      <!-- Bottom Note (Centered Container) -->
       <div class="section-inner">
         <p class="partners-note">
           Trusted by millions worldwide. Built on proven, enterprise-grade technology.
@@ -416,46 +1229,40 @@
 
     <div class="site-separator" aria-hidden="true"></div>
 
-    <div class="site-separator" aria-hidden="true"></div>
-
     <!-- FAQ SECTION -->
-    <section class="section section-content dvpn-how">
+    <section class="section section-content nogas-faq" id="faq">
       <div class="section-inner narrow">
-        <div class="content-block dvpn-how-card">
-          
+        <div class="content-block nogas-faq-card">
+
           <h2>Frequently Asked Questions</h2>
 
           <h3>Q: Is this really free forever?</h3>
           <p>
-            <strong>A:</strong> Yes. We've allocated 3% of our 1 billion token supply (30 million NDG) specifically 
-            for gas sponsorship. At current BNB prices, this funds millions of transactions. It's a permanent 
-            commitment, not a temporary promotion.
+            <strong>A:</strong> The goal is sustainable, long‑term gas sponsorship where enabled. When gasless mode is active, users won’t need to hold a
+            gas token just to interact. Sponsorship can be managed via paymasters and dedicated budgets.
           </p>
 
           <h3>Q: Can NetDAG access my funds?</h3>
           <p>
-            <strong>A:</strong> No. Your wallet is non-custodial—only you can authorize transactions. NetDAG simply 
-            sponsors the gas fees using Biconomy Paymaster technology. We never touch your tokens.
+            <strong>A:</strong> No. Your wallet is designed to be non-custodial — only you can authorize transactions. NetDAG can sponsor gas fees, but
+            sponsoring gas is not the same thing as controlling funds.
           </p>
 
           <h3>Q: What if I want to use MetaMask instead?</h3>
           <p>
-            <strong>A:</strong> You can! NetDAG supports both gasless accounts AND traditional wallets like MetaMask. 
-            Power users can choose their preferred method, while newcomers enjoy the simple experience.
+            <strong>A:</strong> You can. Easy Access is about onboarding. Power users can still connect traditional wallets and interact normally.
           </p>
 
           <h3>Q: How is this safer than traditional wallets?</h3>
           <p>
-            <strong>A:</strong> Traditional crypto users lose <em>billions</em> every year because they lose their 
-            seed phrases. With NetDAG's social recovery, you can't lose access—it's as recoverable as your Gmail. 
-            Plus, Account Abstraction is used by Coinbase and Polygon—it's enterprise-grade security.
+            <strong>A:</strong> Traditional users lose access when seed phrases are lost. Embedded wallet flows can support modern recovery methods
+            (email / device / trusted recovery), while smart wallets can add advanced security controls.
           </p>
 
-          <h3>Q: What happens if Biconomy shuts down?</h3>
+          <h3>Q: What happens if one provider changes or shuts down?</h3>
           <p>
-            <strong>A:</strong> Your funds remain 100% safe in your wallet. You could export your account to a 
-            traditional wallet (like MetaMask) and continue using NDG normally. The gas sponsorship would end, 
-            but your tokens are always yours—that's the power of non-custodial design.
+            <strong>A:</strong> The goal is portability and resilience. Because the wallet is on-chain and user-authorized, the experience can evolve:
+            if one infrastructure option changes, users should still be able to keep using NDG via standard wallet routes.
           </p>
 
         </div>
@@ -463,7 +1270,6 @@
     </section>
 
     <div class="site-separator" aria-hidden="true"></div>
-
   </main>
 
   <!-- FOOTER -->
@@ -476,7 +1282,7 @@
       <div class="footer-banner-inner">
         <div class="banner-tagline">
           <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
-          NetDAG is not another short-term token.  We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment.  
+          NetDAG is not another short-term token.  We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment.
           Join the ecosystem and let your wealth grow with real utility.
         </div>
         <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
@@ -485,7 +1291,7 @@
 
     <div class="footer-main">
       <div class="footer-columns">
-        
+
         <div class="footer-col footer-brand-col">
           <div class="footer-brand-logo">
             <img src="images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
@@ -546,7 +1352,6 @@
           Copyright: NetDAG 2026 | Built with care
         </p>
       </div>
-
   </footer>
 
   <!-- BEGIN OF CONTACT MODAL -->
@@ -561,38 +1366,32 @@
       </div>
 
       <form id="contactForm" class="contact-form">
-        <!-- First Name -->
         <div class="contact-form-group">
           <label for="contactFirstName" class="contact-label">First Name *</label>
           <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
             placeholder="Enter your first name">
         </div>
 
-        <!-- Last Name -->
         <div class="contact-form-group">
           <label for="contactLastName" class="contact-label">Last Name *</label>
           <input type="text" id="contactLastName" name="lastName" class="contact-input" required
             placeholder="Enter your last name">
         </div>
 
-        <!-- Email -->
         <div class="contact-form-group">
           <label for="contactEmail" class="contact-label">Email *</label>
           <input type="email" id="contactEmail" name="email" class="contact-input" required
             placeholder="your.email@example.com">
         </div>
 
-        <!-- Message -->
         <div class="contact-form-group">
           <label for="contactMessage" class="contact-label">Message *</label>
           <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
             placeholder="How can we help you?"></textarea>
         </div>
 
-        <!-- Status Message -->
         <div id="contactStatus" class="contact-status"></div>
 
-        <!-- Submit Button -->
         <button type="submit" class="contact-submit-btn">
           Send Message
         </button>
@@ -600,11 +1399,8 @@
     </div>
   </div>
 
-<!-- END OF CONTACT MODAL -->
-
-<script src="js/contact-modal.js" defer></script>
+  <script src="js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
-<script src="/js/ndg-buy-loader.js" defer></script>
-
+  <script src="/js/ndg-buy-loader.js" defer></script>
 </body>
-</html>
+</html

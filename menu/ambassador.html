@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NetDAG — Ambassador Program</title>
-  <meta name="description" content="NetDAG Ambassador Program:  for creators, educators, and community leaders who want to promote a stability-first crypto economy." />
+  <title>NetDAG — Roadmap</title>
+  <meta name="description" content="NetDAG roadmap: from bonding-curve shock absorber and Guardian AI to gas-free Easy Access, dVPN, provenance RWA dApp, ecosystem growth and long-term governance." />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/contact-modal.css">
@@ -12,213 +12,462 @@
   <script src="../js/main.js" defer></script>
 
   <style>
-    /* Ambassador page-specific styles */
-    .amb-wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 0 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 26px;
-    }
-    
-    .page-title{
-      font-size: 2.1rem;
-      font-weight:  650;
-      margin:  0 0 8px;
-      color: #fff;
-    }
-    
-    .page-intro{
-      margin:  0 0 18px;
-      color: var(--muted);
-      max-width: 760px;
-      font-size: 0.96rem;
-      line-height:  1.7;
+    /* =========================================================
+       ROADMAP — Modern, refined (page-scoped)
+       - Keeps hero image but caps hero height to 50vh
+       - Refines copy, adds NetDAG values + business plan
+       - Modern glow cards + timeline diagram
+       ========================================================= */
+
+    body.roadmap-page{
+      background: var(--bg, #050714);
+      color: var(--muted, #e0e0e0);
     }
 
-    .amb-grid{
+    /* Hero (50vh) */
+    .hero-roadmap{
+      position: relative;
+      min-height: 50vh; /* requested */
+      height: 50vh;     /* hard cap */
       display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #070914;
+    }
+
+    /* Uses existing background-image from your original CSS */
+    .hero-roadmap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 16% 20%, rgba(255,153,0,.22), transparent 55%),
+        radial-gradient(circle at 82% 30%, rgba(120,160,255,.18), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.72));
+      pointer-events:none;
+    }
+
+    .hero-roadmap .hero-overlay{
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 34px 16px 26px;
+      text-align: center;
+    }
+
+    .hero-roadmap .hero-title{
+      color: #ff9900;
+      font-size: clamp(2.05rem, 4.4vw, 3.2rem);
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 16px 44px rgba(0,0,0,.55);
+      font-weight: 900;
+    }
+
+    .hero-roadmap .hero-subtitle{
+      max-width: 900px;
+      color: rgba(255,255,255,.92);
+      font-size: 1.02rem;
+      margin: 0 auto;
+      line-height: 1.75;
+      text-shadow: 0 12px 36px rgba(0,0,0,.55);
+    }
+
+    .hero-chip-row{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+    .hero-chip i{ color: var(--accent, #ff9900); }
+
+    /* Content */
+    .curve-section{ padding-top: 22px; }
+
+    .road-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 16px 66px;
+      display: flex;
+      flex-direction: column;
       gap: 18px;
     }
-    
-    @media(min-width: 900px){
-      .amb-grid{
-        grid-template-columns: minmax(0,1.1fr) minmax(0,0.9fr);
+
+    .page-title{
+      font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+      font-weight: 900;
+      margin: 0 0 10px;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .page-intro{
+      margin: 0;
+      color: rgba(233,238,247,.78);
+      max-width: 980px;
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .road-grid{
+      display: grid;
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    @media (min-width: 980px){
+      .road-grid{
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
         align-items: flex-start;
       }
     }
 
-    .amb-card{
-      background: #0f1120;
-      border: 1px solid var(--border);
+    /* Values + plan block */
+    .values-card{
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px 18px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.50);
+      position: relative;
+      overflow: hidden;
+    }
+    .values-card::before{
+      content:"";
+      position:absolute;
+      inset:-60px -60px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255,153,0,.16), rgba(255,153,0,0) 65%);
+      opacity: .6;
+      pointer-events:none;
+    }
+
+    .values-card h2{
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: #fff;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      letter-spacing: -0.01em;
+    }
+    .values-card h2 i{ color: var(--accent, #ff9900); }
+
+    .values-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (min-width: 880px){
+      .values-grid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .val{
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .val-ico{
+      width: 44px;
+      height: 44px;
       border-radius: 14px;
-      padding: 20px 22px;
-      box-shadow:  0 2px 10px rgba(0,0,0,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,153,0,.25);
+      background: rgba(255,153,0,.10);
+      box-shadow: 0 0 34px rgba(255,153,0,.12);
+      color: var(--accent, #ff9900);
+      flex: 0 0 auto;
     }
-    
-    .amb-card h2{
-      margin:  0 0 10px;
-      color: #fff;
-      font-size:  1.25rem;
+    .val-body h3{
+      margin: 0 0 6px;
+      color: rgba(255,255,255,.94);
+      font-size: 1.0rem;
+      letter-spacing: -0.01em;
     }
-    
-    .amb-card h3{
-      margin: 0 0 8px;
-      color: #fff;
-      font-size:  1.02rem;
-    }
-    
-    .amb-text{
-      margin: 0 0 18px;
-      color: var(--text);
+    .val-body p{
+      margin: 0;
+      color: rgba(233,238,247,.78);
+      line-height: 1.65;
       font-size: .95rem;
-      line-height: 1.7;
     }
 
-    .amb-list{
-      margin: 6px 0 18px;
+    /* Phase cards */
+    .road-phase{
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px 18px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.50);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .road-phase::before{
+      content:"";
+      position:absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, rgba(255,153,0,.95), rgba(127,176,255,.10));
+      opacity: .95;
+    }
+
+    .phase-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .phase-label{
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,184,77,.92);
+      margin: 0 0 6px;
+    }
+
+    .phase-title{
+      font-size: 1.18rem;
+      margin: 0;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .phase-time{
+      font-size: .88rem;
+      color: rgba(233,238,247,.72);
+      margin: 4px 0 0;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      white-space: nowrap;
+    }
+    .phase-time i{ color: rgba(127,176,255,.95); }
+
+    .road-phase p{
+      margin: 0 0 14px;
+      color: rgba(233,238,247,.78);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .phase-list{
+      margin: 0;
       padding-left: 18px;
-      color: var(--text);
+      color: rgba(233,238,247,.80);
       font-size: .95rem;
       line-height: 1.7;
     }
-    
-    .amb-list li+li{
-      margin-top: 8px;
+    .phase-list li+li{ margin-top: 8px; }
+    .phase-list strong{ color: rgba(255,255,255,.92); }
+
+    /* Meta column */
+    .road-meta{
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.45);
+      display:flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 110px;
+    }
+    @media (max-width: 980px){
+      .road-meta{ position: static; top: auto; }
     }
 
-    .pill-row{
-      display: flex;
+    .road-meta h3{
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #fff;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .road-meta h3 i{ color: var(--accent, #ff9900); }
+
+    .meta-note{
+      margin: 0;
+      color: rgba(233,238,247,.74);
+      font-size: .94rem;
+      line-height: 1.7;
+    }
+
+    .meta-pill-row{
+      display:flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 8px;
     }
-    
-    .pill{
+    .meta-pill{
       border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      font-size:  .8rem;
-      color: var(--muted);
-      background: rgba(15,23,42,.9);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 6px 10px;
+      font-size: .8rem;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.03);
       white-space: nowrap;
     }
 
-    .amb-callout{
-      border-left: 4px solid var(--accent);
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: #10132a;
+    .road-strip{
+      margin-top: 4px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,.16);
+      background: rgba(15,23,42,.55);
       font-size: .92rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-top: 10px;
-    }
-
-    .amb-steps{
-      margin:  6px 0 18px;
-      padding-left: 18px;
-      color: var(--text);
-      font-size: .95rem;
+      color: rgba(233,238,247,.78);
       line-height: 1.7;
     }
-    
-    .amb-steps li+li{
-      margin-top: 8px;
+
+    .road-timeline-caption{
+      margin: 0;
+      font-size: .94rem;
+      color: rgba(233,238,247,.72);
+      line-height: 1.7;
     }
 
-    .amb-faq{
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    
-    .amb-faq details{
-      background: #0f1120;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      padding: 10px 12px;
-      cursor: pointer;
-    }
-    
-    .amb-faq summary{
-      list-style: none;
-      color: #fff;
-      font-size:  .95rem;
-      font-weight: 550;
-    }
-    
-    .amb-faq summary::-webkit-details-marker{display: none;}
-    
-    .amb-faq p{
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.6;
+    @media (max-width: 700px){
+      .hero-roadmap{ min-height: 52vh; height: 52vh; } /* slightly taller for readability */
+      .hero-roadmap .hero-overlay{ padding: 28px 16px 22px; }
+      .road-wrap{ padding: 30px 16px 60px; }
     }
 
-    .cta-box{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top:  10px;
-    }
-    
-    .cta-link{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: .95rem;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      background: var(--accent);
-      color: #000;
-    }
-    
-    .cta-link.alt{
-      background: transparent;
-      color: #fff;
-    }
+    /* Ambassador hero */
+.hero-ambassador{
+  position: relative;
+  min-height: 50vh;   /* change to 60vh/70vh if you want taller */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #070914;
+}
 
-    /* Hero styling */
-    .hero-ambassador{
-      background-image: url('../images/ndg13.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      min-height: 100vh;
-    }
-    
-    .hero-ambassador .hero-overlay{
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding-top: 0;
-    }
-    
-    .hero-ambassador .hero-title{
-      color: var(--accent);
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom:  20px;
-    }
-    
-    .hero-ambassador .hero-subtitle{
-      color: #b20303;
-      max-width: 720px;
-      font-size: 1.1rem;
-    }
+.hero-ambassador .hero-media{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
 
-    .curve-section{
-      padding-top: 28px;
-    }
+.hero-ambassador .hero-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: saturate(1.05) contrast(1.05);
+  transform: scale(1.02);
+}
+
+.hero-ambassador::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 16% 20%, rgba(255,153,0,.22), transparent 55%),
+    radial-gradient(circle at 82% 30%, rgba(120,160,255,.18), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.78));
+  pointer-events:none;
+}
+
+.hero-ambassador .hero-overlay{
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 118px 16px 60px; /* top padding accounts for fixed header+ticker */
+  text-align: center;
+}
+
+.hero-ambassador .hero-title{
+  color: #ff9900;
+  font-size: clamp(2.05rem, 4.4vw, 3.2rem);
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 16px 44px rgba(0,0,0,.55);
+  font-weight: 900;
+}
+
+.hero-ambassador .hero-subtitle{
+  max-width: 900px;
+  color: rgba(255,255,255,.92);
+  font-size: 1.02rem;
+  margin: 0 auto;
+  line-height: 1.75;
+  text-shadow: 0 12px 36px rgba(0,0,0,.55);
+}
+
+/* Chips */
+.hero-chip-row{
+  margin-top: 14px;
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.hero-chip{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.88);
+  box-shadow: 0 16px 40px rgba(0,0,0,.30);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: .9rem;
+  white-space: nowrap;
+}
+.hero-chip i{ color: var(--accent, #ff9900); }
+
+@media (max-width: 700px){
+  .hero-ambassador .hero-overlay{
+    padding: 110px 16px 54px;
+  }
+}
   </style>
 </head>
 
-<body class="ambassador-page" id="top">
+<body class="roadmap-page" id="top">
 
   <!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
@@ -274,9 +523,9 @@
 
       <ul class="menu-list">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../bonding-curve.html">Bonding Curve</a></li>
         <li><a href="../guardian.html">Guardian</a></li>
-        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../no-gas.html">Easy Access</a></li>
         <li><a href="whitepaper.html">Whitepaper</a></li>
         <li><a href="blog.html">Blog</a></li>
@@ -291,140 +540,258 @@
       </ul>
 
       <div class="mobile-ctas">
-        <a href="../purchase-ndg.html" class="btn">Join Presale</a>
-        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
-      </div>
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
     </div>
   </div>
 
-  <!-- HERO -->
-  <main class="hero-banner hero-ambassador" id="main-content" role="main">
-    <div class="hero-overlay">
-      <h1 class="hero-title">NetDAG Ambassadors</h1>
-      <p class="hero-subtitle"></p>
-    </div>
-  </main>
+  <!-- HERO (keeps your existing background-image, now capped to 50vh) -->
+ <!-- HERO -->
+<main class="hero-banner hero-ambassador" id="main-content" role="main">
+  <!-- Hero image tag (swap src anytime) -->
+  <div class="hero-media" aria-hidden="true">
+    <img src="../images/ndg13.png" alt="">
+  </div>
 
-  <!-- CONTENT -->
+  <div class="hero-overlay">
+    <h1 class="hero-title">Ambassador Program</h1>
+    <p class="hero-subtitle">
+      Help grow a stability-first ecosystem built for trust, real utility, and long-term partners.
+    </p>
+
+    <div class="hero-chip-row" aria-label="Program highlights">
+      <span class="hero-chip"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Community</span>
+      <span class="hero-chip"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Trust-first</span>
+      <span class="hero-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Gas-free UX</span>
+      <span class="hero-chip"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> Provenance</span>
+    </div>
+  </div>
+</main>
+
+  <!-- ROADMAP CONTENT -->
   <section class="curve-section">
-    <div class="amb-wrap">
+    <div class="road-wrap">
+
       <header>
-        <h1 class="page-title">Ambassador Program</h1>
+        <h1 class="page-title">What we are (in plain English).</h1>
         <p class="page-intro">
-          The NetDAG Ambassador Program is a <strong>relationship, not a paid shill gig</strong>. 
-          If you genuinely believe in building a math-backed, real-utility crypto economy and want to help
-          explain it to others, we would love to hear from you.
+          NetDAG is a stability-first ecosystem designed to survive multiple market cycles.
+          We earn trust through transparency and real-world utility: predictable liquidity via the bonding curve,
+          measurable risk signals via Guardian, private connectivity via dVPN, and authenticity verification via Provenance.
+          Easy Access (gas-free UX) ties it together so normal users can actually participate.
         </p>
       </header>
 
-      <div class="amb-grid">
-        <!-- Left column -->
-        <div class="amb-main">
-          <article class="amb-card">
-            <h2>Who this is for</h2>
-            <p class="amb-text">We welcome people who already add value to their communities: </p>
-            <ul class="amb-list">
-              <li>Content creators (YouTube, TikTok, X, long-form writers, podcasters). </li>
-              <li>Community builders (Telegram/Discord admins, meetup organizers, local leaders).</li>
-              <li>Educators and explainers who enjoy turning complex topics into clear language.</li>
-              <li>Researchers / DeFi and infra nerds who want to test and stress-test our ideas.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="pill">No pump-and-dump</span>
-              <span class="pill">No fake promises</span>
-              <span class="pill">Long-term mindset</span>
+      <!-- Values & Business Plan -->
+      <section class="values-card" aria-label="NetDAG values and business plan">
+        <h2><i class="fa-solid fa-compass" aria-hidden="true"></i> NetDAG values &amp; business plan</h2>
+        <p class="page-intro">
+          The business goal is not “more hype”—it’s durable usage. Partners should be able to buy trust rails with simple pricing
+          (per scan, per session, per API), while the protocol converts a portion of revenue into long-term support (buy-backs/reserve),
+          subject to governance and safety.
+        </p>
+
+        <div class="values-grid">
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="val-body">
+              <h3>Trust over marketing</h3>
+              <p>Publish verifiable addresses and policies. Make system actions auditable. Never ask users to “just believe.”</p>
             </div>
-          </article>
-
-          <article class="amb-card">
-            <h2>What NetDAG Ambassadors do</h2>
-            <ul class="amb-list">
-              <li><strong>Teach &amp; explain:</strong> create honest content about NetDAG, NDG, the bonding curve, Guardian, dVPN, and provenance.</li>
-              <li><strong>Host conversations:</strong> AMAs, spaces, meetups or private sessions for your local community.</li>
-              <li><strong>Give feedback:</strong> share what your audience actually understands, likes, or worries about.</li>
-              <li><strong>Spot partnerships:</strong> introduce projects, companies or communities that could benefit from NetDAG rails.</li>
-              <li><strong>Protect the vibe:</strong> help keep our ecosystem away from hype, scams, and unrealistic expectations.</li>
-            </ul>
-            <div class="amb-callout">
-              Ambassadorship is always <strong>opt-in and reversible</strong>. If at any point you feel misaligned with our direction,
-              we prefer an honest conversation over forced branding.
-            </div>
-          </article>
-
-          <article class="amb-card">
-            <h2>How it works</h2>
-            <ol class="amb-steps">
-              <li><strong>Introduce yourself:</strong> send us a short message or email with links to your work and communities.</li>
-              <li><strong>We talk:</strong> if there is a good fit, we schedule a call or async chat to align on values and expectations.</li>
-              <li><strong>Trial phase:</strong> we start with a small, low-pressure collaboration (content pieces, events, or experiments).</li>
-              <li><strong>Ongoing role:</strong> if it works for both sides, we define a longer-term ambassador path with clear goals.</li>
-            </ol>
-            <div class="amb-callout">
-              Ambassadorship is always <strong>opt-in and reversible</strong>.  If at any point you feel misaligned with our direction,
-              we prefer an honest conversation over forced branding.
-            </div>
-          </article>
-        </div>
-
-        <!-- Right column -->
-        <aside class="amb-card">
-          <h2>What we look for</h2>
-          <p class="amb-text">
-            There is no minimum follower count.  We care more about <strong>alignment and integrity</strong>: 
-          </p>
-          <ul class="amb-list">
-            <li>You are comfortable saying "I don't know" instead of inventing answers.</li>
-            <li>You are willing to highlight risks as well as opportunities.</li>
-            <li>You care about users more than short-term price action.</li>
-            <li>You are okay rejecting shady offers, even if they pay more.</li>
-          </ul>
-
-          <h3>What ambassadors can receive</h3>
-          <ul class="amb-list">
-            <li>NDG-denominated rewards tied to real impact (not pure follower numbers).</li>
-            <li>Early access to features, documents, and discussions.</li>
-            <li>Direct communication with the core contributors.</li>
-            <li>Visibility on the website and official channels where appropriate.</li>
-          </ul>
-
-          <div class="amb-callout">
-            Rewards are always <strong>transparent and capped</strong>. We do not sell private allocations
-            or guaranteed returns.  Ambassadors are partners, not insiders.
           </div>
 
-          <h3>Quick questions</h3>
-          <div class="amb-faq">
-            <details>
-              <summary>Is this a paid job?</summary>
-              <p>
-                No. It is a flexible collaboration.  We may reward contributions, but we do not hire
-                people to "say only nice things" or to manufacture hype. 
-              </p>
-            </details>
-            <details>
-              <summary>Do I need to be a DeFi expert?</summary>
-              <p>
-                Basic crypto literacy helps, but you do not need to be a solidity engineer.
-                We can support you with materials, diagrams, and explanations.
-              </p>
-            </details>
-            <details>
-              <summary>Can I be an ambassador for other projects too?</summary>
-              <p>
-                Yes, as long as there is no conflict of interest and you stay transparent.
-                We will decline collaborations that promote obvious scams or pump-and-dump schemes.
-              </p>
-            </details>
-            <details>
-              <summary>How do I apply?</summary>
-              <p>
-                Use the contact options below. Share who you are, what you already do, and how you
-                imagine contributing.  Short and honest is better than a long sales pitch.
-              </p>
-            </details>
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-coins"></i></div>
+            <div class="val-body">
+              <h3>Predictable liquidity</h3>
+              <p>Bonding-curve + reserve shock absorber aims to reduce panic mechanics and increase usability for real activity.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
+            <div class="val-body">
+              <h3>Gas‑free Easy Access</h3>
+              <p>Embedded wallets + optional sponsored transactions reduce onboarding failures and make utility flows complete.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-fingerprint"></i></div>
+            <div class="val-body">
+              <h3>Provenance that brands can use</h3>
+              <p>QR/NFC verification, anti-counterfeit proofs, and audit trails—priced and packaged in a partner-friendly way.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
+            <div class="val-body">
+              <h3>Privacy as a utility</h3>
+              <p>dVPN helps protect everyday users, while enabling node operators to earn for providing real network value.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-handshake"></i></div>
+            <div class="val-body">
+              <h3>Partner revenue flywheel</h3>
+              <p>Partner usage → protocol revenue → buy-backs/reserve support → resilience → more partner trust.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="road-grid">
+        <!-- Phases -->
+        <div class="road-phases" aria-label="Roadmap phases">
+
+          <article class="road-phase">
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 0 · Foundations</p>
+                <h2 class="phase-title">Concept, math &amp; security-first architecture</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-circle-nodes" aria-hidden="true"></i> In motion</p>
+            </div>
+            <p>
+              Define the rules, validate the economics, and prepare the system so every claim is verifiable and every contract is reviewable.
+            </p>
+            <ul class="phase-list">
+              <li>Formalize the pillars: <strong>Bonding Curve</strong>, <strong>Guardian</strong>, <strong>Provenance</strong>, <strong>dVPN</strong>, <strong>Easy Access</strong>.</li>
+              <li>Reserve/curve parameter tuning and documentation (including the <strong>22% reserve shock absorber</strong>).</li>
+              <li>Security model: multi-sig treasury, timelocks, and audit readiness.</li>
+              <li>Partner packaging: simple pricing concepts + integration paths (scan/session/API).</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 1 · Launch</p>
+                <h2 class="phase-title">Core contracts + transparency dashboards</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Upcoming</p>
+            </div>
+            <p>
+              Launch the on-chain core with maximum clarity: verified addresses, readable policies, and public monitoring.
+            </p>
+            <ul class="phase-list">
+              <li>Deploy NDG token, reserve, and governance-safe admin controls.</li>
+              <li>Publish dashboards for reserve flows and system activity.</li>
+              <li>Guardian (beta) in advisory mode: risk signals, anomaly warnings, health metrics.</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 2 · Adoption</p>
+                <h2 class="phase-title">Easy Access (gas-free UX) becomes default</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Planned</p>
+            </div>
+            <p>
+              Make crypto feel normal: login flows, embedded wallets, recovery options, and (where enabled) sponsored gas so users see $0 fees.
+            </p>
+            <ul class="phase-list">
+              <li>Email/social onboarding + embedded wallet creation.</li>
+              <li>Optional paymaster sponsorship so users see <strong>$0 gas</strong>.</li>
+              <li>Batched actions (buy + stake, verify + mint proof, claim + reward).</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 3 · Utility</p>
+                <h2 class="phase-title">dVPN + Provenance in real-world pilots</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-lock" aria-hidden="true"></i> Planned</p>
+            </div>
+            <p>
+              Ship recurring-use products that create real demand: privacy sessions and authenticity scans—tracked, measurable, and partner-ready.
+            </p>
+            <ul class="phase-list">
+              <li>dVPN client + node stack with rewards tied to real network value.</li>
+              <li>Provenance dApp with QR/NFC verification and clear “AUTHENTIC” proofs.</li>
+              <li>SDKs and docs for integrators; analytics feed Guardian insights.</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 4 · Scale</p>
+                <h2 class="phase-title">Partnership revenue + conversion loops</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-handshake" aria-hidden="true"></i> Future</p>
+            </div>
+            <p>
+              Make adoption easy for brands: simple pricing, predictable service, and a clear path from partner usage to protocol support.
+            </p>
+            <ul class="phase-list">
+              <li>Partner plans (per scan/session/API) + onboarding playbooks.</li>
+              <li>Governance-defined policy for converting a portion of revenue into NDG buy-backs/reserve support.</li>
+              <li>Loyalty/rewards programs tied to verifiable actions (not fake volume).</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 5 · Maturity</p>
+                <h2 class="phase-title">Guardian active defense + long-term governance</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Long-term</p>
+            </div>
+            <p>
+              Graduate from advisory signals to carefully limited, transparent safety actions—then progressively hand the keys to community governance.
+            </p>
+            <ul class="phase-list">
+              <li>Governance-tuned thresholds and transparent circuit-breaker protections.</li>
+              <li>Public reporting of every Guardian action and outcome.</li>
+              <li>Community-led upgrades, grants, and long-term funding for audits/public goods.</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <!-- Meta / principles -->
+        <aside class="road-meta" aria-label="Roadmap notes">
+          <div>
+            <h3><i class="fa-solid fa-book-open" aria-hidden="true"></i> How to read this roadmap</h3>
+            <p class="meta-note">
+              Phases are <strong>sequenced, not calendar-locked</strong>. Some will overlap and some may shift due to audits,
+              regulation, or partner feedback. The goal is to ship responsibly and report progress honestly.
+            </p>
+          </div>
+
+          <div>
+            <h3><i class="fa-solid fa-compass" aria-hidden="true"></i> Guardrails</h3>
+            <div class="meta-pill-row" aria-label="Guardrails">
+              <span class="meta-pill">Stability before speculation</span>
+              <span class="meta-pill">Transparency by default</span>
+              <span class="meta-pill">Security over speed</span>
+              <span class="meta-pill">Real usage &gt; fake volume</span>
+              <span class="meta-pill">Partner-friendly pricing</span>
+              <span class="meta-pill">Community alignment</span>
+            </div>
+          </div>
+
+          <div class="road-strip">
+            NetDAG is deliberately patient: the goal is to build infrastructure that survives multiple cycles.
+            If you’re only here for a quick flip, this will feel too slow—and that’s intentional.
           </div>
         </aside>
       </div>
+
+      <p class="road-timeline-caption">
+        This roadmap will be updated with verified links, metrics, audits, and pilot case studies as they go live.
+      </p>
+
     </div>
   </section>
 
@@ -440,10 +807,8 @@
     <div class="footer-banner">
       <div class="footer-banner-inner">
         <div class="banner-tagline">
-          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
-          NetDAG is not another short-term token.  We build next-gen infrastructure
-          for the real world — with math-backed stability and long-term commitment.
-          Join the ecosystem and let your wealth grow with real utility.
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.    </span>
+          NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment. Join the ecosystem and let your wealth grow with real utility.
         </div>
         <a href="vision.html" class="btn-explore-vision">Explore the Vision</a>
       </div>
@@ -451,14 +816,14 @@
 
     <div class="footer-main">
       <div class="footer-columns">
-        
+
         <div class="footer-col footer-brand-col">
           <div class="footer-brand-logo">
             <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
             <span class="footer-brand-name">NetDAG</span>
           </div>
           <p class="footer-brand-tagline">
-            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy. </em>
+            <em>A stability-first crypto economy: DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy.</em>
           </p>
         </div>
 
@@ -467,7 +832,7 @@
           <ul>
             <li><a href="../provenance.html">Provenance dApp</a></li>
             <li><a href="../bonding-curve.html">Bonding Curve</a></li>
-            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../guardian.html">Guardian</a></li>
             <li><a href="../no-gas.html">Easy Access</a></li>
           </ul>
         </div>
@@ -527,38 +892,32 @@
       </div>
 
       <form id="contactForm" class="contact-form">
-        <!-- First Name -->
         <div class="contact-form-group">
           <label for="contactFirstName" class="contact-label">First Name *</label>
           <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
             placeholder="Enter your first name">
         </div>
 
-        <!-- Last Name -->
         <div class="contact-form-group">
           <label for="contactLastName" class="contact-label">Last Name *</label>
           <input type="text" id="contactLastName" name="lastName" class="contact-input" required
             placeholder="Enter your last name">
         </div>
 
-        <!-- Email -->
         <div class="contact-form-group">
           <label for="contactEmail" class="contact-label">Email *</label>
           <input type="email" id="contactEmail" name="email" class="contact-input" required
             placeholder="your.email@example.com">
         </div>
 
-        <!-- Message -->
         <div class="contact-form-group">
           <label for="contactMessage" class="contact-label">Message *</label>
           <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
             placeholder="How can we help you?"></textarea>
         </div>
 
-        <!-- Status Message -->
         <div id="contactStatus" class="contact-status"></div>
 
-        <!-- Submit Button -->
         <button type="submit" class="contact-submit-btn">
           Send Message
         </button>
@@ -566,11 +925,11 @@
     </div>
   </div>
 
-<!-- END OF CONTACT MODAL -->
+  <!-- END OF CONTACT MODAL -->
 
- <script src="../js/contact-modal.js" defer></script>
+  <script src="../js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
-<script src="/js/ndg-buy-loader.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
 
 </body>
 </html>

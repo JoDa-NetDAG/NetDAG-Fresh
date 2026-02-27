@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NetDAG — Roadmap</title>
-  <meta name="description" content="NetDAG roadmap:   from bonding-curve shock absorber and Neuron AI to dVPN, provenance RWA dApp, ecosystem growth and long-term governance." />
+  <meta name="description" content="NetDAG roadmap: from bonding-curve shock absorber and Neuron AI to gas-free Easy Access, dVPN, provenance RWA dApp, ecosystem growth and long-term governance." />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/contact-modal.css">
@@ -12,190 +12,403 @@
   <script src="../js/main.js" defer></script>
 
   <style>
-    /* Roadmap page-specific styles */
+    /* =========================================================
+       ROADMAP — Modern rebuild (page-scoped)
+       Adds:
+       - Clear NetDAG values + business plan milestones
+       - Hero image tag so you can swap the image anytime
+       - Glowing phase cards + a simple SVG timeline diagram
+       ========================================================= */
+
+    body.roadmap-page{
+      background: var(--bg, #050714);
+      color: var(--muted, #e0e0e0);
+    }
+
+    /* Hero */
+    .hero-roadmap{
+      position: relative;
+      min-height: 50vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #070914;
+    }
+
+    /* HERO IMAGE TAG (swap the src) */
+    .hero-roadmap .hero-media{
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-roadmap .hero-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.02);
+    }
+
+    .hero-roadmap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 16% 20%, rgba(255,153,0,.22), transparent 55%),
+        radial-gradient(circle at 82% 30%, rgba(120,160,255,.18), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.80));
+      pointer-events:none;
+    }
+
+    .hero-roadmap .hero-overlay{
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 118px 16px 68px;
+      text-align: center;
+    }
+
+    .hero-roadmap .hero-title{
+      color: #ff9900;
+      font-size: clamp(2.2rem, 5.2vw, 4rem);
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 16px 44px rgba(0,0,0,.55);
+      font-weight: 900;
+    }
+
+    .hero-roadmap .hero-subtitle{
+      max-width: 860px;
+      color: rgba(255,255,255,.92);
+      font-size: 1.05rem;
+      margin: 0 auto;
+      line-height: 1.85;
+      text-shadow: 0 12px 36px rgba(0,0,0,.55);
+    }
+
+    .hero-chip-row{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      font-size: .92rem;
+      white-space: nowrap;
+    }
+    .hero-chip i{ color: var(--accent, #ff9900); }
+
+    /* Content */
+    .curve-section{ padding-top: 28px; }
+
     .road-wrap{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 0 60px;
+      padding: 34px 16px 66px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 22px;
     }
-    
+
     .page-title{
-      font-size: 2.1rem;
-      font-weight: 650;
-      margin:  0 0 8px;
-      color: var(--accent);
+      font-size: clamp(1.55rem, 2.6vw, 2.15rem);
+      font-weight: 900;
+      margin: 0 0 10px;
+      color: #ffffff;
+      letter-spacing: -0.01em;
     }
-    
+
     .page-intro{
-      margin:  0 0 18px;
-      color: var(--muted);
-      max-width: 820px;
-      font-size: 0.96rem;
-      line-height:  1.7;
+      margin: 0;
+      color: rgba(233,238,247,.78);
+      max-width: 980px;
+      font-size: 0.98rem;
+      line-height: 1.8;
     }
 
     .road-grid{
       display: grid;
       gap: 18px;
+      margin-top: 6px;
     }
-    
-    @media(min-width: 900px){
+
+    @media (min-width: 980px){
       .road-grid{
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
         align-items: flex-start;
       }
     }
 
-    .road-phase{
-      background: #0f1120;
-      border:  1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px 22px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+    /* Values + plan block */
+    .values-card{
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px 18px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.50);
       position: relative;
       overflow: hidden;
     }
-    
-    .road-phase::before{
-      content: "";
-      position: absolute;
-      left: 0;
-      top:  0;
-      bottom: 0;
-      width:  3px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-      opacity: .8;
+    .values-card::before{
+      content:"";
+      position:absolute;
+      inset:-60px -60px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255,153,0,.16), rgba(255,153,0,0) 65%);
+      opacity: .6;
+      pointer-events:none;
     }
-    
+
+    .values-card h2{
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: #fff;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      letter-spacing: -0.01em;
+    }
+    .values-card h2 i{ color: var(--accent, #ff9900); }
+
+    .values-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (min-width: 880px){
+      .values-grid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    .val{
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .val-ico{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,153,0,.25);
+      background: rgba(255,153,0,.10);
+      box-shadow: 0 0 34px rgba(255,153,0,.12);
+      color: var(--accent, #ff9900);
+      flex: 0 0 auto;
+    }
+    .val-body h3{
+      margin: 0 0 6px;
+      color: rgba(255,255,255,.94);
+      font-size: 1.0rem;
+      letter-spacing: -0.01em;
+    }
+    .val-body p{
+      margin: 0;
+      color: rgba(233,238,247,.78);
+      line-height: 1.65;
+      font-size: .95rem;
+    }
+
+    /* Phase cards */
+    .road-phase{
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px 18px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.50);
+      position: relative;
+      overflow: hidden;
+    }
+    .road-phase::before{
+      content:"";
+      position:absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, rgba(255,153,0,.95), rgba(127,176,255,.10));
+      opacity: .95;
+    }
+
+    .phase-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
     .phase-label{
       font-size: .78rem;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: var(--accent-2);
-      margin-bottom: 4px;
-    }
-    
-    .phase-title{
-      font-size: 1.15rem;
-      margin:  0 0 10px;
-      color: #fff;
-    }
-    
-    .phase-time{
-      font-size: .85rem;
-      color: var(--muted);
-      margin: 0 0 12px;
+      color: rgba(255,184,77,.92);
+      margin: 0 0 6px;
     }
 
+    .phase-title{
+      font-size: 1.18rem;
+      margin: 0;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .phase-time{
+      font-size: .88rem;
+      color: rgba(233,238,247,.72);
+      margin: 4px 0 0;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      white-space: nowrap;
+    }
+    .phase-time i{ color: rgba(127,176,255,.95); }
+
     .road-phase p{
-      margin: 0 0 18px;
-      color: var(--text);
+      margin: 0 0 14px;
+      color: rgba(233,238,247,.78);
       font-size: 0.95rem;
-      line-height:  1.7;
+      line-height: 1.75;
     }
 
     .phase-list{
       margin: 0;
       padding-left: 18px;
-      color: var(--text);
-      font-size: .96rem;
+      color: rgba(233,238,247,.80);
+      font-size: .95rem;
+      line-height: 1.7;
     }
-    
-    .phase-list li+li{
-      margin-top:  8px;
+    .phase-list li+li{ margin-top: 8px; }
+    .phase-list strong{ color: rgba(255,255,255,.92); }
+
+    /* Meta column */
+    .road-meta{
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.45);
+      display:flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 110px; /* stays visible below fixed header */
+    }
+    @media (max-width: 980px){
+      .road-meta{ position: static; top: auto; }
     }
 
-    .road-meta{
-      background: rgba(15,17,32,.9);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.16);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    
     .road-meta h3{
       margin: 0 0 8px;
       font-size: 1rem;
       color: #fff;
+      display:flex;
+      align-items:center;
+      gap: 10px;
     }
-    
+    .road-meta h3 i{ color: var(--accent, #ff9900); }
+
     .meta-note{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: .93rem;
-      line-height:  1.7;
+      margin: 0;
+      color: rgba(233,238,247,.74);
+      font-size: .94rem;
+      line-height: 1.7;
     }
-    
+
     .meta-pill-row{
-      display: flex;
+      display:flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 4px;
+      margin-top: 8px;
     }
-    
     .meta-pill{
       border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      font-size:  .8rem;
-      color: var(--muted);
-      background: rgba(15,23,42,.9);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 6px 10px;
+      font-size: .8rem;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.03);
       white-space: nowrap;
     }
 
-    .road-timeline-caption{
-      margin: 8px 0 0;
-      font-size: .9rem;
-      color: var(--muted);
-    }
-
     .road-strip{
+      margin-top: 4px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,.16);
+      background: rgba(15,23,42,.55);
+      font-size: .92rem;
+      color: rgba(233,238,247,.78);
+      line-height: 1.7;
+    }
+
+    /* Timeline diagram */
+    .diagram{
       margin-top: 10px;
-      padding:  14px 16px;
-      border-radius: 12px;
-      border: 1px dashed var(--border);
-      background: rgba(15,23,42,.75);
-      font-size: .9rem;
-      color:var(--muted);
-      line-height:1.7;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      box-shadow: 0 18px 46px rgba(0,0,0,.45);
     }
-
-    /* Hero tweaks */
-    .hero-roadmap{
-      background-image: url('../images/ndg23.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      min-height: 100vh;
-    }
-    
-    .hero-roadmap .hero-overlay{
-      justify-content: center;
+    .diagram-header{
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
       align-items: center;
-      text-align: center;
-      padding-top: 0;
+      background: rgba(0,0,0,.22);
     }
-    
-    .hero-roadmap .hero-title{
-      color: #ff9900;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom:  20px;
+    .diagram-header strong{
+      color: rgba(255,255,255,.90);
+      font-size: .95rem;
+      letter-spacing: .2px;
     }
-    
-    .hero-roadmap .hero-subtitle{
-      max-width: 720px;
-      color: #000000;
-      font-size: 1.1rem;
+    .diagram-header span{
+      color: rgba(233,238,247,.72);
+      font-size: .86rem;
+    }
+    .diagram-body{ padding: 14px; }
+
+    .road-timeline-caption{
+      margin: 0;
+      font-size: .94rem;
+      color: rgba(233,238,247,.72);
+      line-height: 1.7;
     }
 
-    .curve-section{
-      padding-top: 28px;
+    @media (max-width: 700px){
+      .hero-roadmap .hero-overlay{ padding: 110px 16px 54px; }
+      .road-wrap{ padding: 30px 16px 60px; }
     }
   </style>
 </head>
@@ -256,9 +469,9 @@
 
       <ul class="menu-list">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../bonding-curve.html">Bonding Curve</a></li>
         <li><a href="../guardian.html">Guardian</a></li>
-        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../no-gas.html">Easy Access</a></li>
         <li><a href="whitepaper.html">Whitepaper</a></li>
         <li><a href="blog.html">Blog</a></li>
@@ -273,35 +486,140 @@
       </ul>
 
       <div class="mobile-ctas">
-        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
-      </div>
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
     </div>
   </div>
 
   <!-- HERO -->
   <main class="hero-banner hero-roadmap" id="main-content" role="main">
+    <!-- HERO IMAGE TAG (swap this src any time) -->
+    <div class="hero-media" aria-hidden="true">
+      <img src="../images/ndg2.png" alt="">
+    </div>
+
     <div class="hero-overlay">
       <h1 class="hero-title">NetDAG Roadmap</h1>
       <p class="hero-subtitle">
-        From foundations and presale to dVPN, provenance, Guardian upgrades and
-        long-term governance — a stability-first path instead of hype dates.
+        A stability-first path: ship foundations, prove utility, scale partnerships, and graduate to community governance—
+        without chasing hype dates.
       </p>
+
+      <div class="hero-chip-row" aria-label="Roadmap themes">
+        <span class="hero-chip"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Trust &amp; Transparency</span>
+        <span class="hero-chip"><i class="fa-solid fa-coins" aria-hidden="true"></i> Bonding-curve stability</span>
+        <span class="hero-chip"><i class="fa-solid fa-brain" aria-hidden="true"></i> Guardian AI</span>
+        <span class="hero-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Gas-free UX</span>
+        <span class="hero-chip"><i class="fa-solid fa-lock" aria-hidden="true"></i> dVPN privacy</span>
+        <span class="hero-chip"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> Provenance</span>
+      </div>
     </div>
   </main>
 
   <!-- ROADMAP CONTENT -->
   <section class="curve-section">
     <div class="road-wrap">
-      <header>
-        <h1 class="page-title">NetDAG Roadmap</h1>
+
+      <header class="values-card">
+        <h2><i class="fa-solid fa-compass" aria-hidden="true"></i> Values &amp; Business Plan (what guides every phase)</h2>
         <p class="page-intro">
-          NetDAG is a <strong>systemic DeFi / RWA project</strong> built on three pillars:
-          a financial engine (bonding-curve shock absorber), an AI brain (Neuron / Guardian),
-          and a physical dApp layer (provenance + retail integrations). This roadmap is
-          <strong>not a hype schedule</strong>; it is a sequence of real milestones that
-          connect those three pillars into one working system.
+          NetDAG is designed as <strong>infrastructure</strong>—a stability-first crypto economy where real usage matters more than short-term price action.
+          The roadmap below is sequenced around measurable outcomes: security, adoption, partner revenue, and long-term resilience.
         </p>
+
+        <div class="values-grid" aria-label="NetDAG values and business plan">
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="val-body">
+              <h3>Trust over hype</h3>
+              <p>Proof beats claims: transparent addresses, clear token flows, auditable system behavior, and simple user safety rules.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-coins"></i></div>
+            <div class="val-body">
+              <h3>Stability-first token design</h3>
+              <p>Bonding-curve + reserve “shock absorber” aims to reduce fragility and build predictable liquidity for real users.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-bolt"></i></div>
+            <div class="val-body">
+              <h3>Gas-free Easy Access</h3>
+              <p>Crypto must feel normal: onboarding that looks like Web2, embedded wallets, and optional sponsored gas for users.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-fingerprint"></i></div>
+            <div class="val-body">
+              <h3>Real-world commerce</h3>
+              <p>Provenance is built for brands: QR/NFC verification, anti-counterfeit protection, and audit trails that outlive labels.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
+            <div class="val-body">
+              <h3>Privacy as a utility</h3>
+              <p>dVPN turns bandwidth into a privacy network—so everyday users can connect without trusting a single central provider.</p>
+            </div>
+          </div>
+
+          <div class="val">
+            <div class="val-ico" aria-hidden="true"><i class="fa-solid fa-handshake"></i></div>
+            <div class="val-body">
+              <h3>Partner-friendly revenue model</h3>
+              <p>Make adoption easy: partners can pay simple fees (per scan/session/API), while the protocol converts a portion into NDG buy-backs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="diagram" aria-label="Business flywheel diagram">
+          <div class="diagram-header">
+            <strong>Business Flywheel</strong>
+            <span>Utility → partner revenue → buy-backs → resilience → more utility</span>
+          </div>
+          <div class="diagram-body">
+            <svg viewBox="0 0 920 240" role="img" aria-label="Diagram: Utility drives partner revenue, revenue supports buy-backs and reserve, creating resilience that attracts more utility">
+              <defs>
+                <linearGradient id="rmStroke" x1="0" x2="1">
+                  <stop offset="0" stop-color="#ff9900" stop-opacity=".92"/>
+                  <stop offset="1" stop-color="#7fb0ff" stop-opacity=".80"/>
+                </linearGradient>
+              </defs>
+
+              <g>
+                <rect x="34"  y="70" width="210" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(255,153,0,.32)"/>
+                <rect x="270" y="70" width="210" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(127,176,255,.32)"/>
+                <rect x="506" y="70" width="210" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(255,153,0,.26)"/>
+                <rect x="742" y="70" width="150" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(127,176,255,.26)"/>
+
+                <text x="139" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="900">Utility</text>
+                <text x="375" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="900">Revenue</text>
+                <text x="611" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="900">Buy‑backs</text>
+                <text x="817" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="900">Resilience</text>
+
+                <text x="139" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">dVPN • Provenance</text>
+                <text x="375" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">Partners • Fees</text>
+                <text x="611" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">Curve • Burns</text>
+                <text x="817" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">Trust • Growth</text>
+
+                <path d="M244 120h26" stroke="url(#rmStroke)" stroke-width="8" stroke-linecap="round"/>
+                <path d="M480 120h26" stroke="url(#rmStroke)" stroke-width="8" stroke-linecap="round"/>
+                <path d="M716 120h26" stroke="url(#rmStroke)" stroke-width="8" stroke-linecap="round"/>
+
+                <path d="M268 108l18 12-18 12" fill="none" stroke="url(#rmStroke)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M504 108l18 12-18 12" fill="none" stroke="url(#rmStroke)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M740 108l18 12-18 12" fill="none" stroke="url(#rmStroke)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+        </div>
       </header>
 
       <div class="road-grid">
@@ -309,83 +627,139 @@
         <div class="road-phases">
 
           <article class="road-phase">
-            <p class="phase-label">Phase 0 · Foundations</p>
-            <h2 class="phase-title">Concept, math &amp; architecture</h2>
-            <p class="phase-time">Status: In motion</p>
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 0 · Foundations</p>
+                <h2 class="phase-title">Concept, math &amp; architecture</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-circle-nodes" aria-hidden="true"></i> Status: In motion</p>
+            </div>
+            <p>
+              Build the stability-first core: define rules, publish docs, and prepare contracts and dashboards so every claim can be verified.
+            </p>
             <ul class="phase-list">
-              <li>Define NetDAG's core mission:  stability-first, real-world-linked crypto economy. </li>
-              <li>Formalise the three core pillars: Financial Engine, Neuron AI, Provenance dApp.</li>
-              <li>Design bonding-curve parameters and <strong>22% reserve "shock absorber"</strong>.</li>
-              <li>Mathematically validate the reserve + curve model and prepare partner-facing docs.</li>
-              <li>High-level architecture for Neuron AI, oracle feeds and provenance / RWA flows.</li>
-              <li>Brand identity, web presence and documentation structure (whitepaper, tokenomics).</li>
+              <li>Define the mission: <strong>stability-first, real-world-linked crypto economy</strong>.</li>
+              <li>Formalize pillars: <strong>Financial Engine</strong>, <strong>Guardian/Neuron</strong>, <strong>Provenance</strong>, plus <strong>Easy Access</strong> UX.</li>
+              <li>Design curve parameters and the <strong>22% reserve shock absorber</strong> with clear, explainable mechanics.</li>
+              <li>Prepare partner-facing docs: fee model, onboarding plan, and proof flows (QR/NFC, scan verification).</li>
+              <li>Architecture for Guardian signals, oracle feeds, and dashboards.</li>
+              <li>Security planning: contract boundaries, multi-sig custody, and audit readiness.</li>
             </ul>
           </article>
 
           <article class="road-phase">
-            <p class="phase-label">Phase 1 · Launch</p>
-            <h2 class="phase-title">Presale, core contracts &amp; first guardian</h2>
-            <p class="phase-time">Status:  Upcoming</p>
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 1 · Launch</p>
+                <h2 class="phase-title">Presale, core contracts &amp; Guardian (beta)</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Status: Upcoming</p>
+            </div>
+            <p>
+              Launch the on-chain core with maximum transparency: verified addresses, readable policies, and a Guardian layer that measures risk in public.
+            </p>
             <ul class="phase-list">
-              <li>Deploy NDG token, bonding-curve reserve and timelock / treasury contracts on BNB Chain.</li>
-              <li>Lock the permanent reserve on-chain and publish verifiable addresses and dashboards.</li>
-              <li>Run the initial presale with transparent curve-based price steps and supply caps.</li>
-              <li>Integrate oracles and monitoring so Neuron / Guardian can observe market conditions.</li>
-              <li>Launch Guardian (beta) in advisory mode with public risk and liquidity signals.</li>
-              <li>List NDG on the first DEX and enable curve-aware buy-back and arbitrage incentives.</li>
+              <li>Deploy NDG token, bonding-curve reserve, and timelock/treasury contracts.</li>
+              <li>Publish verifiable addresses and dashboards for reserve/flows.</li>
+              <li>Presale: transparent curve steps, supply caps, and clear user guidance.</li>
+              <li>Guardian beta in advisory mode: concentration alerts, liquidity signals, anomaly detection.</li>
+              <li>Enable the first “utility rails”: initial buy, stake (if live), and ecosystem onboarding.</li>
             </ul>
           </article>
 
           <article class="road-phase">
-            <p class="phase-label">Phase 2 · Network utilities</p>
-            <h2 class="phase-title">dVPN &amp; provenance / RWA dApp</h2>
-            <p class="phase-time">Status: Planned</p>
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 2 · User adoption</p>
+                <h2 class="phase-title">Easy Access (gas-free UX) + first utility loops</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Status: Planned</p>
+            </div>
+            <p>
+              Make the experience feel normal. Adoption is a UX problem as much as a tech problem—and gas-free flows remove the biggest failure points.
+            </p>
             <ul class="phase-list">
-              <li>Release the first NetDAG dVPN client &amp; node stack with NDG-denominated bandwidth.</li>
-              <li>Launch the provenance dApp for verifying digital media and physical products.</li>
-              <li>Align the dApp design with existing standards (barcodes, QR, NFC) for easy adoption.</li>
-              <li>Pipe usage metrics (scans, sessions, nodes) into Neuron / Guardian for live analytics.</li>
-              <li>Create SDKs and docs so external teams can build on dVPN and provenance rails.</li>
-              <li>Experiment with NDG incentives for early users, node operators and verifiers.</li>
+              <li>Release Easy Access onboarding: email/social sign-in, embedded wallet creation, recovery options.</li>
+              <li>Optional sponsored transactions so users see <strong>$0 gas</strong> when enabled.</li>
+              <li>Batch actions: buy + stake, verify + mint proof, claim + reward.</li>
+              <li>Education &amp; safety prompts: “verify addresses”, “avoid fake links”, “readable transaction previews”.</li>
             </ul>
           </article>
 
           <article class="road-phase">
-            <p class="phase-label">Phase 3 · Ecosystem &amp; commerce</p>
-            <h2 class="phase-title">Real-world integration &amp; loyalty</h2>
-            <p class="phase-time">Status:  Planned</p>
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 3 · Network utilities</p>
+                <h2 class="phase-title">dVPN + Provenance / RWA dApp</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-lock" aria-hidden="true"></i> Status: Planned</p>
+            </div>
+            <p>
+              Ship utilities that create real, recurring demand: privacy connectivity and verifiable authenticity for physical goods.
+            </p>
             <ul class="phase-list">
-              <li>Open affiliate and commerce bridges so Web2 / Web3 partners can plug into NetDAG.</li>
-              <li>Structure pilots where brands pay simple per-scan or per-session fees (no token risk).</li>
-              <li>Convert a portion of that real-world revenue into NDG buy-backs on the bonding curve.</li>
-              <li>Introduce staking and loyalty programs tied to verifiable activity, not pure speculation.</li>
-              <li>Launch community-led ecosystem projects that extend the dVPN and provenance stack.</li>
+              <li>dVPN client + node stack with NDG-denominated bandwidth and rewards.</li>
+              <li>Provenance dApp for verifying products using QR/NFC, with clear “AUTHENTIC” proofs.</li>
+              <li>SDKs and docs for third parties (brands, dev teams, integrators).</li>
+              <li>Usage metrics feed Guardian analytics: scans, sessions, node health, fraud signals.</li>
+              <li>Incentives based on verifiable activity, not fake volume.</li>
             </ul>
           </article>
 
           <article class="road-phase">
-            <p class="phase-label">Phase 4 · Guardian upgrade</p>
-            <h2 class="phase-title">From advisory to active defence</h2>
-            <p class="phase-time">Status:  Future</p>
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 4 · Commerce &amp; partnerships</p>
+                <h2 class="phase-title">Brand rails, pricing, and revenue conversion</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-handshake" aria-hidden="true"></i> Status: Future</p>
+            </div>
+            <p>
+              Scale through business reality: partners want simple pricing, reliability, and measurable value. NetDAG aims to make “trust rails” easy to buy.
+            </p>
             <ul class="phase-list">
-              <li>Upgrade Guardian / Neuron from "read-only advisor" to carefully-limited on-chain actor.</li>
-              <li>Allow governance to tune risk thresholds, intervention rules and reserve usage policies.</li>
-              <li>Deploy more sophisticated anomaly detection and circuit-breaker style protections.</li>
-              <li>Expose full transparency dashboards for every Guardian action and outcome.</li>
-              <li>Offer opt-in user profiles (conservative / neutral / adventurous) for strategy preferences.</li>
+              <li>Partner plans: per-scan, per-session, per-API usage pricing (minimizes token risk for brands).</li>
+              <li>Revenue policy: convert a portion of partner revenue into NDG buy-backs on the curve (subject to governance).</li>
+              <li>Loyalty programs tied to verified actions (scan/verify/connect), not speculation.</li>
+              <li>Case studies + industry templates (luxury, pharma, electronics, tickets).</li>
             </ul>
           </article>
 
           <article class="road-phase">
-            <p class="phase-label">Phase 5 · Governance &amp; autonomy</p>
-            <h2 class="phase-title">NetDAG as self-sustaining infrastructure</h2>
-            <p class="phase-time">Status:  Vision</p>
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 5 · Guardian upgrade</p>
+                <h2 class="phase-title">From advisory to limited active defense</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-shield" aria-hidden="true"></i> Status: Vision</p>
+            </div>
+            <p>
+              Upgrade Guardian carefully. Any “active” behavior must be limited, transparent, and governed—because safety without accountability becomes risk.
+            </p>
             <ul class="phase-list">
-              <li>Progressively hand control of key parameters to on-chain governance and the community.</li>
-              <li>Formalise NDG as the coordination asset across all NetDAG products and revenue flows.</li>
-              <li>Extend multi-chain support and cross-chain liquidity rails for the bonding-curve engine.</li>
-              <li>Grow a network of independent teams and partners building specialised apps on NetDAG.</li>
-              <li>Ensure long-term funding for public goods, audits and ecosystem maintenance.</li>
+              <li>Governance-tuned risk thresholds and intervention rules.</li>
+              <li>On-chain “circuit-breaker” style protections for extreme events (with public reporting).</li>
+              <li>Transparency dashboards for every Guardian action and outcome.</li>
+              <li>Opt-in profiles (conservative/neutral/advanced) to respect different user preferences.</li>
+            </ul>
+          </article>
+
+          <article class="road-phase">
+            <div class="phase-head">
+              <div>
+                <p class="phase-label">Phase 6 · Governance &amp; autonomy</p>
+                <h2 class="phase-title">NetDAG as self-sustaining infrastructure</h2>
+              </div>
+              <p class="phase-time"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Status: Long-term</p>
+            </div>
+            <p>
+              Mature into a multi-cycle protocol: community-led upgrades, sustainable treasury, and independent builders extending NetDAG.
+            </p>
+            <ul class="phase-list">
+              <li>Progressively hand key parameters to on-chain governance.</li>
+              <li>Grow independent teams building specialized apps on NetDAG rails.</li>
+              <li>Multi-chain expansion where it adds resilience and user access.</li>
+              <li>Long-term funding for audits, public goods, and ecosystem maintenance.</li>
             </ul>
           </article>
 
@@ -394,49 +768,82 @@
         <!-- Meta / principles column -->
         <aside class="road-meta">
           <div>
-            <h3>How to read this roadmap</h3>
+            <h3><i class="fa-solid fa-book-open" aria-hidden="true"></i> How to read this roadmap</h3>
             <p class="meta-note">
-              Phases are <strong>sequenced, not calendar-locked</strong>. Some will overlap, some may
-              be reordered by audits, regulation or partner feedback.  We prefer to <strong>ship quietly
-              and report honestly</strong> rather than publishing aggressive date promises.
+              Phases are <strong>sequenced, not calendar-locked</strong>. Some will overlap, and some may be reordered by audits,
+              regulation, or partner feedback. The goal is to ship responsibly and report progress honestly.
             </p>
           </div>
 
           <div>
-            <h3>Guiding principles</h3>
-            <p class="meta-note">Every step we take must respect these guardrails:</p>
+            <h3><i class="fa-solid fa-compass" aria-hidden="true"></i> Guiding principles</h3>
+            <p class="meta-note">Every step should respect these guardrails:</p>
             <div class="meta-pill-row">
               <span class="meta-pill">Stability before speculation</span>
               <span class="meta-pill">On-chain transparency</span>
               <span class="meta-pill">Security over speed</span>
               <span class="meta-pill">Real usage &gt; fake volume</span>
-              <span class="meta-pill">RWA &amp; partner-friendly design</span>
+              <span class="meta-pill">Partner-friendly pricing</span>
               <span class="meta-pill">Community alignment</span>
             </div>
           </div>
 
-          <div>
-            <h3>Partnership lens</h3>
-            <p class="meta-note">
-              NetDAG's ecosystem is built around three partner types: financial allies who
-              understand the reserve and curve, AI / data infrastructure that Neuron can rely on,
-              and real-world brands and manufacturers that care about provenance and anti-counterfeit.
-              This roadmap keeps all three in view. 
-            </p>
+          <div class="diagram" aria-label="Roadmap timeline diagram">
+            <div class="diagram-header">
+              <strong>Timeline at a glance</strong>
+              <span>Foundations → Utility → Partnerships → Governance</span>
+            </div>
+            <div class="diagram-body">
+              <svg viewBox="0 0 900 220" role="img" aria-label="Timeline diagram: phases move from foundations to governance">
+                <defs>
+                  <linearGradient id="rmLine" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ff9900" stop-opacity=".92"/>
+                    <stop offset="1" stop-color="#7fb0ff" stop-opacity=".82"/>
+                  </linearGradient>
+                </defs>
+
+                <path d="M60 110H840" stroke="url(#rmLine)" stroke-width="10" stroke-linecap="round"/>
+
+                <g>
+                  <circle cx="120" cy="110" r="18" fill="rgba(255,153,0,.18)" stroke="rgba(255,153,0,.65)" stroke-width="3"/>
+                  <text x="120" y="165" text-anchor="middle" fill="rgba(255,255,255,.88)" font-size="14" font-weight="800">0–1</text>
+                  <text x="120" y="188" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="12">Core</text>
+
+                  <circle cx="260" cy="110" r="18" fill="rgba(127,176,255,.12)" stroke="rgba(127,176,255,.55)" stroke-width="3"/>
+                  <text x="260" y="165" text-anchor="middle" fill="rgba(255,255,255,.88)" font-size="14" font-weight="800">2</text>
+                  <text x="260" y="188" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="12">UX</text>
+
+                  <circle cx="400" cy="110" r="18" fill="rgba(255,153,0,.12)" stroke="rgba(255,153,0,.55)" stroke-width="3"/>
+                  <text x="400" y="165" text-anchor="middle" fill="rgba(255,255,255,.88)" font-size="14" font-weight="800">3</text>
+                  <text x="400" y="188" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="12">Utility</text>
+
+                  <circle cx="540" cy="110" r="18" fill="rgba(127,176,255,.12)" stroke="rgba(127,176,255,.55)" stroke-width="3"/>
+                  <text x="540" y="165" text-anchor="middle" fill="rgba(255,255,255,.88)" font-size="14" font-weight="800">4</text>
+                  <text x="540" y="188" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="12">Partners</text>
+
+                  <circle cx="680" cy="110" r="18" fill="rgba(255,153,0,.10)" stroke="rgba(255,153,0,.50)" stroke-width="3"/>
+                  <text x="680" y="165" text-anchor="middle" fill="rgba(255,255,255,.88)" font-size="14" font-weight="800">5</text>
+                  <text x="680" y="188" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="12">Defense</text>
+
+                  <circle cx="820" cy="110" r="18" fill="rgba(127,176,255,.10)" stroke="rgba(127,176,255,.50)" stroke-width="3"/>
+                  <text x="820" y="165" text-anchor="middle" fill="rgba(255,255,255,.88)" font-size="14" font-weight="800">6</text>
+                  <text x="820" y="188" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="12">Gov</text>
+                </g>
+              </svg>
+            </div>
           </div>
 
           <div class="road-strip">
-            NetDAG is deliberately patient:  the goal is to build infrastructure that can survive
-            hype cycles, not chase them. If you are here only for a quick flip, this roadmap will
-            probably feel too slow — and that is by design. 
+            NetDAG is deliberately patient: the goal is to build infrastructure that survives multiple cycles.
+            If you are here only for a quick flip, this roadmap will feel too slow—and that is by design.
           </div>
         </aside>
       </div>
 
       <p class="road-timeline-caption">
-        A visual timeline graphic will be added here later, once the first contracts, audits
-        and pilot partnerships are live. Until then, this text is the canonical roadmap.
+        Roadmaps are living documents. As audits complete and pilot partnerships go live, this page will be updated with verified links, metrics, and progress reports.
       </p>
+
     </div>
   </section>
 
@@ -461,7 +868,7 @@
 
     <div class="footer-main">
       <div class="footer-columns">
-        
+
         <div class="footer-col footer-brand-col">
           <div class="footer-brand-logo">
             <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
@@ -477,7 +884,7 @@
           <ul>
             <li><a href="../provenance.html">Provenance dApp</a></li>
             <li><a href="../bonding-curve.html">Bonding Curve</a></li>
-            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../guardian.html">Guardian</a></li>
             <li><a href="../no-gas.html">Easy Access</a></li>
           </ul>
         </div>
@@ -576,11 +983,11 @@
     </div>
   </div>
 
-<!-- END OF CONTACT MODAL -->
+  <!-- END OF CONTACT MODAL -->
 
-<script src="../js/contact-modal.js" defer></script>
+  <script src="../js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
-<script src="/js/ndg-buy-loader.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
 
 </body>
 </html>

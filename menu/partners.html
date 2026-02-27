@@ -4,207 +4,312 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NetDAG — Partners</title>
-  <meta name="description" content="Partner with NetDAG to bring trust, stability, and real-world utility to your users.  Technology, exchanges, brands, NGOs—build with us." />
+  <meta name="description" content="Partner with NetDAG to bring trust, stability, and real-world utility to your users. Technology, exchanges, brands, and NGOs—build with us." />
   <link rel="icon" href="../images/favicon.ico" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/contact-modal.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare. com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <!-- FIXED: removed accidental space in CDN url -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
   <script src="../js/main.js" defer></script>
 
   <style>
-    /* Partners page-specific styles */
+    /* =========================================================
+       PARTNERS — Refined + added ideas (page-scoped)
+       - Keeps your structure, adds:
+         * clearer partner proposition + value flywheel
+         * partner packages (pricing models, pilots, KPIs)
+         * a "what we need from partners" section (realistic)
+       - Also fixes charity wording: do NOT claim "protocol-level" donation
+         (consistent with your current off-chain pledge approach)
+       ========================================================= */
+
+    body.partners-page{
+      background: var(--bg, #050714);
+      color: var(--muted, #e0e0e0);
+    }
+
     .p-wrap{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 0 60px;
+      padding: 40px 16px 60px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 18px;
+    }
+    @media (min-width: 980px){
+      .p-wrap{ padding: 40px 0 60px; }
     }
 
     .p-card{
-      background:  #0f1120;
-      border:  1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 24px;
-      box-shadow:  0 2px 10px rgba(0,0,0,.18);
+      background: rgba(7, 9, 20, 0.96);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 22px 22px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.45);
+      position: relative;
+      overflow: hidden;
     }
-    
+    .p-card::before{
+      content:"";
+      position:absolute;
+      inset:-60px -60px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255,153,0,.16), rgba(255,153,0,0) 65%);
+      opacity: .6;
+      pointer-events:none;
+    }
+
     .p-card h2{
-      margin:  0 0 12px;
+      margin: 0 0 12px;
       color: #fff;
-      font-size:  1.35rem;
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+      position: relative;
+      z-index: 1;
+      display:flex;
+      align-items:center;
+      gap: 10px;
     }
-    
+    .p-card h2 i{ color: var(--accent, #ff9900); }
+
     .p-card h3{
       margin: 0 0 8px;
       color: #fff;
       font-size: 1.05rem;
+      position: relative;
+      z-index: 1;
+      display:flex;
+      align-items:center;
+      gap: 10px;
     }
-    
+    .p-card h3 i{ color: rgba(127,176,255,.95); }
+
     .p-card p{
-      margin: 0 0 18px;
-      color: var(--text);
-      font-size: 0.95rem;
-      line-height: 1.7;
+      margin: 0 0 14px;
+      color: rgba(233,238,247,.78);
+      font-size: 0.98rem;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
     }
 
     .p-grid{
-      display: grid;
+      display:grid;
       gap: 18px;
+      position: relative;
+      z-index: 1;
     }
-    
     @media(min-width: 980px){
-      .p-grid{
-        grid-template-columns: 1fr 1fr;
-      }
+      .p-grid{ grid-template-columns: 1fr 1fr; }
     }
 
     .p-list{
       list-style: none;
-      margin: 8px 0 18px;
+      margin: 8px 0 0;
       padding: 0;
       display: grid;
       gap: 12px;
-      color: var(--text);
+      color: rgba(233,238,247,.78);
       font-size: 0.95rem;
       line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
-    
     .p-list li{
-      background: #0f1120;
-      border:  1px solid var(--border);
-      border-radius: 10px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
       padding: 12px 14px;
     }
+    .p-list li strong{ color: rgba(255,255,255,.92); }
 
     .tier-grid{
-      display: grid;
+      display:grid;
       gap: 18px;
+      position: relative;
+      z-index: 1;
     }
-    
     @media(min-width: 980px){
-      .tier-grid{
-        grid-template-columns: repeat(3,1fr);
-      }
+      .tier-grid{ grid-template-columns: repeat(3, 1fr); }
     }
-    
+
     .tier{
-      background: #0f1120;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.18);
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: 0 18px 46px rgba(0,0,0,.30);
+      position: relative;
     }
-    
     .tier h3{
       margin: 0 0 8px;
       color: #fff;
       font-size: 1.08rem;
+      letter-spacing: -0.01em;
     }
-    
     .tier p{
-      margin: 0 0 18px;
-      color: var(--text);
+      margin: 0 0 12px;
+      color: rgba(233,238,247,.78);
       font-size: 0.94rem;
-      line-height:  1.7;
+      line-height: 1.7;
     }
 
     .logos{
-      display: grid;
-      grid-template-columns: repeat(4,minmax(80px,1fr));
+      display:grid;
+      grid-template-columns: repeat(4, minmax(80px, 1fr));
       gap: 12px;
+      position: relative;
+      z-index: 1;
     }
-    
     .logo-box{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed var(--border);
-      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px dashed rgba(255,255,255,.16);
+      border-radius: 14px;
       padding: 14px;
       min-height: 64px;
-      opacity: .85;
+      opacity: .9;
       font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .cta-box{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 6px;
-    }
-    
-    .cta{
-      display: inline-flex;
-      gap: 10px;
-      align-items:  center;
-      justify-content: center;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 0.95rem;
-      text-decoration: none;
-      background: var(--accent);
-      color: #000;
-      border: 1px solid var(--border);
-    }
-    
-    .cta.alt{
-      background: transparent;
-      color: #fff;
-      border: 1px solid var(--border);
+      color: rgba(233,238,247,.72);
+      background: rgba(255,255,255,.02);
     }
 
     .mini{
       opacity: .95;
-      margin:  0 0 18px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
+      margin: 0 0 14px;
+      color: rgba(233,238,247,.72);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
     }
 
     .callout{
-      border-left: 4px solid var(--accent);
+      border-left: 4px solid var(--accent, #ff9900);
       padding: 12px 14px;
-      background: #10132a;
-      border-radius: 8px;
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.6;
+      background: rgba(16, 19, 42, .85);
+      border-radius: 14px;
+      font-size: 0.94rem;
+      color: rgba(233,238,247,.78);
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 46px rgba(0,0,0,.30);
     }
 
-    /* Hero styling */
+    /* Hero styling (keep your background-image but push text down a bit) */
     .hero-partners{
-      background-image: url('../images/ndg2.png');
+      background-image: url('../images/ndg14.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      min-height: 100vh;
+      min-height: 50vh;
+      position: relative;
+      overflow: hidden;
     }
-    
+    .hero-partners::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 16% 20%, rgba(255,153,0,.22), transparent 55%),
+        radial-gradient(circle at 82% 30%, rgba(120,160,255,.18), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.78));
+      z-index:0;
+      pointer-events:none;
+    }
+
     .hero-partners .hero-overlay{
+      position: relative;
+      z-index: 1;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding-top: 0;
-    }
-    
-    .hero-partners .hero-title{
-      color: var(--accent);
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom: 20px;
-    }
-    
-    .hero-partners .hero-subtitle{
-      color: #f3f3f3;
-      max-width: 720px;
-      font-size: 1.1rem;
+      padding-top: 120px; /* pushes below fixed ticker+header */
+      padding-bottom: 60px;
     }
 
-    .curve-section{
-      padding-top: 28px;
+    .hero-partners .hero-title{
+      color: var(--accent, #ff9900);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 14px;
+      text-shadow: 0 16px 44px rgba(0,0,0,.55);
+      letter-spacing: -0.02em;
+      font-weight: 900;
+    }
+
+    .hero-partners .hero-subtitle{
+      color: rgba(255,255,255,.92);
+      max-width: 820px;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      text-shadow: 0 12px 36px rgba(0,0,0,.55);
+    }
+
+    .hero-chip-row{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+    .hero-chip i{ color: var(--accent, #ff9900); }
+
+    .curve-section{ padding-top: 28px; }
+
+    /* CTA buttons */
+    .cta-box{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      text-decoration:none;
+      background: var(--accent, #ff9900);
+      color:#000;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .cta.alt{
+      background: rgba(255,255,255,.02);
+      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    @media (max-width: 700px){
+      .hero-partners .hero-overlay{
+        padding-top: 110px;
+        padding-bottom: 52px;
+      }
+      .logos{ grid-template-columns: repeat(2, minmax(80px, 1fr)); }
     }
   </style>
 </head>
@@ -265,9 +370,9 @@
 
       <ul class="menu-list">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../bonding-curve.html">Bonding Curve</a></li>
         <li><a href="../guardian.html">Guardian</a></li>
-        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../no-gas.html">Easy Access</a></li>
         <li><a href="whitepaper.html">Whitepaper</a></li>
         <li><a href="blog.html">Blog</a></li>
@@ -282,9 +387,10 @@
       </ul>
 
       <div class="mobile-ctas">
-        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
-      </div>
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+  </div>>
     </div>
   </div>
 
@@ -293,9 +399,17 @@
     <div class="hero-overlay">
       <h1 class="hero-title">Partners &amp; Integrations</h1>
       <p class="hero-subtitle">
-        Join us to bring trust, stability, and real utility to users worldwide — from exchanges and wallets
-        to brands and NGOs. 
+        Build with NetDAG to deliver <strong>trust</strong>, <strong>stability-first liquidity</strong>, and <strong>real utility</strong>—with a modern user experience
+        (including gas-free onboarding flows where supported).
       </p>
+
+      <div class="hero-chip-row" aria-label="Partner highlights">
+        <span class="hero-chip"><i class="fa-solid fa-coins" aria-hidden="true"></i> Predictable economics</span>
+        <span class="hero-chip"><i class="fa-solid fa-brain" aria-hidden="true"></i> Guardian signals</span>
+        <span class="hero-chip"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> Provenance verification</span>
+        <span class="hero-chip"><i class="fa-solid fa-lock" aria-hidden="true"></i> dVPN privacy</span>
+        <span class="hero-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Easy Access UX</span>
+      </div>
     </div>
   </main>
 
@@ -304,57 +418,65 @@
     <div class="p-wrap">
 
       <article class="p-card">
-        <h2>Why Partner with NetDAG</h2>
+        <h2><i class="fa-solid fa-handshake" aria-hidden="true"></i> Why partner with NetDAG</h2>
+        <p class="mini">
+          Many Web3 integrations fail for one reason: they ask mainstream users to accept volatility, confusing UX, and unverifiable claims.
+          NetDAG is designed to be the opposite—stable-by-design mechanics, measurable risk signals, and real-world products that partners can sell.
+        </p>
+
         <div class="p-grid">
           <div>
             <ul class="p-list">
-              <li><strong>Predictable Economics: </strong> The bonding curve smooths volatility and embeds liquidity. </li>
-              <li><strong>AI Stability Layer:</strong> The NetDAG Guardian monitors activity and proposes optimizations.</li>
-              <li><strong>Real-World Utility:</strong> Provenance (authenticity), dVPN (privacy), and more to come.</li>
+              <li><strong>Predictable economics:</strong> bonding-curve dynamics + reserve “shock absorber” aim to smooth liquidity and reduce fragility.</li>
+              <li><strong>Guardian intelligence:</strong> public risk metrics (concentration, anomalies, drain signals) that help partners operate responsibly.</li>
+              <li><strong>Real-world utility:</strong> Provenance for authenticity + dVPN for privacy are designed to create recurring usage.</li>
             </ul>
           </div>
           <div>
             <ul class="p-list">
-              <li><strong>On-Chain Transparency:</strong> Asset-backed reserves, visible parameters, DAO oversight.</li>
-              <li><strong>Impact by Default:</strong> Protocol-level charity contributions from network usage.</li>
+              <li><strong>Easy Access UX:</strong> optional gas-free flows, embedded wallets, and onboarding patterns that feel familiar.</li>
+              <li><strong>Transparency:</strong> publish addresses, dashboards, and policy changes to reduce integration risk.</li>
+              <li><strong>Charity pledge (accurate):</strong> a <strong>public 2%</strong> giving pledge with reporting—<strong>not</strong> currently enforced as immutable contract logic.</li>
             </ul>
           </div>
+        </div>
+
+        <div class="cta-box" aria-label="Partner CTAs">
+          <a class="cta" href="#" data-contact-open><i class="fa-solid fa-envelope"></i> Partner Inquiry</a>
+          <a class="cta alt" href="whitepaper.html"><i class="fa-solid fa-file-lines"></i> Read Whitepaper</a>
+          <a class="cta alt" href="../provenance.html"><i class="fa-solid fa-fingerprint"></i> See Provenance</a>
         </div>
       </article>
 
       <section class="p-card">
-        <h2>Partner Tracks</h2>
+        <h2><i class="fa-solid fa-route" aria-hidden="true"></i> Partner tracks</h2>
         <div class="tier-grid">
           <div class="tier">
-            <h3>Technology</h3>
-            <p>
-              Exchanges, wallets, node providers, and infrastructure partners who want stability-first rails.
-            </p>
+            <h3><i class="fa-solid fa-microchip" aria-hidden="true"></i> Technology</h3>
+            <p>Exchanges, wallets, custody, node providers, data platforms, and infra teams who want stability-first rails and clear integration boundaries.</p>
             <ul class="p-list">
-              <li>Listings, custody, staking/vesting hooks. </li>
-              <li>SDKs &amp; APIs for Provenance and dVPN.</li>
-              <li>Co-development pilots and research.</li>
+              <li>Listings + custody readiness + staking/vesting hooks.</li>
+              <li>SDKs/APIs for Provenance and dVPN.</li>
+              <li>Security reviews + structured pilots.</li>
             </ul>
           </div>
+
           <div class="tier">
-            <h3>Enterprise &amp; Brands</h3>
-            <p>
-              Supply chain, retail, pharma, luxury, food, and logistics teams looking for verifiable provenance.
-            </p>
+            <h3><i class="fa-solid fa-industry" aria-hidden="true"></i> Enterprise &amp; brands</h3>
+            <p>Supply chain, retail, pharma, luxury, food, electronics, and logistics teams looking for verifiable provenance and audit-friendly reporting.</p>
             <ul class="p-list">
-              <li>Authenticity-as-a-Service (QR / barcode verifications).</li>
-              <li>Private data channels via dVPN.</li>
-              <li>Custom dashboards &amp; audit-friendly reporting.</li>
+              <li>Authenticity-as-a-Service (QR / NFC verification).</li>
+              <li>Dashboards + compliance-aligned reporting templates.</li>
+              <li>Loyalty/reward pilots tied to verified scans.</li>
             </ul>
           </div>
+
           <div class="tier">
-            <h3>NGOs &amp; Foundations</h3>
-            <p>
-              Social impact organizations that want transparent, on-chain funding flows.
-            </p>
+            <h3><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i> NGOs &amp; foundations</h3>
+            <p>Social impact organizations that value transparency and want public reporting of flows and outcomes (while respecting operational realities).</p>
             <ul class="p-list">
-              <li>Charity pool disbursements with public addresses.</li>
-              <li>Program tracking and impact metrics.</li>
+              <li>Public wallet reporting (when live) + summaries.</li>
+              <li>Impact metrics frameworks and dashboards.</li>
               <li>Co-branded initiatives and campaigns.</li>
             </ul>
           </div>
@@ -362,31 +484,56 @@
       </section>
 
       <section class="p-card">
-        <h2>How Integration Works</h2>
+        <h2><i class="fa-solid fa-gears" aria-hidden="true"></i> How integration works (practical steps)</h2>
         <div class="p-grid">
           <div>
             <ol class="p-list">
-              <li><strong>Discovery:</strong> Define goals, data flows, and milestones together.</li>
-              <li><strong>Technical Plan:</strong> Select SDKs/APIs, authentication, and sandbox or testnet access.</li>
-              <li><strong>Pilot: </strong> Run a limited-scope rollout with clear metrics and reporting.</li>
-              <li><strong>Scale:</strong> Harden, optimize, and expand to new regions, products, or user segments.</li>
+              <li><strong>Discovery:</strong> define goals, user journey, trust requirements, and success metrics.</li>
+              <li><strong>Technical plan:</strong> choose SDK/API paths, auth (Easy Access vs wallet-native), environments, and data needs.</li>
+              <li><strong>Pilot:</strong> limited rollout with measurement (conversion, fraud reduction, retention, support load).</li>
+              <li><strong>Scale:</strong> harden security, finalize pricing, expand geography/products, and publish case studies.</li>
             </ol>
           </div>
           <div>
             <div class="callout">
-              <strong>Security &amp; Compliance:</strong> Key integrations go through security review, on-chain audits
-              (where relevant), and governance sign-off for sensitive parameter changes.  We prefer careful growth over
-              rushed deployments.
+              <strong>What we optimize for:</strong> fewer user drop-offs, fewer fraud events, clearer audit trails, and stable operational economics.
+              If an integration cannot be measured, it usually cannot scale—so we instrument pilots from day one.
+            </div>
+            <div class="callout" style="margin-top: 12px;">
+              <strong>Security &amp; compliance:</strong> sensitive integrations go through security review and governance sign-off for parameter changes.
+              We prefer careful growth over rushed deployments.
             </div>
           </div>
         </div>
       </section>
 
       <section class="p-card">
-        <h2>Featured &amp; Ecosystem Logos</h2>
+        <h2><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Suggested pilot KPIs (ideas you can keep or remove)</h2>
+        <div class="p-grid">
+          <div>
+            <ul class="p-list">
+              <li><strong>Conversion:</strong> % of users who complete onboarding (Easy Access) and first action.</li>
+              <li><strong>Fraud reduction:</strong> counterfeit claims reduced; verified authenticity rate.</li>
+              <li><strong>Support load:</strong> tickets per 1,000 users (wallet issues, lost access, gas confusion).</li>
+              <li><strong>Retention:</strong> repeat scans/sessions over 7/30/90 days.</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="p-list">
+              <li><strong>Revenue:</strong> partner usage fees (per scan/session/API) + predictability.</li>
+              <li><strong>Network health:</strong> dVPN node uptime, bandwidth served, geographic coverage.</li>
+              <li><strong>Trust metrics:</strong> audit trail completeness, time-to-verify, dispute resolution time.</li>
+              <li><strong>Governance readiness:</strong> clarity of policy changes and partner communications.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="p-card">
+        <h2><i class="fa-solid fa-images" aria-hidden="true"></i> Featured &amp; ecosystem logos</h2>
         <p class="mini">
           As NetDAG grows, we will highlight featured partners and maintain a broader ecosystem wall.
-          The goal is not to collect logos, but to nurture a small group of serious, long-term collaborators.
+          The goal is not to collect logos—it’s to ship with a small group of serious collaborators and expand from proven results.
         </p>
         <div class="logos" aria-label="Partner logos">
           <div class="logo-box">Your Logo</div>
@@ -426,7 +573,7 @@
 
     <div class="footer-main">
       <div class="footer-columns">
-        
+
         <div class="footer-col footer-brand-col">
           <div class="footer-brand-logo">
             <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
@@ -442,7 +589,7 @@
           <ul>
             <li><a href="../provenance.html">Provenance dApp</a></li>
             <li><a href="../bonding-curve.html">Bonding Curve</a></li>
-            <li><a href="../guardian.html">Guardian AI</a></li>
+            <li><a href="../guardian.html">Guardian</a></li>
             <li><a href="../no-gas.html">Easy Access</a></li>
           </ul>
         </div>
@@ -476,7 +623,7 @@
         <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
         <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
         <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.facebook.com/r. php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.facebook.com/r.php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
         <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
         <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
       </div>
@@ -502,50 +649,39 @@
       </div>
 
       <form id="contactForm" class="contact-form">
-        <!-- First Name -->
         <div class="contact-form-group">
           <label for="contactFirstName" class="contact-label">First Name *</label>
-          <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
-            placeholder="Enter your first name">
+          <input type="text" id="contactFirstName" name="firstName" class="contact-input" required placeholder="Enter your first name">
         </div>
 
-        <!-- Last Name -->
         <div class="contact-form-group">
           <label for="contactLastName" class="contact-label">Last Name *</label>
-          <input type="text" id="contactLastName" name="lastName" class="contact-input" required
-            placeholder="Enter your last name">
+          <input type="text" id="contactLastName" name="lastName" class="contact-input" required placeholder="Enter your last name">
         </div>
 
-        <!-- Email -->
         <div class="contact-form-group">
           <label for="contactEmail" class="contact-label">Email *</label>
-          <input type="email" id="contactEmail" name="email" class="contact-input" required
-            placeholder="your.email@example.com">
+          <input type="email" id="contactEmail" name="email" class="contact-input" required placeholder="your.email@example.com">
         </div>
 
-        <!-- Message -->
         <div class="contact-form-group">
           <label for="contactMessage" class="contact-label">Message *</label>
-          <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
-            placeholder="How can we help you?"></textarea>
+          <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required placeholder="How can we help you?"></textarea>
         </div>
 
-        <!-- Status Message -->
         <div id="contactStatus" class="contact-status"></div>
 
-        <!-- Submit Button -->
         <button type="submit" class="contact-submit-btn">
           Send Message
         </button>
       </form>
     </div>
   </div>
+  <!-- END OF CONTACT MODAL -->
 
-<!-- END OF CONTACT MODAL -->
- 
-<script src="../js/contact-modal.js" defer></script>
+  <script src="../js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
-<script src="/js/ndg-buy-loader.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
 
 </body>
 </html>

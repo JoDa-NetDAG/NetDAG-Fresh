@@ -1,1 +1,812 @@
-The complete guardian.html file with fixed navbar structure (header-ctas outside nav-right), reduced mobile header size (logo 32px, text 1.6rem, padding 6px), visible hamburger menu without border, and smaller hero title on mobile.
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NetDAG Guardian — AI That Guards Value</title>
+  <meta name="description" content="NetDAG Guardian is a living layer of protection - an AI neuron intelligence that learns, adapts, and defends digital assets in real time." />
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/contact-modal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="js/main.js" defer></script>
+
+ <style>
+  /* HERO TITLE COLOR FIX */
+  .hero-title-highlight {
+    color: #ff9900 !important;
+  }
+
+  /* ---- Guardian upgrades (robot fullpage + image sizing + mobile header) ---- */
+
+  /* 4) Shrink the "whitepaper maths" image (images/ndg20.png) a bit */
+  .guardian-feature-img.guardian-img-tall.guardian-img-small {
+    max-width: 520px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* 3) Full-page robot section before footer (uses images/ndg11.png) */
+  .guardian-robot-fullpage {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: radial-gradient(1200px 700px at 50% 30%, rgba(255, 153, 0, 0.12), rgba(0,0,0,0) 60%),
+                linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
+  }
+
+  .guardian-robot-fullpage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* keep the head visible; if cropping happens, crop bottom */
+    object-position: center top;
+    display: block;
+  }
+
+  .guardian-robot-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: grid;
+    place-items: end center;
+    padding: 42px 18px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+  }
+
+  .guardian-robot-overlay p {
+    max-width: 860px;
+    text-align: center;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.55;
+    color: rgba(255,255,255,0.92);
+    margin: 0;
+  }
+
+  /* MOBILE HEADER FIX - Guardian Page */
+  @media (max-width: 900px) {
+    /* Hide desktop nav */
+    body.guardian-page .site-header .nav-links {
+      display: none !important;
+    }
+
+    /* Header container */
+    body.guardian-page .site-header .header-inner {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 6px 12px !important;
+      flex-wrap: nowrap !important;
+      box-sizing: border-box !important;
+      min-height: 50px !important;
+      max-height: 50px !important;
+    }
+
+    /* Brand section */
+    body.guardian-page .site-header .brand {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      flex-shrink: 0 !important;
+    }
+
+    /* Logo smaller */
+    body.guardian-page .site-header .brand-logo {
+      height: 45px !important;
+      width: auto !important;
+    }
+
+    /* NetDAG text smaller */
+    body.guardian-page .site-header .brand-text {
+      font-size: 2.5rem !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+    }
+
+    /* Nav right container */
+    body.guardian-page .site-header .nav-right {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      flex-shrink: 0 !important;
+      margin-left: auto !important;
+      padding: 0 !important;
+      margin-right: 4px !important;
+    }
+
+    /* HAMBURGER MENU - CLEAN & VISIBLE */
+    body.guardian-page .site-header .menu-toggle {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 4px !important;
+      padding: 6px !important;
+      background: transparent !important;
+      border: none !important;
+      cursor: pointer !important;
+      width: 40px !important;
+      height: 40px !important;
+      margin: 0 !important;
+      position: relative !important;
+      z-index: 100 !important;
+    }
+
+    /* Hamburger lines */
+    body.guardian-page .site-header .menu-toggle .burger-line {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 24px !important;
+      height: 3px !important;
+      background: #ff9900 !important;
+      border-radius: 2px !important;
+    }
+
+    /* Hide CTA buttons */
+    body.guardian-page .site-header .header-ctas {
+      display: none !important;
+    }
+
+    /* HERO TITLE - Smaller on mobile */
+    body.guardian-page .hero-title.guardian-title {
+      font-size: 1.5rem !important;
+      line-height: 1.3 !important;
+    }
+
+    .guardian-feature-img.guardian-img-tall.guardian-img-small {
+      max-width: 360px;
+    }
+  }
+
+  /* Side-by-side wrap for ndg20.png + the self-defending economy text */
+  .guardian-side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: center;
+  }
+
+  .guardian-side-figure { margin: 0; }
+  .guardian-side-text { min-width: 0; }
+
+  /* On smaller screens: stack image over text */
+  @media (max-width: 900px) {
+    .guardian-side-by-side {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  }
+
+  /* Full-screen background image (alternate robot layout) */
+  .guardian-robot-fullpage {
+    position: relative;
+    height: 110vh;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .guardian-robot-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("images/ndg11.png");
+    background-repeat: no-repeat;
+
+    /* Use smaller (e.g. 88%/82%) to zoom OUT and show more body */
+    background-size: 100% auto;
+    background-position: center top;
+    transform: translateY(-4%);
+    will-change: transform;
+    z-index: 0;
+  }
+
+  .guardian-robot-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    align-items: end;
+    justify-items: center;
+    padding: 48px 18px;
+    background: linear-gradient(180deg,
+      rgba(0,0,0,0) 55%,
+      rgba(0,0,0,0.55) 90%);
+  }
+
+  .guardian-robot-overlay-inner {
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .guardian-robot-overlay p {
+    margin: 0;
+    color: rgba(255,255,255,0.92);
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.55;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.55);
+  }
+
+  /* Mobile tuning */
+  @media (max-width: 900px) {
+    .guardian-robot-bg {
+      background-size: 98% auto;
+      transform: translateY(-10%);
+    }
+  }
+
+  /* Center captions / figures */
+  .guardian-caption{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .guardian-figure{
+    text-align: center;
+  }
+
+  /* IMPORTANT: avoid horizontal overflow (105vw causes sideways scroll + hidden hamburger) */
+  img.guardian-feature-img.guardian-feature-img--xl{
+    width: min(1800px, 100%) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .guardian-hero .hero-kicker{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  figure.guardian-figure{
+    text-align: center !important;
+  }
+
+  .curve-container{
+    display: flex;
+    justify-content: center;
+  }
+
+  /* =========================================================
+     SHIELD (the only shield code you need)
+     Your HTML uses:
+       <img class="guardian-shield guardian-shield-pulse" ...>
+     so we target that class (NOT #guardianShield).
+     ========================================================= */
+
+  .guardian-hero .guardian-hero-image{
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+
+  @media (max-width: 900px){
+    .guardian-hero .guardian-hero-image img.guardian-shield{
+      width: min(420px, 92vw);
+    }
+  }
+
+  /* Pump -> rest -> pump -> rest */
+  @keyframes guardianPumpStop{
+    0%, 22%{ transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,153,0,0)); }
+
+    30%{ transform: scale(1.05);  filter: drop-shadow(0 0 18px rgba(255,153,0,.20)); }
+    36%{ transform: scale(1.085); filter: drop-shadow(0 0 30px rgba(255,153,0,.30)); }
+    44%{ transform: scale(1);     filter: drop-shadow(0 0 0 rgba(255,153,0,0)); }
+
+    44%, 66%{ transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,153,0,0)); }
+
+    74%{ transform: scale(1.04);  filter: drop-shadow(0 0 16px rgba(255,153,0,.18)); }
+    80%{ transform: scale(1.075); filter: drop-shadow(0 0 26px rgba(255,153,0,.26)); }
+    88%{ transform: scale(1);     filter: drop-shadow(0 0 0 rgba(255,153,0,0)); }
+
+    88%, 100%{ transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,153,0,0)); }
+  }
+
+  /* Optional: respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .guardian-hero .guardian-hero-image img.guardian-shield{ animation: none; }
+  }
+
+  /* Make ONLY ndg-neuron-c.png (guardian-feature-img--xl) go full-screen */
+img.guardian-feature-img.guardian-feature-img--xl{
+  width: 100vw !important;
+  height: 110vh !important;
+  max-width: none !important;
+  max-height: none !important;
+
+  display: block;
+  margin: 0 !important;
+  
+  object-fit: cover;        /* fills the screen, may crop edges */
+  background: #000; /* optional letterbox color */
+}
+
+/* If the image sits inside a figure/container with padding, remove it */
+.guardian-figure,
+.guardian-side-figure{
+  margin: 0;
+  padding: 0;
+}
+
+</style>
+
+</head>
+
+<body class="guardian-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+
+      <span>💧 Presale begins <strong>14 Feb 2026</strong> (14.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a class="brand" href="index.html" title="NetDAG home">
+        <img src="images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+        <span class="brand-text">NetDAG</span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="provenance.html">Provenance dApp</a></li>
+          <li><a href="bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
+          <li><a href="no-gas.html">Easy Access</a></li>
+          <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+        </ul>
+
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+          <span class="burger-line" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="header-ctas">
+        <a href="purchase-ndg.html" class="btn">Join Presale</a>
+        <a href="stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance</a></li>
+        <li><a href="bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="guardian.html">Guardian</a></li>
+        <li><a href="no-gas.html">Easy Access</a></li>
+        <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+        <li><a href="menu/blog.html">Blog</a></li>
+        <li><a href="menu/vision.html">Vision</a></li>
+        <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+        <li><a href="menu/faq.html">FAQ</a></li>
+        <li><a href="menu/roadmap.html">Roadmap</a></li>
+        <li><a href="menu/ambassador.html">Ambassador</a></li>
+        <li><a href="menu/charity.html">Charity</a></li>
+        <li><a href="menu/blog.html">Blog</a></li>
+        <li><a href="menu/partners.html">Partners</a></li>
+        <li><a href="menu/legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Top separator -->
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- GUARDIAN HERO SECTION -->
+    <section class="section guardian-hero" id="guardian">
+      <div class="section-overlay" aria-hidden="true"></div>
+      <div class="section-inner">
+        <div class="hero-inner">
+          <h1 class="hero-title guardian-title">
+            NetDAG Guardian — <span class="hero-title-highlight">AI That Guards Value</span>
+          </h1>
+          <p class="hero-kicker">
+           Financial intelligence with a human core — designed to think, predict, and protect.
+         </p>
+          <div class="guardian-hero-image">
+           <img src="images/ndg-neuron1.png" class="guardian-shield guardian-shield-pulse" alt="Guardian Shield">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom separator -->
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- GUARDIAN SUMMARY -->
+    <section class="section section-content guardian-summary">
+      <div class="section-inner narrow">
+        <div class="content-block guardian-summary-card">
+          <p>
+            In today's volatile markets, passive security is no longer enough. The NetDAG Guardian is a
+            living layer of protection – an AI neuron intelligence that learns, adapts, and defends
+            digital assets in real time. 
+          </p>
+          <p>
+            Instead of reacting after the damage is done, Guardian looks ahead:  it monitors flows, spots
+            abnormal behaviour, and proposes parameter updates before instability turns into chaos.  That
+            means fewer surprise crashes and more predictable liquidity for long-term holders.
+          </p>
+          <p>
+            Together with the bonding curve and reserve, Guardian turns NDG into a system that is designed
+            to stay usable and predictable – even when the wider market is noisy. 
+          </p>
+
+          <p>
+            Think of the Bonding Curve as the <strong>engine</strong> of the NDG economy: it provides deterministic
+            pricing and always-on liquidity, so the market doesn’t depend on fragile order books.
+            The Guardian is the <strong>pilot</strong>: it continuously evaluates risk and conditions, then keeps the
+            system operating inside mathematically safe ranges.
+          </p>
+          <p>
+            The Guardian is coded to look beyond the NDG ecosystem and into the wider financial world. It tracks macro
+            and market signals (broad risk-on/risk-off moves, liquidity stress, abnormal correlation spikes, sudden volatility
+            events) and compares them with on-chain behavior (reserve inflows, buy/sell pressure, concentration, and trading anomalies).
+            That “outside + inside” view is what allows prevention rather than damage control.
+          </p>
+          <p>
+            When conditions become hostile, traditional tokens often fail the same way: liquidity dries up, slippage explodes,
+            and panic selling feeds on itself. NetDAG’s design breaks that feedback loop. The Bonding Curve keeps a continuous price path,
+            while the Guardian adds adaptive intelligence — identifying early warning patterns and recommending controlled parameter tuning
+            within predefined limits.
+          </p>
+          <p>
+            This is what turns Guardian + Bonding Curve into a next-gen winning team: <strong>the curve provides structure</strong>, and
+            <strong>the Guardian provides foresight</strong>. Together they guard and power the NDG ecosystem — keeping liquidity usable,
+            smoothing extremes, and defending the long-term price floor as adoption grows.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- GUARDIAN IMAGE #1 -->
+    <section class="section curve-section" aria-label="Guardian monitoring network">
+      <div class="section-inner">
+        <div class="curve-container">
+          <figure class="guardian-figure">
+            <img
+            src="images/ndg-neuron-c.png"
+            alt="Guardian protecting the NDG ecosystem"
+            class="guardian-feature-img guardian-feature-img--xl" />
+              <p>
+            <figcaption class="guardian-caption">
+              The Guardian's neural intelligence constantly monitors NDG's global liquidity network.
+            </figcaption>
+            </p>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- NEURON AI & CORE DEFENSES -->
+    <section class="section section-content">
+      <div class="section-inner narrow">
+        <div class="content-block soft-card prose">
+          
+          <h2>The Neuron AI</h2>
+          <p>
+            The Guardian is designed to think like an investor and act like a protector — 20% human intuition (the neuron part), 80% machine precision.  
+            It studies market sentiment and liquidity with emotional intelligence, learning from behavior to maintain equilibrium.
+          </p>
+
+          <p>
+            Concretely, the Guardian layer continuously scores market conditions across multiple dimensions — volatility regime,
+            liquidity depth, abnormal flow patterns, and distribution risk. It then cross-checks those signals against the bonding-curve
+            state (current supply position, reserve strength, and recent curve movement).
+          </p>
+          <p>
+            This allows the Guardian to propose <strong>small, controlled</strong> adjustments (never chaotic switches) that keep the curve operating
+            as a shock-absorber: smoothing sell pressure, defending the reserve, and maintaining a predictable experience for holders and builders.
+            The result is an economy that can “brace” for impact instead of breaking.
+          </p>
+
+          <h2>The Guardian's Core Defenses</h2>
+          <ul class="tick">
+            <li><strong>Vigilant Scanning: </strong> Identifies hidden risk patterns before they manifest, reacting instantly to preserve value. </li>
+            <li><strong>Decisive Actions:</strong> Counters manipulation and volatility through automated rebalancing and reserve protection.</li>
+            <li><strong>Dynamic Bonding Curve Integration:</strong> Adjusts NDG's core price engine for smooth, predictable liquidity and stable growth.</li>
+          </ul>
+
+          <p>
+            Example: if the Guardian detects a rapid rise in sell concentration (few wallets driving most sells) while macro volatility spikes,
+            it can trigger protective posture — prioritizing reserve integrity and stability over short-term noise.
+          </p>
+          <p>
+            Example: if adoption accelerates (sustained buy demand + rising reserve inflows), the Guardian can keep growth smooth and fair by ensuring
+            curve movement remains predictable, preventing “hype gaps” and maintaining confidence for new entrants.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- Replace the existing "GUARDIAN IMAGE #2" + "SELF-DEFENDING ECONOMY" blocks
+     with this combined side-by-side section (image ndg20.png + the provided text). -->
+
+<section class="section section-content guardian-curve-sidebyside" aria-label="Guardian and Bonding Curve working together">
+  <div class="section-inner narrow">
+    <div class="content-block soft-card prose">
+
+      <div class="guardian-side-by-side">
+        <!-- Left: image (shrunk) -->
+        <figure class="guardian-side-figure">
+          <img
+            src="images/ndg20.png"
+            alt="Guardian and Bonding Curve technical overview"
+            class="guardian-feature-img guardian-img-tall guardian-img-small" />
+          <figcaption class="guardian-caption">
+            Guardian and the Bonding Curve — working together to build the world's first self-defending economy.
+          </figcaption>
+        </figure>
+
+        <!-- Right: text (your provided copy) -->
+        <div class="guardian-side-text">
+          <p class="guardian-highlight-text">
+            By investing in NetDAG, you're not just holding a quality token — you're owning part of the world's first self-defending economy.
+            In this new era, your wealth doesn't wait for protection. It is protected — by design.
+          </p>
+
+          <p>
+            Guardian doesn’t replace the Bonding Curve — it amplifies it. The curve supplies the rules of motion; the Guardian supplies the
+            intelligence to recognize when the environment changes. That’s how NDG can remain stable across cycles: the economy is not “set and forget,”
+            it is monitored, measured, and defended.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Keep your separator after this section as you already have -->
+ <div class="site-separator" aria-hidden="true"></div>
+
+ <!-- Replace your current robot section with this version.
+     It makes the image a full-screen background and keeps the text OVER the image. -->
+
+<section class="guardian-robot-fullpage" aria-label="NetDAG metal robot">
+  <div class="guardian-robot-bg" aria-hidden="true"></div>
+
+  <div class="guardian-robot-overlay">
+    <div class="guardian-robot-overlay-inner">
+      <p>
+        Guardian is the watchtower. The Bonding Curve is the engine. Together they form a self-defending economy designed to
+        detect threats early, keep liquidity usable, and protect long-term value even under global market pressure.
+      </p>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.</span>
+          NetDAG is not another short-term token.  We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment.  Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy.</em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="provenance.html">Provenance dApp</a></li>
+            <li><a href="bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="guardian.html">Guardian AI</a></li>
+            <li><a href="no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+            <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+            <li><a href="menu/vision.html">Vision</a></li>
+            <li><a href="menu/faq.html">FAQ</a></li>
+            <li><a href="menu/roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="menu/ambassador.html">Ambassador Program</a></li>
+            <li><a href="menu/charity.html">Charity</a></li>
+            <li><a href="menu/blog.html">Blog</a></li>
+            <li><a href="menu/partners.html">Partners</a></li>
+            <li><a href="menu/legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/r.php" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      <div class="footer-bottom-blue">
+        <p class="footer-bottom-text">
+          <a href="#" data-contact-open class="footer-contact-link">📧 Contact</a> |
+          Copyright: NetDAG 2026 | Built with care
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BEGIN OF CONTACT MODAL -->
+  <div id="contactModal" class="ndg-modal" aria-hidden="true">
+    <div class="ndg-modal-backdrop" data-contact-close></div>
+    <div class="ndg-modal-content">
+      <button class="ndg-modal-close" data-contact-close aria-label="Close">×</button>
+
+      <div class="ndg-modal-header">
+        <h2>📧 Get in Touch</h2>
+        <p>Send us a message and we'll respond within 3 working days.</p>
+      </div>
+
+      <form id="contactForm" class="contact-form">
+        <div class="contact-form-group">
+          <label for="contactFirstName" class="contact-label">First Name *</label>
+          <input type="text" id="contactFirstName" name="firstName" class="contact-input" required placeholder="Enter your first name">
+        </div>
+
+        <div class="contact-form-group">
+          <label for="contactLastName" class="contact-label">Last Name *</label>
+          <input type="text" id="contactLastName" name="lastName" class="contact-input" required placeholder="Enter your last name">
+        </div>
+
+        <div class="contact-form-group">
+          <label for="contactEmail" class="contact-label">Email *</label>
+          <input type="email" id="contactEmail" name="email" class="contact-input" required placeholder="your.email@example.com">
+        </div>
+
+        <div class="contact-form-group">
+          <label for="contactMessage" class="contact-label">Message *</label>
+          <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required placeholder="How can we help you?"></textarea>
+        </div>
+
+        <div id="contactStatus" class="contact-status"></div>
+
+        <button type="submit" class="contact-submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+  <!-- END OF CONTACT MODAL -->
+
+  <!-- Add this near the bottom of guardian.html, RIGHT BEFORE </body>.
+     It will:
+     - "beat" 400 times over 6 seconds
+     - then rest (no motion) for 7 seconds
+     - repeat forever
+     Targets your existing shield:
+       <img class="guardian-shield guardian-shield-pulse" ...>
+-->
+<script>
+(() => {
+  const shield = document.querySelector('.guardian-hero-image img.guardian-shield-pulse');
+  if (!shield) return;
+
+  const beats = 500;
+  const beatWindowMs = 6000; // 6s beating
+  const restMs = 7000;       // 7s rest
+
+  // Tweak these if you want stronger/weaker pumping:
+  const minScale = 1.2;
+  const maxScale = 1.085;
+
+  // Optional: respect reduced-motion users
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  function runCycle() {
+    const start = performance.now();
+    const beatInterval = beatWindowMs / beats; // ~15ms/beat
+
+    function frame(now) {
+      const t = now - start;
+
+      if (t >= beatWindowMs) {
+        // REST: stop completely
+        shield.style.transform = `scale(${minScale})`;
+        shield.style.filter = `drop-shadow(0 0 0 rgba(255,153,0,0))`;
+        setTimeout(runCycle, restMs);
+        return;
+      }
+
+      // Beat index and position within the beat
+      const i = Math.floor(t / beatInterval);
+      const localT = (t - i * beatInterval) / beatInterval; // 0..1
+
+      // Triangle pulse per beat (0 -> 1 -> 0)
+      const pulse = localT < 0.5 ? localT * 2 : 2 - localT * 2;
+
+      const scale = minScale + (maxScale - minScale) * pulse;
+      shield.style.transform = `scale(${scale.toFixed(4)})`;
+
+      // Glow only while beating
+      const glow = 10 + 18 * pulse;
+      shield.style.filter = `drop-shadow(0 0 ${glow.toFixed(1)}px rgba(255,153,0,0.22))`;
+
+      requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  runCycle();
+})();
+</script>
+
+  <script src="js/contact-modal.js" defer></script>
+  <script src="/js/buy-modals.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

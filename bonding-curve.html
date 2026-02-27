@@ -1,1 +1,700 @@
-The bonding-curve.html file with fixed navbar structure where header-ctas is moved outside nav-right div, and class="brand" added to the brand anchor tag.
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stability By Design — The NetDAG Bonding Curve</title>
+  <meta name="description" content="NetDAG's bonding curve provides mathematical liquidity and predictable pricing, replacing order-book chaos with algorithmic stability." />
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/contact-modal.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <script src="js/main.js" defer></script>
+</head>
+
+<body class="bonding-curve-page" id="top">
+
+  <!-- INFO TICKER -->
+  <div class="site-ticker" role="region" aria-label="Presale info">
+    <div class="ticker-track" data-ticker>
+      <span>💧 Presale begins <strong>28 Feb 2026</strong> (28.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+
+      <span>💧 Presale begins <strong>28 Feb 2026</strong> (28.02.2026).</span>
+      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a class="brand" href="index.html" title="NetDAG home">
+      <img src="images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+      <span class="brand-text">NetDAG</span>
+    </a>
+
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance dApp</a></li>
+        <li><a href="bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="guardian.html">Guardian</a></li>
+        <li><a href="no-gas.html">Easy Access</a></li>
+        <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+      </ul>
+      
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <span class="burger-line" aria-hidden="true"></span>
+        <span class="burger-line" aria-hidden="true"></span>
+        <span class="burger-line" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="header-ctas">
+      <a href="purchase-ndg.html" class="btn">Join Presale</a>
+      <a href="stake-ndg.html" class="btn btn-primary">Stake NDG</a>
+    </div>
+  </div>
+</header>
+
+  <!-- MENU PANEL -->
+  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+
+      <ul class="menu-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance</a></li>
+        <li><a href="bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="guardian.html">Guardian</a></li>
+        <li><a href="no-gas.html">Easy Access</a></li>
+        <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+        <li><a href="menu/blog.html">Blog</a></li>
+        <li><a href="menu/vision.html">Vision</a></li>
+        <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+        <li><a href="menu/faq.html">FAQ</a></li>
+        <li><a href="menu/roadmap.html">Roadmap</a></li>
+        <li><a href="menu/ambassador.html">Ambassador</a></li>
+        <li><a href="menu/charity.html">Charity</a></li>
+        <li><a href="menu/partners.html">Partners</a></li>
+        <li><a href="menu/legal.html">Legal</a></li>
+      </ul>
+
+      <div class="mobile-ctas">
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Top separator -->
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- BONDING CURVE HERO SECTION -->
+    <section class="section section-bonding-curve" id="bonding-curve">
+      
+      <!-- Full-screen background image -->
+      <div class="bonding-curve-bg-image">
+        <img src="images/ndg75.png" alt="" class="bonding-curve-fullscreen-bg" />
+      </div>
+      
+      <!-- Overlay -->
+      <div class="section-overlay"></div>
+      
+      <!-- Content -->
+      <div class="bonding-curve-content">
+        
+        <h1 class="bonding-curve-title">
+          <span class="bc-title-line1">Stability by Design:</span><br>
+          <span class="bc-title-line2">The NetDAG Bonding Curve</span>
+        </h1>
+        
+        <div class="bonding-curve-text-block">
+          <p class="bonding-curve-description">
+            A mathematical engine that turns hype-driven swings into smooth, predictable pricing. 
+          </p>
+          <p class="bonding-curve-description">
+            No whales dumping. No liquidity crises. Just algorithmic stability backed by permanent reserves.
+          </p>
+        </div>
+        
+        <div class="bc-hero-cta">
+          <a href="#what-this-means" class="btn btn-primary">What This Means For You</a>
+          <a href="#math-details" class="btn btn-ghost">See The Math</a>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Bottom separator -->
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- NEW: WHAT THIS MEANS FOR YOU -->
+    <section class="section section-content bc-investor-benefits" id="what-this-means">
+      <div class="section-inner narrow">
+        <div class="content-block">
+          
+          <h2 class="section-title">
+            <span class="accent">What This Means For You</span>
+          </h2>
+
+          <p class="lead-text">
+            Most crypto investors have experienced the nightmare: You buy at a high, a whale sells, 
+            liquidity vanishes, and the price craters before you can exit. <strong>NetDAG's bonding curve 
+            eliminates that risk.</strong>
+          </p>
+
+          <div class="bc-benefits-grid">
+            
+            <div class="bc-benefit-card">
+              <div class="bc-benefit-icon">🛡️</div>
+              <h3>Protection From Dumps</h3>
+              <p>
+                Every sell moves down the curve gradually. Large holders can't crash the price in one transaction 
+                because the bonding curve only allows small incremental price changes per trade.
+              </p>
+            </div>
+
+            <div class="bc-benefit-card">
+              <div class="bc-benefit-icon">💧</div>
+              <h3>Always Liquid</h3>
+              <p>
+                You're never trapped. The smart contract itself is the market maker, guaranteeing you can 
+                always sell at the current curve price — no waiting for buyers, no slippage nightmares.
+              </p>
+            </div>
+
+            <div class="bc-benefit-card">
+              <div class="bc-benefit-icon">📈</div>
+              <h3>Predictable Growth</h3>
+              <p>
+                Every buy moves the price up mathematically. As adoption grows, so does your position — not 
+                because of hype, but because the formula ensures it.
+              </p>
+            </div>
+
+            <div class="bc-benefit-card">
+              <div class="bc-benefit-icon">🏦</div>
+              <h3>22% Buy-Back Reserve</h3>
+              <p>
+                Unlike other projects where reserves disappear, <strong>22% of all platform revenue flows 
+                into the buy-back reserve forever</strong> — continuously strengthening the price floor.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- NEW: COMPARISON TABLE -->
+    <section class="section section-content bc-comparison">
+      <div class="section-inner narrow">
+        <div class="content-block">
+          
+          <h2 class="section-title">
+            Bonding Curve vs. Traditional Markets
+          </h2>
+
+          <p class="lead-text">
+            Here's how NetDAG's bonding curve compares to typical order-book DEXs and centralized exchanges:
+          </p>
+
+          <div class="table-wrapper">
+            <table class="bc-comparison-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Traditional DEX/CEX</th>
+                  <th class="highlight-col">NetDAG Bonding Curve</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Price Discovery</strong></td>
+                  <td>Chaotic order matching, prone to manipulation</td>
+                  <td class="highlight-col">Mathematical formula — transparent and predictable</td>
+                </tr>
+                <tr>
+                  <td><strong>Liquidity</strong></td>
+                  <td>Depends on market makers; can dry up anytime</td>
+                  <td class="highlight-col">Always available via smart contract</td>
+                </tr>
+                <tr>
+                  <td><strong>Whale Protection</strong></td>
+                  <td>Large sells can crash price instantly</td>
+                  <td class="highlight-col">Gradual curve movement prevents panic crashes</td>
+                </tr>
+                <tr>
+                  <td><strong>Volatility</strong></td>
+                  <td>Extreme — driven by fear and FOMO</td>
+                  <td class="highlight-col">Smoothed by algorithmic pricing</td>
+                </tr>
+                <tr>
+                  <td><strong>Exit Risk</strong></td>
+                  <td>Can get stuck with no buyers</td>
+                  <td class="highlight-col">Guaranteed sell price on the curve</td>
+                </tr>
+                <tr>
+                  <td><strong>Reserve Backing</strong></td>
+                  <td>None — price can go to zero</td>
+                  <td class="highlight-col">22% revenue reserve builds permanent floor</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- NDG ADVANTAGE SECTION (IMPROVED) -->
+    <section class="section section-content ndg-advantage" id="ndg-advantage">
+      <div class="section-inner narrow">
+        <div class="content-block">
+          
+          <h2 class="section-title">
+            The NDG Advantage: 
+            <span class="accent">Mathematically Guaranteed Growth &amp; Unrivaled Stability</span>
+          </h2>
+
+          <p>
+            To our earliest investors, we present not just a token, but a mathematically reinforced
+            financial architecture engineered for sustained, long-term growth. 
+          </p>
+
+          <p>
+            The foundation of the NDG economic system is our Bonding Curve — stabilized by an
+            unprecedented commitment: <strong>22% of all platform revenue is permanently allocated
+            to a buy-back reserve.</strong> This reserve grows forever, strengthening liquidity
+            and stabilizing price behavior at every stage of adoption.
+          </p>
+          <p>
+            Every buy pushes the price up by design — not emotion — creating a mathematical staircase. 
+            Liquidity is always available, panic crashes can't wipe you out, 
+            and early buyers sit closest to the lowest possible price the token will ever have again. 
+            It's not hype. It's not luck. <strong>It's programmable growth</strong>, where opportunity is determined 
+            by timing and conviction — not market chaos. The curve doesn't guess.
+          </p>
+
+          <!-- INSERT: Bonding curve shock-absorber visual -->
+          <figure class="bc-inline-figure">
+            <img src="images/ndg5b.png" alt="NetDAG bonding curve acting as a shock-absorber under price action" loading="lazy" />
+            <figcaption class="bc-inline-caption">
+              <p></p>
+              NetDAG’s bonding curve acts like a built-in shock absorber: sells step down predictably, while the reserve-backed curve helps hold structure.
+            </figcaption>
+          </figure>
+
+          <p>
+            The key is that price movement is not dictated by thin order books or panic-driven liquidity pulls.
+            Instead, the curve provides a continuous pricing path and the reserve provides an always-available counterparty.
+          </p>
+          <p>
+            That combination helps prevent “air pockets” in liquidity — so even during heavy sells, price tends to move in controlled steps rather than collapsing.
+          </p>
+
+          <h3 class="subheading">The Bonding Curve: Your Stability Engine</h3>
+
+          <p>
+            While most crypto projects depend entirely on volatile external markets,
+            <strong>NDG creates its own intrinsic value</strong>. Our token price <strong>P</strong>
+            is a deterministic function of the circulating supply <strong>S</strong>, represented by: 
+          </p>
+
+          <p class="formula">P = f(S)</p>
+
+          <p>This provides NDG with three structural advantages:</p>
+
+          <h4 class="subheading">1. Guaranteed Liquidity</h4>
+          <p>
+            The 22% reserve acts as an always-available counterparty for sellers. Every holder is
+            assured a <strong>guaranteed sell price</strong> based on the current point on the
+            bonding curve — effectively eliminating the risk of liquidity failure or sudden collapse.
+          </p>
+
+          <h4 class="subheading">2. Predictable, Algorithmic Price Action</h4>
+          <p>
+            As platform revenue flows into the reserve, the curve ensures that price increases in a
+            mathematically controlled, non-manipulable manner. Early adopters are rewarded
+            algorithmically, every new buyer lifts the entire price floor, and each reserve infusion
+            raises long-term stability.
+          </p>
+
+          <h4 class="subheading">3. Rational, Transparent Market Mechanics</h4>
+          <p>Here is a simple technical summary of how the curve behaves:</p>
+
+          <div class="table-wrapper">
+            <table class="ndg-curve-table">
+              <thead>
+                <tr>
+                  <th>Curve Mechanism</th>
+                  <th>Price Determinism</th>
+                  <th>Resulting Stability</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Buying (Minting)</strong></td>
+                  <td>Price increases as S increases</td>
+                  <td>Rewards early adopters and consistently lifts the price floor</td>
+                </tr>
+                <tr>
+                  <td><strong>Selling (Burning)</strong></td>
+                  <td>Price decreases predictably along the curve</td>
+                  <td>Eliminates liquidity risk; prevents panic drops</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- NEW: REAL-WORLD SCENARIOS -->
+    <section class="section section-content bc-scenarios">
+      <div class="section-inner narrow">
+        <div class="content-block">
+          
+          <h2 class="section-title">
+            Real-World Scenarios: <span class="accent">How The Curve Protects You</span>
+          </h2>
+
+          <div class="bc-scenario-card">
+            <h3>Scenario 1: A Whale Wants To Exit</h3>
+            <p>
+              <strong>Traditional DEX:</strong> They dump 10 million tokens at once. Price craters 60%. 
+              Panic spreads. Small holders lose everything trying to escape.
+            </p>
+            <p>
+              <strong>NetDAG Bonding Curve:</strong> The whale's sell moves down the curve gradually. 
+              Each token is sold at a slightly lower price than the last — but the price floor holds. 
+              Other holders can exit calmly if they choose, or hold knowing the curve stabilizes.
+            </p>
+          </div>
+
+          <div class="bc-scenario-card">
+            <h3>Scenario 2: Market-Wide Crypto Crash</h3>
+            <p>
+              <strong>Traditional Token:</strong> Bitcoin drops 30%, and your token drops 70% because 
+              liquidity providers panic and withdraw. You're stuck holding worthless tokens.
+            </p>
+            <p>
+              <strong>NetDAG Bonding Curve:</strong> External market conditions don't control NDG's price. 
+              The bonding curve formula still applies, and the 22% buy-back reserve continues to strengthen 
+              the floor. You can still sell at the curve price — always.
+            </p>
+          </div>
+
+          <div class="bc-scenario-card">
+            <h3>Scenario 3: You Need To Cash Out During Low Volume</h3>
+            <p>
+              <strong>Traditional DEX:</strong> Order book is thin. You place a market sell and get 
+              30% less than the displayed price due to slippage. You lose thousands.
+            </p>
+            <p>
+              <strong>NetDAG Bonding Curve:</strong> Volume doesn't matter. The smart contract is the 
+              buyer. You sell exactly at the curve price shown — no slippage, no waiting, no uncertainty.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- MATH DETAILS SECTION (WITH IMAGE INTEGRATION) -->
+    <section class="section bc-math-section" id="math-details">
+      <div class="section-inner">
+        
+        <h2 class="section-title text-center">The Mathematics Behind Stability</h2>
+        <p class="lead-text text-center">
+          Here's the technical foundation that makes NetDAG's bonding curve work:
+        </p>
+
+        <div class="bc-math-layout">
+          
+          <div class="bc-math-figure">
+            <img src="images/BondingCurveMaths.png" alt="NetDAG bonding curve math" />
+          </div>
+
+          <div class="bc-math-text">
+            <h3>NetDAG Bonding Curve Formula</h3>
+            <p>For clarity, consider a simple linear function:</p>
+            <ul>
+              <li><strong>P(S) = a·S + b</strong></li>
+              <li><strong>P(S)</strong> — price at total supply S</li>
+              <li><strong>a</strong> — slope (how quickly price rises)</li>
+              <li><strong>b</strong> — base price when supply is zero</li>
+            </ul>
+            <p>
+              Minting <strong>ΔS</strong> tokens (from S₁ to S₂) costs the area under the curve:
+            </p>
+            <p class="formula-block">Cost(ΔS) = ∫<sub>S₁</sub><sup>S₂</sup> P(S) dS</p>
+            <p>
+              This integral preserves backing in the contract reserve, giving NDG a built-in price floor. 
+              The math guarantees that every token minted has corresponding value locked in the reserve.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- BONDING CURVE IMAGE (FULL WIDTH) -->
+    <section class="bc-image-section" aria-label="Bonding curve visualization">
+      <img src="images/BondingCurve.png" alt="Bonding curve visualization" class="bc-feature-img" />
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- BENEFITS & FUTURE (IMPROVED) -->
+    <section class="section section-content curve-info">
+      <div class="section-inner narrow">
+        <div class="content-block">
+          
+          <h2 class="section-title">Why NetDAG's Approach Is Different</h2>
+
+          <details class="curve-dd" open>
+            <summary>The Benefits: A Market Governed by Math</summary>
+            <ul>
+              <li><strong>Dump-Resistant:</strong> Big holders can't nuke the price in one move — each trade steps along the curve.</li>
+              <li><strong>Volatility-Smoothed:</strong> Predictable, formula-driven moves instead of fear and FOMO.</li>
+              <li><strong>Self-Liquid:</strong> The contract is the market maker; there's always a counterparty on-chain.</li>
+              <li><strong>Transparent Pricing:</strong> Anyone can calculate the exact buy/sell price at any supply level.</li>
+              <li><strong>No Rug Pulls:</strong> Liquidity can't be withdrawn because it's locked in the bonding curve smart contract.</li>
+            </ul>
+          </details>
+
+          <details class="curve-dd">
+            <summary>The Future: Triple-Layer Innovation</summary>
+            <p>
+              NDG is pioneering a triple-layer innovation — a worldwide first — that establishes true decentralized management: 
+            </p>
+            <ul>
+              <li><strong>Smart Contract Governance:</strong> Management rules are encoded directly into the smart contract using Bonding Curve principles for transparent and immutable execution.</li>
+              <li><strong>DAG Scalability:</strong> NDG merges its robust token economy with Directed Acyclic Graph (DAG) technology, ensuring unparalleled transaction speed and scalability.</li>
+              <li><strong>AI Monitoring (Guardian):</strong> An intelligent Guardian layer audits market behavior and automatically adjusts key parameters within mathematically defined safe limits, proactively protecting investor value.</li>
+            </ul>
+          </details>
+
+          <div class="bc-cta-box">
+            <h3>Ready to enter at the lowest curve price?</h3>
+            <p>Early presale participants lock in the best position on the bonding curve — before the price climbs.</p>
+            <a href="purchase-ndg.html" class="btn btn-primary btn-large">Join The Presale</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- WHY DAG + BONDING CURVE (WITH IMAGE) -->
+    <section class="section bc-dag-section">
+      <div class="section-inner">
+        
+        <div class="bc-dag-layout">
+          
+          <div class="bc-dag-text">
+            <h2>Why DAG + Bonding Curve Matters</h2>
+
+            <p>
+              <strong>DAG (Directed Acyclic Graph)</strong> lets transactions flow in parallel instead of waiting 
+              in a single line. As more people join, the network stays fast and responsive instead of clogging up 
+              when you need it most. 
+            </p>
+
+            <p>
+              The <strong>bonding curve</strong> adds structure to that activity. Every buy and sell follows a 
+              transparent price formula backed by a reserve, so price moves in smooth steps instead of violent 
+              spikes and crashes.
+            </p>
+
+            <p>
+              Together, DAG and the Bonding Curve create a market that is built to stay usable and predictable: 
+              <strong>high throughput for traders and builders, and pricing that reacts to real demand</strong> 
+              instead of pure hype.
+            </p>
+
+            <a href="menu/whitepaper.html" class="btn btn-ghost">Read The Technical Whitepaper</a>
+          </div>
+
+          <div class="bc-dag-image">
+            <img src="images/ndg15.png" alt="DAG and Bonding Curve synergy" class="bc-feature-img" />
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="section section-content bc-final-cta">
+      <div class="section-inner narrow text-center">
+        <h2 class="section-title">
+          <span class="accent">Mathematics. Stability. Protection.</span>
+        </h2>
+        <p class="lead-text">
+          NetDAG's bonding curve isn't just a pricing mechanism — it's investor protection built into the protocol.
+        </p>
+        <p class="lead-text">
+          Join the presale and lock in your position at the lowest curve price before adoption drives it higher.
+        </p>
+        <div class="bc-final-buttons">
+          <a href="purchase-ndg.html" class="btn btn-primary btn-large">Join Presale Now</a>
+          <a href="menu/faq.html" class="btn btn-ghost">Have Questions? Read FAQ</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="site-separator" aria-hidden="true"></div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-gray" role="contentinfo">
+    <div class="footer-back-to-top">
+      <a href="#top" class="back-to-top-link">Back to top</a>
+    </div>
+
+    <div class="footer-banner">
+      <div class="footer-banner-inner">
+        <div class="banner-tagline">
+          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE.</span>
+          NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment. Join the ecosystem and let your wealth grow with real utility.
+        </div>
+        <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-columns">
+        
+        <div class="footer-col footer-brand-col">
+          <div class="footer-brand-logo">
+            <img src="images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+            <span class="footer-brand-name">NetDAG</span>
+          </div>
+          <p class="footer-brand-tagline">
+            <em>A stability-first crypto economy: DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy.</em>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>PRODUCTS</h3>
+          <ul>
+            <li><a href="provenance.html">Provenance dApp</a></li>
+            <li><a href="bonding-curve.html">Bonding Curve</a></li>
+            <li><a href="guardian.html">Guardian AI</a></li>
+            <li><a href="no-gas.html">Easy Access</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>TOKEN & DOCS</h3>
+          <ul>
+            <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+            <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+            <li><a href="menu/vision.html">Vision</a></li>
+            <li><a href="menu/faq.html">FAQ</a></li>
+            <li><a href="menu/roadmap.html">Roadmap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>COMMUNITY</h3>
+          <ul>
+            <li><a href="menu/ambassador.html">Ambassador Program</a></li>
+            <li><a href="menu/charity.html">Charity</a></li>
+            <li><a href="menu/blog.html">Blog</a></li>
+            <li><a href="menu/partners.html">Partners</a></li>
+            <li><a href="menu/legal.html">Legal</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-socials-blue">
+        <a href="https://twitter.com/i/flow/signup" class="social-icon-blue social-x-blue" aria-label="X (Twitter)" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://telegram.org/" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+        <a href="https://discord.com/register" class="social-icon-blue social-ds-blue" aria-label="Discord" target="_blank" rel="noopener"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/" class="social-icon-blue social-yt-blue" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.facebook.com/" class="social-icon-blue social-fb-blue" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/signup" class="social-icon-blue social-gh-blue" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/accounts/emailsignup/" class="social-icon-blue social-ig-blue" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      <div class="footer-bottom-blue">
+        <p class="footer-bottom-text">
+          <a href="#" data-contact-open class="footer-contact-link">📧 Contact</a> |
+          Copyright: NetDAG 2026 | Built with care
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BEGIN OF CONTACT MODAL -->
+  <div id="contactModal" class="ndg-modal" aria-hidden="true">
+    <div class="ndg-modal-backdrop" data-contact-close></div>
+    <div class="ndg-modal-content">
+      <button class="ndg-modal-close" data-contact-close aria-label="Close">×</button>
+
+      <div class="ndg-modal-header">
+        <h2>📧 Get in Touch</h2>
+        <p>Send us a message and we'll respond within 3 working days.</p>
+      </div>
+
+      <form id="contactForm" class="contact-form">
+        <div class="contact-form-group">
+          <label for="contactFirstName" class="contact-label">First Name *</label>
+          <input type="text" id="contactFirstName" name="firstName" class="contact-input" required placeholder="Enter your first name">
+        </div>
+
+        <div class="contact-form-group">
+          <label for="contactLastName" class="contact-label">Last Name *</label>
+          <input type="text" id="contactLastName" name="lastName" class="contact-input" required placeholder="Enter your last name">
+        </div>
+
+        <div class="contact-form-group">
+          <label for="contactEmail" class="contact-label">Email *</label>
+          <input type="email" id="contactEmail" name="email" class="contact-input" required placeholder="your.email@example.com">
+        </div>
+
+        <div class="contact-form-group">
+          <label for="contactMessage" class="contact-label">Message *</label>
+          <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required placeholder="How can we help you?"></textarea>
+        </div>
+
+        <div id="contactStatus" class="contact-status"></div>
+
+        <button type="submit" class="contact-submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/contact-modal.js" defer></script>
+  <script src="/js/buy-modals.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
+
+</body>
+</html>

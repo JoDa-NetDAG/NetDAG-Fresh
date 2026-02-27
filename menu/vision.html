@@ -12,22 +12,41 @@
   <script src="../js/main.js" defer></script>
 
   <style>
-    /* Vision page-specific styles */
-    body.vision-page {
-      background:  var(--bg, #050714);
-      color: var(--text, #e0e0e0);
+    /* =========================================================
+       VISION PAGE — MODERN UPGRADE (self-contained)
+       Adds:
+       - Gas-free (Easy Access) value
+       - 10+ year narrative + milestones
+       - Icon cards, glow accents, and simple diagrams (SVG)
+       ========================================================= */
+
+    body.vision-page{
+      background: var(--bg, #050714);
+      color: var(--muted, #e0e0e0);
     }
 
-    .hero-banner.hero-vision {
-      background-image: url('../images/ndg37.png');
+    /* Hero */
+    .hero-banner.hero-vision{
+      background-image: url('../images/ndg37c.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      min-height: 100vh;
+      min-height: 50vh;
       position: relative;
+      overflow: hidden;
     }
-
-    .hero-banner.hero-vision .hero-overlay {
+    .hero-banner.hero-vision::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,153,0,.22), transparent 55%),
+        radial-gradient(circle at 85% 30%, rgba(120,160,255,.16), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.72));
+      z-index:0;
+      pointer-events:none;
+    }
+    .hero-banner.hero-vision .hero-overlay{
       max-width: 1100px;
       margin: 0 auto;
       padding: 120px 16px 72px;
@@ -36,174 +55,308 @@
       align-items: flex-start;
       justify-content: center;
       text-align: left;
+      position: relative;
+      z-index: 1;
     }
-
-    @media (min-width: 960px) {
-      .hero-banner.hero-vision .hero-overlay {
-        padding: 140px 0 84px;
-      }
+    @media (min-width: 960px){
+      .hero-banner.hero-vision .hero-overlay{ padding: 140px 0 84px; }
     }
-
-    .hero-banner.hero-vision .hero-title {
-      font-size: clamp(3rem, 3.1vw, 3. 6rem);
-      font-weight: 800;
+    .hero-banner.hero-vision .hero-title{
+      font-size: clamp(2.3rem, 3.1vw, 3.6rem);
+      font-weight: 900;
       color: #ffffff;
-      margin-bottom:  10px;
-      text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.7);
+      margin: 0 0 10px;
+      text-shadow: 0 12px 34px rgba(0,0,0,.60);
+      letter-spacing: -0.02em;
     }
-
-    .hero-banner.hero-vision .hero-subtitle {
-      max-width: 748px;
-      font-size: 1.0rem;
-      line-height: 1.8;
-      color: #ffffff;
-      text-shadow: 30px 8px 20px rgba(0, 0, 0, 0.6);
+    .hero-banner.hero-vision .hero-subtitle{
+      max-width: 820px;
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,.92);
+      text-shadow: 0 10px 26px rgba(0,0,0,.55);
+      margin: 0 0 18px;
     }
+    .vision-hero-chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .vision-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      box-shadow: 0 16px 40px rgba(0,0,0,.30);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      font-size: .92rem;
+      white-space: nowrap;
+    }
+    .vision-chip i{ color: var(--accent, #ff9900); }
 
-    .curve-section {
+    /* Body section */
+    .curve-section{
       background: radial-gradient(circle at top, #101226 0, #050714 55%);
+      padding-top: 24px;
     }
-
-    .vision-wrap {
+    .vision-wrap{
       max-width: 1100px;
-      margin:  0 auto;
+      margin: 0 auto;
       padding: 32px 16px 70px;
     }
-
-    @media (min-width: 960px) {
-      .vision-wrap {
-        padding: 40px 0 90px;
-      }
+    @media (min-width: 960px){
+      .vision-wrap{ padding: 40px 0 90px; }
     }
 
-    .vision-header {
+    /* Shared cards */
+    .vision-header{
       background: #0f1120;
       border-radius: 18px;
       padding: 22px 18px 20px;
-      border: 1px solid var(--border, #2a2a3a);
-      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 44px rgba(0,0,0,.70);
       margin-bottom: 26px;
       position: relative;
       overflow: hidden;
     }
-
-    .vision-header::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: 
-        radial-gradient(circle at top left, rgba(255, 184, 77, 0.25), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(255, 153, 0, 0.18), transparent 55%);
-      opacity: 0.55;
-      pointer-events: none;
-      z-index: 0;
+    .vision-header::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(circle at top left, rgba(255, 184, 77, 0.22), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(120, 160, 255, 0.15), transparent 55%);
+      opacity: 0.65;
+      pointer-events:none;
+      z-index:0;
     }
+    .vision-header > *{ position: relative; z-index: 1; }
 
-    .vision-header > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .vision-title {
+    .vision-title{
       margin: 0 0 10px;
-      font-size: clamp(1.6rem, 2.4vw, 2rem);
-      font-weight: 650;
+      font-size: clamp(1.6rem, 2.4vw, 2.05rem);
+      font-weight: 900;
       color: #ffffff;
+      letter-spacing: -0.01em;
     }
-
-    .vision-sub {
+    .vision-sub{
       margin: 2px 0 4px;
-      font-size:  0.98rem;
+      font-size: .99rem;
       line-height: 1.7;
-      color: var(--muted, #c0c0c0);
-      max-width: 820px;
+      color: rgba(233,238,247,.82);
+      max-width: 900px;
     }
 
-    .vision-grid {
-      display: grid;
+    .vision-grid{
+      display:grid;
       gap: 18px;
       margin-bottom: 22px;
     }
-
-    @media (min-width: 960px) {
-      .vision-grid {
-        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-        align-items: flex-start;
+    @media (min-width: 960px){
+      .vision-grid{
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+        align-items: start;
       }
     }
 
-    .vision-card {
-      background: var(--glass, rgba(7, 9, 20, 0.98));
+    .vision-card{
+      background: rgba(7, 9, 20, 0.96);
       border-radius: 16px;
-      border: 1px solid var(--border, #2a2a3a);
+      border: 1px solid rgba(255,255,255,.10);
       padding: 18px 16px 18px;
       font-size: 0.96rem;
-      line-height: 1.7;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+      line-height: 1.75;
+      box-shadow: 0 16px 40px rgba(0,0,0,.55);
+      position: relative;
+      overflow: hidden;
+    }
+    .vision-card::before{
+      content:"";
+      position:absolute;
+      inset:-60px -60px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(255,153,0,.16), rgba(255,153,0,0) 65%);
+      opacity: .6;
+      pointer-events:none;
+    }
+    @media (min-width: 960px){
+      .vision-card{ padding: 20px 20px 22px; }
     }
 
-    @media (min-width: 960px) {
-      .vision-card {
-        padding: 20px 20px 22px;
-      }
-    }
-
-    .vision-card h2 {
+    .vision-card h2{
       margin: 0 0 10px;
       font-size: 1.25rem;
       color: #ffffff;
+      letter-spacing: -0.01em;
     }
-
-    .vision-card h3 {
-      margin: 12px 0 6px;
-      font-size:  1.02rem;
-      color: var(--accent-2, #ffb84d);
+    .vision-card h3{
+      margin: 14px 0 8px;
+      font-size: 1.02rem;
+      color: #ffb84d;
+      display:flex;
+      align-items:center;
+      gap: 10px;
     }
+    .vision-card h3 i{ color: var(--accent, #ff9900); }
 
-    .vision-card p {
-      margin: 6px 0 10px;
-      color: var(--muted, #c0c0c0);
-    }
+    .vision-card p{ margin: 8px 0 12px; color: rgba(233,238,247,.78); }
+    .vision-card ul{ margin: 10px 0 12px 1.2em; padding-left: .2em; }
+    .vision-card li{ margin-bottom: 7px; color: rgba(233,238,247,.78); }
 
-    .vision-card ul {
-      margin: 8px 0 12px 1.3em;
-      padding-left: 0. 2em;
-    }
-
-    .vision-card li {
-      margin-bottom: 5px;
-      color: var(--muted, #c0c0c0);
-    }
-
-    .vision-note {
-      border-radius: 10px;
+    .vision-note{
+      border-radius: 12px;
       border-left: 4px solid var(--accent, #ff9900);
-      background: #10132a;
+      background: rgba(16, 19, 42, 0.9);
       padding: 10px 12px;
-      font-size: 0.9rem;
-      color: var(--muted, #c0c0c0);
-      margin-top: 8px;
+      font-size: 0.92rem;
+      color: rgba(233,238,247,.80);
+      margin-top: 10px;
     }
 
-    .vision-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .vision-pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
       margin-top: 12px;
     }
-
-    .vision-pill {
+    .vision-pill{
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 4px 10px;
-      font-size:  0.78rem;
-      color: var(--muted, #d0d0d0);
-      background: radial-gradient(circle at top left, rgba(255, 153, 0, 0.18), rgba(10, 10, 26, 0.98));
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,.86);
+      background:
+        radial-gradient(circle at top left, rgba(255,153,0,0.18), rgba(10, 10, 26, 0.96));
       white-space: nowrap;
     }
 
-    .curve-section {
-      padding-top: 24px;
+    /* Icon grid */
+    .value-grid{
+      display:grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (min-width: 880px){
+      .value-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .value-card{
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: 0 18px 46px rgba(0,0,0,.45);
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .value-ico{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,153,0,.25);
+      background: rgba(255,153,0,.10);
+      box-shadow: 0 0 34px rgba(255,153,0,.12);
+      color: var(--accent, #ff9900);
+      flex: 0 0 auto;
+    }
+    .value-ico i{ font-size: 18px; }
+    .value-body h4{
+      margin: 0 0 6px;
+      color: rgba(255,255,255,.94);
+      font-size: 1.0rem;
+      letter-spacing: -0.01em;
+    }
+    .value-body p{
+      margin: 0;
+      color: rgba(233,238,247,.78);
+      line-height: 1.65;
+      font-size: .95rem;
+    }
+
+    /* Simple diagram blocks */
+    .diagram{
+      margin-top: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      overflow: hidden;
+      box-shadow: 0 18px 46px rgba(0,0,0,.45);
+    }
+    .diagram-header{
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      background: rgba(0,0,0,.22);
+    }
+    .diagram-header strong{
+      color: rgba(255,255,255,.90);
+      font-size: .95rem;
+      letter-spacing: .2px;
+    }
+    .diagram-header span{
+      color: rgba(233,238,247,.72);
+      font-size: .86rem;
+    }
+    .diagram-body{ padding: 14px; }
+
+    .timeline{
+      display:grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .t-item{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .t-dot{
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(120,160,255,.10);
+      border: 1px solid rgba(120,160,255,.22);
+      color: rgba(160,190,255,.95);
+      flex: 0 0 auto;
+    }
+    .t-text h4{
+      margin: 0 0 4px;
+      color: rgba(255,255,255,.92);
+      font-size: 1.0rem;
+    }
+    .t-text p{
+      margin: 0;
+      color: rgba(233,238,247,.78);
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+
+    /* Mobile hero spacing */
+    @media (max-width: 700px){
+      .hero-banner.hero-vision .hero-overlay{
+        padding: 110px 16px 60px;
+      }
     }
   </style>
 </head>
@@ -264,9 +417,9 @@
 
       <ul class="menu-list">
         <li><a href="../index.html">Home</a></li>
+        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../bonding-curve.html">Bonding Curve</a></li>
         <li><a href="../guardian.html">Guardian</a></li>
-        <li><a href="../provenance.html">Provenance</a></li>
         <li><a href="../no-gas.html">Easy Access</a></li>
         <li><a href="whitepaper.html">Whitepaper</a></li>
         <li><a href="blog.html">Blog</a></li>
@@ -281,21 +434,29 @@
       </ul>
 
       <div class="mobile-ctas">
-        <a href="../buy-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
-      </div>
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
     </div>
   </div>
 
   <!-- HERO -->
   <main class="hero-banner hero-vision" id="main-content" role="main">
     <div class="hero-overlay">
-      <h1 class="hero-title">Our Vision for the Future</h1>
+      <h1 class="hero-title">Our Vision for the Next Decade</h1>
       <p class="hero-subtitle">
-        A stability-first crypto economy that powers private connectivity, verifiable real-world
-        products and AI-guided liquidity — so people and brands can interact with Web3 without
-        gambling their future.
+        NetDAG is building a stability-first crypto economy: fast settlement, predictable liquidity, and real-world utility.
+        Over the next 10+ years we want NDG to feel less like a trading toy—and more like dependable infrastructure.
       </p>
+
+      <div class="vision-hero-chips" aria-label="Vision highlights">
+        <span class="vision-chip"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Stability-first token design</span>
+        <span class="vision-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Gas-free user experience</span>
+        <span class="vision-chip"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> Provenance for the real world</span>
+        <span class="vision-chip"><i class="fa-solid fa-brain" aria-hidden="true"></i> Guardian risk intelligence</span>
+        <span class="vision-chip"><i class="fa-solid fa-lock" aria-hidden="true"></i> Private connectivity (dVPN)</span>
+      </div>
     </div>
   </main>
 
@@ -306,130 +467,310 @@
       <header class="vision-header">
         <h2 class="vision-title">Why NetDAG Exists</h2>
         <p class="vision-sub">
-          We believe the next generation of crypto will not be defined by memes or brute-force
-          speculation, but by systems that normal people and serious brands can actually trust.
-          NetDAG is our attempt to build that kind of system:  fast, transparent and mathematically
-          honest, with real-world usage at its core.
+          The next generation of crypto will not be defined by memes or brute-force speculation.
+          It will be defined by systems that normal people and serious brands can trust—because the rules are visible,
+          the incentives are aligned, and the user experience doesn’t punish newcomers.
+        </p>
+        <p class="vision-sub">
+          NetDAG aims to merge three things that rarely live together: <strong>stability</strong>, <strong>privacy</strong>, and
+          <strong>real-world utility</strong>. If we do it right, NDG becomes the asset you use because it works—not because a chart is green.
         </p>
       </header>
 
-      <!-- First row -->
+      <!-- Row 1 -->
       <div class="vision-grid">
-        <!-- Left column -->
         <article class="vision-card">
-          <h2>A Stability-First Crypto Economy</h2>
+          <h2>A Stability‑First Crypto Economy</h2>
           <p>
-            Most token projects start with hype and try to bolt on stability later. NetDAG does
-            the opposite.  We start with a <strong>bonding-curve reserve</strong>, conservative
-            tokenomics and an AI Guardian that reads the market in real time. Growth is welcome,
-            but not at the cost of structural fragility.
+            Most token projects start with hype and try to bolt on stability later. NetDAG does the opposite.
+            We start with a <strong>bonding‑curve reserve</strong>, conservative tokenomics, and a Guardian layer focused on market health.
           </p>
           <p>
-            The NDG token is designed to behave like the native asset of a network, not a lottery
-            ticket. As adoption grows, new demand from dVPN usage, provenance scans and
-            partner integrations feeds back into the curve and reserve, reinforcing the system
-            instead of stretching it to breaking point.
+            The NDG token is designed to behave like the native asset of a network, not a lottery ticket.
+            As adoption grows, demand from dVPN usage, provenance scans, and partner integrations feeds back into the reserve,
+            strengthening the system instead of stretching it thin.
           </p>
 
-          <h3>Three long-term goals</h3>
+          <h3><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Three long‑term goals</h3>
           <ul>
-            <li><strong>Predictable liquidity: </strong> builders, users and brands know what happens
-                when they interact with NDG, even in volatile markets. </li>
-            <li><strong>Utility-driven demand:</strong> a large share of token usage comes from
-                real services, not just trading against itself.</li>
-            <li><strong>Self-defending infrastructure:</strong> Guardian and governance can react
-                to stress before it becomes a crisis.</li>
+            <li><strong>Predictable liquidity:</strong> builders and brands know what happens when they interact with NDG, even in volatile markets.</li>
+            <li><strong>Utility‑driven demand:</strong> token usage comes from real services, not only trading against itself.</li>
+            <li><strong>Self‑defending infrastructure:</strong> Guardian and governance spot stress early and respond with measured, transparent controls.</li>
           </ul>
 
           <p class="vision-note">
-            If we get this right, NetDAG becomes boring in the best possible way:  more like a
-            resilient financial rail than a casino table. 
+            If we get this right, NetDAG becomes “boring” in the best possible way—more like infrastructure than a casino.
           </p>
+
+          <div class="diagram" aria-label="Stability loop diagram">
+            <div class="diagram-header">
+              <strong>Stability Loop</strong>
+              <span>Utility → demand → reserve → confidence</span>
+            </div>
+            <div class="diagram-body">
+              <svg viewBox="0 0 900 220" role="img" aria-label="Diagram: Utility feeds demand, demand strengthens reserve, reserve increases confidence, confidence grows utility">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ff9900" stop-opacity=".9"/>
+                    <stop offset="1" stop-color="#7fb0ff" stop-opacity=".75"/>
+                  </linearGradient>
+                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="8" result="b"/>
+                    <feColorMatrix in="b" type="matrix"
+                      values="1 0 0 0 0
+                              0 1 0 0 0
+                              0 0 1 0 0
+                              0 0 0 0.35 0"/>
+                    <feMerge>
+                      <feMergeNode/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <g filter="url(#glow)">
+                  <rect x="30"  y="60" width="190" height="90" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(255,153,0,.35)"/>
+                  <rect x="255" y="60" width="190" height="90" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(127,176,255,.35)"/>
+                  <rect x="480" y="60" width="190" height="90" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(255,153,0,.28)"/>
+                  <rect x="705" y="60" width="165" height="90" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(127,176,255,.28)"/>
+
+                  <text x="125" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Utility</text>
+                  <text x="350" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Demand</text>
+                  <text x="575" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Reserve</text>
+                  <text x="788" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Confidence</text>
+
+                  <path d="M220 105h35" stroke="url(#g1)" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M445 105h35" stroke="url(#g1)" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M670 105h35" stroke="url(#g1)" stroke-width="8" stroke-linecap="round"/>
+
+                  <path d="M250 93l18 12-18 12" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M475 93l18 12-18 12" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M700 93l18 12-18 12" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </div>
+          </div>
         </article>
 
-        <!-- Right column -->
         <aside class="vision-card">
-          <h2>The Three Pillars of NetDAG</h2>
+          <h2>The Pillars of NetDAG</h2>
 
-          <h3>1. Financial Engine</h3>
+          <h3><i class="fa-solid fa-coins" aria-hidden="true"></i> 1) Financial Engine</h3>
           <p>
-            The bonding-curve reserve is our "shock absorber".  A permanent on-chain reserve
-            backs NDG liquidity and gives the community clear visibility into how price and
-            supply relate.  Over time, we aim to collaborate with professional liquidity and
-            treasury partners who share our stability-first mindset.
+            The bonding‑curve reserve is the “shock absorber”—a transparent, on‑chain liquidity base that keeps NDG usable
+            and helps reduce panic dynamics. Over time, professional treasury practices and partner integrations can strengthen resilience.
           </p>
 
-          <h3>2. AI "Neuron" &amp; Guardian Layer</h3>
+          <h3><i class="fa-solid fa-brain" aria-hidden="true"></i> 2) Guardian AI (Risk Intelligence)</h3>
           <p>
-            Guardian is our AI-driven risk brain. It does not chase high-frequency trading,
-            it watches for unhealthy patterns:  concentration, drain events, wash volume,
-            shallow liquidity.  Its job is to warn the community and, later, enforce modest
-            safety rules chosen by governance.
+            Guardian is a risk‑aware layer focused on unhealthy patterns: concentration, liquidity drain events, wash volume, and exploit signals.
+            Its goal is not to “trade”—it’s to help the community see problems early and respond with measured policy.
           </p>
 
-          <h3>3. Real-World Provenance &amp; Commerce</h3>
+          <h3><i class="fa-solid fa-fingerprint" aria-hidden="true"></i> 3) Provenance & Real Commerce</h3>
           <p>
-            The Provenance dApp and RWA integrations are our bridge to the physical world.
-            We want a future where buying a pair of sneakers, a gadget or a concert ticket
-            can issue verifiable on-chain proofs — and optionally reward you with NDG/JODA
-            for choosing transparency over grey markets.
+            Provenance is our bridge to the physical world: verification for products, tickets, certificates, and supply chains.
+            The long‑term win is simple: <strong>truth becomes verifiable by default</strong>.
+          </p>
+
+          <h3><i class="fa-solid fa-bolt" aria-hidden="true"></i> 4) Gas‑Free “Easy Access”</h3>
+          <p>
+            For mainstream adoption, crypto must feel as easy as email. NetDAG’s gas‑free value is about removing friction:
+            no wallet downloads, no seed phrase anxiety, and (when sponsorship is enabled) <strong>$0 gas shown</strong> for the user.
           </p>
 
           <div class="vision-pill-row">
-            <span class="vision-pill">Math-backed liquidity</span>
-            <span class="vision-pill">AI risk intelligence</span>
+            <span class="vision-pill">Math‑backed liquidity</span>
+            <span class="vision-pill">Guardian risk signals</span>
             <span class="vision-pill">Privacy &amp; dVPN</span>
-            <span class="vision-pill">Real product provenance</span>
-            <span class="vision-pill">Brand-ready rails</span>
+            <span class="vision-pill">Product provenance</span>
+            <span class="vision-pill">Gas‑free onboarding</span>
+            <span class="vision-pill">Brand‑ready rails</span>
           </div>
         </aside>
       </div>
 
-      <!-- Second row -->
+      <!-- Row 2: Value in practice -->
       <div class="vision-grid">
         <article class="vision-card">
-          <h2>How We See the Next 5–10 Years</h2>
+          <h2>What “Gas‑Free” Actually Means</h2>
           <p>
-            In the early years, NetDAG will look like a focused ecosystem:  NDG, the bonding curve,
-            Guardian dashboards, dVPN clients, the provenance app and a handful of committed
-            partners. The priority is <strong>depth over breadth</strong> — a few products that
-            really work, not a hundred half-finished experiments.
+            “Gasless” isn’t magic and it isn’t a gimmick—it’s a product decision. The goal is to hide complexity without hiding truth.
+            Under the hood, transactions can be batched and sponsored, while users still control approvals and can verify activity on-chain.
           </p>
-          <p>
-            Over a longer horizon we want NetDAG to become invisible plumbing.  You might connect
-            to a privacy network, scan a product for authenticity, or earn loyalty points from a
-            brand partnership without ever thinking about bonding curves or AI risk models.
-            The complexity sits under the hood; the experience feels natural.
-          </p>
-          <p>
-            When people look back, we want them to say: "this was one of the first crypto systems
-            that really tried to behave like infrastructure, not a pump."
+
+          <div class="value-grid" aria-label="Gas-free value grid">
+            <div class="value-card">
+              <div class="value-ico" aria-hidden="true"><i class="fa-solid fa-envelope-open-text"></i></div>
+              <div class="value-body">
+                <h4>Onboarding that feels normal</h4>
+                <p>Sign up with email or a familiar provider. The wallet is created in the background—no extension required.</p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <div class="value-ico" aria-hidden="true"><i class="fa-solid fa-key"></i></div>
+              <div class="value-body">
+                <h4>No seed phrase panic</h4>
+                <p>Recovery flows can match real life (device-based, email/SMS, or custody options)—so people don’t lose access forever.</p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <div class="value-ico" aria-hidden="true"><i class="fa-solid fa-receipt"></i></div>
+              <div class="value-body">
+                <h4>$0 gas shown (when enabled)</h4>
+                <p>Fees can be sponsored by a paymaster so the user sees $0 at checkout—great for retail and partner experiences.</p>
+              </div>
+            </div>
+
+            <div class="value-card">
+              <div class="value-ico" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></div>
+              <div class="value-body">
+                <h4>Batched actions</h4>
+                <p>Multiple operations can feel like one click: buy + stake, scan + mint proof, verify + reward—less friction, more completion.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="diagram" aria-label="Easy Access diagram">
+            <div class="diagram-header">
+              <strong>Easy Access (UX Diagram)</strong>
+              <span>Login → Wallet → Action → Proof</span>
+            </div>
+            <div class="diagram-body">
+              <svg viewBox="0 0 920 240" role="img" aria-label="Diagram: Login leads to embedded wallet, then to actions, then to verifiable proof">
+                <defs>
+                  <linearGradient id="g2" x1="0" x2="1">
+                    <stop offset="0" stop-color="#7fb0ff" stop-opacity=".85"/>
+                    <stop offset="1" stop-color="#ff9900" stop-opacity=".85"/>
+                  </linearGradient>
+                </defs>
+
+                <g>
+                  <rect x="34"  y="70" width="210" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(127,176,255,.35)"/>
+                  <rect x="270" y="70" width="210" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(255,153,0,.30)"/>
+                  <rect x="506" y="70" width="210" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(127,176,255,.28)"/>
+                  <rect x="742" y="70" width="150" height="100" rx="22" fill="rgba(255,255,255,.05)" stroke="rgba(255,153,0,.28)"/>
+
+                  <text x="139" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Login</text>
+                  <text x="375" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Wallet</text>
+                  <text x="611" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Action</text>
+                  <text x="817" y="112" text-anchor="middle" fill="rgba(255,255,255,.92)" font-size="18" font-weight="800">Proof</text>
+
+                  <text x="139" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">Email / Google</text>
+                  <text x="375" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">Embedded</text>
+                  <text x="611" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">Buy / Stake / Scan</text>
+                  <text x="817" y="140" text-anchor="middle" fill="rgba(233,238,247,.72)" font-size="13">On‑chain</text>
+
+                  <path d="M244 120h26" stroke="url(#g2)" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M480 120h26" stroke="url(#g2)" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M716 120h26" stroke="url(#g2)" stroke-width="8" stroke-linecap="round"/>
+
+                  <path d="M268 108l18 12-18 12" fill="none" stroke="url(#g2)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M504 108l18 12-18 12" fill="none" stroke="url(#g2)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M740 108l18 12-18 12" fill="none" stroke="url(#g2)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <p class="vision-note">
+            Gas‑free UX isn’t about hiding reality—it’s about removing failure points so more people complete real actions (and real utility can compound).
           </p>
         </article>
 
         <article class="vision-card">
-          <h2>Role of the Community</h2>
+          <h2>The Next 10+ Years (A Practical Trajectory)</h2>
           <p>
-            NetDAG is not meant to be controlled forever by a small founding group. The community
-            is expected to gradually shape the curve parameters, Guardian behaviour, ecosystem
-            grants and product priorities through transparent governance. 
+            We view NetDAG as a long game. The world doesn’t need another chain with 1,000 features; it needs a few systems that behave responsibly
+            and can survive multiple market cycles. Here’s a plausible path:
           </p>
-          <p>
-            We imagine three types of long-term contributors:
-          </p>
-          <ul>
-            <li><strong>Builders:</strong> teams integrating dVPN, provenance and NDG rails into
-                their own products.</li>
-            <li><strong>Guardians:</strong> analysts and researchers who stress-test the system,
-                challenge assumptions and help refine risk models.</li>
-            <li><strong>Ambassadors:</strong> people who enjoy explaining stability-first crypto
-                to newcomers and to serious brands.</li>
-          </ul>
+
+          <div class="timeline" aria-label="NetDAG timeline">
+            <div class="t-item">
+              <div class="t-dot" aria-hidden="true"><i class="fa-solid fa-seedling"></i></div>
+              <div class="t-text">
+                <h4>2026–2027: Trust Foundation</h4>
+                <p>Launch stable core rails: bonding‑curve reserve, Guardian dashboards, and easy onboarding that normal people can use.</p>
+              </div>
+            </div>
+
+            <div class="t-item">
+              <div class="t-dot" aria-hidden="true"><i class="fa-solid fa-link"></i></div>
+              <div class="t-text">
+                <h4>2027–2029: Partner Integrations</h4>
+                <p>Provenance pilots, dVPN distribution, and real commerce partners. Utility begins to dominate purely speculative demand.</p>
+              </div>
+            </div>
+
+            <div class="t-item">
+              <div class="t-dot" aria-hidden="true"><i class="fa-solid fa-shield-virus"></i></div>
+              <div class="t-text">
+                <h4>2029–2032: Resilience Cycles</h4>
+                <p>NetDAG proves itself through volatility: transparent reserve dynamics and measurable risk signals become a differentiator.</p>
+              </div>
+            </div>
+
+            <div class="t-item">
+              <div class="t-dot" aria-hidden="true"><i class="fa-solid fa-industry"></i></div>
+              <div class="t-text">
+                <h4>2032–2036: Infrastructure Era</h4>
+                <p>NetDAG becomes “invisible plumbing”: users verify, connect privately, and transact without thinking about crypto mechanics.</p>
+              </div>
+            </div>
+          </div>
+
           <p class="vision-note">
-            Our commitment is to give these groups tools, data and clear incentives — not just slogans.
+            The long-term benchmark is simple: do we reduce fraud, reduce friction, and increase trust—while staying mathematically honest?
           </p>
         </article>
       </div>
+
+      <!-- Row 3: Community -->
+      <div class="vision-grid">
+        <article class="vision-card">
+          <h2>Role of the Community</h2>
+          <p>
+            NetDAG is not meant to be permanently controlled by a small founding group.
+            As the system matures, the community should shape curve parameters, Guardian behavior, ecosystem grants,
+            and product priorities through transparent governance.
+          </p>
+
+          <h3><i class="fa-solid fa-hammer" aria-hidden="true"></i> Builders</h3>
+          <p>Teams integrating dVPN, provenance verification, and NDG rails into real apps—where users come for the product, not the token.</p>
+
+          <h3><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Guardians</h3>
+          <p>Analysts and researchers stress-testing assumptions, validating risk signals, and improving transparency and detection.</p>
+
+          <h3><i class="fa-solid fa-people-group" aria-hidden="true"></i> Ambassadors</h3>
+          <p>Communicators who help newcomers and brands understand stability-first crypto—without hype and without confusion.</p>
+
+          <p class="vision-note">
+            Commitment: tools, data, clear incentives, and measurable progress—not slogans.
+          </p>
+        </article>
+
+        <aside class="vision-card">
+          <h2>What We Want NetDAG to Be Known For</h2>
+          <ul>
+            <li><strong>Trust:</strong> proof beats claims (provenance, auditable reserve behavior).</li>
+            <li><strong>Stability:</strong> predictable liquidity and risk-aware guardrails through multiple cycles.</li>
+            <li><strong>Privacy:</strong> practical protection for everyday users (dVPN), not just ideology.</li>
+            <li><strong>Ease:</strong> gas-free onboarding so utility can reach normal people.</li>
+            <li><strong>Integrity:</strong> long-term thinking, conservative design, and transparent tradeoffs.</li>
+          </ul>
+
+          <div class="vision-pill-row">
+            <span class="vision-pill">Infrastructure mindset</span>
+            <span class="vision-pill">Measured governance</span>
+            <span class="vision-pill">Brand trust rails</span>
+            <span class="vision-pill">Consumer UX</span>
+            <span class="vision-pill">Multi-cycle resilience</span>
+          </div>
+        </aside>
+      </div>
+
     </div>
   </section>
 
@@ -454,7 +795,7 @@
 
     <div class="footer-main">
       <div class="footer-columns">
-        
+
         <div class="footer-col footer-brand-col">
           <div class="footer-brand-logo">
             <img src="../images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
@@ -530,50 +871,43 @@
       </div>
 
       <form id="contactForm" class="contact-form">
-        <!-- First Name -->
         <div class="contact-form-group">
           <label for="contactFirstName" class="contact-label">First Name *</label>
           <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
             placeholder="Enter your first name">
         </div>
 
-        <!-- Last Name -->
         <div class="contact-form-group">
           <label for="contactLastName" class="contact-label">Last Name *</label>
           <input type="text" id="contactLastName" name="lastName" class="contact-input" required
             placeholder="Enter your last name">
         </div>
 
-        <!-- Email -->
         <div class="contact-form-group">
           <label for="contactEmail" class="contact-label">Email *</label>
           <input type="email" id="contactEmail" name="email" class="contact-input" required
             placeholder="your.email@example.com">
         </div>
 
-        <!-- Message -->
         <div class="contact-form-group">
           <label for="contactMessage" class="contact-label">Message *</label>
           <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
             placeholder="How can we help you?"></textarea>
         </div>
 
-        <!-- Status Message -->
         <div id="contactStatus" class="contact-status"></div>
 
-        <!-- Submit Button -->
         <button type="submit" class="contact-submit-btn">
           Send Message
         </button>
       </form>
     </div>
   </div>
+  <!-- END OF CONTACT MODAL -->
 
-<!-- END OF CONTACT MODAL -->
-
-<script src="../js/contact-modal.js" defer></script>
+  <script src="../js/contact-modal.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
-<script src="/js/ndg-buy-loader.js" defer></script>
+  <script src="/js/ndg-buy-loader.js" defer></script>
 
 </body>
 </html>

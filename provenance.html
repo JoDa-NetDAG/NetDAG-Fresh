@@ -15,17 +15,215 @@
   <link rel="icon" href="images/favicon.ico" />
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/contact-modal.css">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-
   <!-- Main JS -->
   <script src="js/main.js" defer></script>
+<link rel="stylesheet" href="css/styles.css" />
+
+<style>
+/* =========================================================
+   PROVENANCE PAGE — INLINE (single source of truth)
+   Added inline on provenance.html.
+   IMPORTANT: After adding this, remove the matching blocks
+   from css/styles.css as listed below.
+   ========================================================= */
+
+/* ---------- HERO ---------- */
+#prov-hero.prov-hero{
+  min-height: 120dvh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#prov-hero .prov-wrap{
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 14px;
+  position: relative;
+  z-index: 5;
+}
+
+#prov-hero .prov-title{
+  font-size: 4.5rem;
+  color: #ff9900;
+  line-height: 1.05;
+  margin: 0 0 34px;
+  text-align: center;
+}
+
+#prov-hero .prov-cols{
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+#prov-hero .prov-subtitle{
+  font-size: 1.5rem;
+  color: #ff9900;
+  line-height: 1.12;
+  margin: 0 0 18px;
+}
+
+#prov-hero .prov-p{
+  margin: 0 0 14px;
+  line-height: 1.65;
+  color: rgba(233,238,247,.88);
+  font-size: 1.05rem;
+}
+
+#prov-hero .prov-cta{
+  margin-top: 18px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+#prov-hero .prov-right{
+  display: flex;
+  justify-content: center;
+}
+
+#prov-hero .prov-phone{
+  width: min(620px, 46vw);
+  max-width: 680px;
+  height: auto;
+  display: block;
+}
+
+/* slow elegant rotation (desktop) */
+#prov-hero .prov-phone-anim{
+  transform-origin: 50% 60%;
+  animation: phoneRotateSlow 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes phoneRotateSlow{
+  0%   { transform: rotate(-3deg); }
+  50%  { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
+}
+
+/* glow blobs */
+#prov-hero.prov-hero::before,
+#prov-hero.prov-hero::after{
+  content: "";
+  position: absolute;
+  width: 820px;
+  height: 820px;
+  border-radius: 999px;
+  background: radial-gradient(circle,
+    rgba(255,153,0,.34) 0%,
+    rgba(255,153,0,.12) 35%,
+    rgba(255,153,0,0) 70%
+  );
+  filter: blur(18px);
+  opacity: .9;
+  z-index: 0;
+  pointer-events: none;
+}
+#prov-hero.prov-hero::before{ top: -180px; left: -140px; }
+#prov-hero.prov-hero::after{ bottom: -220px; right: -160px; opacity: .75; }
+
+/* Mobile: wrap text around the phone (phone is inside .prov-left) */
+@media (max-width: 900px){
+  #prov-hero .prov-cols{ display: block; }
+
+  #prov-hero .prov-phone--mobile{
+    display: block;
+    float: right;
+    width: min(46vw, 190px);
+    height: auto;
+    margin: 0.25rem 0 0.9rem 1rem;
+    border-radius: 16px;
+    animation: none; /* stable */
+  }
+
+  #prov-hero .prov-right{ display: none; }
+
+  #prov-hero .prov-left::after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+/* Desktop: hide the inline mobile phone */
+@media (min-width: 901px){
+  #prov-hero .prov-phone--mobile{ display: none; }
+}
+
+/* Mobile typography tuning for Provenance hero title */
+@media (max-width: 900px){
+  #prov-hero .prov-title{
+    font-size: clamp(2.2rem, 7.2vw, 3.0rem);
+    line-height: 1.08;
+    margin-bottom: 18px;
+  }
+
+  /* If your 2-line spans exist, tighten their spacing a bit */
+  #prov-hero .prov-title-line1,
+  #prov-hero .prov-title-line2{
+    display: inline;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 420px){
+  #prov-hero .prov-title{
+    font-size: 2.05rem;
+    line-height: 1.06;
+  }
+}
+
+  /* ===== NO-GAS: fix black band & ensure separator visible under hero ===== */
+
+  /* Ensure hero background cannot overlap outside its section */
+  .nogas-hero{
+    position: relative;
+    overflow: hidden;
+    background: transparent; /* prevent any accidental dark fill */
+  }
+
+  .nogas-hero-bg{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Ensure hero content stays above bg */
+  .nogas-hero .section-inner,
+  .nogas-hero .hero-inner{
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Make the separator that follows the hero sit ABOVE the hero background edge */
+  .nogas-hero + .site-separator{
+    position: relative;
+    z-index: 5;
+  }
+
+  /* Visible separator line only for the one right after the hero */
+  .nogas-hero + .site-separator{
+    height: 14px; /* or whatever your design uses */
+    background: linear-gradient(
+      to bottom,
+      rgba(255,153,0,0.35),
+      rgba(255,153,0,0.00)
+    );
+  }
+</style>
 
 </head>
 
-<body class="home-page" id="top">
+<body class="prov-page" id="top">
 
   <!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
@@ -83,9 +281,9 @@
 
       <ul class="menu-list">
         <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance</a></li>
         <li><a href="bonding-curve.html">Bonding Curve</a></li>
         <li><a href="guardian.html">Guardian</a></li>
-        <li><a href="provenance.html">Provenance</a></li>
         <li><a href="no-gas.html">Easy Access</a></li>
         <li><a href="menu/whitepaper.html">Whitepaper</a></li>
         <li><a href="menu/blog.html">Blog</a></li>
@@ -98,14 +296,18 @@
         <li><a href="menu/partners.html">Partners</a></li>
         <li><a href="menu/legal.html">Legal</a></li>
       </ul>
+      <div class="mobile-ctas">
+  <!-- Use this on pages inside /menu/ -->
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+</div>
      </div>
     </div>
    
  <!-- PROVENANCE HERO — TRUST WRITTEN IN CODE -->
+<!-- PROVENANCE HERO — TRUST WRITTEN IN CODE -->
 <section class="prov-hero-79">
-
   <div class="prov-hero-79-overlay"></div>
-
 </section>
 
     <!-- top separator before hero (site separator) -->
@@ -114,46 +316,36 @@
 <section class="prov-hero" id="prov-hero">
   <div class="prov-wrap">
 
-    <!-- TITLE (ALWAYS ABOVE) -->
     <h1 class="prov-title">
-      Trust Written in Code:<br>
-      Provenance Anti-Counterfeit
+      <span class="prov-title-line1">Trust Written in Code:</span>
+      <span class="prov-title-line2">Provenance Anti-Counterfeit</span>
     </h1>
 
-    <!-- 2 INVISIBLE COLUMNS -->
     <div class="prov-cols">
 
-      <!-- LEFT COLUMN: subtitle + all text + buttons -->
       <div class="prov-left">
-        <h2 class="prov-subtitle">Provenance is not a claim. It’s a proof.</h2>
+        <h2 class="prov-subtitle">Provenance isn't a claim. It's proof.</h2>
 
-        <p class="prov-p">
-          Verifiable authenticity for real-world products — independent, cryptographic, and permanent.
-        </p>
+        <!-- Mobile-only phone goes HERE (inside prov-left) -->
+        <img
+          src="images/ndg78.png"
+          class="prov-phone prov-phone-anim prov-phone--mobile"
+          alt="NetDAG Scan App"
+        />
 
-        <p class="prov-p">
-          Built for manufacturers, brands, and supply chains that can’t afford ambiguity — across primary sales, resale,
-          warranty, and compliance workflows.
-        </p>
-
-        <p class="prov-p">
-          We are solving the global crisis of commercial trust. Built to bind every product — from your morning coffee to
-          limited editions — our technology puts verification power directly into the customer’s hands.
-        </p>
-
-        <p class="prov-p">
-          For brands, this means a permanent, tamper-resistant audit trail. For buyers, it means one clear signal:
-          Confidence. The NetDAG Provenance dApp delivers “AUTHENTIC” the moment the code is scanned.
-        </p>
+        <p class="prov-p">Verifiable authenticity for real-world products — independent, cryptographic, and permanent.</p>
+        <p class="prov-p">Built for manufacturers, brands, and supply chains that can’t afford ambiguity — across primary sales, resale, warranty, and compliance workflows.</p>
+        <p class="prov-p">We are solving the global crisis of commercial trust. Built to bind every product — from your morning coffee to limited editions — our technology puts verification power directly into the customer’s hands.</p>
+        <p class="prov-p">For brands, this means a permanent, tamper-resistant audit trail. For buyers, it means one clear signal: Confidence. The NetDAG Provenance dApp delivers “AUTHENTIC” the moment the code is scanned.</p>
 
         <div class="prov-cta">
-          <a href="#prov-how" class="btn btn-primary">How it works</a>
-          <a href="#provenance-participants" class="btn btn-ghost">Who it’s built for</a>
+          <a href="#how-it-works" class="btn btn-primary">How it works</a>
+          <a href="#provenance-participants" class="btn btn-ghost">Who it's built for</a>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: phone only -->
       <div class="prov-right">
+        <!-- Desktop phone goes HERE -->
         <img
           src="images/ndg78.png"
           class="prov-phone prov-phone-anim"
@@ -161,11 +353,11 @@
         />
       </div>
 
-    </div>
-  </div>
-</section>
-
+    </div> <!-- /.prov-cols -->
+  </div>   <!-- /.prov-wrap -->
+</section> <!-- /#prov-hero -->
 <!-- Other sections unchanged... -->
+
     <div class="section-separator" aria-hidden="true"></div>
 
 <section class="prov-s2">
@@ -178,9 +370,9 @@
     <div class="prov-s2-copy">
 
       <p>
-        <span class="prov-sub">The End of Counterfeiting.</span><br>
-        The Dawn of Real Blockchain Utility.
-      </p>
+  <span class="prov-sub">The End of Counterfeiting.</span><br>
+  <span class="prov-sub-accent">The Dawn of Real Blockchain Utility.</span>
+  </p>
 
       <p class="prov-sub">What changes now</p>
       <p>
