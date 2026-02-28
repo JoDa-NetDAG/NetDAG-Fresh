@@ -229,42 +229,6 @@
         "SafeERC20"
       ]
     },
-    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol": {
-      "lastModificationDate": 1770300676069,
-      "contentHash": "211ffd288c1588ba8c10eae668ca3c66",
-      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
-      "solcConfig": {
-        "version": "0.8.17",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "viaIR": true,
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.1"
-      ],
-      "artifacts": [
-        "Address"
-      ]
-    },
     "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Permit.sol": {
       "lastModificationDate": 1770300675571,
       "contentHash": "525fcdad8d171312933f47baf01d1ed8",
@@ -299,6 +263,42 @@
       ],
       "artifacts": [
         "IERC20Permit"
+      ]
+    },
+    "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol": {
+      "lastModificationDate": 1770300676069,
+      "contentHash": "211ffd288c1588ba8c10eae668ca3c66",
+      "sourceName": "@openzeppelin/contracts/utils/Address.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.1"
+      ],
+      "artifacts": [
+        "Address"
       ]
     },
     "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\VestingVault.sol": {
@@ -420,7 +420,7 @@
       ]
     },
     "C:\\Users\\usER\\Documents\\NetDAG-Fresh\\netdag-presale\\contracts\\PresaleWithVesting.sol": {
-      "lastModificationDate": 1771623687626,
+      "lastModificationDate": 1771666120053,
       "contentHash": "732a9b301e47eb8007459de2aef0d7cf",
       "sourceName": "contracts/PresaleWithVesting.sol",
       "solcConfig": {

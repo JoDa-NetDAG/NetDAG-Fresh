@@ -14,14 +14,14 @@ export default async function handler(req, res) {
   }
 
   let transporter = nodemailer.createTransport({
-    host: smtp.zoho.eu,
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.ZOHO_SMTP_USER,
-      pass: process.env.ZOHO_SMTP_PASS,
-    },
-  });
+  host: "smtp.zoho.eu",
+  port: 587,
+  secure: false, // port 587 always uses secure: false (STARTTLS)
+  auth: {
+    user: process.env.ZOHO_SMTP_USER,
+    pass: process.env.ZOHO_SMTP_PASS,
+  },
+});
 
   try {
     await transporter.sendMail({

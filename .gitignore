@@ -196,3 +196,6 @@ nohup.out
 
 # Local test files
 test-results/
+
+# Backup folder (YOUR REQUEST)
+NetDAG-Backups/
