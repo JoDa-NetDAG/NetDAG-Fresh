@@ -1,96 +1,84 @@
-/* NetDAG Contact Modal Handler */
+(function () {
+  const modal = document.getElementById("contactModal");
+  const openBtns = document.querySelectorAll("[data-contact-open]");
+  const form = document.getElementById("contactForm");
+  const statusEl = document.getElementById("contactStatus");
 
-(function() {
-  'use strict';
+  if (!modal || !form) return;
 
-  const modal = document.getElementById('contactModal');
-  const form = document.getElementById('contactForm');
-  const status = document.getElementById('contactStatus');
+  const closeEls = modal.querySelectorAll("[data-contact-close]");
 
-  if (!modal || !form || !status) return;
-
-  // Open modal
-  document.querySelectorAll('[data-contact-open]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  // Close modal
-  function closeModal() {
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    form.reset();
-    status.textContent = '';
-    status.className = 'contact-status';
+  function setStatus(msg, color) {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.style.color = color || "#ffcc80";
   }
 
-  document.querySelectorAll('[data-contact-close]').forEach(btn => {
-    btn.addEventListener('click', closeModal);
+  function openModal() {
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    setStatus("", "");
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  openBtns.forEach((btn) => {
+    if (btn.tagName === "BUTTON") btn.setAttribute("type", "button");
+    btn.addEventListener("click", openModal);
   });
 
-  modal.querySelector('.ndg-modal-backdrop').addEventListener('click', closeModal);
+  closeEls.forEach((el) => el.addEventListener("click", closeModal));
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
-      closeModal();
-    }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
 
-  // Form submission
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const submitBtn = form.querySelector('.contact-submit-btn');
-    const formData = new FormData(form);
+    // Read your existing stake modal fields
+    const name = (document.getElementById("cName")?.value || "").trim();
+    const email = (document.getElementById("cEmail")?.value || "").trim();
+    const topic = (document.getElementById("cTopic")?.value || "").trim();
+    const message = (document.getElementById("cMessage")?.value || "").trim();
 
-    // Validate
-    const firstName = formData.get('firstName').trim();
-    const lastName = formData.get('lastName').trim();
-    const email = formData.get('email').trim();
-    const message = formData.get('message').trim();
-
-    if (!firstName || !lastName || !email || !message) {
-      status.textContent = 'Please fill in all fields.';
-      status.className = 'contact-status error';
+    if (!name || !email || !topic || !message) {
+      setStatus("Please fill in all fields.", "#ff6b6b");
       return;
     }
 
-    // Disable button
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    status.textContent = 'Sending your message...';
-    status.className = 'contact-status';
-    status.style.display = 'block';
+    setStatus("Sending…", "#ffcc80");
 
     try {
-      const response = await fetch('send-contact.php', {
-        method: 'POST',
-        body: formData
+      // Map to the API fields you created in /api/contact.js
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: name,
+          lastName: "(Website)",
+          email: email,
+          message: `Topic: ${topic}\n\n${message}`,
+        }),
       });
 
-      const result = await response.json();
+      const data = await response.json().catch(() => ({}));
 
-      if (result.success) {
-        status.textContent = '✓ Message sent! We\'ll respond within 24 hours.';
-        status.className = 'contact-status success';
-        form.reset();
-        setTimeout(() => closeModal(), 3000);
-      } else {
-        status.textContent = '✗ ' + result.message;
-        status.className = 'contact-status error';
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || `HTTP ${response.status}`);
       }
 
-    } catch (error) {
-      console.error('Form error:', error);
-      status.textContent = '✗ Something went wrong. Please email us at info@netdag.com';
-      status.className = 'contact-status error';
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
+      setStatus("Message sent ✅", "#53ff73");
+      form.reset();
+      setTimeout(closeModal, 900);
+    } catch (err) {
+      console.error(err);
+      setStatus("Failed to send. Please try again later.", "#ff6b6b");
     }
   });
-
 })();
