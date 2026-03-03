@@ -523,18 +523,19 @@
           <button class="btn-disconnect" id="disconnect-wallet">Disconnect</button>
         </div>
 
-        <!-- Referral Link Section -->
-        <div id="referral-section" style="display: none;">
-          <div class="referral-box">
-            <h3>🎁 Your Referral Link</h3>
-            <p>Share this link and earn 5% on every purchase!</p>
-            <div class="referral-link-container">
-              <input type="text" id="referral-link" readonly value="">
-              <button id="copy-referral-btn">📋 Copy</button>
-            </div>
-            <p class="referral-stats">Earn 5% NDG tokens on every referral purchase</p>
-          </div>
-        </div>
+        <!-- Referral Link Section (Show after wallet is connected) -->
+<div id="referral-section" style="display:none; margin-bottom:24px;">
+  <div class="referral-box">
+    <h3>🎁 Your Referral Link</h3>
+    <p>Share this link and earn rewards when friends buy NDG at presale launch.</p>
+    <div class="referral-link-container" style="display:flex; align-items:center; gap:8px;">
+      <input type="text" id="referral-link" readonly style="flex:1; padding:8px; border-radius:6px; border:1px solid #eea; background:#222; color:#fff;">
+      <button id="copy-referral-btn" class="btn btn-small" style="padding:6px 12px; font-size:15px;">📋 Copy</button>
+    </div>
+    <p class="referral-stats" style="font-size:0.95em; color:#ffc107; margin:6px 0 0 0;">Your link gives you a bonus for every friend who joins!</p>
+    <span id="refCopiedMsg" style="display:none; color:#53ff73; font-size:0.95em;">Copied!</span>
+  </div>
+</div>
 
         <h3 class="step-title">Step 2: Choose Currency &amp; Amount</h3>
 
@@ -623,12 +624,15 @@
         </div>
 
         <!-- Purchase Button -->
-        <button class="btn-purchase" id="btn-purchase">
-          <span class="btn-text">Confirm Purchase</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
+        <div id="presaleWarning" style="display:none; margin:12px 0; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,153,0,.35); background:rgba(255,153,0,.10); color:#ffcc80; font-weight:600;">
+  <span style="color:#ff9900; font-weight:800;">Presale has not started.</span>
+  Please check back later.
+</div>
 
-      </div>
+<button id="confirmPurchase" type="button" class="btn-purchase">
+  <span class="btn-text">Confirm Purchase</span>
+  <i class="fas fa-arrow-right"></i>
+</button>
 
       <!-- ============================================
            STEP 3: TRANSACTION PROCESSING
@@ -764,13 +768,56 @@
     </div>
   </div>
 
+<!-- Presale Not Started Modal -->
+<div id="presaleNotStartedModal" class="ndg-blocker" aria-hidden="true">
+  <div class="ndg-blocker-backdrop" data-ndg-blocker-close></div>
+  <div class="ndg-blocker-card" role="dialog" aria-modal="true" aria-labelledby="ndgBlockerTitle">
+    <button type="button" class="ndg-blocker-x" data-ndg-blocker-close aria-label="Close">×</button>
+    <h3 id="ndgBlockerTitle">Presale has not started</h3>
+    <p>Please check back later.</p>
+    <button type="button" class="ndg-blocker-ok" data-ndg-blocker-close>OK</button>
+  </div>
+</div>
 <!-- END OF CONTACT MODAL -->
 
   <!-- JavaScript Files -->
-  <script src="js/contact-modal.js" defer></script>
   <script src="js/main.js"></script>
   <script src="js/wallet-connect-v2.js"></script>
   <script src="js/presale-modal.js"></script>
+  <script src="js/contact-mailto-handler.js" defer></script>
+  <script src="js/referral-link.js" defer></script>
+  <script src="js/contact-modal.js" defer></script>
+ 
+  <!-- THEN your inline blocking script here: -->
+<script>
+(function () {
+  function showInlineWarning() {
+    var box = document.getElementById("presaleWarning");
+    if (!box) return;
+
+    box.style.display = "block";
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    // optional: auto-hide after 6 seconds
+    clearTimeout(window.__ndgWarnTimer);
+    window.__ndgWarnTimer = setTimeout(function () {
+      box.style.display = "none";
+    }, 6000);
+  }
+
+  document.addEventListener("click", function (e) {
+    var confirmBtn = e.target.closest("#confirmPurchase");
+    if (confirmBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      showInlineWarning();
+      return false;
+    }
+  }, true);
+})();
+</script>
 
 </body>
 </html>
