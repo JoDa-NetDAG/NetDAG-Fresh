@@ -5633,6 +5633,7 @@ body.ndg-modal-open {
   }
 }
 
+
 /* =========================
    Referral System Styles
    ========================= */
@@ -6653,3 +6654,209 @@ body.ndg-modal-open {
     0 0 10px rgba(255,153,0,.28),
     0 0 22px rgba(255,153,0,.18);
 }
+
+/* Realign center purchase-modal) */
+/* FORCE-CENTER NetDAG Presale / Buy Modal (put at end of CSS) */
+#ndgBuyModal,
+.ndg-buy-modal,
+.ndg-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  display: none;
+  z-index: 9999;
+}
+
+#ndgBuyModal.is-open,
+.ndg-buy-modal.is-open,
+.ndg-modal.is-open {
+  display: block;
+}
+
+/* the overlay/backdrop must be a flex container */
+#ndgBuyModal .ndg-modal-backdrop,
+#ndgBuyModal .ndg-buy-backdrop,
+#ndgBuyModal .modal-backdrop,
+.ndg-buy-modal .ndg-modal-backdrop,
+.ndg-modal .ndg-modal-backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 18px !important;
+}
+
+/* the actual card/panel */
+#ndgBuyModal .ndg-modal-card,
+#ndgBuyModal .ndg-buy-card,
+#ndgBuyModal .modal-card,
+.ndg-buy-modal .ndg-modal-card,
+.ndg-modal .ndg-modal-card {
+  position: relative !important;
+  margin: 0 !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important; /* prevent conflicting transforms */
+  width: min(520px, 94vw) !important;
+  max-width: 94vw !important;
+}
+
+/* Center Buy / Presale Modal */
+#ndgBuyModal {
+  position: fixed;
+  inset: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#ndgBuyModal .ndg-modal-card {
+  margin: 0 auto;
+}
+
+/* CENTER PRESALE MODAL */
+.presale-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.presale-modal-content {
+  margin: auto;
+}
+/* End of Realign center purchase-modal) */
+
+/* =========================
+   NetDAG Community Modal (GLOBAL)
+   ========================= */
+.ndg-community-modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+.ndg-community-modal.is-open{ display:block; }
+
+.ndg-community-backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.65);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* true center */
+.ndg-community-card{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(520px, 92vw);
+  padding: 18px 18px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: #0f0f14;
+  color: #fff;
+  box-shadow: 0 24px 70px rgba(0,0,0,.55);
+}
+
+.ndg-community-x{
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.25);
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.ndg-community-title{ margin: 4px 0 6px; font-size: 22px; }
+.ndg-community-sub{ margin: 0 0 14px; font-size: 13px; color: rgba(255,255,255,.78); line-height: 1.45; }
+
+.ndg-community-actions{ display: grid; gap: 10px; margin-top: 12px; }
+
+.ndg-community-btn{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  text-decoration:none;
+  font-weight: 800;
+}
+.ndg-community-btn:hover{
+  border-color: rgba(255,153,0,.40);
+  background: rgba(255,153,0,.10);
+}
+
+.ndg-community-divider{ height:1px; background: rgba(255,255,255,.10); margin: 14px 0 12px; }
+.ndg-community-foot{ margin: 0 0 12px; font-size: 12px; color: rgba(255,255,255,.75); }
+
+.ndg-community-email{ color:#ff9900; text-decoration:none; }
+.ndg-community-email:hover{ text-decoration: underline; }
+
+.ndg-community-ok{
+  width:100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 900;
+  cursor: pointer;
+  background: #ff9900;
+  color: #111;
+}
+
+/* =========================
+   FORCE CENTER — NetDAG Community Modal (override)
+   ========================= */
+#ndgCommunityModal{
+  position: fixed !important;
+  inset: 0 !important;
+  display: none;
+  z-index: 999999 !important;
+}
+
+#ndgCommunityModal.is-open{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 18px !important;
+}
+
+#ndgCommunityModal .ndg-community-backdrop{
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,.65) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+#ndgCommunityModal .ndg-community-card{
+  position: relative !important;
+  right: auto !important;
+  left: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+
+  width: min(520px, 92vw) !important;
+  max-height: calc(100vh - 36px) !important;
+  overflow: auto !important;
+
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: #0f0f14;
+  color: #fff;
+  box-shadow: 0 24px 70px rgba(0,0,0,.55);
+}
+/* ========================= */

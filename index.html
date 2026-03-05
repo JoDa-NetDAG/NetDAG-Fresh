@@ -20,14 +20,9 @@
   <!-- Main stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 
-  <link rel="stylesheet" href="css/contact-modal.css">
-
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     crossorigin="anonymous" />
-
-  <!-- Main JS -->
-  <script src="js/main.js" defer></script>
 
 <style>
 /* MOBILE NAVBAR FIX - Inline for index.html */
@@ -317,7 +312,7 @@
 
         <!-- PRESALE BLOCK (counter) — extra vertical space added below subtitle -->
         <div class="presale-block">
-          <p class="presale-line">Presale begins <strong>14 Feb 2026</strong></p>
+          <p class="presale-line">Presale begins <strong>00.00.2026</strong></p>
 
           <div class="presale-countdown" aria-label="Presale countdown">
             <div class="presale-box glow-box"><span id="days" class="presale-num">00</span><span
@@ -829,7 +824,7 @@
             <a href="#" class="curve-cta-btn-primary" data-ndg-open>Connect wallet to buy</a>
           </div>
           <div class="curve-cta-date">
-            Presale begins on the 28 February 2026.
+            Presale begins on the 00.00.2026.
           </div>
         </div>
 
@@ -951,120 +946,9 @@
 
   <script src="https://unpkg.com/ethers@6.7.0/dist/ethers.umd.min.js"></script>
 
-  <!-- =========================
-       NDG BUY MODAL (GLOBAL)
-  ========================= -->
-  <div id="ndgBuyModal" class="ndg-modal" aria-hidden="true">
-
-    <!-- Backdrop -->
-    <div class="ndg-modal-backdrop" data-ndg-close></div>
-
-    <!-- Card -->
-    <div class="ndg-modal-card" role="dialog" aria-modal="true" aria-labelledby="ndgBuyModalTitle">
-      <button class="ndg-modal-close" type="button" aria-label="Close" data-ndg-close>
-        ×
-      </button>
-
-      <h2 class="ndg-modal-title" id="ndgBuyModalTitle">
-        NDG Token Presale
-      </h2>
-
-      <p class="ndg-modal-sub">
-        Preview your NDG estimate.
-        Buying is currently disabled.
-      </p>
-
-      <form id="ndgBuyForm" autocomplete="off">
-
-        <!-- USD INPUT -->
-        <input id="ndgUsdInput" type="number" min="1" step="1" placeholder="Enter USD amount" />
-        <input id="ndgNdgInput" type="number" min="1" step="1" placeholder="Enter NDG amount" />
-
-        <!-- OUTPUTS -->
-        <div class="ndg-summary">
-          <span>NDG tokens: <b id="ndgTokensOut">—</b></span>
-          <span>Cost: <b id="ndgCostOut">—</b> USD</span>
-        </div>
-
-        <!-- EARLYBIRD -->
-        <div class="ndg-earlybird">
-          <div>30 days: <b id="ndgBonus30">—</b> NDG</div>
-          <div>60 days: <b id="ndgBonus60">—</b> NDG</div>
-          <div>90 days: <b id="ndgBonus90">—</b> NDG</div>
-          <div class="ndg-footnote">
-            <span>Earlybird bonus: +8% per 30 days (airdropped separately).</span>
-          </div>
-        </div>
-
-        <!-- CTA -->
-        <button class="ndg-buy-btn" type="button" disabled>
-          Buy NDG (disabled)
-        </button>
-
-        <div class="ndg-status" id="ndgBuyStatus">
-          Estimates only · Buying disabled
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- BEGIN OF CONTACT MODAL -->
-  <div id="contactModal" class="ndg-modal" aria-hidden="true">
-    <div class="ndg-modal-backdrop" data-contact-close></div>
-    <div class="ndg-modal-content">
-      <button class="ndg-modal-close" data-contact-close aria-label="Close">×</button>
-
-      <div class="ndg-modal-header">
-        <h2>📧 Get in Touch</h2>
-        <p>Send us a message and we'll respond within 3 working days.</p>
-      </div>
-
-      <form id="contactForm" class="contact-form">
-        <!-- First Name -->
-        <div class="contact-form-group">
-          <label for="contactFirstName" class="contact-label">First Name *</label>
-          <input type="text" id="contactFirstName" name="firstName" class="contact-input" required
-            placeholder="Enter your first name">
-        </div>
-
-        <!-- Last Name -->
-        <div class="contact-form-group">
-          <label for="contactLastName" class="contact-label">Last Name *</label>
-          <input type="text" id="contactLastName" name="lastName" class="contact-input" required
-            placeholder="Enter your last name">
-        </div>
-
-        <!-- Email -->
-        <div class="contact-form-group">
-          <label for="contactEmail" class="contact-label">Email *</label>
-          <input type="email" id="contactEmail" name="email" class="contact-input" required
-            placeholder="your.email@example.com">
-        </div>
-
-        <!-- Message -->
-        <div class="contact-form-group">
-          <label for="contactMessage" class="contact-label">Message *</label>
-          <textarea id="contactMessage" name="message" class="contact-textarea" rows="5" required
-            placeholder="How can we help you?"></textarea>
-        </div>
-
-        <!-- Status Message -->
-        <div id="contactStatus" class="contact-status"></div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="contact-submit-btn">
-          Send Message
-        </button>
-      </form>
-    </div>
-  </div>
-
-<!-- END OF CONTACT MODAL -->
-
+  <script src="js/main.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
-  <script src="/js/ndg-buy-loader.js" defer></script>
-  <script src="js/contact-modal.js" defer></script>
-  <script src="js/contact-mailto-handler.js" defer></script>
+  <script src="js/community-modal-inject.js"></script>
 
 </body>
 

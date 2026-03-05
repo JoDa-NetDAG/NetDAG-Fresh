@@ -11,112 +11,44 @@
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
-  /* =========================
-   NetDAG Simple Contact Modal
-   ========================= */
-.ndg-contact-modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  z-index:9999;
-}
-.ndg-contact-modal.is-open{ display:block; }
+/* COMMUNITY MODAL — ALWAYS CENTERED */
 
-.ndg-contact-backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.65);
+.ndg-community-modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+
+.ndg-community-modal.is-open{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.ndg-community-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.65);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
-.ndg-contact-card{
-  position:relative;
-  width:min(420px, 92vw);
-  margin:14vh auto 0;
-  padding:18px 18px 16px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.10);
-  background:#0f0f14;
-  color:#fff;
-  box-shadow:0 24px 70px rgba(0,0,0,.55);
+.ndg-community-card{
+  position: relative;
+  width: min(520px, 92vw);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  margin: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: #0f0f14;
+  color: #fff;
+  box-shadow: 0 24px 70px rgba(0,0,0,.55);
+  z-index: 1;
 }
-
-.ndg-contact-x{
-  position:absolute;
-  right:10px;
-  top:10px;
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(0,0,0,.25);
-  color:#fff;
-  font-size:22px;
-  cursor:pointer;
-}
-
-.ndg-contact-title{
-  margin:4px 0 4px;
-  font-size:22px;
-}
-.ndg-contact-sub{
-  margin:0 0 14px;
-  font-size:12px;
-  color:rgba(255,255,255,.75);
-}
-
-.ndg-contact-form{ display:block; }
-
-.ndg-label{
-  display:block;
-  margin:10px 0 6px;
-  font-size:12px;
-  color:rgba(255,255,255,.75);
-}
-
-.ndg-input,
-.ndg-textarea{
-  width:100%;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.12);
-  background:#141420;
-  color:#fff;
-  padding:10px 12px;
-  outline:none;
-}
-.ndg-textarea{ resize:vertical; }
-
-.ndg-send-btn,
-.ndg-mailto-btn{
-  width:100%;
-  margin-top:12px;
-  padding:10px 12px;
-  border-radius:10px;
-  border:none;
-  font-weight:800;
-  cursor:pointer;
-  background:#ff9900;
-  color:#111;
-  text-align:center;
-  text-decoration:none;
-  display:inline-block;
-}
-
-.ndg-mailto-btn{
-  margin-top:10px;
-}
-
-.ndg-contact-footer{
-  margin-top:12px;
-  font-size:12px;
-  color:rgba(255,255,255,.75);
-}
-.ndg-email{
-  color:#ff9900;
-  text-decoration:none;
-}
-.ndg-email:hover{ text-decoration:underline; }
+/* End of COMMUNITY MODAL — ALWAYS CENTERED */
 </style>
 </head>
 
@@ -125,14 +57,14 @@
   <!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
     <div class="ticker-track" data-ticker>
-      <span>💧 Presale begins <strong>28 Feb 2026</strong> (28.02.2026).</span>
+      <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
       <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
-      <span>💧 Presale begins <strong>28 Feb 2026</strong> (28.02.2026).</span>
+      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
+      <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
       <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>500,000,000 NDG</strong> up for grabs.</span>
+      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
     </div>
   </div>
 
@@ -291,63 +223,69 @@
       </div>
       <div class="footer-bottom-blue">
         <p class="footer-bottom-text">
-          <button type="button" data-contact-open>📧Send message</button> |
+          <a href="#" data-ndg-community-open class="footer-contact-link">📧 Contact</a> |
           Copyright: NetDAG 2026 | Built with care
         </p>
       </div>
     </div>
   </footer>
 
-<!-- =========================
-     CONTACT MODAL (NetDAG)
+  <!-- =========================
+     NETDAG COMMUNITY CONTACT MODAL
+     (No backend / no email sending)
      ========================= -->
-<div id="contactModal" class="ndg-contact-modal" aria-hidden="true">
-  <div class="ndg-contact-backdrop" data-contact-close></div>
+<div id="ndgCommunityModal" class="ndg-community-modal" aria-hidden="true">
+  <div class="ndg-community-backdrop" data-ndg-community-close></div>
 
-  <div class="ndg-contact-card" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
-    <button type="button" class="ndg-contact-x" aria-label="Close" data-contact-close>×</button>
+  <div class="ndg-community-card" role="dialog" aria-modal="true" aria-labelledby="ndgCommunityTitle">
+    <button type="button" class="ndg-community-x" aria-label="Close" data-ndg-community-close>×</button>
 
-    <h3 id="contactTitle" class="ndg-contact-title">Send message</h3>
-    <p class="ndg-contact-sub">We’ll reply as soon as possible.</p>
+    <h3 id="ndgCommunityTitle" class="ndg-community-title">Contact NetDAG</h3>
+    <p class="ndg-community-sub">
+      The NetDAG presale is launching soon.
+Join the community for updates, announcements and early access.
+    </p>
 
-    <form id="contactForm" class="ndg-contact-form">
-      <label class="ndg-label" for="cName">Name</label>
-      <input id="cName" class="ndg-input" type="text" placeholder="Your name" required />
+    <div class="ndg-community-actions">
 
-      <label class="ndg-label" for="cEmail">Email</label>
-      <input id="cEmail" class="ndg-input" type="email" placeholder="you@example.com" required />
+  <a class="ndg-community-btn"
+     href="https://discord.com/invite/netdag"
+     target="_blank"
+     rel="noopener">
+     <i class="fab fa-discord"></i>
+     Join our Discord Community
+  </a>
 
-      <label class="ndg-label" for="cTopic">Topic</label>
-      <select id="cTopic" class="ndg-input" required>
-        <option value="" disabled selected>Select a topic…</option>
-        <option value="Partnership">Partnership</option>
-        <option value="Investor / Presale">Investor / Presale</option>
-        <option value="Support">Support</option>
-        <option value="Product / Provenance">Product / Provenance</option>
-        <option value="Other">Other</option>
-      </select>
+  <a class="ndg-community-btn"
+     href="https://t.me/netdag"
+     target="_blank"
+     rel="noopener">
+     <i class="fab fa-telegram"></i>
+     Join our Telegram Channel
+  </a>
 
-      <label class="ndg-label" for="cMessage">Your message</label>
-      <textarea id="cMessage" class="ndg-textarea" rows="6" placeholder="Write your message…" required></textarea>
+  <a class="ndg-community-btn"
+     href="https://twitter.com/netdag"
+     target="_blank"
+     rel="noopener">
+     <i class="fab fa-x-twitter"></i>
+     Follow NetDAG on X
+  </a>
 
-      <div id="contactStatus" class="contact-status" style="margin:10px 0; font-weight:700;"></div>
-      <button type="submit" class="ndg-send-btn">Send</button>
-      
+</div>
 
-      <!-- iOS-safe: JS will reveal this link after preparing the email -->
-      <a id="mailtoLink" class="ndg-mailto-btn" href="mailto:info@netdag.com" style="display:none;">
-        Tap to open email app
-      </a>
+    <div class="ndg-community-divider"></div>
 
-      <div class="ndg-contact-footer">
-        Or email:
-        <a class="ndg-email" href="mailto:info@netdag.com">info@netdag.com</a>
-      </div>
-    </form>
+    <p class="ndg-community-foot">
+      Partnerships &amp; media:
+      <a class="ndg-community-email" href="mailto:info@netdag.com">info@netdag.com</a>
+    </p>
+
+    <button type="button" class="ndg-community-ok" data-ndg-community-close>OK</button>
   </div>
 </div>
-  
-  <!-- Only one script for modal and mailto functionality -->
-  <script src="js/contact-modal.js"></script>
+
+<script src="js/community-modal-inject.js" defer></script>
+
 </body>
 </html>
