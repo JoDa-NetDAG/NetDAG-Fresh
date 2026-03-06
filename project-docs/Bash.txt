@@ -1,0 +1,5 @@
+Bush to GitHub block
+
+git add -A
+git commit -m "add here" - Like this if you want to add a particular stuff.
+git push origin main
