@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://netdag.com/</loc>
-  </url>
-
-  <url>
-    <loc>https://netdag.com/no-gas.html</loc>
-  </url>
-
-  <url>
-    <loc>https://netdag.com/provenance.html</loc>
-  </url>
-
-  <url>
-    <loc>https://netdag.com/guardian.html</loc>
-  </url>
-
-  <url>
-    <loc>https://netdag.com/bonding-curve.html</loc>
-  </url>
-
-  <url>
-    <loc>https://netdag.com/vision.html</loc>
-  </url>
-
-  <url>
-    <loc>https://netdag.com/purchase-ndg.html</loc>
-  </url>
-
-</urlset>
+<url>
+<loc>https://netdag.com/</loc>
+</url>
 
 <url>
-  <loc>https://netdag.com/vision.html</loc>
-  <lastmod>2026-03-08</lastmod>
+<loc>https://netdag.com/no-gas.html</loc>
 </url>
+
+<url>
+<loc>https://netdag.com/provenance.html</loc>
+</url>
+
+<url>
+<loc>https://netdag.com/guardian.html</loc>
+</url>
+
+<url>
+<loc>https://netdag.com/bonding-curve.html</loc>
+</url>
+
+<url>
+<loc>https://netdag.com/vision.html</loc>
+</url>
+
+<url>
+<loc>https://netdag.com/purchase-ndg.html</loc>
+</url>
+
+</urlset>
