@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>Buy NDG – NetDAG Presale Access</title>
-  <meta name="description" content="Join the NetDAG presale. Purchase NDG tokens at the lowest bonding curve price with BNB, USDT, or USDC." />
+ <title>Access NDG – NetDAG Ecosystem Participation</title>
+  <meta name="description" content="Access NDG during the NetDAG ecosystem distribution phase using BNB, USDT, or USDC. NDG is a utility token designed for participation within the NetDAG ecosystem." />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/wallet-modal-v2.css" />
@@ -57,7 +57,114 @@
 /* =========================
    Ende NetDAG Community Contact Modal
    ========================= */
+
+   .footer-legal-note{
+  max-width: 980px;
+  margin: 16px auto 8px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.72);
+  }
+
+  .menu-toggle{
+  display:none;
+}
+
+@media (max-width: 900px){
+  .menu-toggle{
+    display:flex;
+  }
+}
+
+
+
+.site-header .header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.site-header .nav-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  flex:1;
+  justify-content:center;
+}
+
+.site-header .nav-links{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  white-space:nowrap;
+}
+
+.site-header .nav-links li{
+  white-space:nowrap;
+}
+
+.site-header .header-ctas{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-shrink:0;
+}
+
+.site-header .menu-toggle{
+  display:none;
+}
+
+@media (max-width: 900px){
+  .site-header .menu-toggle{
+    display:flex;
+  }
+
+  .site-header .nav-links,
+  .site-header .header-ctas{
+    display:none;
+  }
+
+  .site-header .nav-right{
+    flex:0;
+    justify-content:flex-end;
+  }
+}
+
+.header-ctas .btn{
+  padding:10px 16px;
+  font-size:0.95rem;
+  white-space:nowrap;
+}
+
+.site-header .menu-toggle{
+  display:flex !important;
+  flex-direction:column;
+  gap:5px;
+  padding:8px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  min-width:40px;
+  min-height:40px;
+  flex-shrink:0;
+  position:relative;
+  z-index:20;
+}
+
+.site-header .menu-toggle .burger-line{
+  display:block !important;
+  width:24px;
+  height:3px;
+  background:#ff9900;
+  border-radius:2px;
+}
 </style>
+
 </head>
 
 <body class="purchase-page" id="top">
@@ -66,49 +173,48 @@
   <div class="site-ticker" role="region" aria-label="Presale info">
     <div class="ticker-track" data-ticker>
       <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
-      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
+      <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
       <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
       <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
 
       <span>💧 Presale begins <strong>00.00. 2026</strong> (00.00.2026).</span>
-      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
-      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
+      <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
+      <span>🏦 <strong>22% protocol reserve mechanism</strong> supports ecosystem liquidity design.</span>
       <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
     </div>
   </div>
 
   <!-- HEADER -->
   <header class="site-header" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="index.html" title="NetDAG home">
-        <img src="images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
-        <span class="brand-text">NetDAG</span>
-      </a>
+  <div class="header-inner">
+    <a class="brand" href="index.html" title="NetDAG home">
+      <img src="images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+      <span class="brand-text">NetDAG</span>
+    </a>
 
-      <div class="nav-right">
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="provenance.html">Provenance dApp</a></li>
-          <li><a href="bonding-curve.html">Bonding Curve</a></li>
-          <li><a href="guardian.html">Guardian</a></li>
-          <li><a href="no-gas.html">Easy Access</a></li>
-          <li><a href="menu/whitepaper.html">Whitepaper</a></li>
-        </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance</a></li>
+        <li><a href="bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="guardian.html">Guardian</a></li>
+        <li><a href="no-gas.html">Easy Access</a></li>
+        <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+      </ul>
 
-        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
-          <span class="burger-line" aria-hidden="true"></span>
-          <span class="burger-line" aria-hidden="true"></span>
-          <span class="burger-line" aria-hidden="true"></span>
-        </button>
-
-        <div class="header-ctas">
-          <button type="button" data-open-presale class="btn btn-primary">Buy NDG</button>
-          <a href="stake-ndg.html" class="btn btn-primary">Stake NDG</a>
-        </div>
-
-      </div>
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <span class="burger-line" aria-hidden="true"></span>
+        <span class="burger-line" aria-hidden="true"></span>
+        <span class="burger-line" aria-hidden="true"></span>
+      </button>
     </div>
-  </header>
+
+    <div class="header-ctas">
+      <button type="button" data-open-presale class="btn btn-primary">Access NDG</button>
+      <a href="stake-ndg.html" class="btn btn-primary">NDG Staking</a>
+    </div>
+  </div>
+</header>
 
   <!-- MENU PANEL -->
   <div id="site-menu" class="site-menu" hidden aria-hidden="true">
@@ -135,8 +241,8 @@
 
       <div class="mobile-ctas">
   <!-- Use this on pages inside /menu/ -->
-  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
 </div>
     </div>
   </div>
@@ -149,14 +255,13 @@
     <section class="section purchase-hero">
       <div class="section-inner">
         <div class="hero-inner" style="text-align: center; max-width: 900px; margin: 0 auto;">
-          <p class="hero-eyebrow" style="color: #ff9900;">PRESALE · Join Early</p>
-
+          <p class="hero-eyebrow" style="color: #ff9900;">ECOSYSTEM ACCESS · Early Phase</p>
           <h1 class="hero-title" style="font-size: 4rem; color: #ffffff; margin-bottom: 20px;">
-            Secure Your <span style="color: #ff9900;">NDG Tokens</span>
+           Access <span style="color: #ff9900;">NDG Tokens</span>
           </h1>
 
           <p class="hero-kicker" style="font-size: 1.4rem; color: #cccccc; margin-bottom: 40px;">
-            Join the NetDAG presale and get the lowest bonding curve price. Purchase with BNB, USDT, or USDC in just a few clicks.
+            Access NDG during the early NetDAG ecosystem distribution phase using BNB, USDT, or USDC in just a few clicks.
           </p>
 
           <button type="button" data-open-presale class="btn-cta-large" style="
@@ -172,7 +277,7 @@
             box-shadow: 0 10px 30px rgba(255, 153, 0, 0.4);
           ">
             <i class="fas fa-rocket" style="margin-right: 10px;"></i>
-            Join Presale Now
+          Access NDG Now
           </button>
 
         </div>
@@ -186,36 +291,36 @@
   <div class="section-inner narrow">
     <div class="content-block" style="text-align: center;">
 
-      <h2 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 30px;">Why Buy NDG Tokens?</h2>
+      <h2 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 30px;">Why Access NDG?</h2>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
 
         <!-- 1. Bonding Curve Pricing -->
         <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,153,0,0.2);">
           <div style="font-size: 3rem; color: #ff9900; margin-bottom: 15px;">📈</div>
-          <h3 style="color: #ff9900; margin-bottom: 10px;">Bonding Curve Pricing</h3>
-          <p style="color: #cccccc;">Next-gen Curve stability by design. Each tier increases, rewarding conviction and reducing volatility.</p>
+          <h3 style="color: #ff9900; margin-bottom: 10px;">Protocol Distribution Design</h3>
+          <p style="color: #cccccc;">NetDAG uses a bonding-curve-based distribution model designed to support structured token access across ecosystem stages.</p>
         </div>
 
         <!-- 2. Math-Backed Liquidity -->
         <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,153,0,0.2);">
           <div style="font-size: 3rem; color: #ff9900; margin-bottom: 15px;">🏦</div>
-          <h3 style="color: #ff9900; margin-bottom: 10px;">Math-Backed Liquidity</h3>
-          <p style="color: #cccccc;">Self-increasing Anti-rug pull. 22% permanent buy-back reserve engine ensures you can always exit at fair market value.</p>
+          <h3 style="color: #ff9900; margin-bottom: 10px;">Protocol Reserve Mechanism</h3>
+          <p style="color: #cccccc;">A 22% protocol reserve mechanism is designed to support ecosystem liquidity structure and reduce stress during changing market conditions.</p>
         </div>
 
         <!-- 3. DAG Speed -->
         <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,153,0,0.2);">
           <div style="font-size: 3rem; color: #ff9900; margin-bottom: 15px;">⚡</div>
           <h3 style="color: #ff9900; margin-bottom: 10px;">DAG Speed</h3>
-          <p style="color: #cccccc;">DAG scalability, instant finality and zero gas fees on mainnet. Transaction confirmed in seconds, not minutes.</p>
+          <p style="color: #cccccc;">DAG scalability, fast confirmation design, and low-friction user experience are core elements of the NetDAG architecture.</p>
         </div>
 
         <!-- 4. Neuron AI Guardian (NEW) -->
         <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,153,0,0.2);">
           <div style="font-size: 3rem; color: #ff9900; margin-bottom: 15px;">🛡️</div>
           <h3 style="color: #ff9900; margin-bottom: 10px;">Neuron AI Guardian</h3>
-          <p style="color: #cccccc;">World's first emotional AI-driven sentinel built to protect your digital assets in real time, 24/7 — all around NetDAG ecosystem.</p>
+          <p style="color: #cccccc;">etDAG’s Neuron Guardian monitors ecosystem conditions in real time to support protocol awareness, resilience, and risk signalling across the network.</p>
         </div>
 
       </div>
@@ -231,7 +336,7 @@
       <div class="section-inner narrow">
         <div class="content-block" style="text-align: center;">
 
-          <h2 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 40px;">How to Buy NDG</h2>
+          <h2 style="font-size: 2.5rem; color: #ffffff; margin-bottom: 40px;">How to Access NDG</h2>
 
           <div style="display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto; text-align: left;">
 
@@ -291,7 +396,7 @@
               ">3</div>
               <div>
                 <h3 style="color: #ffffff; margin-bottom: 5px;">Choose Currency & Amount</h3>
-                <p style="color: #cccccc;">Select BNB, USDT, or USDC and enter how much you want to invest.</p>
+                <p style="color: #cccccc;">Select BNB, USDT, or USDC and enter the amount you want to use for ecosystem access.</p>
               </div>
             </div>
 
@@ -311,7 +416,7 @@
               ">4</div>
               <div>
                 <h3 style="color: #ffffff; margin-bottom: 5px;">Confirm & Done!</h3>
-                <p style="color: #cccccc;">Review your purchase, confirm the transaction, and receive your NDG tokens instantly.</p>
+                <p style="color: #cccccc;">Review the transaction, confirm it in your wallet, and receive your NDG tokens according to the active distribution flow.</p>
               </div>
             </div>
 
@@ -350,7 +455,7 @@
     <div class="footer-banner-inner">
       <div class="banner-tagline">
         <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
-        NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment. Join the ecosystem and let your wealth grow with real utility.
+        NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment. Join the ecosystem and explore technology built around real-world utility.
       </div>
       <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
     </div>
@@ -463,6 +568,13 @@
   </a>
 </div>
 
+<p class="footer-legal-note">
+  NetDAG tokens are utility tokens intended for use within the NetDAG ecosystem.
+  They do not represent shares, securities, collective investment interests, or financial instruments.
+  Access to NDG through this interface is intended for ecosystem participation and 
+  does not constitute financial, legal, or investment advice.
+</p>
+
 <div class="footer-bottom-blue">
   <p class="footer-bottom-text">
     <a href="#" data-contact-open class="footer-contact-link">📧 Join the NetDAG Community</a> |
@@ -486,17 +598,17 @@
 
     <!-- Modal Header -->
     <div class="presale-header">
-      <h2 class="presale-title">Join NetDAG Presale</h2>
-      <p class="presale-subtitle">Secure your NDG tokens at the lowest bonding curve price</p>
+      <h2 class="presale-title">Access NDG in the Early Ecosystem Phase</h2>
+      <p class="presale-subtitle">Access NDG during the early NetDAG ecosystem distribution phase</p>
 
       <!-- Price Tier Countdown -->
       <div class="price-tier-banner">
         <div class="tier-info">
-          <span class="current-price">Current Price: <strong id="current-tier-price">$0.006</strong> per NDG</span>
-          <span class="next-price">Next Tier: <strong id="next-tier-price">$0.009</strong></span>
+          <span class="current-price">Current Stage: <strong id="current-tier-price">Stage 1</strong> per NDG</span>
+          <span class="next-price">Next Stage: <strong id="next-tier-price">Stage 2</strong></span>
         </div>
         <div class="tier-countdown">
-          <span class="countdown-label">Price increases in:</span>
+          <span class="countdown-label">Next distribution stage in:</span>
           <div class="countdown-timer">
             <div class="time-unit">
               <span class="time-value" id="days">00</span>
@@ -662,7 +774,7 @@
       <!-- Amount Input -->
       <div class="amount-input-section">
         <div class="input-group">
-          <label for="pay-amount" class="input-label">You Pay</label>
+          <label for="pay-amount" class="input-label">Exchange Rate</label>
           <div class="input-wrapper">
             <input type="number" id="pay-amount" class="amount-input" placeholder="0.0" min="0.1" step="0.1">
             <span class="input-currency" id="selected-currency">BNB</span>
@@ -716,7 +828,7 @@
       </div>
 
       <button id="confirmPurchase" type="button" class="btn-purchase">
-        <span class="btn-text">Confirm Purchase</span>
+        <span class="btn-text">Confirm Access</span>
         <i class="fas fa-arrow-right"></i>
       </button>
 
@@ -745,8 +857,8 @@
           <div class="success-icon">
             <i class="fas fa-check-circle"></i>
           </div>
-          <h3 class="success-title">Purchase Successful! 🎉</h3>
-          <p class="success-text">Your NDG tokens have been successfully purchased!</p>
+          <h3 class="success-title">Access Successful! 🎉</h3>
+          <p class="success-text">Your NDG tokens have been successfully allocated through the current ecosystem access flow.</p>
 
           <div class="success-details">
             <div class="detail-row">
@@ -769,7 +881,7 @@
               View on BscScan
             </a>
             <button class="btn-buy-more" id="btn-buy-more">
-              Buy More NDG
+              Access More NDG
             </button>
           </div>
 

@@ -216,6 +216,50 @@
   overflow-wrap: anywhere;
 }
 
+.footer-legal-note{
+  max-width: 980px;
+  margin: 16px auto 8px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.72);
+}
+
+.site-ticker{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #f0a020;
+  color: #1a1a1a;
+  position: relative;
+}
+
+.ticker-track{
+  display: inline-flex;
+  align-items: center;
+  gap: 48px;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ndgTickerScroll 34s linear infinite;
+}
+
+.ticker-track span{
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+@keyframes ndgTickerScroll{
+  from{
+    transform: translateX(0);
+  }
+  to{
+    transform: translateX(-50%);
+  }
+}
 </style>
 
 <link rel="canonical" href="https://netdag.com/">
@@ -260,18 +304,18 @@
 
   <!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
-    <div class="ticker-track" data-ticker>
-      <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
-      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
-      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
+  <div class="ticker-track">
+    <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
+    <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
+    <span>🏦 <strong>22% protocol reserve mechanism</strong> supports ecosystem liquidity design.</span>
+    <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
 
-      <span>💧 Presale begins <strong>00.00. 2026</strong> (00.00.2026).</span>
-      <span>🔥 Early participants enjoy the <strong>lowest curve entry prices</strong>.</span>
-      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
-    </div>
+    <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
+    <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
+    <span>🏦 <strong>22% protocol reserve mechanism</strong> supports ecosystem liquidity design.</span>
+    <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
   </div>
+</div>
 
   <!-- HEADER -->
   <header class="site-header" role="banner">
@@ -303,8 +347,8 @@
 
       <!-- CTAs -->
       <div class="header-ctas">
-        <a href="purchase-ndg.html" class="btn">Join Presale</a>
-        <a href="stake-ndg.html" class="btn btn-ghost">Stake NDG</a>
+        <a href="purchase-ndg.html" class="btn">Access NDG</a>
+        <a href="stake-ndg.html" class="btn btn-ghost">NDG Staking</a>
       </div>
     </div>
   </div>
@@ -334,8 +378,8 @@
       </ul>
       <div class="mobile-ctas">
   <!-- Use this on pages inside /menu/ -->
-  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
+  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
 </div>
     </div>
   </div>
@@ -351,11 +395,11 @@
         </h1>
 
         <div class="rotating-headlines">
-          <h1 class="headline">End Counterfeits Forever with NetDAG scan dApp</h1>
+          <h1 class="headline">Blockchain into your real-world activities. End Counterfeits Forever with NetDAG scan dApp</h1>
           <h1 class="headline">No Wallet. No Gas Fees. No Seed Phrases. Just Crypto</h1>
-          <h1 class="headline">Built-In Price Protection with 22% Reserve Fund</h1>
+          <h1 class="headline">Built-In Stability Design (Shock-absorber) with a 22% Reserve Mechanism</h1>
           <h1 class="headline">AI Security agent + DAG lightning speed Transactions</h1>
-          <h1 class="headline">Stake up to 30% APY - Grow your wealth while you sleep</h1>
+          <h1 class="headline">Stake NDG and participate in protocol-based network rewards</h1>
 
           <!-- Navigation dots -->
           <div class="headline-dots">
@@ -390,7 +434,7 @@
 
           <!-- Early bird message -->
           <p class="presale-early-message">
-  Early participants secure the lowest Bonding Curve entry rates.
+  🔥 Early participants access the earliest stage of the NetDAG token distribution.
 </p>
 <p class="presale-tagline">Empowering a Decentralized Future - NetDAG</p>
             <!-- Action buttons -->
@@ -415,7 +459,7 @@
           </div>
         </div>
 
-        <p class="presale-tokens-sold"><span id="progressPercent">3.6</span>% of tokens sold</p>
+        <p class="presale-tokens-sold"><span id="progressPercent">3.6</span>% of tokens distributed</p>
         <!-- Info Grid -->
         <div class="presale-info-grid">
           <div class="presale-info-item">
@@ -424,13 +468,13 @@
           </div>
 
           <div class="presale-info-item">
-            <div class="info-label">Token Price</div>
-            <div class="info-value">$0.025</div>
+            <div class="info-label">Current Distribution Stage</div>
+            <div class="info-value">Stage 1</div>
           </div>
 
           <div class="presale-info-item">
-            <div class="info-label">Total Raised</div>
-            <div class="info-value" id="presaleRaised">$450,000</div>
+            <div class="info-label">Community Participation</div>
+            <div class="info-value" id="presaleRaised">Stage 1 Active</div>
           </div>
 
           <div class="presale-info-item">
@@ -464,12 +508,14 @@
         <!-- Presale Early CTA (ADD right after Presale Progress in the same section!) -->
         <div class="early-curve-cta-block">
           <h2 class="early-curve-title">
-            Join the curve before the market does.
+            <h2 class="early-curve-title">
+             Join the ecosystem in its earliest phase.
+            </h2>
           </h2>
           <p class="early-curve-subtitle">
-            Early participants secure the lowest Bonding Curve entry rates.<br>
+          🔥 Early participants access the earliest stage of the NetDAG protocol rollout.<br>
           </p>
-          <a href="purchase-ndg.html" class="btn-curve-buy">Connect wallet to Buy</a>
+          <a href="purchase-ndg.html" class="btn-curve-buy">Get NDG Access</a>
           <div class="presale-info-announcement">
             Presale begins on 00.00.2026.
           </div>
@@ -493,7 +539,7 @@
         </p>
          <div class="preview-buttons">
   <a href="no-gas.html" class="gasless-learn-btn">Learn More</a>
-  <a href="purchase-ndg.html" class="gasless-learn-btn">Join Presale</a>
+  <a href="purchase-ndg.html" class="gasless-learn-btn">Get NDG Access</a>
         </div> 
       </div>
     </section>
@@ -536,7 +582,7 @@
         </div>
         <div class="preview-buttons">
   <a href="provenance.html" class="gasless-learn-btn">Learn More</a>
-  <a href="purchase-ndg.html" class="gasless-learn-btn">Join Presale</a>
+  <a href="purchase-ndg.html" class="gasless-learn-btn">Get NDG Access</a>
         </div> 
       </div>
 
@@ -571,14 +617,13 @@
 
         <div class="bonding-curve-text-block">
           <p class="bonding-curve-description">
-            A math-driven liquidity engine (integrated DAG and the Bunding Curve economics) that replaces
-            order-book panic with a predictable price path — every sell is absorbed along the curve and
-            build-in permanent reserve. The curve smooths volatility while rewarding conviction within the ecosystem.
+            A protocol-based liquidity design combining DAG infrastructure and bonding-curve logic to support smoother ecosystem participation. 
+            The reserve mechanism is built to reduce sudden shocks in token flow and support a more resilient network structure over time.
           </p>
         </div>
         <div class="preview-buttons">
   <a href="bonding-curve.html" class="gasless-learn-btn">Learn More</a>
-  <a href="purchase-ndg.html" class="gasless-learn-btn">Join Presale</a>
+  <a href="purchase-ndg.html" class="gasless-learn-btn">Get NDG Access</a>
         </div> 
       </div>
     </section>
@@ -604,12 +649,12 @@
           economies in real time.<br><br>
           While others rely on static algorithms, our Guardian learns, adapts, and defends — analyzing market behavior,
           liquidity flow,
-          and global sentiment 24/7. Its neural intelligence predicts volatility before it happens, stabilizing growth
-          and maximizing investor confidence, all around NDG.<br><br>
+          and global sentiment 24/7. Its neural intelligence monitors behavioral signals, liquidity conditions, and ecosystem stress in real time, 
+helping the protocol respond more intelligently to changing network conditions around NDG.<br><br>
         </p>
         <div class="preview-buttons">
   <a href="guardian.html" class="gasless-learn-btn">Learn More</a>
-  <a href="purchase-ndg.html" class="gasless-learn-btn">Join Presale</a>
+  <a href="purchase-ndg.html" class="gasless-learn-btn">Get NDG Access</a>
         </div> 
 
         <!-- PULSING HEART SPLASH (red, soft, subtle, not a circle) -->
@@ -635,13 +680,12 @@
           economy engineered for the future. Every transaction fuels equilibrium between growth and stability.
         </p>
         <p class="tokenomics-description">
-          <b>Our adaptive bonding-curve mechanism converts volatility into forward momentum, while
-            22% of liquidity is locked in a permanent buy-back reserve that strengthens the floor with every move —
-            forever.</b>
+          <b>Our adaptive bonding-curve mechanism is designed to support a more resilient token environment, while
+             a 22% protocol reserve contributes to long-term ecosystem liquidity and structural stability.</b>
         </p>
        <div>
   <a href="menu/tokenomics.html" class="gasless-learn-btn">View full Tokenomics</a>
-  <a href="purchase-ndg.html" class="gasless-learn-btn">Join Presale</a>
+  <a href="purchase-ndg.html" class="gasless-learn-btn">Get NDG Access</a>
   </div>
         </div> 
     </section>
@@ -689,15 +733,14 @@
       <div class="utility-footer">
         <strong>NetDAG is not another hype-driven project.</strong>
         <span>
-          It is a long-term, next-generation architecture built for real-world utility, resilience, and measurable
-          value.
+          It is a long-term, next-generation architecture built for real-world utility, resilience, and durable network design.
           Every component — the Provenance dApp, the DAG speed & the Bonding Curve integration, Neuron Guardian AI, dVPN
           or the Treasury (shock-absorber) Reservior — is engineered for durability and sustainable growth, not
           speculation.
         </span>
         <br>
         <span class="footer-highlight">
-          Join the NetDAG ecosystem and build wealth through technology that lasts.
+          Join the NetDAG ecosystem and participate in technology built for long-term real-world utility.
         </span>
       </div>
     </section>
@@ -825,8 +868,8 @@
     <a href="menu/blog.html#reserve-fund" class="blog-preview-card highlight">
       <div class="card-title">22% Reserve Fund Explained: Your Price Protection Shield</div>
       <div class="card-meta">Published · Jan 2026 · NetDAG Economics · Price Protection</div>
-      <div class="card-desc">How a permanent 22% buyback reserve acts as mathematical shock absorbers — 
-      protecting your investment when markets crash.</div>
+      <div class="card-desc">How a 22% protocol reserve mechanism is designed to reduce ecosystem shocks 
+        and support structural stability during volatile conditions.</div>
     </a>
     
     <!-- Article 6 - Easy Access -->
@@ -858,8 +901,8 @@
     <a href="menu/blog.html#bonding-curves" class="blog-preview-card">
       <div class="card-title">Bonding Curves vs. Order Books</div>
       <div class="card-meta">Published · Nov 2025 · NetDAG Research · Predictable Liquidity</div>
-      <div class="card-desc">How an always-on curve market prevents panic crashes and keeps pricing 
-      rational in all conditions.</div>
+      <div class="card-desc">How a curve-based liquidity model is designed to reduce abrupt market 
+        reactions and support more consistent token flow.</div>
     </a>
     
     <!-- Article 2 - Guardian Risk -->
@@ -890,21 +933,20 @@
           <span class="pool-action-status">GUARDIAN STAKING · COMING SOON</span>
           <div class="pool-action-title">Stake NDG with the Guardian Pool</div>
           <div class="pool-action-desc">
-            Long-term NDG holders can lock their tokens into the Guardian Pool and earn protocol rewards with
-            predictable, curve-aligned yields.
+            Long-term NDG holders can lock their tokens into the Guardian Pool and receive protocol-defined network rewards under the staking model.
           </div>
           <a href="stake-ndg.html" class="pool-action-btn">View staking details</a>
         </div>
 
         <!-- Presale Curve Call-to-Action -->
         <div class="presale-curve-cta-block">
-          <div class="curve-cta-title">Join the curve before the market does.</div>
+          <div class="curve-cta-title">Join the ecosystem in its early phase.</div>
           <div class="curve-cta-desc">
-            Get in while the price is still on the early stages of the curve and help shape a liquidity model that
-            rewards real participation, not noise.
+            Join during the early rollout phase and help shape a protocol model 
+            designed around participation, resilience, and long-term utility.
           </div>
           <div class="curve-cta-actions">
-            <a href="#" class="curve-cta-btn-primary" data-ndg-open>Connect wallet to buy</a>
+            <a href="#" class="curve-cta-btn-primary" data-ndg-open>Connect wallet to access NDG</a>
           </div>
           <div class="curve-cta-date">
             Presale begins on the 00.00.2026.
@@ -936,7 +978,7 @@
           <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
           NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with math-backed
           stability and long-term commitment.
-          Join the ecosystem and let your wealth grow with real utility.
+          Join the ecosystem and explore technology built around real utility.
         </div>
         <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
       </div>
@@ -1055,6 +1097,14 @@
   </a>
 
 </div>
+
+</div>  <!-- footer-socials-blue ends here -->
+
+<p class="footer-legal-note">
+  NetDAG tokens are utility tokens intended for use within the NetDAG ecosystem.
+  They do not represent shares, securities, or financial instruments.
+  Nothing on this website constitutes financial, legal, or investment advice.
+</p>
 
 <div class="footer-bottom-blue">
   <p class="footer-bottom-text">

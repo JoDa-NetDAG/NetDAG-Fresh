@@ -6189,6 +6189,8 @@ body.ndg-modal-open {
   /* Hide desktop CTA buttons */
   .header-ctas {
     display: none !important;
+    padding: 10px 16px;
+    font-size: 0.95rem;
   }
 }
 
@@ -6859,4 +6861,5 @@ body.ndg-modal-open {
   color: #fff;
   box-shadow: 0 24px 70px rgba(0,0,0,.55);
 }
+
 /* ========================= */
