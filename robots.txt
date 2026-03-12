@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://netdag.com/sitemap.xml
+Sitemap: https://www.netdag.com/sitemap.xml

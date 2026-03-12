@@ -173,17 +173,17 @@
     </p>
 
     <div class="ndg-community-actions">
-      <a class="ndg-community-btn" href="https://discord.com/invite/netdag" target="_blank" rel="noopener">
+      <a class="ndg-community-btn" href="https://discord.gg/GycvtzBs" target="_blank" rel="noopener">
         <i class="fab fa-discord"></i>
         Join our Discord Community
       </a>
 
-      <a class="ndg-community-btn" href="https://t.me/netdag" target="_blank" rel="noopener">
+      <a class="ndg-community-btn" href="https://t.me/NetDAG" target="_blank" rel="noopener">
         <i class="fab fa-telegram"></i>
         Join our Telegram Channel
       </a>
 
-      <a class="ndg-community-btn" href="https://twitter.com/netdag" target="_blank" rel="noopener">
+      <a class="ndg-community-btn" href="https://x.com/NetDAGOfficial" target="_blank" rel="noopener">
         <i class="fab fa-x-twitter"></i>
         Follow NetDAG on X
       </a>
