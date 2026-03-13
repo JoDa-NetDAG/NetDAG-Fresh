@@ -320,26 +320,61 @@
   line-height: 1.5;
   color: rgba(255,255,255,0.72);
   }
+
+  .site-ticker{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #f0a020;
+  color: #1a1a1a;
+  position: relative;
+}
+
+.ticker-track{
+  display: inline-flex;
+  align-items: center;
+  gap: 48px;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ndgTickerScroll 34s linear infinite;
+}
+
+.ticker-track span{
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+@keyframes ndgTickerScroll{
+  from{
+    transform: translateX(0);
+  }
+  to{
+    transform: translateX(-50%);
+  }
+}
   </style>
   
 </head>
 
 <body class="partners-page" id="top">
 
-   <!-- INFO TICKER -->
+<!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
-    <div class="ticker-track" data-ticker>
-      <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
-      <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
-      <span>🏦 <strong>22% permanent buy-back reserve</strong> = math-backed liquidity.</span>
-      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
+  <div class="ticker-track">
+    <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
+    <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
+    <span>🏦 <strong>22% protocol reserve mechanism</strong> supports ecosystem liquidity design.</span>
+    <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
 
-      <span>💧 Presale begins <strong>00.00. 2026</strong> (00.00.2026).</span>
-      <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
-      <span>🏦 <strong>22% protocol reserve mechanism</strong> supports ecosystem liquidity design.</span>
-      <span>🎯 Only <strong>600,000,000 NDG</strong> up for grabs.</span>
-    </div>
+    <span>💧 Presale begins <strong>00.00.2026</strong> (00.00.2026).</span>
+    <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
+    <span>🏦 <strong>22% protocol reserve mechanism</strong> supports ecosystem liquidity design.</span>
+    <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
   </div>
+</div>
 
   <!-- HEADER -->
   <header class="site-header" role="banner">
