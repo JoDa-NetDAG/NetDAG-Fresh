@@ -164,13 +164,22 @@
   border-radius:2px;
 }
 
+/* ===============================
+   GLOBAL TOP TICKER
+   =============================== */
+
 .site-ticker{
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ticker-height);
+  line-height: var(--ticker-height);
   background: #f0a020;
   color: #1a1a1a;
-  position: relative;
+  z-index: 1100;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .ticker-track{
@@ -198,6 +207,11 @@
     transform: translateX(-50%);
   }
 }
+
+ .purchase-hero{
+  min-height: 60vh;
+}
+
 </style>
 
 </head>

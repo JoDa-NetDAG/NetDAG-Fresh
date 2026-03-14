@@ -260,6 +260,7 @@
   }
 
   .guardian-hero .hero-kicker{
+
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -402,6 +403,60 @@ img.guardian-feature-img.guardian-feature-img--xl{
   }
 
 }
+
+.site-separator-top{
+  margin-top: -6px !important;
+  margin-bottom: 6px !important;
+}
+
+/* ===============================
+   GLOBAL TOP TICKER
+   =============================== */
+
+.site-ticker{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ticker-height);
+  line-height: var(--ticker-height);
+  background: #f0a020;
+  color: #1a1a1a;
+  z-index: 1100;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-track{
+  display: inline-flex;
+  align-items: center;
+  gap: 48px;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ndgTickerScroll 34s linear infinite;
+}
+
+.ticker-track span{
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+@keyframes ndgTickerScroll{
+  from{
+    transform: translateX(0);
+  }
+  to{
+    transform: translateX(-50%);
+  }
+}
+
+.site-separator-top{
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
+}
 </style>
 
 </head>
@@ -481,15 +536,15 @@ img.guardian-feature-img.guardian-feature-img--xl{
 
       <div class="mobile-ctas">
   <!-- Use this on pages inside /menu/ -->
-  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
-  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
+  <a href="purchase-ndg.html" class="btn btn-primary nav-cta">Buy NDG</a>
+  <a href="stake-ndg.html" class="btn btn-primary nav-cta">Stake NDG</a>
 </div>
     </div>
   </div>
 
   <main>
     <!-- Top separator -->
-    <div class="site-separator" aria-hidden="true"></div>
+    <div class="site-separator site-separator-top" aria-hidden="true"></div>
 
     <!-- GUARDIAN HERO SECTION -->
     <section class="section guardian-hero" id="guardian">

@@ -46,6 +46,7 @@
 
 
 <style>
+
 /* MOBILE NAVBAR FIX - Inline for index.html */
 @media (max-width: 900px) {
   /* Hide desktop nav links */
@@ -226,13 +227,22 @@
   color: rgba(255,255,255,0.72);
 }
 
+/* ===============================
+   GLOBAL TOP TICKER
+   =============================== */
+
 .site-ticker{
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ticker-height);
+  line-height: var(--ticker-height);
   background: #f0a020;
   color: #1a1a1a;
-  position: relative;
+  z-index: 1100;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .ticker-track{
@@ -260,6 +270,7 @@
     transform: translateX(-50%);
   }
 }
+
 </style>
 
 <link rel="canonical" href="https://netdag.com/">
@@ -317,39 +328,33 @@
   </div>
 </div>
 
-  <!-- HEADER -->
   <header class="site-header" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="index.html" title="NetDAG home">
-        <img src="images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
-        <span class="brand-text">NetDAG</span>
-      </a>
+  <div class="header-inner">
+    <a class="brand" href="index.html" title="NetDAG home">
+      <img src="images/ndg-logo.png" alt="NetDAG logo" class="brand-logo" />
+      <span class="brand-text">NetDAG</span>
+    </a>
 
-      <div class="nav-right">
-        <!-- Desktop nav links -->
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="provenance.html">Provenance dApp</a></li>
-          <li><a href="bonding-curve.html">Bonding Curve</a></li>
-          <li><a href="guardian.html">Guardian</a></li>
-          <li><a href="no-gas.html">Easy Access</a></li>
-          <li><a href="menu/whitepaper.html">Whitepaper</a></li>
-        </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="provenance.html">Provenance dApp</a></li>
+        <li><a href="bonding-curve.html">Bonding Curve</a></li>
+        <li><a href="guardian.html">Guardian</a></li>
+        <li><a href="no-gas.html">Easy Access</a></li>
+        <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+      </ul>
 
-        <!-- Hamburger menu button -->
-              <!-- Hamburger menu button -->
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu"
-        aria-label="Open menu">
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
         <span class="burger-line" aria-hidden="true"></span>
         <span class="burger-line" aria-hidden="true"></span>
         <span class="burger-line" aria-hidden="true"></span>
       </button>
+    </div>
 
-      <!-- CTAs -->
-      <div class="header-ctas">
-        <a href="purchase-ndg.html" class="btn">Access NDG</a>
-        <a href="stake-ndg.html" class="btn btn-ghost">NDG Staking</a>
-      </div>
+    <div class="header-ctas">
+      <a href="purchase-ndg.html" class="btn">Access NDG</a>
+      <a href="stake-ndg.html" class="btn btn-ghost">NDG Staking</a>
     </div>
   </div>
 </header>
@@ -378,15 +383,16 @@
       </ul>
       <div class="mobile-ctas">
   <!-- Use this on pages inside /menu/ -->
-  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
-  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
+  <a href="purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
+  <a href="stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
 </div>
     </div>
   </div>
 
+  
   <main>
     <!-- top separator before hero (site separator) -->
-    <div class="site-separator" aria-hidden="true"></div>
+   <div class="site-separator" aria-hidden="true"></div>
 
     <!-- HERO -->
     <section class="section section-hero">

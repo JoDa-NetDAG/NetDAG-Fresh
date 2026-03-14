@@ -229,13 +229,22 @@
   color: rgba(255,255,255,0.72);
   }
  
- .site-ticker{
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+ /* ===============================
+   GLOBAL TOP TICKER
+   =============================== */
+
+.site-ticker{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ticker-height);
+  line-height: var(--ticker-height);
   background: #f0a020;
   color: #1a1a1a;
-  position: relative;
+  z-index: 1100;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .ticker-track{
@@ -262,6 +271,17 @@
   to{
     transform: translateX(-50%);
   }
+}
+
+.site-separator-top{
+  position: relative;
+  z-index: 5;
+}
+
+.prov-hero-79{
+  min-height: 120vh;
+  display:flex;
+  align-items:center;
 }
 </style>
 
@@ -342,20 +362,21 @@
       </ul>
       <div class="mobile-ctas">
   <!-- Use this on pages inside /menu/ -->
-  <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
-  <a href="../stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
+  <a href="purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
+  <a href="stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
 </div>
      </div>
     </div>
-   
- <!-- PROVENANCE HERO — TRUST WRITTEN IN CODE -->
-<!-- PROVENANCE HERO — TRUST WRITTEN IN CODE -->
+
+    <main>
+<div class="site-separator site-separator-top" aria-hidden="true"></div>
+
 <section class="prov-hero-79">
   <div class="prov-hero-79-overlay"></div>
 </section>
 
-    <!-- top separator before hero (site separator) -->
-    <div class="site-separator" aria-hidden="true"></div>
+<div class="site-separator" aria-hidden="true"></div>
+
 
 <section class="prov-hero" id="prov-hero">
   <div class="prov-wrap">
@@ -712,6 +733,8 @@
 
 <!-- top separator before hero (site separator) -->
     <div class="site-separator" aria-hidden="true"></div>
+
+    </main>
 
   <!-- FOOTER - Blue gradient design -->
   <!-- Back to Top Section -->

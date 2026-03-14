@@ -148,13 +148,22 @@
   color: rgba(255,255,255,0.72);
   }
 
-  .site-ticker{
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
+/* ===============================
+   GLOBAL TOP TICKER
+   =============================== */
+
+.site-ticker{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ticker-height);
+  line-height: var(--ticker-height);
   background: #f0a020;
   color: #1a1a1a;
-  position: relative;
+  z-index: 1100;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .ticker-track{
@@ -182,6 +191,7 @@
     transform: translateX(-50%);
   }
 }
+
   </style>
   
 </head>
