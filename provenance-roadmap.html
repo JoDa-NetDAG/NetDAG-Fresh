@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NetDAG Provenance Infrastructure Roadmap</title>
+  <style>
+    :root{
+      --bg:#0f0f14;
+      --panel:#171721;
+      --panel-2:#1d1d28;
+      --text:#f3f3f3;
+      --muted:#cfcfcf;
+      --accent:#ff9900;
+      --line:rgba(255,153,0,.18);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,153,0,.08), transparent 28%),
+        linear-gradient(180deg, #0d0d12 0%, #111119 100%);
+      color:var(--text);
+      line-height:1.7;
+    }
+
+    .wrap{
+      max-width:1080px;
+      margin:0 auto;
+      padding:48px 22px 70px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:18px 0 28px;
+    }
+
+    .hero .eyebrow{
+      display:inline-block;
+      color:var(--accent);
+      border:1px solid var(--line);
+      background:rgba(255,153,0,.06);
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:13px;
+      letter-spacing:.4px;
+      margin-bottom:18px;
+    }
+
+    .hero h1{
+      margin:0 0 14px;
+      font-size:44px;
+      line-height:1.15;
+      color:var(--accent);
+    }
+
+    .hero p{
+      max-width:820px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:18px;
+    }
+
+    .intro{
+      margin:30px 0 18px;
+      background:linear-gradient(180deg, rgba(255,153,0,.06), rgba(255,153,0,.02));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:24px 24px 20px;
+      box-shadow:var(--shadow);
+    }
+
+    .intro h2{
+      margin:0 0 12px;
+      color:var(--accent);
+      font-size:28px;
+    }
+
+    .intro p{
+      margin:0;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    .phases{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:18px;
+      margin-top:30px;
+    }
+
+    .phase{
+      background:linear-gradient(180deg, var(--panel), var(--panel-2));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px 20px;
+      box-shadow:var(--shadow);
+    }
+
+    .phase .num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,153,0,.12);
+      color:var(--accent);
+      font-weight:700;
+      margin-bottom:16px;
+      border:1px solid var(--line);
+    }
+
+    .phase h3{
+      margin:0 0 10px;
+      color:var(--accent);
+      font-size:22px;
+    }
+
+    .phase p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+    }
+
+    .closing{
+      margin-top:34px;
+      background:linear-gradient(180deg, rgba(255,153,0,.07), rgba(255,153,0,.03));
+      border-left:4px solid var(--accent);
+      border-radius:14px;
+      padding:18px 20px;
+      color:#f5f5f5;
+      box-shadow:var(--shadow);
+      font-size:17px;
+    }
+
+    @media (max-width: 860px){
+      .hero h1{font-size:34px}
+      .hero p{font-size:16px}
+      .phases{grid-template-columns:1fr}
+    }
+
+    .back-link-top{
+  position:absolute;
+  top:22px;
+  left:28px;
+  font-size:16px;
+  text-decoration:none;
+  color:#ff9900;
+  border:1px solid rgba(255,153,0,.25);
+  padding:20px 22px;
+  border-radius:8px;
+  transition:all .2s ease;
+}
+
+.back-link-top:hover{
+  background:rgba(255,153,0,.10);
+  color:#fff;
+}
+
+.back-link-bottom{
+  display:block;
+  width:max-content;
+  margin-left:auto;
+  margin-top:40px;
+  font-size:16px;
+  text-decoration:none;
+  color:#ff9900;
+  border:1px solid rgba(255,153,0,.25);
+  padding:6px 12px;
+  border-radius:8px;
+  transition:all .2s ease;
+}
+
+.back-link-bottom:hover{
+  background:rgba(255,153,0,.10);
+  color:#fff;
+}
+
+.roadmap-nav{
+  max-width:1000px;
+  margin:20px auto 0 auto;
+  padding-left:10px;
+}
+  </style>
+
+
+</head>
+<body>
+
+  <div class="roadmap-nav">
+  <a href="provenance.html">← Back to menu</a>
+</div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">NetDAG Infrastructure Vision</div>
+      <h1>Provenance Infrastructure Roadmap</h1>
+      <p>
+        NetDAG Provenance is being developed as a blockchain-secured authenticity layer
+        for manufacturers, logistics networks, retailers, regulators, and consumers.
+        Its purpose is to make product identity verifiable, traceable, and trustworthy
+        across real-world commercial environments.
+      </p>
+    </section>
+
+    <section class="intro">
+      <h2>Why this matters</h2>
+      <p>
+        The Provenance layer is intended to move NetDAG beyond concept and into visible
+        real-world utility. By establishing a trusted verification framework for goods,
+        batches, and supply chains, NetDAG creates a practical entry point for adoption
+        while laying the foundation for broader ecosystem expansion.
+      </p>
+    </section>
+
+    <section class="phases">
+      <article class="phase">
+        <div class="num">1</div>
+        <h3>Identity Layer</h3>
+        <p>
+          Establish a secure product identity framework that enables authentic goods to
+          be registered and linked to trusted verification records.
+        </p>
+      </article>
+
+      <article class="phase">
+        <div class="num">2</div>
+        <h3>Verification Interface</h3>
+        <p>
+          Deploy a public-facing verification experience allowing users to confirm
+          authenticity through simple and accessible product checks.
+        </p>
+      </article>
+
+      <article class="phase">
+        <div class="num">3</div>
+        <h3>Blockchain Anchoring</h3>
+        <p>
+          Strengthen the verification environment through tamper-resistant on-chain
+          timestamping and secure authenticity references.
+        </p>
+      </article>
+
+      <article class="phase">
+        <div class="num">4</div>
+        <h3>Manufacturer Access Layer</h3>
+        <p>
+          Introduce structured onboarding tools for brands and production partners to
+          manage authenticity records across product lines and batches.
+        </p>
+      </article>
+
+      <article class="phase">
+        <div class="num">5</div>
+        <h3>Supply Chain Extension</h3>
+        <p>
+          Expand beyond product verification into traceability checkpoints supporting
+          logistics transparency and movement tracking.
+        </p>
+      </article>
+
+      <article class="phase">
+        <div class="num">6</div>
+        <h3>Guardian Intelligence Integration</h3>
+        <p>
+          Connect the Provenance layer with NetDAG Guardian capabilities to support
+          anomaly detection, integrity monitoring, and risk-aware verification flows.
+        </p>
+      </article>
+
+      <article class="phase">
+        <div class="num">7</div>
+        <h3>Enterprise API Access</h3>
+        <p>
+          Enable direct integration for manufacturers, retailers, compliance systems,
+          and ecosystem partners through structured enterprise-ready access points.
+        </p>
+      </article>
+
+      <article class="phase">
+        <div class="num">8</div>
+        <h3>Global Verification Network</h3>
+        <p>
+          Evolve into a scalable authenticity infrastructure capable of supporting
+          cross-industry and cross-border verification use cases.
+        </p>
+      </article>
+    </section>
+
+    <div class="closing">
+      NetDAG Provenance is designed to become a trust layer for the real economy —
+      bringing blockchain-secured verification into supply chains, product identity,
+      and authenticity assurance.
+    </div>
+  </div>
+
+  <div class="roadmap-nav">
+  <a href="provenance.html">Back to menu →</a>
+  <p></p>
+</div>
+
+</body>
+</html>

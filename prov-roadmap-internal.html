@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetDAG Provenance dApp Roadmap</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#0f0f14;
+  color:#e8e8e8;
+  max-width:1000px;
+  margin:auto;
+  line-height:1.6;
+  padding:40px;
+}
+
+h1,h2,h3{
+  color:#ff9900;
+}
+
+section{
+  margin-bottom:40px;
+}
+
+ul{
+  margin-left:20px;
+}
+
+.box{
+  background:#181820;
+  border-left:4px solid #ff9900;
+  padding:15px;
+  margin:20px 0;
+}
+</style>
+</head>
+
+
+<body>
+
+<h1>NetDAG Provenance dApp Roadmap</h1>
+
+
+<section>
+<h2>Purpose of this Document</h2>
+
+<p>
+This roadmap defines the development strategy for the NetDAG Provenance dApp —
+the first real-world infrastructure module of the NetDAG ecosystem.
+</p>
+
+<p>
+Its objective is to create a blockchain-based verification layer allowing
+manufacturers, brands, and supply chains to prove product authenticity
+using QR-based verification anchored on-chain.
+</p>
+
+<div class="box">
+This dApp is the foundation layer for trust in the NetDAG ecosystem.
+</div>
+
+</section>
+
+
+<section>
+<h2>Strategic Role Inside NetDAG</h2>
+
+<ul>
+<li>Transforms NetDAG from concept into working infrastructure</li>
+<li>Provides real-world utility before token presale</li>
+<li>Supports enterprise adoption pathways</li>
+<li>Strengthens accelerator applications</li>
+<li>Introduces NDG as a verification utility token (future phase)</li>
+</ul>
+
+</section>
+
+
+<section>
+<h2>Core MVP Objective</h2>
+
+<p>The first version of the Provenance dApp must support this simple flow:</p>
+
+<ul>
+<li>Manufacturer registers product</li>
+<li>System generates QR code</li>
+<li>User scans QR code</li>
+<li>Verification page opens</li>
+<li>Blockchain hash confirms authenticity</li>
+</ul>
+
+<div class="box">
+The goal of Version 1.0 is credibility, not complexity.
+</div>
+
+</section>
+
+
+<section>
+<h2>Development Phase Structure</h2>
+
+
+<h3>Phase 1 — MVP Definition</h3>
+
+<ul>
+<li>Define minimal verification workflow</li>
+<li>Design product registration structure</li>
+<li>Create verification display logic</li>
+<li>Prepare QR generation process</li>
+</ul>
+
+
+<h3>Phase 2 — Architecture Setup</h3>
+
+<ul>
+<li>Create provenance.html interface</li>
+<li>Build product verification page template</li>
+<li>Store product records (JSON / Firebase)</li>
+<li>Prepare blockchain anchor integration</li>
+</ul>
+
+
+<h3>Phase 3 — Verification Interface</h3>
+
+<p>User scanning QR should see:</p>
+
+<ul>
+<li>Product authenticity status</li>
+<li>Manufacturer name</li>
+<li>Country of origin</li>
+<li>Timestamp</li>
+<li>Verification hash</li>
+<li>NetDAG verification badge</li>
+</ul>
+
+
+<h3>Phase 4 — Blockchain Anchoring</h3>
+
+<p>Each product entry generates:</p>
+
+<ul>
+<li>SHA256 hash of product metadata</li>
+<li>Hash stored on BNB Smart Chain</li>
+<li>Explorer verification link displayed</li>
+</ul>
+
+<div class="box">
+This step converts the demo into true Web3 infrastructure.
+</div>
+
+
+<h3>Phase 5 — Manufacturer Onboarding Portal</h3>
+
+<p>Create:</p>
+
+<ul>
+<li>/provenance-register.html</li>
+</ul>
+
+<p>Form fields:</p>
+
+<ul>
+<li>Company name</li>
+<li>Product name</li>
+<li>Batch ID</li>
+<li>Country of origin</li>
+<li>Optional certificate upload</li>
+<li>QR code generator</li>
+</ul>
+
+</section>
+
+
+<section>
+<h2>Version 1.0 Success Criteria</h2>
+
+<ul>
+<li>QR code verification works reliably</li>
+<li>Product metadata displays correctly</li>
+<li>Blockchain hash is visible</li>
+<li>Explorer link confirms timestamp record</li>
+<li>At least one manufacturer agrees to pilot test</li>
+</ul>
+
+</section>
+
+
+<section>
+<h2>Expected Pilot Partner Workflow</h2>
+
+<ul>
+<li>Manufacturer submits product sample</li>
+<li>NetDAG generates QR verification record</li>
+<li>QR attached to product batch</li>
+<li>End-user scans QR</li>
+<li>Verification displayed publicly</li>
+</ul>
+
+<div class="box">
+Only one pilot partner is required to validate the system.
+</div>
+
+</section>
+
+
+<section>
+<h2>Future Expansion Layers</h2>
+
+<ul>
+<li>NDG-powered verification requests</li>
+<li>Batch-level traceability</li>
+<li>Logistics checkpoint tracking</li>
+<li>Anti-counterfeit certificates</li>
+<li>AI anomaly detection via Guardian Layer</li>
+<li>Enterprise API integration</li>
+<li>GS1 barcode compatibility</li>
+<li>Phygital product identity tags</li>
+</ul>
+
+</section>
+
+
+<section>
+<h2>Integration With NetDAG Ecosystem</h2>
+
+<ul>
+<li>Bonding Curve economic stability model</li>
+<li>Guardian AI monitoring layer</li>
+<li>Gasless verification UX</li>
+<li>dVPN privacy protection infrastructure</li>
+</ul>
+
+</section>
+
+
+<section>
+<h2>Strategic Positioning Statement</h2>
+
+<div class="box">
+NetDAG Provenance enables instant product authenticity verification using blockchain-secured QR identity layers, forming the trust foundation of the NetDAG digital economy.
+</div>
+
+</section>
+
+
+<section>
+<h2>Execution Philosophy</h2>
+
+<ul>
+<li>Start simple</li>
+<li>Ship early</li>
+<li>Demonstrate publicly</li>
+<li>Validate with real manufacturers</li>
+<li>Expand into enterprise integrations</li>
+</ul>
+
+</section>
+
+
+<section>
+<h2>Immediate Next Steps</h2>
+
+<ul>
+<li>Create provenance.html interface</li>
+<li>Create verification result page template</li>
+<li>Implement QR generator</li>
+<li>Implement metadata storage structure</li>
+<li>Add SHA256 hashing logic</li>
+<li>Anchor hash to BSC testnet</li>
+<li>Display verification badge</li>
+</ul>
+
+</section>
+
+
+<section>
+<h2>Long-Term Vision</h2>
+
+<p>
+The NetDAG Provenance dApp will evolve into a global verification infrastructure
+layer supporting manufacturers, logistics providers, regulators, and consumers.
+</p>
+
+<div class="box">
+Trust Written in Code.
+</div>
+
+</section>
+
+
+</body>
+</html>

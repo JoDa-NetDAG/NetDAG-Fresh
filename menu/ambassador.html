@@ -518,6 +518,62 @@
   }
 }
 
+.nav-links .nav-dropdown{
+  position:relative;
+  list-style:none;
+}
+
+.nav-links .nav-dropdown > a{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.nav-links .nav-dropdown > a::after{
+  content:"▾";
+  font-size:12px;
+  line-height:1;
+  transform:translateY(1px);
+}
+
+.nav-links .nav-dropdown-menu{
+  display:none;
+  position:absolute;
+  top:calc(100%);
+  left:0;
+  min-width:240px;
+  margin:0;
+  padding:8px 0;
+  list-style:none;
+  background:rgba(15,15,20,.98);
+  border:1px solid rgba(255,153,0,.18);
+  border-radius:12px;
+  box-shadow:0 12px 28px rgba(0,0,0,.35);
+  z-index:9999;
+}
+
+.nav-links .nav-dropdown-menu li{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.nav-links .nav-dropdown-menu a{
+  display:block;
+  padding:10px 16px;
+  color:#fff;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.nav-links .nav-dropdown-menu a:hover{
+  background:rgba(255,153,0,.10);
+  color:#ff9900;
+}
+
+.nav-links .nav-dropdown:hover .nav-dropdown-menu{
+  display:block;
+}
 </style>
 
 </head>
@@ -551,7 +607,13 @@
         <ul class="nav-links">
           <li><a href="../index.html">Home</a></li>
           <li><a href="../provenance.html">Provenance dApp</a></li>
-          <li><a href="../bonding-curve.html">Bonding Curve</a></li>
+          <li class="nav-dropdown">
+  <a href="../provenance.html">Provenance App ∇</a>
+  <ul class="nav-dropdown-menu">
+    <li><a href="../provenance.html">Overview</a></li>
+    <li><a href="../provenance-roadmap.html">Infrastructure Roadmap</a></li>
+  </ul>
+</li>
           <li><a href="../guardian.html">Guardian</a></li>
           <li><a href="../no-gas.html">Easy Access</a></li>
           <li><a href="whitepaper.html">Whitepaper</a></li>
