@@ -10,7 +10,7 @@
   -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NetDAG Provenance dApp – (Anti-Counterfeit) Real-World Authenticity Verification</title>
+  <title>NetDAG Provenance dApp – Anti-Counterfeit Real-World Authenticity Verification</title>
   <meta name="description" content="NetDAG Provenance is a real-world authenticity verification dApp designed for manufacturers, brands, certifiers, logistics partners, and consumers." />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="canonical" href="https://netdag.com/provenance.html">
@@ -340,6 +340,454 @@
 .nav-links .nav-dropdown:hover .nav-dropdown-menu{
   display:block;
 }
+
+/* =========================================================
+   PROVENANCE MVP SECTION
+   ========================================================= */
+
+.prov-mvp-section{
+  padding: 90px 0;
+  position: relative;
+}
+
+.prov-mvp-wrap{
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 14px;
+}
+
+.prov-mvp-head{
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.prov-mvp-title{
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+  color: #ff9900;
+  margin: 0 0 14px;
+}
+
+.prov-mvp-sub{
+  max-width: 860px;
+  margin: 0 auto;
+  color: rgba(233,238,247,.84);
+  line-height: 1.7;
+  font-size: 1.03rem;
+}
+
+.prov-mvp-grid{
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 26px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+
+.prov-mvp-verify{
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.prov-mvp-card{
+  background: rgba(14,16,22,0.88);
+  border: 1px solid rgba(255,153,0,.14);
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: 0 12px 34px rgba(0,0,0,.28);
+}
+
+.prov-mvp-card-title{
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  color: #ff9900;
+}
+
+.prov-mvp-note{
+  margin: 0 0 20px;
+  color: rgba(233,238,247,.72);
+  line-height: 1.6;
+}
+
+.prov-form-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.prov-field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prov-field-full{
+  grid-column: 1 / -1;
+}
+
+.prov-field label{
+  font-size: .95rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.prov-field input,
+.prov-field textarea{
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  border-radius: 14px;
+  padding: 14px 15px;
+  outline: none;
+  font: inherit;
+}
+
+.prov-field input:focus,
+.prov-field textarea:focus{
+  border-color: rgba(255,153,0,.42);
+  box-shadow: 0 0 0 3px rgba(255,153,0,.10);
+}
+
+.prov-form-actions{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.prov-output-stack{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.prov-output-box{
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.prov-output-box h4{
+  margin: 0 0 10px;
+  color: #ffb84d;
+  font-size: 1rem;
+}
+
+.prov-summary-grid{
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 8px 14px;
+  font-size: .95rem;
+}
+
+.prov-summary-grid div:nth-child(odd){
+  font-weight: 700;
+  color: #fff;
+}
+
+.prov-summary-grid div:nth-child(even){
+  color: rgba(233,238,247,.78);
+  word-break: break-word;
+}
+
+.prov-mono{
+  font-family: Consolas, Monaco, monospace;
+  font-size: .92rem;
+  color: #d7deee;
+  word-break: break-word;
+}
+
+.prov-placeholder{
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: rgba(233,238,247,.70);
+  border: 1px dashed rgba(255,255,255,.14);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.prov-status{
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+.prov-status-pending{
+  background: rgba(255,204,0,.10);
+  color: #ffcc00;
+  border: 1px solid rgba(255,204,0,.18);
+}
+
+.prov-status-success{
+  background: rgba(48,196,141,.10);
+  color: #39d29a;
+  border: 1px solid rgba(48,196,141,.18);
+}
+
+.prov-status-error{
+  background: rgba(255,90,107,.10);
+  color: #ff6b7b;
+  border: 1px solid rgba(255,90,107,.18);
+}
+
+.prov-small{
+  margin: 12px 0 0;
+  font-size: .93rem;
+  line-height: 1.6;
+  color: rgba(233,238,247,.74);
+}
+
+@media (max-width: 980px){
+  .prov-mvp-grid,
+  .prov-mvp-verify{
+    grid-template-columns: 1fr;
+  }
+}
+
+.prov-result{
+  display: none;
+}
+
+.prov-result[hidden]{
+  display: none;
+}
+
+@media (max-width: 720px){
+  .prov-form-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .prov-summary-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .prov-form-actions{
+    flex-direction: column;
+  }
+
+  .prov-form-actions .btn{
+    width: 100%;
+  }
+}
+
+.prov-live-check{
+  padding: 70px 0;
+}
+
+.prov-check-form{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:20px 0 16px;
+}
+
+.prov-check-form input{
+  flex:1 1 320px;
+  min-height:48px;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(255,153,0,.25);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+}
+
+.prov-check-form button{
+  min-height:48px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:#ff9900;
+  color:#111;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.prov-status{
+  margin:12px 0 16px;
+  font-weight:600;
+}
+
+.prov-result{
+  padding:18px;
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,153,0,.18);
+}
+
+.prov-result p{
+  margin:0 0 10px;
+  word-break:break-word;
+}
+
+.prov-live-check{
+  padding: 70px 0;
+}
+
+.prov-live-check h2{
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.prov-live-check p{
+  color: rgba(255,255,255,.82);
+}
+
+.prov-check-form{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:20px 0 16px;
+}
+
+.prov-check-form input{
+  flex:1 1 320px;
+  min-height:48px;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(255,153,0,.25);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+}
+
+.prov-check-form button{
+  min-height:48px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:#ff9900;
+  color:#111;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.prov-status{
+  margin:12px 0 16px;
+  font-weight:600;
+}
+
+.prov-result{
+  padding: 22px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+  border: 1px solid rgba(255,153,0,.18);
+  box-shadow: 0 12px 36px rgba(0,0,0,.28);
+}
+
+.prov-cert-header{
+  margin-bottom: 18px;
+}
+
+.prov-badge{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,153,0,.14);
+  border:1px solid rgba(255,153,0,.28);
+  color:#ff9900;
+  font-weight:700;
+  font-size:.95rem;
+  margin-bottom:12px;
+}
+
+.prov-cert-title{
+  margin:0 0 8px;
+  color:#fff;
+  font-size:1.4rem;
+}
+
+.prov-cert-subtitle{
+  margin:0;
+  color:rgba(255,255,255,.76);
+  line-height:1.5;
+}
+
+.prov-cert-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:16px;
+}
+
+.prov-cert-item{
+  padding:14px;
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.prov-cert-label{
+  display:block;
+  font-size:.86rem;
+  color:#ff9900;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.prov-cert-value{
+  display:block;
+  color:#fff;
+  line-height:1.55;
+  word-break:break-word;
+}
+
+@media (max-width: 800px){
+  .prov-cert-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+.prov-cert-item-full{
+  grid-column: 1 / -1;
+}
+
+.prov-copy-btn{
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: .9rem;
+}
+
+.prov-cert-value{
+  display: block;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+
+.prov-cert-item{
+  min-width: 0;
+}
+
+.prov-cert-item-full .prov-cert-value{
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px){
+  .prov-cert-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .prov-cert-item{
+    padding: 12px;
+  }
+
+  .prov-cert-value{
+    font-size: 0.95rem;
+  }
+
+  .prov-copy-btn{
+    width: 100%;
+  }
+}
 </style>
 
 </head>
@@ -543,100 +991,100 @@
 
     <!-- ORIGINAL SET (10) -->
   <div class="prov-img">
-  <img src="../images/ndg44.png" alt=>
+  <img src="images/ndg44.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg57.png" alt=>
+  <img src="images/ndg57.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg34.png" alt=>
+  <img src="images/ndg34.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg53.png" alt=>
+  <img src="images/ndg53.png" alt=>
   </div>
   
   <div class="prov-img">
-  <img src="../images/ndg59.png" alt=>
+  <img src="images/ndg59.png" alt=>
   </div>
 
    <div class="prov-img">
-  <img src="../images/ndg52.png" alt=>
+  <img src="images/ndg52.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg38.png" alt=>
+  <img src="images/ndg38.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg40.png" alt=>
+  <img src="images/ndg40.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg41.png" alt=>
+  <img src="images/ndg41.png" alt=>
   </div>
   
   <div class="prov-img">
-  <img src="../images/ndg39.png" alt=>
+  <img src="images/ndg39.png" alt=>
   </div>
   
   <div class="prov-img">
-  <img src="../images/ndg46.png" alt=>
+  <img src="images/ndg46.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/provenance3.png" alt=>
+  <img src="images/provenance3.png" alt=>
   </div>
 
     <!-- DUPLICATE SET (10) -->
     <div class="prov-img">
-  <img src="../images/ndg44.png" alt=>
+  <img src="images/ndg44.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg57.png" alt=>
+  <img src="images/ndg57.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg34.png" alt=>
+  <img src="images/ndg34.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg53.png" alt=>
+  <img src="images/ndg53.png" alt=>
   </div>
   
   <div class="prov-img">
-  <img src="../images/ndg59.png" alt=>
+  <img src="images/ndg59.png" alt=>
   </div>
 
    <div class="prov-img">
-  <img src="../images/ndg52.png" alt=>
+  <img src="images/ndg52.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg38.png" alt=>
+  <img src="images/ndg38.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg40.png" alt=>
+  <img src="images/ndg40.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg41.png" alt=>
+  <img src="images/ndg41.png" alt=>
   </div>
   
   <div class="prov-img">
-  <img src="../images/ndg39.png" alt=>
+  <img src="images/ndg39.png" alt=>
   </div>
 
   <div class="prov-img">
-  <img src="../images/ndg46.png" alt=>
+  <img src="images/ndg46.png" alt=>
   </div>
   
   <div class="prov-img">
-  <img src="../images/provenance3.png" alt=>
+  <img src="images/provenance3.png" alt=>
   </div>
   </div>
 </section>
@@ -793,6 +1241,245 @@
   </div>
 </section>
 
+<div class="site-separator" aria-hidden="true"></div>
+
+<section id="prov-mvp" class="prov-mvp-section">
+  <div class="prov-mvp-wrap">
+
+    <header class="prov-mvp-head">
+      <h2 class="prov-mvp-title">Provenance MVP Demo</h2>
+      <p class="prov-mvp-sub">
+        This is the first working interface of the NetDAG Provenance dApp MVP.
+        Register a product record, generate a provenance preview, and test verification flow.
+      </p>
+    </header>
+
+    <div class="prov-mvp-grid">
+
+      <!-- LEFT: REGISTRATION FORM -->
+      <section class="prov-mvp-card">
+        <h3 class="prov-mvp-card-title">Register Product</h3>
+        <p class="prov-mvp-note">
+          Enter basic product origin data to create a provenance record.
+        </p>
+
+        <form id="provRegisterForm" class="prov-form">
+          <div class="prov-form-grid">
+
+            <div class="prov-field">
+              <label for="provProductName">Product Name</label>
+              <input type="text" id="provProductName" name="productName" placeholder="e.g. Limited Edition Sneaker" required>
+            </div>
+
+            <div class="prov-field">
+              <label for="provSku">SKU / Product Code</label>
+              <input type="text" id="provSku" name="sku" placeholder="e.g. NDG-SNK-001" required>
+            </div>
+
+            <div class="prov-field">
+              <label for="provBatch">Batch / Lot Number</label>
+              <input type="text" id="provBatch" name="batch" placeholder="e.g. LOT-2026-001" required>
+            </div>
+
+            <div class="prov-field">
+              <label for="provSerial">Serial Number</label>
+              <input type="text" id="provSerial" name="serial" placeholder="e.g. SN-45821">
+            </div>
+
+            <div class="prov-field">
+              <label for="provManufacturer">Manufacturer</label>
+              <input type="text" id="provManufacturer" name="manufacturer" placeholder="e.g. NetDAG Partner Factory" required>
+            </div>
+
+            <div class="prov-field">
+              <label for="provOrigin">Country of Origin</label>
+              <input type="text" id="provOrigin" name="origin" placeholder="e.g. Italy" required>
+            </div>
+
+           <div class="prov-field">
+            <label for="provShipment">Shipment Route</label>
+           <input type="text" id="provShipment" name="shipment" placeholder="e.g. Wales → Zürich">
+           </div> 
+
+            <div class="prov-field">
+              <label for="provProdDate">Production Date</label>
+              <input type="date" id="provProdDate" name="productionDate" required>
+            </div>
+
+            <div class="prov-field">
+              <label for="provIssuer">Issuer Name</label>
+              <input type="text" id="provIssuer" name="issuer" placeholder="e.g. NetDAG Provenance Desk" required>
+            </div>
+
+            <div class="prov-field prov-field-full">
+              <label for="provDescription">Product Description</label>
+              <textarea id="provDescription" name="description" rows="4" placeholder="Optional short product or origin note"></textarea>
+            </div>
+
+          </div>
+
+          <div class="prov-form-actions">
+            <button type="submit" class="btn btn-primary">Generate Record</button>
+            <button type="button" id="provClearBtn" class="btn btn-ghost">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- RIGHT: OUTPUT -->
+      <aside class="prov-mvp-card">
+        <h3 class="prov-mvp-card-title">Generated Provenance Preview</h3>
+        <p class="prov-mvp-note">
+          This preview prepares the data for hashing, QR generation, and blockchain anchoring.
+        </p>
+
+        <div class="prov-output-stack">
+
+          <div class="prov-output-box">
+            <h4>Record Summary</h4>
+            <div class="prov-summary-grid" id="provSummaryGrid">
+              <div>Record ID</div><div>—</div>
+              <div>Product</div><div>—</div>
+              <div>SKU</div><div>—</div>
+              <div>Batch</div><div>—</div>
+              <div>Origin</div><div>—</div>
+              <div>Issuer</div><div>—</div>
+              <div>Created</div><div>—</div>
+            </div>
+          </div>
+
+          <div class="prov-output-box">
+            <h4>SHA256 Hash</h4>
+            <div id="provHashOutput" class="prov-mono">Hash not generated yet.</div>
+          </div>
+
+          <div class="prov-output-box">
+            <h4>QR Code</h4>
+            <div id="provQrOutput" class="prov-placeholder">
+              QR code will appear here in the next step.
+            </div>
+          </div>
+
+          <div class="prov-output-box">
+  <h4>BSC Testnet Anchor</h4>
+  <div id="provAnchorStatus" class="prov-status prov-status-pending">Not anchored yet</div>
+  <p id="provAnchorText" class="prov-small">
+    Blockchain anchoring will be connected in a later step.
+  </p>
+  <p id="provAnchorLinkWrap" class="prov-small" style="display:none;">
+  <a id="provAnchorLink" href="#" target="_blank" rel="noopener">View transaction on BscScan</a>
+ </p>
+
+  <div class="prov-form-actions">
+    <button type="button" id="provAnchorBtn" class="btn btn-primary">Anchor on BSC Testnet</button>
+  </div>
+</div>
+
+        </div>
+      </aside>
+
+    </div>
+
+    <div class="prov-mvp-verify">
+  <section class="prov-mvp-card">
+    <h3 class="prov-mvp-card-title">Verify Record</h3>
+    <p class="prov-mvp-note">
+      Enter a Record ID to test the verification flow.
+    </p>
+
+    <form id="provVerifyForm" class="prov-verify-form">
+      <div class="prov-field">
+        <label for="provVerifyId">Record ID</label>
+        <input type="text" id="provVerifyId" placeholder="Enter or paste Record ID" required>
+      </div>
+
+      <div class="prov-form-actions">
+        <button type="submit" class="btn btn-primary">Verify</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="prov-mvp-card">
+    <h3 class="prov-mvp-card-title">Verification Result</h3>
+    <p class="prov-mvp-note">
+      Verification result will appear here.
+    </p>
+    <div id="provVerifyStatus" class="prov-status prov-status-pending" style="display:none;"></div>
+
+    <div id="provResult" class="prov-result" style="display:none;">
+
+      <div class="prov-cert-header">
+        <div id="provBadge" class="prov-badge">Authenticity Confirmed</div>
+        <h3 class="prov-cert-title">NetDAG Provenance Certificate</h3>
+      </div>
+
+      <div class="prov-cert-grid">
+        <div class="prov-cert-item">
+          <span class="prov-cert-label">Company</span>
+          <span id="provOutCompany" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item">
+        <span class="prov-cert-label">Issuer</span>
+        <span id="provOutIssuer" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item">
+          <span class="prov-cert-label">Product</span>
+          <span id="provOutProduct" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item">
+        <span class="prov-cert-label">Product ID</span>
+        <span id="provOutId" class="prov-cert-value"></span>
+        <button type="button" id="provCopyIdBtn" class="btn btn-ghost prov-copy-btn">Copy ID</button>
+        </div>
+
+        <div class="prov-cert-item">
+          <span class="prov-cert-label">Batch</span>
+          <span id="provOutBatch" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item">
+       <span class="prov-cert-label">Serial Number</span>
+       <span id="provOutSerial" class="prov-cert-value"></span>
+      </div>
+
+        <div class="prov-cert-item">
+          <span class="prov-cert-label">Origin</span>
+          <span id="provOutOrigin" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item">
+        <span class="prov-cert-label">Production Date</span>
+        <span id="provOutProdDate" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item">
+          <span class="prov-cert-label">Shipment</span>
+          <span id="provOutShipment" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item">
+        <span class="prov-cert-label">Verification Hash</span>
+        <span id="provOutHash" class="prov-cert-value"></span>
+        <button type="button" id="provCopyHashBtn" class="btn btn-ghost prov-copy-btn">Copy Hash</button>
+        </div>
+
+        <div class="prov-cert-item">
+          <span class="prov-cert-label">Recorded On</span>
+          <span id="provOutTime" class="prov-cert-value"></span>
+        </div>
+
+        <div class="prov-cert-item prov-cert-item-full">
+        <span class="prov-cert-label">Anchored By</span>
+        <span id="provOutOwner" class="prov-cert-value"></span>
+        <button type="button" id="provCopyOwnerBtn" class="btn btn-ghost prov-copy-btn">Copy Wallet</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- top separator before hero (site separator) -->
     <div class="site-separator" aria-hidden="true"></div>
 
@@ -946,8 +1633,11 @@
   </footer>
 
 <script src="/js/buy-modals.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="js/provenance.js?v=1"></script>
 <script src="js/community-modal-inject.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+<script src="js/provenance-read.js"></script>
 
 </body>
 </html>
