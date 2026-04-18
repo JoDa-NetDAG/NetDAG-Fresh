@@ -47,73 +47,6 @@
 
 <style>
 
-/* MOBILE NAVBAR FIX - Inline for index.html */
-@media (max-width: 900px) {
-  /* Hide desktop nav links */
-  .nav-links {
-    display: none !important;
-  }
-  
-  /* Force header to be horizontal */
-  .site-header .header-inner {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 12px 20px !important;
-    flex-wrap: nowrap !important;
-  }
-  
-  /* Brand section */
-  .site-header .brand {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    flex-shrink: 0 !important;
-  }
-  
-  .site-header .brand-logo {
-    height: 45px !important;
-    width: auto !important;
-  }
-  
-  .site-header .brand-text {
-    font-size: 2.5rem !important;
-    white-space: nowrap !important;
-  }
-  
-  /* Nav right section */
-  .site-header .nav-right {
-    display: flex !important;
-    align-items: center !important;
-    flex-shrink: 0 !important;
-  }
-  
-  /* Hamburger menu button */
-  .site-header .menu-toggle {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 5px !important;
-    padding: 8px !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-  }
-  
-  /* Hamburger lines */
-  .site-header .menu-toggle .burger-line {
-    display: block !important;
-    width: 28px !important;
-    height: 3px !important;
-    background: #ff9900 !important;
-    border-radius: 2px !important;
-  }
-  
-  /* Hide CTA buttons on mobile */
-  .site-header .header-ctas {
-    display: none !important;
-  }
-
   /* ========================================
      HERO & PREVIEW SECTIONS - 2.5rem STANDARD
      ======================================== */
@@ -210,7 +143,7 @@
     font-size: 1rem !important;
     line-height: 1.5 !important;
   }
-}
+
 
 .contract-address{
   word-break: break-all;
@@ -606,6 +539,7 @@
           NetDAG eliminates wallets, seed phrases, and gas fees—making blockchain
           as easy as using email. Sign up in seconds, transact for free, forever.
         </p>
+
          <div class="preview-buttons">
   <a href="no-gas.html" class="gasless-learn-btn">Learn More</a>
   <a href="purchase-ndg.html" class="gasless-learn-btn">Get NDG Access</a>
@@ -637,6 +571,42 @@
             <strong>Solving the problem of commercial trust..</strong> We bring Blockchain into your real-life
             activities.
           </p>
+
+          <div class="provenance-demo-teaser">
+
+  <div class="prov-demo-kicker">
+    Live Feature Preview
+  </div>
+
+  <h3 class="prov-demo-title">
+    Verify a sample record in seconds
+  </h3>
+
+  <p class="prov-demo-text">
+    See how NetDAG Provenance confirms authenticity through an on-chain anchored record and certificate-style verification output.
+  </p>
+
+  <div class="prov-demo-row">
+    <span class="prov-demo-id-label">Demo Record ID</span>
+    <span class="prov-demo-id">NDG-PROV-M04EMD23-JGP7PI</span>
+  </div>
+
+  <div class="prov-demo-points">
+    <span class="prov-demo-pill">On-chain anchored</span>
+    <span class="prov-demo-pill">Certificate output</span>
+    <span class="prov-demo-pill">Instant verification</span>
+  </div>
+
+  <div class="prov-demo-actions">
+    <a
+      href="provenance.html?id=NDG-PROV-M04EMD23-JGP7PI#prov-mvp-demo"
+      class="gasless-learn-btn"
+    >
+      Verify Demo Record
+    </a>
+  </div>
+
+ </div>
 
           <p class="provenance-description">
             NetDAG Provenance is a <em>proof-of-origin system. </em> When buyers scan a product's QR code with the

@@ -329,21 +329,49 @@ document.addEventListener('DOMContentLoaded', function () {
   const menuToggle = document.getElementById('menu-toggle');
   const siteMenu = document.getElementById('site-menu');
   const siteMenuClose = document.getElementById('site-menu-close');
-  if (!menuToggle || !siteMenu) return;
-  menuToggle.addEventListener('click', function () {
+  const siteMenuInner = siteMenu ? siteMenu.querySelector('.site-menu-inner') : null;
+
+  if (!menuToggle || !siteMenu || !siteMenuInner) return;
+
+  function openMenu() {
     siteMenu.hidden = false;
     siteMenu.setAttribute('aria-hidden', 'false');
-    siteMenu.focus && siteMenu.focus();
-  });
-  siteMenuClose && siteMenuClose.addEventListener('click', function () {
+    menuToggle.setAttribute('aria-expanded', 'true');
+
+    document.body.classList.add('menu-open');
+    document.documentElement.classList.add('menu-open');
+  }
+
+  function closeMenu() {
     siteMenu.hidden = true;
     siteMenu.setAttribute('aria-hidden', 'true');
+    menuToggle.setAttribute('aria-expanded', 'false');
+
+    document.body.classList.remove('menu-open');
+    document.documentElement.classList.remove('menu-open');
+  }
+
+  menuToggle.addEventListener('click', function (e) {
+    e.preventDefault();
+    openMenu();
   });
-  // Optional: Close menu when clicking outside panel
+
+  if (siteMenuClose) {
+    siteMenuClose.addEventListener('click', function (e) {
+      e.preventDefault();
+      closeMenu();
+    });
+  }
+
   siteMenu.addEventListener('click', function (e) {
     if (e.target === siteMenu) {
-      siteMenu.hidden = true;
-      siteMenu.setAttribute('aria-hidden', 'true');
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !siteMenu.hidden) {
+      closeMenu();
     }
   });
 });
