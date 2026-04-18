@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const CURRENT_KEY = "netdag_current_provenance_record_v1";
   const BSC_TESTNET_CHAIN_ID = "0x61";
 
-  const CONTRACT_ADDRESS = "0x5edd83151c03fad61004214cb895832cde322b67";
+  const CONTRACT_ADDRESS =
+  window.NDG_CONFIG?.PROVENANCE_ADDRESS ||
+  "0x5edd83151c03fad61004214cb895832cde322b67";
 
   const CONTRACT_ABI = [
     "function anchorRecord(string recordId, string hashValue) external",
@@ -292,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSummary(record);
 
       setTimeout(() => {
-        window.location.href = `provenance.html?id=${encodeURIComponent(record.recordId)}#prov-mvp`;
+        window.location.href = `provenance.html?id=${encodeURIComponent(record.recordId)}#prov-mvp-demo`;
       }, 1200);
     } catch (err) {
       console.error(err);

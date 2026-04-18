@@ -1,5 +1,7 @@
 (() => {
-  const CONTRACT_ADDRESS = "0x5edd83151c03fad61004214cb895832cde322b67";
+  const CONTRACT_ADDRESS =
+  window.NDG_CONFIG?.PROVENANCE_ADDRESS ||
+  "0x5edd83151c03fad61004214cb895832cde322b67";
 
   const CONTRACT_ABI = [
     "function isAnchored(string) view returns (bool)",
@@ -9,21 +11,31 @@
   const STORAGE_KEY = "netdag_provenance_records_v1";
 
   const PRODUCT_METADATA = {
-    "NDG-DEMO-001": {
-      company: "SwissAlpineChoco AG",
-      product: "Premium Dark Chocolate 70% – 100g Bar",
-      batch: "BATCH-01",
-      origin: "Switzerland",
-      shipment: "Zürich → Denver"
-    },
-    "CHOC-ZRH-2025-001": {
-      company: "SwissAlpineChoco AG",
-      product: "Premium Dark Chocolate 70% – 100g Bar",
-      batch: "BATCH-01",
-      origin: "Switzerland",
-      shipment: "Zürich → Denver"
-    }
-  };
+  "NDG-DEMO-001": {
+    company: "SwissAlpineChoco AG",
+    product: "Premium Dark Chocolate 70% – 100g Bar",
+    batch: "BATCH-01",
+    origin: "Switzerland",
+    shipment: "Zürich → Denver"
+  },
+  "CHOC-ZRH-2025-001": {
+    company: "SwissAlpineChoco AG",
+    product: "Premium Dark Chocolate 70% – 100g Bar",
+    batch: "BATCH-01",
+    origin: "Switzerland",
+    shipment: "Zürich → Denver"
+  },
+  "NDG-PROV-M04EMD23-JGP7PI": {
+    company: "Ed Mo Wastager",
+    issuer: "NetDAG",
+    product: "Gold Bar",
+    batch: "LOT: 20N9BR444",
+    serial: "SN-458210099",
+    productionDate: "Not provided",
+    origin: "Not provided",
+    shipment: "Not provided"
+  }
+};
 
   const els = {
     form: document.getElementById("provVerifyForm"),
@@ -321,6 +333,21 @@
     };
   }
 
+       function hasRichMetadata(meta) {
+        if (!meta) return false;
+
+        return Boolean(
+        meta.company ||
+        meta.issuer ||
+        meta.product ||
+        meta.batch ||
+        meta.serial ||
+        meta.productionDate ||
+        meta.origin ||
+        meta.shipment
+   );
+}
+
   async function getReadContract() {
     if (window.ethereum) {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -333,30 +360,82 @@
   }
 
   function fillResult(data) {
-    const meta =
-      getLocalMetadata(data.storedRecordId) ||
-      PRODUCT_METADATA[data.storedRecordId] ||
-      {};
+  const meta =
+    getLocalMetadata(data.storedRecordId) ||
+    PRODUCT_METADATA[data.storedRecordId] ||
+    null;
 
-    if (els.outCompany) els.outCompany.textContent = meta.company || "Not provided";
-    if (els.outIssuer) els.outIssuer.textContent = meta.issuer || "Not provided";
-    if (els.outProduct) els.outProduct.textContent = meta.product || "Not provided";
-    if (els.outBatch) els.outBatch.textContent = meta.batch || "Not provided";
-    if (els.outSerial) els.outSerial.textContent = meta.serial || "Not provided";
-    if (els.outProdDate) els.outProdDate.textContent = meta.productionDate || "Not provided";
-    if (els.outOrigin) els.outOrigin.textContent = meta.origin || "Not provided";
-    if (els.outShipment) els.outShipment.textContent = meta.shipment || "Not provided";
-    if (els.certVerifiedOn) els.certVerifiedOn.textContent = formatTimestamp(data.storedTimestamp);
-    if (els.outId) els.outId.textContent = data.storedRecordId || "—";
-    if (els.outHash) els.outHash.textContent = data.storedHash || "—";
-    if (els.outTime) els.outTime.textContent = formatTimestamp(data.storedTimestamp);
-    if (els.outOwner) els.outOwner.textContent = data.storedAnchoredBy || "—";
+  const richMetaAvailable = hasRichMetadata(meta);
 
-    if (els.badge) els.badge.textContent = "Authenticity Confirmed";
-
-    showResult();
-    setStatus("Verified successfully on BNB Smart Chain Testnet.", "success"); 
+  if (els.outCompany) {
+    els.outCompany.textContent = richMetaAvailable
+      ? (meta.company || "Not provided")
+      : "On-chain proof confirmed";
   }
+
+  if (els.outIssuer) {
+    els.outIssuer.textContent = richMetaAvailable
+      ? (meta.issuer || "Not provided")
+      : "Metadata unavailable";
+  }
+
+  if (els.outProduct) {
+    els.outProduct.textContent = richMetaAvailable
+      ? (meta.product || "Not provided")
+      : "Record anchored on BNB Smart Chain Testnet";
+  }
+
+  if (els.outBatch) {
+    els.outBatch.textContent = richMetaAvailable
+      ? (meta.batch || "Not provided")
+      : "Hash-backed record";
+  }
+
+  if (els.outSerial) {
+    els.outSerial.textContent = richMetaAvailable
+      ? (meta.serial || "Not provided")
+      : "Not stored on-chain";
+  }
+
+  if (els.outProdDate) {
+    els.outProdDate.textContent = richMetaAvailable
+      ? (meta.productionDate || "Not provided")
+      : "Not stored on-chain";
+  }
+
+  if (els.outOrigin) {
+    els.outOrigin.textContent = richMetaAvailable
+      ? (meta.origin || "Not provided")
+      : "Not stored on-chain";
+  }
+
+  if (els.outShipment) {
+    els.outShipment.textContent = richMetaAvailable
+      ? (meta.shipment || "Not provided")
+      : "Not stored on-chain";
+  }
+
+  if (els.certVerifiedOn) els.certVerifiedOn.textContent = formatTimestamp(data.storedTimestamp);
+  if (els.outId) els.outId.textContent = data.storedRecordId || "—";
+  if (els.outHash) els.outHash.textContent = data.storedHash || "—";
+  if (els.outTime) els.outTime.textContent = formatTimestamp(data.storedTimestamp);
+  if (els.outOwner) els.outOwner.textContent = data.storedAnchoredBy || "—";
+
+  if (els.badge) {
+    els.badge.textContent = richMetaAvailable
+      ? "Authenticity Confirmed"
+      : "On-Chain Proof Confirmed";
+  }
+
+  showResult();
+
+  setStatus(
+    richMetaAvailable
+      ? "Verified successfully on BNB Smart Chain Testnet."
+      : "Verified on-chain. Rich metadata is not available on this device.",
+    "success"
+  );
+}
 
 async function copyRecordId() {
   const value = els.outId?.textContent?.trim();
