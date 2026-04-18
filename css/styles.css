@@ -7643,3 +7643,98 @@ body {
 #prov-mvp-demo{
   scroll-margin-top: 140px;
 }
+
+/* =========================
+   Provenance Demo Guide
+========================= */
+
+.prov-demo-guide{
+  margin: 22px 0 26px;
+  padding: 20px 22px;
+  border: 1px solid rgba(255,153,0,0.20);
+  border-radius: 18px;
+  background: rgba(10,12,18,0.74);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+  backdrop-filter: blur(6px);
+  max-width: 760px;
+}
+
+.prov-demo-guide-kicker{
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,153,0,0.14);
+  border: 1px solid rgba(255,153,0,0.26);
+  color: #ff9900;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.prov-demo-guide-title{
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.25;
+}
+
+.prov-demo-guide-steps{
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.prov-demo-guide-step{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #f3f3f3;
+}
+
+.prov-demo-step-num{
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #ff9900;
+  color: #111;
+  font-size: 13px;
+  font-weight: 800;
+  flex: 0 0 28px;
+}
+
+.prov-demo-guide-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.prov-demo-guide-note{
+  margin: 0;
+  color: rgba(255,255,255,0.80);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px){
+  .prov-demo-guide{
+    padding: 16px;
+  }
+
+  .prov-demo-guide-title{
+    font-size: 1.1rem;
+  }
+
+  .prov-demo-guide-note{
+    font-size: 13px;
+  }
+}
