@@ -279,6 +279,8 @@ main {
   background: rgba(0,0,0,0.55);
   z-index: 1200;
   padding: 24px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .site-menu[hidden] { display: none; }
@@ -7655,6 +7657,7 @@ body {
   border-radius: 18px;
   background: rgba(10,12,18,0.74);
   box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   max-width: 760px;
 }
@@ -7737,4 +7740,182 @@ body {
   .prov-demo-guide-note{
     font-size: 13px;
   }
+}
+
+/* =========================
+   Provenance Demo Guide
+========================= */
+
+.prov-demo-guide{
+  margin: 22px 0 26px;
+  padding: 20px 22px;
+  border: 1px solid rgba(255,153,0,0.20);
+  border-radius: 18px;
+  background: rgba(10,12,18,0.74);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  max-width: 760px;
+}
+
+.prov-demo-guide-kicker{
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,153,0,0.14);
+  border: 1px solid rgba(255,153,0,0.26);
+  color: #ff9900;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.prov-demo-guide-title{
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.25;
+}
+
+.prov-demo-guide-steps{
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.prov-demo-guide-step{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #f3f3f3;
+}
+
+.prov-demo-step-num{
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #ff9900;
+  color: #111;
+  font-size: 13px;
+  font-weight: 800;
+  flex: 0 0 28px;
+}
+
+.prov-demo-guide-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.prov-demo-guide-note{
+  margin: 0;
+  color: rgba(255,255,255,0.80);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px){
+  .prov-demo-guide{
+    padding: 16px;
+  }
+
+  .prov-demo-guide-title{
+    font-size: 1.1rem;
+  }
+
+  .prov-demo-guide-note{
+    font-size: 13px;
+  }
+}
+
+/* =========================
+   Verify Panel Guide
+========================= */
+
+.prov-verify-guide{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin:10px 0 22px;
+}
+
+.prov-verify-guide-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#f3f3f3;
+  font-size:14px;
+}
+
+.prov-verify-guide-num{
+  width:30px;
+  height:30px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  background:#ff9900;
+  color:#111;
+  font-weight:800;
+  font-size:13px;
+  flex:0 0 30px;
+}
+
+@media(max-width:700px){
+  .prov-verify-guide{
+    grid-template-columns:1fr;
+  }
+}
+
+#prov-mvp-demo{
+  scroll-margin-top: 140px;
+}
+
+.nav-links li.has-dropdown{
+  position: relative;
+}
+
+.nav-links li.has-dropdown .dropdown-menu{
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 10px 0;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+  z-index: 1000;
+}
+
+.nav-links li.has-dropdown:hover .dropdown-menu{
+  display: block;
+}
+
+.nav-links li.has-dropdown .dropdown-menu a{
+  display: block;
+  padding: 10px 16px;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-links li.has-dropdown .dropdown-menu a:hover{
+  background: rgba(255,153,0,0.12);
+  color: #ff9900;
 }

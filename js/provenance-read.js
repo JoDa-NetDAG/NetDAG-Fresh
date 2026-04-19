@@ -617,25 +617,27 @@ function showNotFound(productId) {
     });
   }
 
-  function autoVerifyFromURL() {
+function autoVerifyFromURL() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
   if (!id || !els.input) return;
 
   els.input.value = id;
+  setStatus("Checking blockchain record and loading certificate...", "pending");
 
   const target = document.getElementById("prov-mvp-demo");
   if (target) {
     setTimeout(() => {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 150);
+    }, 120);
   }
 
   setTimeout(() => {
     verifyProduct();
-  }, 400);
+  }, 350);
 }
+
 if (els.copyIdBtn) {
   els.copyIdBtn.addEventListener("click", copyRecordId);
 } 
