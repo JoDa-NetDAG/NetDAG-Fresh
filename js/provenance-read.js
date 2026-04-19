@@ -282,11 +282,30 @@
 ];
   const fullText = lines.join("\n");
 
+if (navigator.clipboard && window.isSecureContext) {
   navigator.clipboard.writeText(fullText).then(() => {
     setStatus("Full certificate copied.", "success");
   }).catch(() => {
     setStatus("Could not copy full certificate.", "error");
   });
+} else {
+  const temp = document.createElement("textarea");
+  temp.value = fullText;
+  temp.setAttribute("readonly", "");
+  temp.style.position = "absolute";
+  temp.style.left = "-9999px";
+  document.body.appendChild(temp);
+  temp.select();
+
+  try {
+    document.execCommand("copy");
+    setStatus("Full certificate copied.", "success");
+  } catch {
+    setStatus("Could not copy full certificate.", "error");
+  }
+
+  document.body.removeChild(temp);
+}
 }
 
 async function copyVerificationLink() {
