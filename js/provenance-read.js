@@ -61,6 +61,7 @@
     printBtn: document.getElementById("provPrintBtn"),
     copyAllBtn: document.getElementById("provCopyAllBtn"),
     certVerifiedOn: document.getElementById("provCertVerifiedOn"),
+    copyLinkBtn: document.getElementById("provCopyLinkBtn"),
   };
 
   function hideResult() {
@@ -211,6 +212,7 @@
         #provCopyHashBtn,
         #provCopyOwnerBtn,
         #provPrintBtn,
+        #provCopyLinkBtn,
         #provCopyAllBtn,
         .prov-form-actions,
         #provVerifyStatus{
@@ -285,6 +287,43 @@
   }).catch(() => {
     setStatus("Could not copy full certificate.", "error");
   });
+}
+
+async function copyVerificationLink() {
+  const recordId = els.outId?.textContent?.trim();
+
+  if (!recordId || recordId === "—" || recordId === "Not provided") return;
+
+  const verifyUrl = `${window.location.origin}/provenance.html?id=${encodeURIComponent(recordId)}#prov-mvp-demo`;
+  const originalText = els.copyLinkBtn?.textContent || "Copy Verification Link";
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(verifyUrl);
+    } else {
+      const temp = document.createElement("textarea");
+      temp.value = verifyUrl;
+      temp.setAttribute("readonly", "");
+      temp.style.position = "absolute";
+      temp.style.left = "-9999px";
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+    }
+
+    if (els.copyLinkBtn) {
+      els.copyLinkBtn.textContent = "Link Copied";
+      setTimeout(() => {
+        els.copyLinkBtn.textContent = originalText;
+      }, 1200);
+    }
+
+    setStatus("Verification link copied.", "success");
+  } catch (err) {
+    console.error("Copy link failed:", err);
+    setStatus("Could not copy verification link.", "error");
+  }
 }
 
   function setStatus(message, type = "pending") {
@@ -429,12 +468,18 @@
 
   showResult();
 
-  setStatus(
-    richMetaAvailable
-      ? "Verified successfully on BNB Smart Chain Testnet."
-      : "Verified on-chain. Rich metadata is not available on this device.",
-    "success"
-  );
+setStatus(
+  richMetaAvailable
+    ? "Verified successfully on BNB Smart Chain Testnet."
+    : "Verified on-chain. Rich metadata is not available on this device.",
+  "success"
+);
+
+setTimeout(() => {
+  if (els.result) {
+    els.result.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}, 120);
 }
 
 async function copyRecordId() {
@@ -552,7 +597,13 @@ function showNotFound(productId) {
   if (els.badge) els.badge.textContent = "Record Not Found";
 
   showResult();
-  setStatus("No on-chain provenance record was found for this Product ID.", "error");
+setStatus("No on-chain provenance record was found for this Product ID.", "error");
+
+setTimeout(() => {
+  if (els.result) {
+    els.result.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}, 120);
 }
 
    function clearResult() {
@@ -653,4 +704,8 @@ if (els.copyOwnerBtn) {
 } else {
   autoVerifyFromURL();
 }
+if (els.copyLinkBtn) {
+  els.copyLinkBtn.addEventListener("click", copyVerificationLink);
+}
+
 })();
