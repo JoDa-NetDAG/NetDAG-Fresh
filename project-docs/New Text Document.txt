@@ -1,0 +1,19 @@
+<!-- NetDAG Banner 1 -->
+<a href="https://netdag.com" target="_blank" rel="noopener">
+  <img
+    src="https://netdag.com/images/banners/netdag-banner1.png"
+    alt="NetDAG Gasless Crypto Access"
+    style="border:0;display:block;max-width:100%;height:auto;"
+  >
+</a>
+
+
+
+<!-- NetDAG Banner 2 -->
+<a href="https://netdag.com/provenance.html#prov-mvp-demo" target="_blank" rel="noopener">
+  <img
+    src="https://netdag.com/images/banners/netdag-banner2.png"
+    alt="NetDAG Provenance Demo"
+    style="border:0;display:block;max-width:100%;height:auto;"
+  >
+</a>
