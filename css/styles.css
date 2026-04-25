@@ -8207,3 +8207,68 @@ body {
   line-height: 1;
   transform: translateY(0);
 }
+
+#provOutAnchoredBy,
+#provOutHash {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   Provenance Mobile Fix
+   ========================= */
+
+@media (max-width: 768px) {
+  .prov-result,
+  .prov-cert,
+  .prov-mvp-card {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .prov-cert-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .prov-cert-item,
+  .prov-cert-item-full {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .prov-cert-value,
+  #provOutHash,
+  #provOutAnchoredBy,
+  #provOutId {
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .prov-copy-btn,
+  .prov-cert-item button,
+  #provCopyIdBtn,
+  #provCopyHashBtn,
+  #provCopyOwnerBtn,
+  #provPrintBtn,
+  #provCopyAllBtn,
+  #provCopyLinkBtn {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .prov-cert-title {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .prov-cert-footer {
+    text-align: center;
+    font-size: 13px;
+  }
+}

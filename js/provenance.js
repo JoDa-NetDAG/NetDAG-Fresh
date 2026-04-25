@@ -98,49 +98,42 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderQr(record) {
-    if (!qrOutput) return;
+  if (!qrOutput) return;
 
-    qrOutput.innerHTML = "";
+  qrOutput.innerHTML = "";
 
-    const qrWrap = document.createElement("div");
-    qrWrap.style.display = "flex";
-    qrWrap.style.flexDirection = "column";
-    qrWrap.style.alignItems = "center";
-    qrWrap.style.justifyContent = "center";
-    qrWrap.style.gap = "10px";
+  const verifyUrl = `${window.location.origin}/provenance.html?id=${encodeURIComponent(record.recordId)}#prov-mvp-demo`;
 
-    const qrCanvasHolder = document.createElement("div");
-    const qrLabel = document.createElement("div");
+  const qrWrap = document.createElement("div");
+  qrWrap.className = "prov-qr-wrap";
 
-    qrLabel.className = "prov-small";
-    qrLabel.style.textAlign = "center";
-    qrLabel.innerHTML = `
-      <strong>Record ID</strong><br>
-      <span class="prov-mono">${record.recordId}</span>
-    `;
+  const qrCanvasHolder = document.createElement("div");
+  qrCanvasHolder.className = "prov-qr-canvas";
 
-    qrWrap.appendChild(qrCanvasHolder);
-    qrWrap.appendChild(qrLabel);
-    qrOutput.appendChild(qrWrap);
+  const qrLabel = document.createElement("div");
+  qrLabel.className = "prov-small";
+  qrLabel.style.textAlign = "center";
+  qrLabel.innerHTML = `
+    <strong>Verification Link</strong><br>
+    <a href="${verifyUrl}" target="_blank" rel="noopener" class="prov-mono">
+      ${record.recordId}
+    </a>
+  `;
 
-    const qrPayload = JSON.stringify({
-      recordId: record.recordId,
-      hash: record.hash,
-      productName: record.productName,
-      batch: record.batch,
-      issuer: record.issuer
+  qrWrap.appendChild(qrCanvasHolder);
+  qrWrap.appendChild(qrLabel);
+  qrOutput.appendChild(qrWrap);
+
+  if (typeof QRCode !== "undefined") {
+    new QRCode(qrCanvasHolder, {
+      text: verifyUrl,
+      width: 170,
+      height: 170
     });
-
-    if (typeof QRCode !== "undefined") {
-      new QRCode(qrCanvasHolder, {
-        text: qrPayload,
-        width: 170,
-        height: 170
-      });
-    } else {
-      qrCanvasHolder.innerHTML = `<div class="prov-small">QR library not loaded.</div>`;
-    }
+  } else {
+    qrCanvasHolder.innerHTML = `<div class="prov-small">QR library not loaded.</div>`;
   }
+}
 
   function hideAnchorLink() {
     if (anchorLinkWrap) anchorLinkWrap.style.display = "none";

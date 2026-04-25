@@ -55,8 +55,8 @@
     outShipment: document.getElementById("provOutShipment"),
     outHash: document.getElementById("provOutHash"),
     copyHashBtn: document.getElementById("provCopyHashBtn"),
-    outTime: document.getElementById("provOutTime"),
-    outOwner: document.getElementById("provOutOwner"),
+    outTime: document.getElementById("provOutTimestamp"),
+    outOwner: document.getElementById("provOutAnchoredBy"),
     copyOwnerBtn: document.getElementById("provCopyOwnerBtn"),
     printBtn: document.getElementById("provPrintBtn"),
     copyAllBtn: document.getElementById("provCopyAllBtn"),
@@ -668,11 +668,11 @@ setTimeout(() => {
       const record = await contract.getAnchor(productId);
 
       fillResult({
-        storedRecordId: record.storedRecordId,
-        storedHash: record.storedHash,
-        storedTimestamp: record.storedTimestamp,
-        storedAnchoredBy: record.storedAnchoredBy
-      });
+      storedRecordId: record[0],
+      storedHash: record[1],
+      storedTimestamp: record[2],
+      storedAnchoredBy: record[3]
+     });
     } catch (err) {
       console.error("Provenance verify error:", err);
       setStatus("Verification failed. Please try again.", "error");
