@@ -3,10 +3,11 @@
   window.NDG_CONFIG?.PROVENANCE_ADDRESS ||
   "0x5edd83151c03fad61004214cb895832cde322b67";
 
-  const CONTRACT_ABI = [
-    "function isAnchored(string) view returns (bool)",
-    "function getAnchor(string) view returns (string storedRecordId, string storedHash, uint256 storedTimestamp, address storedAnchoredBy)"
-  ];
+ const CONTRACT_ABI = [
+  "function anchorRecord(string recordId, string hashValue)",
+  "function isAnchored(string) view returns (bool)",
+  "function getAnchor(string) view returns (string storedRecordId, string storedHash, uint256 storedTimestamp, address storedAnchoredBy)"
+];
 
   const STORAGE_KEY = "netdag_provenance_records_v1";
 
@@ -416,6 +417,50 @@ async function copyVerificationLink() {
     const provider = new ethers.JsonRpcProvider(rpcUrl);
     return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
   }
+
+async function getWriteContract() {
+  if (!window.ethereum) {
+    throw new Error("MetaMask is not available. Please open this page inside MetaMask mobile browser.");
+  }
+
+  const provider = new ethers.BrowserProvider(window.ethereum);
+
+  await provider.send("eth_requestAccounts", []);
+
+  const signer = await provider.getSigner();
+
+  return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+}
+
+async function anchorProduct(recordId, hashValue) {
+  try {
+    setStatus("Preparing MetaMask transaction...", "pending");
+
+    const contract = await getWriteContract();
+
+    const tx = await contract.anchorRecord(recordId, hashValue);
+
+    setStatus("Waiting for blockchain confirmation...", "pending");
+
+    await tx.wait();
+
+    setStatus("Record anchored successfully.", "success");
+
+    if (els.input) {
+      els.input.value = recordId;
+    }
+
+    await verifyProduct();
+  } catch (err) {
+    console.error("Anchor transaction failed:", err);
+
+    if (err.code === 4001) {
+      setStatus("Transaction rejected in MetaMask.", "error");
+    } else {
+      setStatus("Anchoring failed. Please try again.", "error");
+    }
+  }
+}
 
   function fillResult(data) {
   const meta =

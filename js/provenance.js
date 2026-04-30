@@ -199,25 +199,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function ensureBscTestnet() {
-    if (!window.ethereum) {
-      throw new Error("MetaMask not found");
-    }
+  if (!window.ethereum) {
+    throw new Error("MetaMask not found. Please open this page inside MetaMask browser.");
+  }
 
-    const currentChainId = await window.ethereum.request({
-      method: "eth_chainId"
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+
+  let currentChainId = await window.ethereum.request({
+    method: "eth_chainId"
+  });
+
+  currentChainId = String(currentChainId).toLowerCase();
+
+  if (currentChainId === BSC_TESTNET_CHAIN_ID.toLowerCase()) {
+    return true;
+  }
+
+  try {
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: BSC_TESTNET_CHAIN_ID }]
     });
 
-    if (currentChainId !== BSC_TESTNET_CHAIN_ID) {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: BSC_TESTNET_CHAIN_ID }]
-        });
-      } catch {
-        throw new Error("Please switch MetaMask to BSC Testnet");
-      }
-    }
+    return true;
+  } catch (err) {
+    console.error("Network switch failed:", err);
+    throw new Error("Please switch MetaMask to BNB Testnet and try again.");
   }
+}
 
   async function anchorCurrentRecord() {
     const record = loadCurrentRecord();
@@ -247,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await ensureBscTestnet();
       await window.ethereum.request({ method: "eth_requestAccounts" });
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      const provider = new ethers.BrowserProvider(window.ethereum, "any");
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
