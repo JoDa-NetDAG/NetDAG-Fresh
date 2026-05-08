@@ -206,10 +206,13 @@ document.addEventListener("DOMContentLoaded", () => {
   await window.ethereum.request({ method: "eth_requestAccounts" });
 
   let currentChainId = await window.ethereum.request({
-    method: "eth_chainId"
-  });
+  method: "eth_chainId"
+});
 
-  currentChainId = String(currentChainId).toLowerCase();
+alert("CHAIN ID: " + currentChainId);
+console.log("CHAIN ID:", currentChainId);
+
+currentChainId = String(currentChainId).toLowerCase();
 
   if (currentChainId === BSC_TESTNET_CHAIN_ID.toLowerCase()) {
     return true;
@@ -374,3 +377,4 @@ document.addEventListener("DOMContentLoaded", () => {
   resetPreview();
   restoreAnchorState();
 });
+
