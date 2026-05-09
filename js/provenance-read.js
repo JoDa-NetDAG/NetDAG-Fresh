@@ -408,15 +408,11 @@ async function copyVerificationLink() {
 }
 
   async function getReadContract() {
-    if (window.ethereum) {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
-    }
+  const rpcUrl = "https://bsc-testnet.publicnode.com";
+  const provider = new ethers.JsonRpcProvider(rpcUrl);
 
-    const rpcUrl = "https://bsc-testnet.publicnode.com";
-    const provider = new ethers.JsonRpcProvider(rpcUrl);
-    return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
-  }
+  return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
+}
 
 async function getWriteContract() {
   if (!window.ethereum) {
