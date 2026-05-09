@@ -209,9 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
   method: "eth_chainId"
 });
 
-alert("CHAIN ID: " + currentChainId);
-console.log("CHAIN ID:", currentChainId);
-
 currentChainId = String(currentChainId).toLowerCase();
 
   if (currentChainId === BSC_TESTNET_CHAIN_ID.toLowerCase()) {
