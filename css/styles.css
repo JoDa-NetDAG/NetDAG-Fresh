@@ -8272,3 +8272,47 @@ body {
     font-size: 13px;
   }
 }
+
+/* =========================
+   Provenance Mobile Polish
+   ========================= */
+
+.prov-cert-value,
+.prov-mono,
+#provOutHash,
+#provOutAnchoredBy,
+#provAnchorText,
+#provAnchorLink {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .prov-mvp-card,
+  .prov-result,
+  .prov-cert-item {
+    padding: 18px 14px;
+  }
+
+  .prov-status,
+  .prov-badge {
+    font-size: 0.95rem;
+    padding: 12px 16px;
+  }
+
+  .prov-form-actions .btn,
+  .prov-result .btn,
+  .prov-copy-btn {
+    min-height: 50px;
+    font-size: 1rem;
+  }
+
+  .prov-cert-title {
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+
+  .prov-cert-grid {
+    gap: 14px;
+  }
+}
