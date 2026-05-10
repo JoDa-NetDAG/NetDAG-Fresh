@@ -531,7 +531,7 @@ async function anchorProduct(recordId, hashValue) {
 setStatus(
   richMetaAvailable
     ? "Verified successfully on BNB Smart Chain Testnet."
-    : "Verified on-chain. Rich metadata is not available on this device.",
+    : "On-chain proof confirmed. Product metadata is not stored on this browser, but the Record ID, hash, timestamp and anchoring wallet are verified.",
   "success"
 );
 
