@@ -59,6 +59,7 @@
     outTime: document.getElementById("provOutTimestamp"),
     outOwner: document.getElementById("provOutAnchoredBy"),
     copyOwnerBtn: document.getElementById("provCopyOwnerBtn"),
+    bscScanLink: document.getElementById("provBscScanLink"),
     printBtn: document.getElementById("provPrintBtn"),
     copyAllBtn: document.getElementById("provCopyAllBtn"),
     certVerifiedOn: document.getElementById("provCertVerifiedOn"),
@@ -528,6 +529,13 @@ async function anchorProduct(recordId, hashValue) {
   els.outOwner.dataset.fullWallet = data.storedAnchoredBy || "—";
 }
 
+if (els.bscScanLink && data.storedAnchoredBy) {
+  els.bscScanLink.href =
+    `https://testnet.bscscan.com/address/${data.storedAnchoredBy}`;
+
+  els.bscScanLink.style.display = "inline-flex";
+}
+
   if (els.badge) {
     els.badge.textContent = richMetaAvailable
       ? "Authenticity Confirmed"
@@ -691,6 +699,11 @@ setTimeout(() => {
   if (els.outOwner) els.outOwner.textContent = "";
   if (els.certVerifiedOn) els.certVerifiedOn.textContent = "";
   if (els.badge) els.badge.textContent = "";
+
+   if (els.bscScanLink) {
+  els.bscScanLink.style.display = "none";
+  els.bscScanLink.href = "#";
+}
 }
 
   async function verifyProduct() {
