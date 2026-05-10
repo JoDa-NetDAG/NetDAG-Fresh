@@ -368,6 +368,11 @@ async function copyVerificationLink() {
     return new Date(n * 1000).toLocaleString();
   }
 
+  function shortenWallet(address) {
+  if (!address || address === "—" || address.length < 12) return address || "—";
+  return `${address.slice(0, 6)}...${address.slice(-5)}`;
+}
+
   function loadLocalRecords() {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -518,7 +523,10 @@ async function anchorProduct(recordId, hashValue) {
   if (els.outId) els.outId.textContent = data.storedRecordId || "—";
   if (els.outHash) els.outHash.textContent = data.storedHash || "—";
   if (els.outTime) els.outTime.textContent = formatTimestamp(data.storedTimestamp);
-  if (els.outOwner) els.outOwner.textContent = data.storedAnchoredBy || "—";
+ if (els.outOwner) {
+  els.outOwner.textContent = shortenWallet(data.storedAnchoredBy);
+  els.outOwner.dataset.fullWallet = data.storedAnchoredBy || "—";
+}
 
   if (els.badge) {
     els.badge.textContent = richMetaAvailable
@@ -607,7 +615,9 @@ async function copyHash() {
 }
 
 async function copyOwner() {
-  const value = els.outOwner?.textContent?.trim();
+ const value =
+  els.outOwner?.dataset?.fullWallet ||
+  els.outOwner?.textContent?.trim();
   if (!value || value === "—") return;
 
   const originalText = els.copyOwnerBtn?.textContent || "Copy Wallet";
