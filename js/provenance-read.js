@@ -536,6 +536,29 @@ if (els.bscScanLink && data.storedAnchoredBy) {
   els.bscScanLink.style.display = "inline-flex";
 }
 
+if (window.QRCode && document.getElementById("provQrCode")) {
+
+  const qrBlock = document.getElementById("provQrBlock");
+  const qrBox = document.getElementById("provQrCode");
+
+  if (qrBlock) {
+    qrBlock.style.display = "block";
+  }
+
+  if (qrBox) {
+    qrBox.innerHTML = "";
+
+    const verifyUrl =
+      `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(data.storedRecordId)}`;
+
+    new QRCode(qrBox, {
+      text: verifyUrl,
+      width: 160,
+      height: 160
+    });
+  }
+}
+
   if (els.badge) {
     els.badge.textContent = richMetaAvailable
       ? "Authenticity Confirmed"
@@ -704,6 +727,13 @@ setTimeout(() => {
   els.bscScanLink.style.display = "none";
   els.bscScanLink.href = "#";
 }
+
+const qrBlock = document.getElementById("provQrBlock");
+const qrBox = document.getElementById("provQrCode");
+
+if (qrBlock) qrBlock.style.display = "none";
+if (qrBox) qrBox.innerHTML = "";
+
 }
 
   async function verifyProduct() {
