@@ -785,7 +785,11 @@ function autoVerifyFromURL() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
-  if (!id || !els.input) return;
+ if (
+  !id ||
+  !els.input ||
+  id === "YOUR_RECORD_ID"
+) return;
 
   els.input.value = id;
   setStatus("Checking blockchain record and loading certificate...", "pending");
