@@ -789,6 +789,29 @@
   }
 }
 
+.prov-cert-brand{
+  display:flex;
+  justify-content:center;
+  margin-bottom:14px;
+}
+
+.prov-cert-brand img{
+  width:52px;
+  height:auto;
+  opacity:.95;
+}
+
+.prov-cert-brand img{
+  width: 52px !important;
+  max-width:52px !important;
+  display:block !important;
+  margin: 0 auto 6px auto !important;
+}
+
+.prov-cert-brand{
+  margin-bottom: 4px !important;
+}
+
 </style>
 
 </head>
@@ -1440,7 +1463,13 @@
 
       <div class="prov-cert-header">
   <div id="provBadge" class="prov-badge">Authenticity Confirmed</div>
-  <h3 class="prov-cert-title">NetDAG Provenance Certificate</h3>
+  <div class="prov-cert-brand">
+<img src="/images/ndg-logo.png" alt="NetDAG Logo">
+</div>
+
+<h3 class="prov-cert-title">
+  NetDAG Provenance Certificate
+</h3>
 
   <div class="prov-cert-meta">
     <div class="prov-cert-meta-item">

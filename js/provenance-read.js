@@ -77,8 +77,16 @@
   function printCertificate() {
   if (!els.result || els.result.style.display === "none") return;
 
-  const certificateHtml = els.result.outerHTML;
+  const certificateClone = els.result.cloneNode(true);
 
+certificateClone
+  .querySelectorAll(
+    "#provPrintBtn, #provCopyAllBtn, #provCopyLinkBtn, #provCopyIdBtn, #provCopyHashBtn, #provCopyOwnerBtn, #provBscScanLink"
+  )
+  .forEach((el) => el.remove());
+
+const certificateHtml = certificateClone.outerHTML;
+  
   const printWindow = window.open("", "_blank", "width=900,height=1200");
   if (!printWindow) return;
 
@@ -222,14 +230,85 @@
         }
 
         @media print{
-          body{
-            margin: 0;
-          }
+  body{
+    margin: 0;
+  }
 
-          .prov-result{
-            border: 1px solid #ccc !important;
-          }
-        }
+  .prov-result{
+    border: 1px solid #ccc !important;
+  }
+
+  .prov-cert-grid{
+    gap: 10px !important;
+  }
+
+  .prov-cert-item{
+    padding: 10px !important;
+  }
+
+  .prov-cert-panel,
+  .prov-result{
+    padding: 14px !important;
+  }
+}
+
+.prov-qr-code canvas,
+.prov-qr-code img{
+  width: 110px !important;
+  height: 110px !important;
+}
+
+.prov-cert-title{
+  font-size: 20px !important;
+  margin-bottom: 6px !important;
+}
+
+.prov-cert-meta{
+  gap: 3px !important;
+  margin-top: 6px !important;
+}
+
+.prov-cert-footer{
+  margin-top: 8px !important;
+  padding-top: 8px !important;
+}
+
+.prov-cert-value{
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+}
+
+.prov-cert-label{
+  font-size: 11px !important;
+  margin-bottom: 3px !important;
+}
+
+.prov-cert-item{
+  min-height: auto !important;
+  padding: 7px !important;
+}
+
+.prov-cert-grid{
+  gap: 6px !important;
+}
+
+.prov-qr-code canvas,
+.prov-qr-code img{
+  width: 90px !important;
+  height: 90px !important;
+}
+
+.prov-cert-brand img{
+  width: 52px !important;
+  max-width: 52px !important;
+  display:block !important;
+  margin: 0 auto 6px auto !important;
+}
+
+.prov-cert-brand{
+  margin-bottom: 4px !important;
+}
+
       </style>
     </head>
     <body>
@@ -576,7 +655,8 @@ setStatus(
 
 setTimeout(() => {
   if (els.result) {
-    els.result.scrollIntoView({ behavior: "smooth", block: "start" });
+    const y = els.result.getBoundingClientRect().top + window.pageYOffset - 140;
+    window.scrollTo({ top: y, behavior: "smooth" });
   }
 }, 120);
 }
