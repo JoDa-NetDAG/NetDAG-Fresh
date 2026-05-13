@@ -64,6 +64,8 @@
     copyAllBtn: document.getElementById("provCopyAllBtn"),
     certVerifiedOn: document.getElementById("provCertVerifiedOn"),
     copyLinkBtn: document.getElementById("provCopyLinkBtn"),
+    scanQrBtn: document.getElementById("provScanQrBtn"),
+    qrScanner: document.getElementById("provQrScanner"),
   };
 
   function hideResult() {
@@ -423,6 +425,51 @@ async function copyVerificationLink() {
   } catch (err) {
     console.error("Copy link failed:", err);
     setStatus("Could not copy verification link.", "error");
+  }
+}
+
+   let qrScannerInstance = null;
+
+async function startQrScanner() {
+  if (!els.qrScanner || !els.scanQrBtn) return;
+
+  if (!window.Html5Qrcode) {
+    setStatus("QR scanner library could not load.", "error");
+    return;
+  }
+
+  els.qrScanner.style.display = "block";
+  els.scanQrBtn.textContent = "Starting camera...";
+
+  try {
+    qrScannerInstance = new Html5Qrcode("provQrScanner");
+
+    await qrScannerInstance.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      async (decodedText) => {
+        let recordId = decodedText;
+
+        try {
+          const url = new URL(decodedText);
+          recordId = url.searchParams.get("id") || decodedText;
+        } catch {}
+
+        if (els.input) {
+          els.input.value = recordId.trim().toUpperCase();
+        }
+
+        await qrScannerInstance.stop();
+        els.qrScanner.style.display = "none";
+        els.scanQrBtn.textContent = "Scan QR Code";
+
+        await verifyProduct();
+      }
+    );
+  } catch (err) {
+    console.error("QR scanner failed:", err);
+    setStatus("Could not start camera scanner.", "error");
+    els.scanQrBtn.textContent = "Scan QR Code";
   }
 }
 
@@ -903,6 +950,10 @@ if (els.copyOwnerBtn) {
 }
 if (els.copyLinkBtn) {
   els.copyLinkBtn.addEventListener("click", copyVerificationLink);
+}
+
+ if (els.scanQrBtn) {
+  els.scanQrBtn.addEventListener("click", startQrScanner);
 }
 
 })();

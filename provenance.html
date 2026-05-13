@@ -1443,8 +1443,14 @@
       </div>
 
       <div class="prov-form-actions">
-        <button type="submit" class="btn btn-primary">Verify</button>
-      </div>
+  <button type="submit" class="btn btn-primary">Verify</button>
+
+  <button type="button" id="provScanQrBtn" class="btn btn-secondary">
+    Scan QR Code
+  </button>
+</div>
+
+<div id="provQrScanner" style="display:none; margin-top:16px;"></div>
     </form>
   </section>
 
@@ -1748,7 +1754,9 @@
 <script src="js/provenance.js?v=1"></script>
 <script src="js/community-modal-inject.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
 <script src="js/provenance-read.js"></script>
+
 
 </body>
 </html>
