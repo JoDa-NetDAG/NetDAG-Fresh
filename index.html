@@ -263,6 +263,83 @@
   display:block;
 }
 
+/* ===============================
+   SEARCH ENGINE ON INDEX
+   =============================== */
+.hero-prov-search{
+  position:absolute;
+  top:95px;
+  right:214px;
+  width:300px;
+  padding:10px;
+  border-radius:14px;
+  border:1px solid rgba(255,153,0,.18);
+  background:rgba(8,10,18,.82);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  z-index:200;
+}
+
+.hero-prov-search h4{
+  margin:0 0 7px;
+  font-size:.78rem;
+  font-weight:700;
+  color:#fff;
+}
+
+.hero-prov-search-row{
+  display:flex;
+  gap:7px;
+}
+
+.hero-prov-search input{
+  flex:1;
+  height:32px;
+  padding:0 9px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  font-size:.72rem;
+  outline:none;
+}
+
+.hero-prov-search input:focus{
+  border-color:#ff9900;
+}
+
+.hero-prov-search button{
+  height:32px;
+  padding:0 12px;
+  border:none;
+  border-radius:8px;
+  background:#ff9900;
+  color:#111;
+  font-size:.72rem;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.hero-prov-search p{
+  margin:7px 0 0;
+  font-size:.58rem;
+  line-height:1.3;
+  color:rgba(255,255,255,.72);
+}
+
+@media (max-width: 900px){
+  .hero-prov-search{
+    position:relative;
+    top:auto;
+    right:auto;
+    width:92%;
+    margin:14px auto 0;
+  }
+}
+ /* ===============================
+   END OF SEARCH ENGINE
+   =============================== */
+
 </style>
 
 <link rel="canonical" href="https://netdag.com/">
@@ -395,6 +472,24 @@
   <main>
     <!-- top separator before hero (site separator) -->
    <div class="site-separator" aria-hidden="true"></div>
+
+        <!-- Provenance Quick Verify -->
+    <div class="hero-prov-search">
+     <h4>Verify Product Authenticity</h4>
+
+     <div class="hero-prov-search-row">
+      <input
+      type="text"
+      id="heroProvSearch"
+      placeholder="Enter Provenance Verified ID"
+      >
+
+        <button id="heroProvVerifyBtn">
+           Verify
+        </button>
+      </div>
+      </div>
+
 
     <!-- HERO -->
     <section class="section section-hero">
@@ -1217,6 +1312,36 @@ helping the protocol respond more intelligently to changing network conditions a
   <script src="js/main.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
   <script src="js/community-modal-inject.js"></script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("heroProvSearch");
+    const button = document.getElementById("heroProvVerifyBtn");
+
+    if (!input || !button) return;
+
+    function goToVerification() {
+      const recordId = input.value.trim();
+
+      if (!recordId) {
+        input.focus();
+        return;
+      }
+
+      window.location.href =
+        `provenance.html?id=${encodeURIComponent(recordId)}#prov-mvp-demo`;
+    }
+
+    button.addEventListener("click", goToVerification);
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        goToVerification();
+      }
+         });
+       });
+    </script>
 
 </body>
 

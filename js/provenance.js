@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("provRegisterForm");
   const clearBtn = document.getElementById("provClearBtn");
+  const exportBtn = document.getElementById("provExportBtn");
   const anchorBtn = document.getElementById("provAnchorBtn");
 
   const summaryGrid = document.getElementById("provSummaryGrid");
@@ -29,6 +30,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!registerForm) return;
 
+  function renderRecordsHistory() {
+  const historyBox = document.getElementById("provRecordsHistory");
+  if (!historyBox) return;
+
+  const searchInput = document.getElementById("provHistorySearch");
+
+const searchTerm = (
+  searchInput?.value || ""
+).toLowerCase().trim();
+
+if (searchInput && !searchInput.dataset.bound) {
+  searchInput.addEventListener("input", () => {
+    renderRecordsHistory();
+  });
+
+  searchInput.dataset.bound = "true";
+}
+
+const records = loadRecords()
+  .filter((record) => {
+    if (!searchTerm) return true;
+
+    return (
+      (record.productName || "").toLowerCase().includes(searchTerm) ||
+      (record.recordId || "").toLowerCase().includes(searchTerm) ||
+      (record.batch || "").toLowerCase().includes(searchTerm) ||
+      (record.manufacturer || "").toLowerCase().includes(searchTerm)
+    );
+  })
+  .slice(0, 5);
+  const info = getStorageInfo();
+
+  if (!records.length) {
+    historyBox.innerHTML = `<p class="prov-small">No recent records yet.</p>`;
+    return;
+  }
+
+  historyBox.innerHTML = `
+  <p class="prov-small">
+    Storage: ${info.totalRecords} records • approx. ${info.estimatedSizeKB} KB • ${info.storageType}
+  </p>
+  ` + records.map((record) => `
+    <div class="prov-history-item" data-record-id="${record.recordId || ""}">
+      <strong>${record.productName || "Unknown Product"}</strong><br>
+      <span class="prov-mono">${record.recordId || "—"}</span><br>
+      <small>Batch: ${record.batch || "—"} • ${record.createdAt || "—"}</small>
+    </div>
+  `).join("");
+
+      historyBox.querySelectorAll(".prov-history-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    const recordId = item.dataset.recordId;
+    if (!recordId) return;
+
+    if (verifyIdInput) {
+      verifyIdInput.value = recordId;
+    }
+
+    const verifySection = document.getElementById("provVerifyForm");
+    if (verifySection) {
+      verifySection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    setTimeout(() => {
+  const verifyForm = document.getElementById("provVerifyForm");
+  if (verifyForm) {
+    verifyForm.requestSubmit();
+  }
+}, 400);
+
+  });
+});
+
+}
+
   function loadRecords() {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -37,9 +113,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function getStorageInfo() {
+  const records = loadRecords();
+
+  return {
+    storageType: "browser-localStorage",
+    storageVersion: "mvp-local-v1",
+    totalRecords: records.length,
+    estimatedSizeKB: Math.round(
+      JSON.stringify(records).length / 1024
+    )
+  };
+}
+
   function saveRecords(records) {
+  try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    return true;
+  } catch (err) {
+    console.error("Record storage failed:", err);
+
+    alert(
+      "Storage limit reached. Older browser demo records may need cleanup."
+    );
+
+    return false;
   }
+}
 
   function saveCurrentRecord(record) {
     localStorage.setItem(CURRENT_KEY, JSON.stringify(record));
@@ -77,13 +177,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function sha256FromObject(obj) {
-    const json = JSON.stringify(obj);
+  const json = JSON.stringify(obj);
+
+  if (window.crypto && window.crypto.subtle) {
     const encoder = new TextEncoder();
     const data = encoder.encode(json);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashBuffer = await window.crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
   }
+
+  if (window.ethers) {
+    return ethers.sha256(ethers.toUtf8Bytes(json)).replace(/^0x/, "");
+  }
+
+  throw new Error("SHA256 is not available in this browser.");
+}
 
   function updateSummary(record) {
     summaryGrid.innerHTML = `
@@ -274,14 +383,29 @@ currentChainId = String(currentChainId).toLowerCase();
       const records = loadRecords();
       const existingIndex = records.findIndex((item) => item.recordId === record.recordId);
 
-      if (existingIndex >= 0) {
-        records[existingIndex] = { ...records[existingIndex], ...record };
-      } else {
-        records.unshift(record);
-      }
+      const lightweightRecord = {
+  ...record,
+  productImage: record.productImage || ""
+};
+
+if (
+  lightweightRecord.productImage &&
+  lightweightRecord.productImage.length > 250000
+) {
+  lightweightRecord.productImage = "";
+}
+
+if (existingIndex >= 0) {
+  records[existingIndex] = {
+    ...records[existingIndex],
+    ...lightweightRecord
+  };
+} else {
+  records.unshift(lightweightRecord);
+}
 
       saveRecords(records);
-      saveCurrentRecord(record);
+      saveCurrentRecord(lightweightRecord);
 
       anchorStatus.className = "prov-status prov-status-success";
       anchorStatus.textContent = "Anchored on BSC";
@@ -310,22 +434,48 @@ currentChainId = String(currentChainId).toLowerCase();
   registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(registerForm);
+   const formData = new FormData(registerForm);
 
-    const record = {
-      recordId: generateRecordId(),
-      productName: String(formData.get("productName") || "").trim(),
-      sku: String(formData.get("sku") || "").trim(),
-      batch: String(formData.get("batch") || "").trim(),
-      serial: String(formData.get("serial") || "").trim(),
-      manufacturer: String(formData.get("manufacturer") || "").trim(),
-      origin: String(formData.get("origin") || "").trim(),
-      shipment: String(formData.get("shipment") || "").trim(),
-      productionDate: String(formData.get("productionDate") || "").trim(),
-      issuer: String(formData.get("issuer") || "").trim(),
-      description: String(formData.get("description") || "").trim(),
-      createdAt: new Date().toISOString()
-    };
+const record = {
+  recordId: generateRecordId(),
+  productName: String(formData.get("productName") || "").trim(),
+  sku: String(formData.get("sku") || "").trim(),
+  batch: String(formData.get("batch") || "").trim(),
+  serial: String(formData.get("serial") || "").trim(),
+  manufacturer: String(formData.get("manufacturer") || "").trim(),
+  origin: String(formData.get("origin") || "").trim(),
+  shipment: String(formData.get("shipment") || "").trim(),
+  productionDate: String(formData.get("productionDate") || "").trim(),
+  issuer: String(formData.get("issuer") || "").trim(),
+  description: String(formData.get("description") || "").trim(),
+  productImage: "",
+  storageVersion: "mvp-local-v1",
+  storageType: "browser-localStorage",
+  createdAt: new Date().toISOString()
+};
+
+const imageFile = document.getElementById("provProductImage")?.files?.[0];
+
+if (imageFile) {
+  if (imageFile.size > 250000) {
+    alert("Logo image too large. Please use an image below 250KB.");
+    return;
+  }
+
+  try {
+    record.productImage = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => resolve(reader.result || "");
+      reader.onerror = () => reject(new Error("Logo image could not be read."));
+
+      reader.readAsDataURL(imageFile);
+    });
+  } catch (err) {
+    alert(err.message || "Logo image could not be read.");
+    return;
+  }
+}
 
     try {
       const canonicalPayload = buildCanonicalPayload(record);
@@ -335,7 +485,7 @@ currentChainId = String(currentChainId).toLowerCase();
       records.unshift(record);
       saveRecords(records);
       saveCurrentRecord(record);
-
+      renderRecordsHistory();
       updateSummary(record);
       hashOutput.textContent = record.hash;
       renderQr(record);
@@ -352,7 +502,7 @@ currentChainId = String(currentChainId).toLowerCase();
       }
     } catch (err) {
       console.error("Provenance generation failed:", err);
-      hashOutput.textContent = "SHA256 generation failed.";
+      hashOutput.textContent = err.message || "SHA256 generation failed.";
 
       anchorStatus.className = "prov-status prov-status-error";
       anchorStatus.textContent = "Generation failed";
@@ -367,11 +517,68 @@ currentChainId = String(currentChainId).toLowerCase();
     resetPreview();
   });
 
+if (exportBtn) {
+  exportBtn.addEventListener("click", () => {
+    const records = loadRecords();
+
+    if (!records.length) {
+      alert("No records available to export.");
+      return;
+    }
+
+    const dataStr = JSON.stringify(records, null, 2);
+
+    const blob = new Blob([dataStr], {
+      type: "application/json"
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "netdag-provenance-records.json";
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+  });
+}
+
   if (anchorBtn) {
     anchorBtn.addEventListener("click", anchorCurrentRecord);
   }
 
   resetPreview();
   restoreAnchorState();
+  renderRecordsHistory();
+});
+
+exportBtn?.addEventListener("click", () => {
+  const records = loadRecords();
+
+  if (!records.length) {
+    alert("No records available to export.");
+    return;
+  }
+
+  const dataStr = JSON.stringify(records, null, 2);
+
+  const blob = new Blob([dataStr], {
+    type: "application/json"
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "netdag-provenance-records.json";
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
 });
 

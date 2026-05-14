@@ -1172,6 +1172,7 @@ main {
   border-radius: 18px;
   border: 1px solid rgba(255,153,0,0.22);
   background: rgba(10,12,18,0.72);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   box-shadow: 0 12px 32px rgba(0,0,0,0.28);
 }
@@ -1270,8 +1271,74 @@ main {
   .prov-demo-id{
     font-size: 13px;
   }
-
 }
+
+.prov-upload-note{
+  display:block;
+  margin-top:8px;
+  font-size:.82rem;
+  color:rgba(255,255,255,.68);
+  line-height:1.4;
+}
+
+.prov-company-line{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:22px;
+}
+
+.prov-company-logo{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  object-fit:contain;
+  background:transparent;
+  flex-shrink:0;
+}
+
+.prov-history-card{
+  margin-top:24px;
+  padding:18px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+}
+
+.prov-history-card h4{
+  margin:0 0 8px;
+  color:#ffcc4d;
+}
+
+.prov-small{
+  font-size:.9rem;
+  color:rgba(255,255,255,.65);
+  margin-bottom:14px;
+}
+
+.prov-records-history{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+
+.prov-history-search{
+  width:100%;
+  margin:12px 0 14px;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  outline:none;
+}
+
+.prov-history-search:focus{
+  border-color:#ff9900;
+  box-shadow:0 0 0 2px rgba(255,153,0,.15);
+}
+
 
 /* =================
    BONDING CURVE SECTION
@@ -8315,4 +8382,17 @@ body {
   .prov-cert-grid {
     gap: 14px;
   }
+}
+
+.prov-history-item{
+  cursor:pointer;
+  padding:12px;
+  border-radius:12px;
+  transition:all .2s ease;
+}
+
+.prov-history-item:hover{
+  background:rgba(255,153,0,.08);
+  border:1px solid rgba(255,153,0,.18);
+  transform:translateY(-1px);
 }
