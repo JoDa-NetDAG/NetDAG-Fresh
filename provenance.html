@@ -814,6 +814,76 @@
   margin-bottom: 4px !important;
 }
 
+/* =========================
+   MOBILE QR + STATUS FIXES
+   ========================= */
+
+@media (max-width: 720px){
+
+  /* Reduce oversized green verification block */
+  #provVerifyStatus{
+    width: 100%;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    padding: 14px 16px;
+    border-radius: 22px;
+  }
+
+  /* Tighten certificate spacing */
+  .prov-cert-grid{
+    gap: 12px;
+  }
+
+  .prov-cert-item{
+    padding: 12px;
+  }
+
+  /* QR block center */
+  #provQrBlock{
+    text-align: center;
+  }
+
+  /* QR wrapper */
+  #provQrCode{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 16px auto 14px;
+  }
+
+  /* QR image itself */
+  #provQrCode img,
+  #provQrCode canvas{
+    display: block;
+    margin: 0 auto;
+    width: 220px !important;
+    height: 220px !important;
+    max-width: 100%;
+    border-radius: 12px;
+    background: #fff;
+    padding: 10px;
+  }
+
+  /* QR explanatory text */
+  .prov-cert-note{
+    text-align: center;
+    font-size: 0.96rem;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+
+  /* Action buttons tighter */
+  .prov-form-actions{
+    gap: 10px;
+  }
+
+  .prov-form-actions .btn{
+    min-height: 50px;
+    font-size: 1rem;
+  }
+}
+
 </style>
 
 </head>

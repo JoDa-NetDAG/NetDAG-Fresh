@@ -3,125 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  
+
   <title>NetDAG Scan</title>
-  <script src="https://unpkg.com/html5-qrcode"></script>
+
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body class="scan-page">
- <section class="scan-shell">
+  <section class="scan-shell">
 
-  <div class="scan-top">
-    <img src="images/ndg-logo.png" alt="NetDAG Logo" class="scan-logo">
+    <div class="scan-top">
+      <img src="images/ndg-logo.png" alt="NetDAG Logo" class="scan-logo">
 
-    <h1 class="scan-title">
-      NetDAG Scan
-    </h1>
+      <h1 class="scan-title">
+        NetDAG Scan
+      </h1>
 
-    <p class="scan-sub">
-      Verify product authenticity instantly.
-    </p>
-  </div>
-
-  <div class="scan-card">
-
-    <button id="scanQrBtn" class="scan-primary-btn">
-      Scan QR Code
-    </button>
-
-    <div id="reader" style="width:100%; margin-top:16px; display:none;"></div>
-
-    <div class="scan-divider">
-      or
+      <p class="scan-sub">
+        Verify product authenticity instantly.
+      </p>
     </div>
 
-    <input
-      type="text"
-      id="scanRecordInput"
-      class="scan-input"
-      placeholder="Paste Record ID">
+    <div class="scan-card">
+      <div class="scan-camera-note">
+        Scan a NetDAG QR code with your phone camera, then open the verification link.
+      </div>
 
-    <button id="scanVerifyBtn" class="scan-secondary-btn">
-      Verify Record
-    </button>
+      <div class="scan-divider">
+        or
+      </div>
 
-  </div>
+      <input
+        type="text"
+        id="scanRecordInput"
+        class="scan-input"
+        placeholder="Paste Record ID">
 
-  <div class="scan-note">
-    NetDAG Provenance is currently onboarding manufacturing and supply-chain partners.
-    Public demo verification remains active during rollout.
-  </div>
+      <button id="scanVerifyBtn" class="scan-secondary-btn">
+        Verify Record
+      </button>
+    </div>
 
-</section>
+    <div class="scan-note">
+      NetDAG Provenance is currently onboarding manufacturing and supply-chain partners.
+      Public demo verification remains active during rollout.
+    </div>
 
-<script>
-const scanInput = document.getElementById("scanRecordInput");
-const verifyBtn = document.getElementById("scanVerifyBtn");
-const qrBtn = document.getElementById("scanQrBtn");
+  </section>
 
-function goToVerify(id) {
-  if (!id) {
-    alert("Please enter a Record ID.");
-    return;
-  }
+  <script>
+    const scanInput = document.getElementById("scanRecordInput");
+    const verifyBtn = document.getElementById("scanVerifyBtn");
 
-  window.location.href =
-    `provenance.html?verify=${encodeURIComponent(id)}#prov-mvp-demo`;
-}
+    function goToVerify(id) {
+      if (!id) {
+        alert("Please enter a Record ID.");
+        return;
+      }
 
-if (verifyBtn) {
-  verifyBtn.addEventListener("click", () => {
-    goToVerify(scanInput.value.trim());
-  });
-}
-
-let scannerStarted = false;
-let html5QrScanner = null;
-
-if (qrBtn) {
-  qrBtn.addEventListener("click", async () => {
-    const reader = document.getElementById("reader");
-
-    if (!window.Html5Qrcode) {
-      alert("QR scanner library could not load.");
-      return;
+      window.location.href =
+        `provenance.html?verify=${encodeURIComponent(id)}#prov-mvp-demo`;
     }
 
-    if (scannerStarted) return;
-
-    reader.style.display = "block";
-    scannerStarted = true;
-
-    html5QrScanner = new Html5Qrcode("reader");
-
-    try {
-      await html5QrScanner.start(
-        { facingMode: "environment" },
-        {
-          fps: 10,
-          qrbox: { width: 250, height: 250 }
-        },
-        (decodedText) => {
-          let id = decodedText;
-
-          try {
-            const url = new URL(decodedText);
-            id = url.searchParams.get("id") || url.searchParams.get("verify") || decodedText;
-          } catch {}
-
-          goToVerify(id.trim());
-        }
-      );
-    } catch (err) {
-      console.error(err);
-      alert("Camera could not start. Please allow camera permission.");
-      scannerStarted = false;
-      reader.style.display = "none";
+    if (verifyBtn) {
+      verifyBtn.addEventListener("click", () => {
+        goToVerify(scanInput.value.trim());
+      });
     }
-  });
-}
-</script>
-
+  </script>
 </body>
 </html>

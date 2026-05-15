@@ -8590,3 +8590,51 @@ body {
   font-size:.94rem;
   line-height:1.55;
 }
+
+/* MOBILE CERTIFICATE TIGHTENING */
+@media (max-width: 720px){
+
+  /* Reduce green verification text */
+  #provVerifyStatus{
+    font-size: 0.92rem;
+    line-height: 1.45;
+    padding: 16px 18px;
+  }
+
+  /* Tighten certificate action buttons */
+  .prov-form-actions{
+    gap: 12px;
+  }
+
+  .prov-form-actions .btn{
+    padding: 14px 16px;
+    font-size: 1rem;
+  }
+
+  /* QR container */
+  .prov-qr-box,
+  .prov-cert-qr,
+  .prov-verify-qr{
+    text-align: center;
+  }
+
+  /* Center QR image */
+  .prov-qr-box img,
+  .prov-cert-qr img,
+  .prov-verify-qr img{
+    display: block;
+    margin: 0 auto 18px;
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Tighten QR text */
+  .prov-qr-box p,
+  .prov-cert-qr p,
+  .prov-verify-qr p{
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+}
