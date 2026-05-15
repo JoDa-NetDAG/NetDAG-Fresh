@@ -8396,3 +8396,14 @@ body {
   border:1px solid rgba(255,153,0,.18);
   transform:translateY(-1px);
 }
+
+.prov-form-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+}
+
+.prov-form-actions .btn{
+  white-space:nowrap;
+}

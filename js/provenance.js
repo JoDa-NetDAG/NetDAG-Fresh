@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.getElementById("provRegisterForm");
   const clearBtn = document.getElementById("provClearBtn");
   const exportBtn = document.getElementById("provExportBtn");
+  const importBtn = document.getElementById("provImportBtn");
+  const importFileInput = document.getElementById("provImportFile");
   const anchorBtn = document.getElementById("provAnchorBtn");
 
   const summaryGrid = document.getElementById("provSummaryGrid");
@@ -19,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const BSC_TESTNET_CHAIN_ID = "0x61";
 
   const CONTRACT_ADDRESS =
-  window.NDG_CONFIG?.PROVENANCE_ADDRESS ||
-  "0x5edd83151c03fad61004214cb895832cde322b67";
+    window.NDG_CONFIG?.PROVENANCE_ADDRESS ||
+    "0x5edd83151c03fad61004214cb895832cde322b67";
 
   const CONTRACT_ABI = [
     "function anchorRecord(string recordId, string hashValue) external",
@@ -30,81 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!registerForm) return;
 
-  function renderRecordsHistory() {
-  const historyBox = document.getElementById("provRecordsHistory");
-  if (!historyBox) return;
-
-  const searchInput = document.getElementById("provHistorySearch");
-
-const searchTerm = (
-  searchInput?.value || ""
-).toLowerCase().trim();
-
-if (searchInput && !searchInput.dataset.bound) {
-  searchInput.addEventListener("input", () => {
-    renderRecordsHistory();
-  });
-
-  searchInput.dataset.bound = "true";
-}
-
-const records = loadRecords()
-  .filter((record) => {
-    if (!searchTerm) return true;
-
-    return (
-      (record.productName || "").toLowerCase().includes(searchTerm) ||
-      (record.recordId || "").toLowerCase().includes(searchTerm) ||
-      (record.batch || "").toLowerCase().includes(searchTerm) ||
-      (record.manufacturer || "").toLowerCase().includes(searchTerm)
-    );
-  })
-  .slice(0, 5);
-  const info = getStorageInfo();
-
-  if (!records.length) {
-    historyBox.innerHTML = `<p class="prov-small">No recent records yet.</p>`;
-    return;
-  }
-
-  historyBox.innerHTML = `
-  <p class="prov-small">
-    Storage: ${info.totalRecords} records • approx. ${info.estimatedSizeKB} KB • ${info.storageType}
-  </p>
-  ` + records.map((record) => `
-    <div class="prov-history-item" data-record-id="${record.recordId || ""}">
-      <strong>${record.productName || "Unknown Product"}</strong><br>
-      <span class="prov-mono">${record.recordId || "—"}</span><br>
-      <small>Batch: ${record.batch || "—"} • ${record.createdAt || "—"}</small>
-    </div>
-  `).join("");
-
-      historyBox.querySelectorAll(".prov-history-item").forEach((item) => {
-  item.addEventListener("click", () => {
-    const recordId = item.dataset.recordId;
-    if (!recordId) return;
-
-    if (verifyIdInput) {
-      verifyIdInput.value = recordId;
-    }
-
-    const verifySection = document.getElementById("provVerifyForm");
-    if (verifySection) {
-      verifySection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    setTimeout(() => {
-  const verifyForm = document.getElementById("provVerifyForm");
-  if (verifyForm) {
-    verifyForm.requestSubmit();
-  }
-}, 400);
-
-  });
-});
-
-}
-
   function loadRecords() {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -113,33 +40,16 @@ const records = loadRecords()
     }
   }
 
-  function getStorageInfo() {
-  const records = loadRecords();
-
-  return {
-    storageType: "browser-localStorage",
-    storageVersion: "mvp-local-v1",
-    totalRecords: records.length,
-    estimatedSizeKB: Math.round(
-      JSON.stringify(records).length / 1024
-    )
-  };
-}
-
   function saveRecords(records) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-    return true;
-  } catch (err) {
-    console.error("Record storage failed:", err);
-
-    alert(
-      "Storage limit reached. Older browser demo records may need cleanup."
-    );
-
-    return false;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+      return true;
+    } catch (err) {
+      console.error("Record storage failed:", err);
+      alert("Storage limit reached. Older browser demo records may need cleanup.");
+      return false;
+    }
   }
-}
 
   function saveCurrentRecord(record) {
     localStorage.setItem(CURRENT_KEY, JSON.stringify(record));
@@ -151,6 +61,17 @@ const records = loadRecords()
     } catch {
       return null;
     }
+  }
+
+  function getStorageInfo() {
+    const records = loadRecords();
+
+    return {
+      storageType: "browser-localStorage",
+      storageVersion: "mvp-local-v1",
+      totalRecords: records.length,
+      estimatedSizeKB: Math.round(JSON.stringify(records).length / 1024)
+    };
   }
 
   function generateRecordId() {
@@ -177,24 +98,39 @@ const records = loadRecords()
   }
 
   async function sha256FromObject(obj) {
-  const json = JSON.stringify(obj);
+    const json = JSON.stringify(obj);
 
-  if (window.crypto && window.crypto.subtle) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(json);
-    const hashBuffer = await window.crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+    if (window.crypto && window.crypto.subtle) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(json);
+      const hashBuffer = await window.crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    if (window.ethers) {
+      return ethers.sha256(ethers.toUtf8Bytes(json)).replace(/^0x/, "");
+    }
+
+    throw new Error("SHA256 is not available in this browser.");
   }
 
-  if (window.ethers) {
-    return ethers.sha256(ethers.toUtf8Bytes(json)).replace(/^0x/, "");
+  async function checkRecordIntegrity(record) {
+    if (!record || !record.hash) return "unknown";
+
+    const canonicalPayload = buildCanonicalPayload(record);
+    const recalculatedHash = await sha256FromObject(canonicalPayload);
+
+    return recalculatedHash === record.hash ? "valid" : "tampered";
   }
 
-  throw new Error("SHA256 is not available in this browser.");
-}
+  async function updateSummary(record) {
+    const integrity = await checkRecordIntegrity(record);
 
-  function updateSummary(record) {
+    let integrityText = "Unknown";
+    if (integrity === "valid") integrityText = "Valid Record";
+    if (integrity === "tampered") integrityText = "Possible Tampering Detected";
+
     summaryGrid.innerHTML = `
       <div>Record ID</div><div>${record.recordId}</div>
       <div>Product</div><div>${record.productName || "—"}</div>
@@ -203,46 +139,119 @@ const records = loadRecords()
       <div>Origin</div><div>${record.origin || "—"}</div>
       <div>Issuer</div><div>${record.issuer || "—"}</div>
       <div>Created</div><div>${record.createdAt || "—"}</div>
+      <div>Integrity</div><div>${integrityText}</div>
     `;
   }
 
-  function renderQr(record) {
-  if (!qrOutput) return;
+  function renderRecordsHistory() {
+    const historyBox = document.getElementById("provRecordsHistory");
+    if (!historyBox) return;
 
-  qrOutput.innerHTML = "";
+    const searchInput = document.getElementById("provHistorySearch");
 
-  const verifyUrl = `${window.location.origin}/provenance.html?id=${encodeURIComponent(record.recordId)}#prov-mvp-demo`;
+    const searchTerm = (searchInput?.value || "").toLowerCase().trim();
 
-  const qrWrap = document.createElement("div");
-  qrWrap.className = "prov-qr-wrap";
+    if (searchInput && !searchInput.dataset.bound) {
+      searchInput.addEventListener("input", () => {
+        renderRecordsHistory();
+      });
 
-  const qrCanvasHolder = document.createElement("div");
-  qrCanvasHolder.className = "prov-qr-canvas";
+      searchInput.dataset.bound = "true";
+    }
 
-  const qrLabel = document.createElement("div");
-  qrLabel.className = "prov-small";
-  qrLabel.style.textAlign = "center";
-  qrLabel.innerHTML = `
-    <strong>Verification Link</strong><br>
-    <a href="${verifyUrl}" target="_blank" rel="noopener" class="prov-mono">
-      ${record.recordId}
-    </a>
-  `;
+    const records = loadRecords()
+      .filter((record) => {
+        if (!searchTerm) return true;
 
-  qrWrap.appendChild(qrCanvasHolder);
-  qrWrap.appendChild(qrLabel);
-  qrOutput.appendChild(qrWrap);
+        return (
+          (record.productName || "").toLowerCase().includes(searchTerm) ||
+          (record.recordId || "").toLowerCase().includes(searchTerm) ||
+          (record.batch || "").toLowerCase().includes(searchTerm) ||
+          (record.manufacturer || "").toLowerCase().includes(searchTerm)
+        );
+      })
+      .slice(0, 5);
 
-  if (typeof QRCode !== "undefined") {
-    new QRCode(qrCanvasHolder, {
-      text: verifyUrl,
-      width: 170,
-      height: 170
+    const info = getStorageInfo();
+
+    if (!records.length) {
+      historyBox.innerHTML = `<p class="prov-small">No recent records yet.</p>`;
+      return;
+    }
+
+    historyBox.innerHTML = `
+      <p class="prov-small">
+        Storage: ${info.totalRecords} records • approx. ${info.estimatedSizeKB} KB • ${info.storageType}
+      </p>
+    ` + records.map((record) => `
+      <div class="prov-history-item" data-record-id="${record.recordId || ""}">
+        <strong>${record.productName || "Unknown Product"}</strong><br>
+        <span class="prov-mono">${record.recordId || "—"}</span><br>
+        <small>Batch: ${record.batch || "—"} • ${record.createdAt || "—"}</small>
+      </div>
+    `).join("");
+
+    historyBox.querySelectorAll(".prov-history-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        const recordId = item.dataset.recordId;
+        if (!recordId) return;
+
+        if (verifyIdInput) {
+          verifyIdInput.value = recordId;
+        }
+
+        const verifySection = document.getElementById("provVerifyForm");
+        if (verifySection) {
+          verifySection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        setTimeout(() => {
+          const verifyForm = document.getElementById("provVerifyForm");
+          if (verifyForm) {
+            verifyForm.requestSubmit();
+          }
+        }, 400);
+      });
     });
-  } else {
-    qrCanvasHolder.innerHTML = `<div class="prov-small">QR library not loaded.</div>`;
   }
-}
+
+  function renderQr(record) {
+    if (!qrOutput) return;
+
+    qrOutput.innerHTML = "";
+
+    const verifyUrl = `${window.location.origin}/provenance.html?id=${encodeURIComponent(record.recordId)}#prov-mvp-demo`;
+
+    const qrWrap = document.createElement("div");
+    qrWrap.className = "prov-qr-wrap";
+
+    const qrCanvasHolder = document.createElement("div");
+    qrCanvasHolder.className = "prov-qr-canvas";
+
+    const qrLabel = document.createElement("div");
+    qrLabel.className = "prov-small";
+    qrLabel.style.textAlign = "center";
+    qrLabel.innerHTML = `
+      <strong>Verification Link</strong><br>
+      <a href="${verifyUrl}" target="_blank" rel="noopener" class="prov-mono">
+        ${record.recordId}
+      </a>
+    `;
+
+    qrWrap.appendChild(qrCanvasHolder);
+    qrWrap.appendChild(qrLabel);
+    qrOutput.appendChild(qrWrap);
+
+    if (typeof QRCode !== "undefined") {
+      new QRCode(qrCanvasHolder, {
+        text: verifyUrl,
+        width: 170,
+        height: 170
+      });
+    } else {
+      qrCanvasHolder.innerHTML = `<div class="prov-small">QR library not loaded.</div>`;
+    }
+  }
 
   function hideAnchorLink() {
     if (anchorLinkWrap) anchorLinkWrap.style.display = "none";
@@ -264,6 +273,7 @@ const records = loadRecords()
       <div>Origin</div><div>—</div>
       <div>Issuer</div><div>—</div>
       <div>Created</div><div>—</div>
+      <div>Integrity</div><div>—</div>
     `;
 
     hashOutput.textContent = "Hash not generated yet.";
@@ -276,11 +286,11 @@ const records = loadRecords()
     hideAnchorLink();
   }
 
-  function restoreAnchorState() {
+  async function restoreAnchorState() {
     const record = loadCurrentRecord();
     if (!record) return;
 
-    updateSummary(record);
+    await updateSummary(record);
 
     if (record.hash) {
       hashOutput.textContent = record.hash;
@@ -308,34 +318,34 @@ const records = loadRecords()
   }
 
   async function ensureBscTestnet() {
-  if (!window.ethereum) {
-    throw new Error("MetaMask not found. Please open this page inside MetaMask browser.");
-  }
+    if (!window.ethereum) {
+      throw new Error("MetaMask not found. Please open this page inside MetaMask browser.");
+    }
 
-  await window.ethereum.request({ method: "eth_requestAccounts" });
+    await window.ethereum.request({ method: "eth_requestAccounts" });
 
-  let currentChainId = await window.ethereum.request({
-  method: "eth_chainId"
-});
-
-currentChainId = String(currentChainId).toLowerCase();
-
-  if (currentChainId === BSC_TESTNET_CHAIN_ID.toLowerCase()) {
-    return true;
-  }
-
-  try {
-    await window.ethereum.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: BSC_TESTNET_CHAIN_ID }]
+    let currentChainId = await window.ethereum.request({
+      method: "eth_chainId"
     });
 
-    return true;
-  } catch (err) {
-    console.error("Network switch failed:", err);
-    throw new Error("Please switch MetaMask to BNB Testnet and try again.");
+    currentChainId = String(currentChainId).toLowerCase();
+
+    if (currentChainId === BSC_TESTNET_CHAIN_ID.toLowerCase()) {
+      return true;
+    }
+
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: BSC_TESTNET_CHAIN_ID }]
+      });
+
+      return true;
+    } catch (err) {
+      console.error("Network switch failed:", err);
+      throw new Error("Please switch MetaMask to BNB Testnet and try again.");
+    }
   }
-}
 
   async function anchorCurrentRecord() {
     const record = loadCurrentRecord();
@@ -384,25 +394,25 @@ currentChainId = String(currentChainId).toLowerCase();
       const existingIndex = records.findIndex((item) => item.recordId === record.recordId);
 
       const lightweightRecord = {
-  ...record,
-  productImage: record.productImage || ""
-};
+        ...record,
+        productImage: record.productImage || ""
+      };
 
-if (
-  lightweightRecord.productImage &&
-  lightweightRecord.productImage.length > 250000
-) {
-  lightweightRecord.productImage = "";
-}
+      if (
+        lightweightRecord.productImage &&
+        lightweightRecord.productImage.length > 250000
+      ) {
+        lightweightRecord.productImage = "";
+      }
 
-if (existingIndex >= 0) {
-  records[existingIndex] = {
-    ...records[existingIndex],
-    ...lightweightRecord
-  };
-} else {
-  records.unshift(lightweightRecord);
-}
+      if (existingIndex >= 0) {
+        records[existingIndex] = {
+          ...records[existingIndex],
+          ...lightweightRecord
+        };
+      } else {
+        records.unshift(lightweightRecord);
+      }
 
       saveRecords(records);
       saveCurrentRecord(lightweightRecord);
@@ -417,7 +427,7 @@ if (existingIndex >= 0) {
       }
 
       hashOutput.textContent = record.hash;
-      updateSummary(record);
+      await updateSummary(record);
 
       setTimeout(() => {
         window.location.href = `provenance.html?id=${encodeURIComponent(record.recordId)}#prov-mvp-demo`;
@@ -434,48 +444,48 @@ if (existingIndex >= 0) {
   registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-   const formData = new FormData(registerForm);
+    const formData = new FormData(registerForm);
 
-const record = {
-  recordId: generateRecordId(),
-  productName: String(formData.get("productName") || "").trim(),
-  sku: String(formData.get("sku") || "").trim(),
-  batch: String(formData.get("batch") || "").trim(),
-  serial: String(formData.get("serial") || "").trim(),
-  manufacturer: String(formData.get("manufacturer") || "").trim(),
-  origin: String(formData.get("origin") || "").trim(),
-  shipment: String(formData.get("shipment") || "").trim(),
-  productionDate: String(formData.get("productionDate") || "").trim(),
-  issuer: String(formData.get("issuer") || "").trim(),
-  description: String(formData.get("description") || "").trim(),
-  productImage: "",
-  storageVersion: "mvp-local-v1",
-  storageType: "browser-localStorage",
-  createdAt: new Date().toISOString()
-};
+    const record = {
+      recordId: generateRecordId(),
+      productName: String(formData.get("productName") || "").trim(),
+      sku: String(formData.get("sku") || "").trim(),
+      batch: String(formData.get("batch") || "").trim(),
+      serial: String(formData.get("serial") || "").trim(),
+      manufacturer: String(formData.get("manufacturer") || "").trim(),
+      origin: String(formData.get("origin") || "").trim(),
+      shipment: String(formData.get("shipment") || "").trim(),
+      productionDate: String(formData.get("productionDate") || "").trim(),
+      issuer: String(formData.get("issuer") || "").trim(),
+      description: String(formData.get("description") || "").trim(),
+      productImage: "",
+      storageVersion: "mvp-local-v1",
+      storageType: "browser-localStorage",
+      createdAt: new Date().toISOString()
+    };
 
-const imageFile = document.getElementById("provProductImage")?.files?.[0];
+    const imageFile = document.getElementById("provProductImage")?.files?.[0];
 
-if (imageFile) {
-  if (imageFile.size > 250000) {
-    alert("Logo image too large. Please use an image below 250KB.");
-    return;
-  }
+    if (imageFile) {
+      if (imageFile.size > 250000) {
+        alert("Logo image too large. Please use an image below 250KB.");
+        return;
+      }
 
-  try {
-    record.productImage = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
+      try {
+        record.productImage = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
 
-      reader.onload = () => resolve(reader.result || "");
-      reader.onerror = () => reject(new Error("Logo image could not be read."));
+          reader.onload = () => resolve(reader.result || "");
+          reader.onerror = () => reject(new Error("Logo image could not be read."));
 
-      reader.readAsDataURL(imageFile);
-    });
-  } catch (err) {
-    alert(err.message || "Logo image could not be read.");
-    return;
-  }
-}
+          reader.readAsDataURL(imageFile);
+        });
+      } catch (err) {
+        alert(err.message || "Logo image could not be read.");
+        return;
+      }
+    }
 
     try {
       const canonicalPayload = buildCanonicalPayload(record);
@@ -483,10 +493,13 @@ if (imageFile) {
 
       const records = loadRecords();
       records.unshift(record);
+
       saveRecords(records);
       saveCurrentRecord(record);
       renderRecordsHistory();
-      updateSummary(record);
+
+      await updateSummary(record);
+
       hashOutput.textContent = record.hash;
       renderQr(record);
 
@@ -517,68 +530,90 @@ if (imageFile) {
     resetPreview();
   });
 
-if (exportBtn) {
-  exportBtn.addEventListener("click", () => {
-    const records = loadRecords();
+  if (exportBtn) {
+    exportBtn.addEventListener("click", () => {
+      const records = loadRecords();
 
-    if (!records.length) {
-      alert("No records available to export.");
-      return;
-    }
+      if (!records.length) {
+        alert("No records available to export.");
+        return;
+      }
 
-    const dataStr = JSON.stringify(records, null, 2);
+      const dataStr = JSON.stringify(records, null, 2);
 
-    const blob = new Blob([dataStr], {
-      type: "application/json"
+      const blob = new Blob([dataStr], {
+        type: "application/json"
+      });
+
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "netdag-provenance-records.json";
+
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+    });
+  }
+
+  if (importBtn && importFileInput) {
+    importBtn.addEventListener("click", () => {
+      importFileInput.click();
     });
 
-    const url = URL.createObjectURL(blob);
+    importFileInput.addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "netdag-provenance-records.json";
+      try {
+        const text = await file.text();
+        const importedRecords = JSON.parse(text);
 
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+        if (!Array.isArray(importedRecords)) {
+          throw new Error("Invalid backup format");
+        }
 
-    URL.revokeObjectURL(url);
-  });
-}
+        const checkedRecords = [];
+
+        for (const record of importedRecords) {
+          const integrity = await checkRecordIntegrity(record);
+
+          checkedRecords.push({
+            ...record,
+            integrityStatus: integrity
+          });
+        }
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedRecords));
+
+        renderRecordsHistory();
+
+        const validCount = checkedRecords.filter((r) => r.integrityStatus === "valid").length;
+        const tamperedCount = checkedRecords.filter((r) => r.integrityStatus === "tampered").length;
+        const unknownCount = checkedRecords.filter((r) => r.integrityStatus === "unknown").length;
+
+        alert(
+          `Import completed.\n\nValid: ${validCount}\nTampered: ${tamperedCount}\nUnknown: ${unknownCount}`
+        );
+      } catch (err) {
+        console.error(err);
+        alert("Import failed. Invalid JSON backup file.");
+      }
+
+      importFileInput.value = "";
+    });
+  }
 
   if (anchorBtn) {
     anchorBtn.addEventListener("click", anchorCurrentRecord);
   }
 
   resetPreview();
-  restoreAnchorState();
+
+restoreAnchorState().then(() => {
   renderRecordsHistory();
-});
-
-exportBtn?.addEventListener("click", () => {
-  const records = loadRecords();
-
-  if (!records.length) {
-    alert("No records available to export.");
-    return;
-  }
-
-  const dataStr = JSON.stringify(records, null, 2);
-
-  const blob = new Blob([dataStr], {
-    type: "application/json"
   });
-
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "netdag-provenance-records.json";
-
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  URL.revokeObjectURL(url);
 });
-

@@ -1367,7 +1367,13 @@
             <button type="submit" class="btn btn-primary">Generate Record</button>
             <button type="button" id="provClearBtn" class="btn btn-ghost">Clear</button>
             <button type="button" id="provExportBtn" class="btn btn-ghost">Export Records</button>
-          </div>
+            <button type="button" id="provImportBtn" class="btn btn-ghost">Import Records</button>
+            <input
+             type="file"
+             id="provImportFile"
+             accept="application/json"
+             style="display:none;">
+            </div>
           
           <div class="prov-history-card">
           <h4>Recent Records</h4>
@@ -1491,6 +1497,14 @@
    <button type="button" id="provPrintBtn" class="btn btn-primary">Print / Save Certificate</button>
    <button type="button" id="provCopyAllBtn" class="btn btn-primary">Copy Full Certificate</button>
     <button type="button" id="provCopyLinkBtn" class="btn btn-secondary">Copy Verification Link</button>
+    <button type="button" id="provDownloadJsonBtn" class="btn btn-secondary">Download JSON Certificate</button>
+    <button type="button" id="provVerifyJsonBtn" class="btn btn-secondary">Verify JSON Certificate</button>
+
+    <input
+      type="file"
+      id="provVerifyJsonFile"
+      accept="application/json"
+      style="display:none;">
    </div>
 
     <div id="provResult" class="prov-result" style="display:none;">

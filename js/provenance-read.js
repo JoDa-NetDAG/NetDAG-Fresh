@@ -70,6 +70,9 @@
     copyAllBtn: document.getElementById("provCopyAllBtn"),
     certVerifiedOn: document.getElementById("provCertVerifiedOn"),
     copyLinkBtn: document.getElementById("provCopyLinkBtn"),
+    downloadJsonBtn: document.getElementById("provDownloadJsonBtn"),
+    verifyJsonBtn: document.getElementById("provVerifyJsonBtn"),
+    verifyJsonFile: document.getElementById("provVerifyJsonFile"),
     scanQrBtn: document.getElementById("provScanQrBtn"),
     qrScanner: document.getElementById("provQrScanner")
   };
@@ -156,6 +159,12 @@ savedAt: new Date().toISOString()
       productImage: localRecord.productImage || ""
     };
   }
+
+     function getLocalRecord(recordId) {
+  return loadLocalRecords().find(
+    (item) => String(item.recordId || "").toUpperCase() === String(recordId || "").toUpperCase()
+  ) || null;
+}
 
   function hasRichMetadata(meta) {
     if (!meta) return false;
@@ -506,6 +515,129 @@ if (
   let qrScannerInstance = null;
   let qrScanLocked = false;
 
+    async function downloadJsonCertificate() {
+  if (!els.result || els.result.style.display === "none") return;
+
+  const certificate = {
+    certificate: "NetDAG Provenance Certificate",
+    status: els.badge?.textContent?.trim() || "",
+    network: "BNB Smart Chain Testnet",
+    verifiedOn: els.certVerifiedOn?.textContent?.trim() || "",
+    issuedBy: "NetDAG Provenance",
+
+    company: els.outCompany?.textContent?.trim() || "",
+    issuer: els.outIssuer?.textContent?.trim() || "",
+    product: els.outProduct?.textContent?.trim() || "",
+    productId: els.outId?.textContent?.trim() || "",
+    batch: els.outBatch?.textContent?.trim() || "",
+    serial: els.outSerial?.textContent?.trim() || "",
+    origin: els.outOrigin?.textContent?.trim() || "",
+    productionDate: els.outProdDate?.textContent?.trim() || "",
+    shipment: els.outShipment?.textContent?.trim() || "",
+    anchoredBy:
+    els.outOwner?.dataset?.fullWallet ||
+    els.outOwner?.textContent?.trim() ||
+    "",
+
+    exportedAt: new Date().toISOString()
+  };
+
+ const unsignedCertificate = JSON.stringify(certificate, null, 2);
+
+const checksumBuffer = await crypto.subtle.digest(
+  "SHA-256",
+  new TextEncoder().encode(unsignedCertificate)
+);
+
+const checksumArray = Array.from(new Uint8Array(checksumBuffer));
+
+certificate.certificateChecksum = checksumArray
+  .map((b) => b.toString(16).padStart(2, "0"))
+  .join("");
+
+const blob = new Blob(
+  [JSON.stringify(certificate, null, 2)],
+  { type: "application/json" }
+);
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download =
+    `${certificate.productId || "netdag-certificate"}.json`;
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+
+  setStatus("JSON certificate downloaded.", "success");
+}
+
+    async function verifyJsonCertificate(file) {
+  try {
+    const text = await file.text();
+
+    const parsed = JSON.parse(text);
+
+    const originalChecksum = parsed.certificateChecksum;
+
+    if (!originalChecksum) {
+      setStatus("Certificate checksum missing.", "error");
+      return;
+    }
+
+    delete parsed.certificateChecksum;
+
+    const rebuiltCertificate = JSON.stringify(parsed, null, 2);
+
+    const checksumBuffer = await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(rebuiltCertificate)
+    );
+
+    const checksumArray = Array.from(
+      new Uint8Array(checksumBuffer)
+    );
+
+    const recalculatedChecksum = checksumArray
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+
+    if (recalculatedChecksum !== originalChecksum) {
+      setStatus(
+        "WARNING: JSON certificate integrity check failed.",
+        "error"
+      );
+
+      if (els.badge) {
+        els.badge.textContent = "Tampered Certificate";
+      }
+
+      return;
+    }
+
+    setStatus(
+      "JSON certificate integrity verified successfully.",
+      "success"
+    );
+
+    if (els.badge) {
+      els.badge.textContent = "Integrity Verified";
+    }
+
+  } catch (err) {
+    console.error(err);
+
+    setStatus(
+      "Could not verify JSON certificate.",
+      "error"
+    );
+  }
+}
+
   async function startQrScanner() {
     if (!els.qrScanner || !els.scanQrBtn) return;
 
@@ -745,6 +877,20 @@ if (companyLogo) {
       "success"
     );
 
+     const integrityState =
+  data.integrityStatus || "unknown";
+
+if (integrityState === "tampered") {
+  if (els.badge) {
+    els.badge.textContent = "Possible Tampering Detected";
+  }
+
+  setStatus(
+    "WARNING: Record hash mismatch detected. Data may have been modified after generation.",
+    "error"
+  );
+}
+
     setTimeout(() => {
       if (els.result) {
         const y = els.result.getBoundingClientRect().top + window.pageYOffset - 140;
@@ -924,13 +1070,28 @@ if (companyLogo) {
     try {
       setStatus("Checking blockchain record...", "pending");
 
-      const contract = await getReadContract();
-      const anchored = await contract.isAnchored(productId);
+      const localRecord = getLocalRecord(productId);
 
-      if (!anchored) {
-        showNotFound(productId);
-        return;
-      }
+if (localRecord?.integrityStatus === "tampered") {
+  fillResult({
+    storedRecordId: localRecord.recordId,
+    storedHash: localRecord.hash || "Hash mismatch detected",
+    storedTimestamp: localRecord.anchoredAt
+      ? Math.floor(new Date(localRecord.anchoredAt).getTime() / 1000)
+      : 0,
+    storedAnchoredBy: localRecord.anchoredBy || "—",
+    integrityStatus: "tampered"
+  });
+  return;
+}
+
+const contract = await getReadContract();
+const anchored = await contract.isAnchored(productId);
+
+if (!anchored) {
+  showNotFound(productId);
+  return;
+}
 
       const record = await contract.getAnchor(productId);
 
@@ -949,7 +1110,10 @@ if (companyLogo) {
 
   function autoVerifyFromURL() {
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
+    const id =
+  params.get("id") ||
+  params.get("record") ||
+  params.get("verify");
 
     if (!id || !els.input || id === "YOUR_RECORD_ID") return;
 
@@ -1000,6 +1164,25 @@ if (companyLogo) {
   if (els.copyLinkBtn) {
     els.copyLinkBtn.addEventListener("click", copyVerificationLink);
   }
+
+   if (els.downloadJsonBtn) {
+  els.downloadJsonBtn.addEventListener("click", downloadJsonCertificate);
+   }
+
+   if (els.verifyJsonBtn && els.verifyJsonFile) {
+  els.verifyJsonBtn.addEventListener("click", () => {
+    els.verifyJsonFile.click();
+  });
+
+  els.verifyJsonFile.addEventListener("change", async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    await verifyJsonCertificate(file);
+
+    els.verifyJsonFile.value = "";
+  });
+   }
 
   if (els.scanQrBtn) {
     els.scanQrBtn.addEventListener("click", startQrScanner);
