@@ -1123,7 +1123,7 @@ if (!anchored) {
     const target = document.getElementById("prov-mvp-demo");
 
    if (target) {
-  const offset = window.innerWidth <= 768 ? 110 : 140;
+  const offset = window.innerWidth <= 768 ? 190 : 140;
   const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
   window.scrollTo({
