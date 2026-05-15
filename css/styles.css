@@ -8418,3 +8418,175 @@ body {
   }
 
 }
+
+/* =========================
+   PROVENANCE ONBOARDING NOTE
+========================= */
+
+.prov-onboarding-note{
+  margin: 0 auto 28px;
+  max-width: 980px;
+  padding: 22px;
+  border-radius: 22px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14,20,38,.92),
+      rgba(10,14,28,.96)
+    );
+  border: 1px solid rgba(255,170,0,.18);
+  box-shadow:
+    0 0 30px rgba(255,170,0,.06);
+}
+
+.prov-onboarding-badge{
+  display:inline-block;
+  margin-bottom:14px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,170,0,.12);
+  border:1px solid rgba(255,170,0,.22);
+  color:#ffb100;
+  font-weight:700;
+  font-size:.85rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.prov-onboarding-note h3{
+  margin:0 0 14px;
+  color:#fff;
+  font-size:1.5rem;
+  line-height:1.3;
+}
+
+.prov-onboarding-note p{
+  margin:0 0 14px;
+  color:rgba(255,255,255,.82);
+  line-height:1.75;
+  font-size:1rem;
+}
+
+@media (max-width:768px){
+
+  .prov-onboarding-note{
+    padding:18px;
+    border-radius:18px;
+  }
+
+  .prov-onboarding-note h3{
+    font-size:1.2rem;
+  }
+
+  .prov-onboarding-note p{
+    font-size:.96rem;
+    line-height:1.65;
+  }
+}
+
+/* =========================
+   NETDAG SCAN MOBILE PAGE
+========================= */
+
+.scan-page{
+  min-height:100vh;
+  margin:0;
+  background:
+    radial-gradient(circle at top, rgba(255,153,0,.18), transparent 35%),
+    linear-gradient(180deg, #08101f, #050812);
+  color:#fff;
+  font-family: inherit;
+}
+
+.scan-shell{
+  width:min(460px, 92vw);
+  margin:0 auto;
+  padding:34px 0 28px;
+}
+
+.scan-top{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  margin-bottom:24px;
+}
+
+.scan-logo{
+  width:82px;
+  height:82px;
+  object-fit:contain;
+  display:block;
+  margin:0 auto 14px;
+}
+
+.scan-title{
+  margin:0;
+  color:#ff9900;
+  font-size:2.2rem;
+}
+
+.scan-sub{
+  margin:10px 0 0;
+  color:rgba(255,255,255,.78);
+}
+
+.scan-card{
+  padding:22px;
+  border-radius:24px;
+  background:rgba(14,16,22,.9);
+  border:1px solid rgba(255,153,0,.18);
+  box-shadow:0 18px 42px rgba(0,0,0,.32);
+}
+
+.scan-primary-btn,
+.scan-secondary-btn{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:16px;
+  font-weight:800;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+.scan-primary-btn{
+  background:#ff9900;
+  color:#111;
+}
+
+.scan-secondary-btn{
+  background:#15254a;
+  color:#ffb100;
+  margin-top:12px;
+}
+
+.scan-input{
+  width:100%;
+  box-sizing:border-box;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  padding:16px;
+  font-size:1rem;
+  outline:none;
+}
+
+.scan-divider{
+  text-align:center;
+  color:rgba(255,255,255,.55);
+  margin:16px 0;
+}
+
+.scan-note{
+  margin-top:18px;
+  padding:16px;
+  border-radius:18px;
+  background:rgba(255,153,0,.08);
+  border:1px solid rgba(255,153,0,.16);
+  color:rgba(255,255,255,.78);
+  font-size:.94rem;
+  line-height:1.55;
+}

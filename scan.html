@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <title>NetDAG Scan</title>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="scan-page">
+ <section class="scan-shell">
+
+  <div class="scan-top">
+    <img src="images/ndg-logo.png" alt="NetDAG Logo" class="scan-logo">
+
+    <h1 class="scan-title">
+      NetDAG Scan
+    </h1>
+
+    <p class="scan-sub">
+      Verify product authenticity instantly.
+    </p>
+  </div>
+
+  <div class="scan-card">
+
+    <button id="scanQrBtn" class="scan-primary-btn">
+      Scan QR Code
+    </button>
+
+    <div id="reader" style="width:100%; margin-top:16px; display:none;"></div>
+
+    <div class="scan-divider">
+      or
+    </div>
+
+    <input
+      type="text"
+      id="scanRecordInput"
+      class="scan-input"
+      placeholder="Paste Record ID">
+
+    <button id="scanVerifyBtn" class="scan-secondary-btn">
+      Verify Record
+    </button>
+
+  </div>
+
+  <div class="scan-note">
+    NetDAG Provenance is currently onboarding manufacturing and supply-chain partners.
+    Public demo verification remains active during rollout.
+  </div>
+
+</section>
+
+<script>
+const scanInput = document.getElementById("scanRecordInput");
+const verifyBtn = document.getElementById("scanVerifyBtn");
+const qrBtn = document.getElementById("scanQrBtn");
+
+function goToVerify(id) {
+  if (!id) {
+    alert("Please enter a Record ID.");
+    return;
+  }
+
+  window.location.href =
+    `provenance.html?verify=${encodeURIComponent(id)}#prov-mvp-demo`;
+}
+
+if (verifyBtn) {
+  verifyBtn.addEventListener("click", () => {
+    goToVerify(scanInput.value.trim());
+  });
+}
+
+let scannerStarted = false;
+let html5QrScanner = null;
+
+if (qrBtn) {
+  qrBtn.addEventListener("click", async () => {
+    const reader = document.getElementById("reader");
+
+    if (!window.Html5Qrcode) {
+      alert("QR scanner library could not load.");
+      return;
+    }
+
+    if (scannerStarted) return;
+
+    reader.style.display = "block";
+    scannerStarted = true;
+
+    html5QrScanner = new Html5Qrcode("reader");
+
+    try {
+      await html5QrScanner.start(
+        { facingMode: "environment" },
+        {
+          fps: 10,
+          qrbox: { width: 250, height: 250 }
+        },
+        (decodedText) => {
+          let id = decodedText;
+
+          try {
+            const url = new URL(decodedText);
+            id = url.searchParams.get("id") || url.searchParams.get("verify") || decodedText;
+          } catch {}
+
+          goToVerify(id.trim());
+        }
+      );
+    } catch (err) {
+      console.error(err);
+      alert("Camera could not start. Please allow camera permission.");
+      scannerStarted = false;
+      reader.style.display = "none";
+    }
+  });
+}
+</script>
+
+</body>
+</html>
