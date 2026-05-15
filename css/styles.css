@@ -8407,3 +8407,14 @@ body {
 .prov-form-actions .btn{
   white-space:nowrap;
 }
+
+@media (max-width: 768px) {
+
+  .prov-status {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+}
