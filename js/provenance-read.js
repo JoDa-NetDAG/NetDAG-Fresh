@@ -1122,12 +1122,15 @@ if (!anchored) {
 
     const target = document.getElementById("prov-mvp-demo");
 
-    if (target) {
-      target.scrollIntoView({
-        behavior: "auto",
-        block: "start"
-      });
-    }
+   if (target) {
+  const offset = window.innerWidth <= 768 ? 110 : 140;
+  const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "auto"
+  });
+}
 
     setTimeout(() => {
       verifyProduct();
