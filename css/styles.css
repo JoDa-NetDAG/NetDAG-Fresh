@@ -8836,3 +8836,27 @@ body {
     opacity:.7;
   }
 }
+
+.prov-trust-header{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 18px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:rgba(0,255,170,.08);
+  border:1px solid rgba(0,255,170,.22);
+  color:#66ffd1;
+  font-weight:800;
+  font-size:.9rem;
+  letter-spacing:.04em;
+  box-shadow:0 0 22px rgba(0,255,170,.12);
+}
+
+.prov-trust-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#66ffd1;
+  box-shadow:0 0 12px rgba(0,255,170,.9);
+}

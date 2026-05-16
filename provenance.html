@@ -1368,7 +1368,7 @@
       <h2 class="prov-mvp-title">NetDAG Provenance Demo</h2>
       <p class="prov-mvp-sub">
         Try the buyer verification flow, or explore the manufacturer demo dashboard for creating 
-        and anchoring product records on BNB Smart Chain Testnet.
+        and anchoring product records on Provenance Demo.
       </p>
 
       <div class="prov-top-actions">
@@ -1602,7 +1602,7 @@
   <button type="submit" class="btn btn-primary">Verify</button>
 </div>
 
-<div id="provQrScanner" style="display:none; margin-top:16px;"></div>
+<div id="provQrScanner" class="prov-qr-scanner-hidden"></div>
     </form>
   </section>
 
@@ -1611,7 +1611,7 @@
     <p class="prov-mvp-note">
       Verification result will appear here.
     </p>
-    <div id="provVerifyStatus" class="prov-status prov-status-pending" style="display:none;"></div>
+    <div id="provVerifyStatus" class="prov-status prov-status-pending prov-hidden"></div>
 
     <div class="prov-form-actions">
    <button type="button" id="provPrintBtn" class="btn btn-primary">Print / Save Certificate</button>
@@ -1624,10 +1624,17 @@
       type="file"
       id="provVerifyJsonFile"
       accept="application/json"
-      style="display:none;">
+      class="prov-hidden"
+      aria-label="Upload JSON Certificate"
+      title="Upload JSON Certificate">
    </div>
 
-    <div id="provResult" class="prov-result" style="display:none;">
+    <div id="provResult" class="prov-result prov-hidden">
+
+    <div class="prov-trust-header">
+  <span class="prov-trust-dot"></span>
+  <span>Verified by NetDAG Provenance</span>
+</div>
 
       <div class="prov-cert-header">
   <div id="provBadge" class="prov-badge">Authenticity Confirmed</div>
