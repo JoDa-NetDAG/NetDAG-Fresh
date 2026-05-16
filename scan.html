@@ -53,6 +53,9 @@
 
 <div class="scan-qr-box">
   <div id="scanQrCode"></div>
+  <div class="scan-live-badge">
+  ● LIVE ON-CHAIN VERIFICATION
+</div>
 
   <p class="scan-qr-note">
     Scan this QR code with your phone camera 
@@ -68,6 +71,12 @@
       NetDAG Provenance is currently onboarding manufacturing and supply-chain partners.
       Public demo verification remains active during rollout.
     </div>
+   
+      <div class="scan-app-footer">
+  <span>Scan</span>
+  <span>Verify</span>
+  <span>Trust</span>
+</div>
 
   </section>
 
@@ -92,6 +101,13 @@
         goToVerify(scanInput.value.trim());
       });
     }
+
+    const params = new URLSearchParams(window.location.search);
+const autoVerify = params.get("verify");
+
+if (autoVerify && scanInput) {
+  scanInput.value = autoVerify;
+}
 
     const demoRecordId = "NDG-PROV-MP5NKDPP-LD72EE";
 const scanQrCode = document.getElementById("scanQrCode");
