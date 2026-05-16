@@ -8860,3 +8860,21 @@ body {
   background:#66ffd1;
   box-shadow:0 0 12px rgba(0,255,170,.9);
 }
+
+#provOutProduct{
+  font-size:1.35rem;
+  font-weight:800;
+  color:#fff;
+  line-height:1.3;
+  text-shadow:0 0 14px rgba(255,170,0,.18);
+}
+
+.prov-cert-item:has(#provOutProduct){
+  border:1px solid rgba(255,170,0,.22);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,170,0,.06),
+      rgba(255,255,255,.02)
+    );
+}

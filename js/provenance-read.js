@@ -12,37 +12,39 @@
   const STORAGE_KEY = "netdag_provenance_records_v1";
 
   const PRODUCT_METADATA = {
-    "NDG-DEMO-001": {
-      company: "SwissAlpineChoco AG",
-      issuer: "NetDAG Provenance",
-      product: "Premium Dark Chocolate 70% – 100g Bar",
-      batch: "BATCH-01",
-      serial: "Not provided",
-      productionDate: "Not provided",
-      origin: "Switzerland",
-      shipment: "Zürich → Denver"
-    },
-    "CHOC-ZRH-2025-001": {
-      company: "SwissAlpineChoco AG",
-      issuer: "NetDAG Provenance",
-      product: "Premium Dark Chocolate 70% – 100g Bar",
-      batch: "BATCH-01",
-      serial: "Not provided",
-      productionDate: "Not provided",
-      origin: "Switzerland",
-      shipment: "Zürich → Denver"
-    },
-    "NDG-PROV-M04EMD23-JGP7PI": {
-      company: "Ed Mo Wastager",
-      issuer: "NetDAG",
-      product: "Gold Bar",
-      batch: "LOT: 20N9BR444",
-      serial: "SN-458210099",
-      productionDate: "Not provided",
-      origin: "Not provided",
-      shipment: "Not provided"
-    }
-  };
+  "NDG-DEMO-001": {
+    company: "Swiss Alpine Chocolate AG",
+    issuer: "NetDAG Provenance",
+    product: "Premium Dark Chocolate 70% – Limited Edition",
+    batch: "ALP-2026-01",
+    serial: "Protected On-Chain",
+    productionDate: "Verified Manufacturing Record",
+    origin: "Switzerland",
+    shipment: "Zürich → Denver"
+  },
+
+  "CHOC-ZRH-2025-001": {
+    company: "Swiss Alpine Chocolate AG",
+    issuer: "NetDAG Provenance",
+    product: "Premium Dark Chocolate 70% – Retail Export Batch",
+    batch: "ALP-EXPORT-05",
+    serial: "Protected On-Chain",
+    productionDate: "Verified Manufacturing Record",
+    origin: "Switzerland",
+    shipment: "Zürich → Denver"
+  },
+
+  "NDG-PROV-M04EMD23-JGP7PI": {
+    company: "NetDAG Gold Reserve Demo",
+    issuer: "NetDAG Provenance",
+    product: "Certified Gold Reserve Bar",
+    batch: "NDR-VAULT-01",
+    serial: "SN-458210099",
+    productionDate: "Verified Vault Record",
+    origin: "Switzerland",
+    shipment: "Secure Institutional Transfer"
+  }
+};
 
   const els = {
     form: document.getElementById("provVerifyForm"),
