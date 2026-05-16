@@ -19,6 +19,10 @@
         NetDAG Scan
       </h1>
 
+      <a href="provenance.html#prov-mvp-demo" class="scan-back-link">
+        ← Back to Provenance Demo
+      </a>
+
       <p class="scan-sub">
         Verify product authenticity instantly.
       </p>
@@ -26,22 +30,38 @@
 
     <div class="scan-card">
       <div class="scan-camera-note">
-        Scan a NetDAG QR code with your phone camera, then open the verification link.
+        Scan this QR code with your phone camera, then open the verification link.
       </div>
 
       <div class="scan-divider">
         or
       </div>
 
-      <input
-        type="text"
-        id="scanRecordInput"
-        class="scan-input"
-        placeholder="Paste Record ID">
+ <input
+  type="text"
+  id="scanRecordInput"
+  class="scan-input"
+  placeholder="Paste Record ID"
+  value="NDG-PROV-MP5NKDPP-LD72EE"
+  autocomplete="off"
+  spellcheck="false"
+>
 
       <button id="scanVerifyBtn" class="scan-secondary-btn">
-        Verify Record
-      </button>
+  Verify Record
+</button>
+
+<div class="scan-qr-box">
+  <div id="scanQrCode"></div>
+
+  <p class="scan-qr-note">
+    Scan this QR code with your phone camera 
+    to instantly open the public NetDAG verification page for this demo product record.
+  </p>
+</div>
+
+    <div class="scan-demo-note">
+     Demo Environment — Only NetDAG demo product IDs will return a positive authenticity confirmation during this public test phase.
     </div>
 
     <div class="scan-note">
@@ -50,6 +70,8 @@
     </div>
 
   </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
     const scanInput = document.getElementById("scanRecordInput");
@@ -70,6 +92,17 @@
         goToVerify(scanInput.value.trim());
       });
     }
+
+    const demoRecordId = "NDG-PROV-MP5NKDPP-LD72EE";
+const scanQrCode = document.getElementById("scanQrCode");
+
+if (scanQrCode && window.QRCode) {
+  new QRCode(scanQrCode, {
+    text: `${window.location.origin}/provenance.html?verify=${demoRecordId}#verify-record`,
+    width: 180,
+    height: 180
+  });
+}
   </script>
 </body>
 </html>

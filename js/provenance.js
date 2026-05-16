@@ -148,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!historyBox) return;
 
     const searchInput = document.getElementById("provHistorySearch");
+    const provClearAllRecordsBtn = document.getElementById("provClearAllRecordsBtn");
 
     const searchTerm = (searchInput?.value || "").toLowerCase().trim();
 
@@ -184,12 +185,41 @@ document.addEventListener("DOMContentLoaded", () => {
         Storage: ${info.totalRecords} records • approx. ${info.estimatedSizeKB} KB • ${info.storageType}
       </p>
     ` + records.map((record) => `
-      <div class="prov-history-item" data-record-id="${record.recordId || ""}">
-        <strong>${record.productName || "Unknown Product"}</strong><br>
-        <span class="prov-mono">${record.recordId || "—"}</span><br>
-        <small>Batch: ${record.batch || "—"} • ${record.createdAt || "—"}</small>
-      </div>
-    `).join("");
+  <div class="prov-history-item" data-record-id="${record.recordId || ""}">
+    <button
+      type="button"
+      class="prov-history-delete"
+      data-record-id="${record.recordId || ""}"
+      aria-label="Delete record"
+    >
+      Delete
+    </button>
+
+    <strong>${record.productName || "Unknown Product"}</strong><br>
+    <span class="prov-mono">${record.recordId || "—"}</span><br>
+    <small>Batch: ${record.batch || "—"} • ${record.createdAt || "—"}</small>
+  </div>
+`).join("");
+
+    historyBox.querySelectorAll(".prov-history-delete").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const recordId = btn.dataset.recordId;
+    if (!recordId) return;
+
+    const confirmed = confirm("Delete this provenance record?");
+    if (!confirmed) return;
+
+    const updatedRecords = loadRecords().filter(
+      (record) => record.recordId !== recordId
+    );
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedRecords));
+
+    renderRecordsHistory();
+  });
+});
 
     historyBox.querySelectorAll(".prov-history-item").forEach((item) => {
       item.addEventListener("click", () => {
@@ -214,6 +244,23 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  if (provClearAllRecordsBtn) {
+  provClearAllRecordsBtn.addEventListener("click", () => {
+
+    const confirmed = confirm(
+      "Delete all stored provenance records from this browser?"
+    );
+
+    if (!confirmed) return;
+
+    localStorage.removeItem(STORAGE_KEY);
+
+    renderRecordsHistory([]);
+
+    alert("All local provenance records deleted.");
+  });
+}
 
   function renderQr(record) {
     if (!qrOutput) return;

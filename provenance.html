@@ -1,13 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <!--
-    index.html — merged version, edited to:
-      - show site separators around the hero
-      - add presale subline + Buy NDG button
-      - show "Amount Raised" label
-      - remove "Total Supply" from presale meta
-  -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NetDAG Provenance dApp – Anti-Counterfeit Real-World Authenticity Verification</title>
@@ -884,6 +877,31 @@
   }
 }
 
+.prov-history-item{
+  position: relative;
+}
+
+.prov-history-delete{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: none;
+  background: rgba(255,80,80,.12);
+  color: #ff6b6b;
+  border: 1px solid rgba(255,80,80,.24);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: .78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+
+.prov-history-delete:hover{
+  background: rgba(255,80,80,.20);
+  transform: translateY(-1px);
+}
+
 </style>
 
 </head>
@@ -920,7 +938,8 @@
           <li class="nav-dropdown">
   <a href="provenance.html">Provenance App▽</a>
   <ul class="nav-dropdown-menu">
-     <li><a href="provenance.html#prov-mvp-demo">App Demo</a></li>
+     <li><a href="provenance.html#prov-mvp-demo">Partner App Demo</a></li>
+     <li><a href="scan.html">Buyer Scan Page</a></li>
     <li><a href="provenance-roadmap.html">Infrastructure Roadmap</a></li>
   </ul>
 </li>
@@ -1346,18 +1365,24 @@
   <div class="prov-mvp-wrap">
 
     <header class="prov-mvp-head">
-      <h2 class="prov-mvp-title">Provenance MVP Demo</h2>
+      <h2 class="prov-mvp-title">NetDAG Provenance Demo</h2>
       <p class="prov-mvp-sub">
-        This is the first working interface of the NetDAG Provenance dApp MVP.
-        Register a product record, generate a provenance preview, and test verification flow.
+        Try the buyer verification flow, or explore the manufacturer demo dashboard for creating 
+        and anchoring product records on BNB Smart Chain Testnet.
       </p>
+
+      <div class="prov-top-actions">
+      <a href="scan.html" class="btn btn-primary">
+      Open Buyer Scan Page
+      </a>
+    </div>
     </header>
 
     <div class="prov-mvp-grid">
 
     <div class="prov-flow-guide">
-  <div class="prov-flow-kicker">Demo flow</div>
-  <h3 class="prov-flow-title">Create, anchor, and verify a product record</h3>
+  <div class="prov-flow-kicker">Manufacturer Demo</div>
+  <h3 class="prov-flow-title">Manufacturer Product Registration Demo</h3>
   <p class="prov-flow-text">
     Step 1: Create a product record and anchor it on BNB Smart Chain Testnet.  
     Step 2: Verify the same record instantly through the certificate viewer below.
@@ -1366,9 +1391,10 @@
 
       <!-- LEFT: REGISTRATION FORM -->
       <section class="prov-mvp-card">
-        <h3 class="prov-mvp-card-title">Register Product</h3>
+        <h2 class="prov-mvp-card-title">Manufacturer Product Registration</h2>
         <p class="prov-mvp-note">
-          Enter basic product origin data to create a provenance record.
+          Demo dashboard for manufacturers to simulate product certification and 
+          blockchain anchoring on BNB Smart Chain Testnet.
         </p>
 
         <form id="provRegisterForm" class="prov-form">
@@ -1459,6 +1485,11 @@
           >
 
 <div id="provRecordsHistory" class="prov-records-history"></div>
+<div class="prov-history-actions">
+  <button type="button" id="provClearAllRecordsBtn" class="btn btn-ghost">
+    Clear All Records
+  </button>
+</div>
         </div>
 
         </form>
@@ -1549,11 +1580,17 @@
   </div>
 </div>   
 
-  <section class="prov-mvp-card">
-    <h3 class="prov-mvp-card-title">Verify Record</h3>
+  <section id="verify-record" class="prov-mvp-card">
+    <h3 class="prov-mvp-card-title">Buyer Product Verification</h3>
     <p class="prov-mvp-note">
-      Enter a Record ID to test the verification flow.
+      Consumers and buyers can verify product authenticity by entering a certified Product ID or scanning a QR code.
     </p>
+
+    <div class="prov-demo-notice">
+     Demo Mode: This public Testnet demonstration shows how NetDAG Provenance verification works. 
+     Certified demo IDs return positive verification results, while unknown or random IDs return 
+     negative verification results.
+     </div>
 
     <form id="provVerifyForm" class="prov-verify-form">
       <div class="prov-field">
@@ -1563,10 +1600,6 @@
 
       <div class="prov-form-actions">
   <button type="submit" class="btn btn-primary">Verify</button>
-
-  <button type="button" id="provScanQrBtn" class="btn btn-secondary">
-    Scan QR Code
-  </button>
 </div>
 
 <div id="provQrScanner" style="display:none; margin-top:16px;"></div>
@@ -1891,8 +1924,6 @@
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script src="js/provenance-read.js"></script>
 
-
 </body>
 </html>
-    
-   
+
