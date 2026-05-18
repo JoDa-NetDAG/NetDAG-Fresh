@@ -1,202 +1,207 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NetDAG Staking – Ecosystem Participation</title>
-  <meta name="description" content="NetDAG staking enables token holders to participate in the ecosystem through protocol-based staking mechanisms and network support." />
+  <meta name="description"
+    content="NetDAG staking enables token holders to participate in the ecosystem through protocol-based staking mechanisms and network support." />
   <link rel="icon" type="image/png" href="/images/ndg-logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" />
   <script src="js/main.js" defer></script>
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="shortcut icon" type="image/png" href="/images/ndg-logo.png">
   <link rel="apple-touch-icon" href="/images/ndg-logo.png">
 
   <style>
-/* COMMUNITY MODAL — ALWAYS CENTERED */
+    /* COMMUNITY MODAL — ALWAYS CENTERED */
 
-.ndg-community-modal{
-  position: fixed;
-  inset: 0;
-  display: none;
-  z-index: 9999;
-}
+    .ndg-community-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 9999;
+    }
 
-.ndg-community-modal.is-open{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-}
+    .ndg-community-modal.is-open {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
 
-.ndg-community-backdrop{
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.65);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
+    .ndg-community-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .65);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
 
-.ndg-community-card{
-  position: relative;
-  width: min(520px, 92vw);
-  max-height: calc(100vh - 36px);
-  overflow: auto;
-  margin: 0;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: #0f0f14;
-  color: #fff;
-  box-shadow: 0 24px 70px rgba(0,0,0,.55);
-  z-index: 1;
-}
-/* End of COMMUNITY MODAL — ALWAYS CENTERED */
+    .ndg-community-card {
+      position: relative;
+      width: min(520px, 92vw);
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      margin: 0;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: #0f0f14;
+      color: #fff;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .55);
+      z-index: 1;
+    }
 
-.footer-legal-note{
-  max-width: 980px;
-  margin: 16px auto 8px;
-  padding: 0 20px;
-  text-align: center;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.72);
-}
+    /* End of COMMUNITY MODAL — ALWAYS CENTERED */
 
-.staking-note{
-  max-width: 760px;
-  margin: 18px auto 0;
-  text-align: center;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: rgba(255,255,255,0.78);
-}
+    .footer-legal-note {
+      max-width: 980px;
+      margin: 16px auto 8px;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.72);
+    }
 
-.header-spacer{
-  height: 100px;
-}
+    .staking-note {
+      max-width: 760px;
+      margin: 18px auto 0;
+      text-align: center;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.78);
+    }
 
-/* ===============================
+    .header-spacer {
+      height: 100px;
+    }
+
+    /* ===============================
    GLOBAL TOP TICKER
    =============================== */
 
-.site-ticker{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--ticker-height);
-  line-height: var(--ticker-height);
-  background: #f0a020;
-  color: #1a1a1a;
-  z-index: 1100;
-  overflow: hidden;
-  white-space: nowrap;
-}
+    .site-ticker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--ticker-height);
+      line-height: var(--ticker-height);
+      background: #f0a020;
+      color: #1a1a1a;
+      z-index: 1100;
+      overflow: hidden;
+      white-space: nowrap;
+    }
 
-.ticker-track{
-  display: inline-flex;
-  align-items: center;
-  gap: 48px;
-  width: max-content;
-  white-space: nowrap;
-  will-change: transform;
-  animation: ndgTickerScroll 34s linear infinite;
-}
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 48px;
+      width: max-content;
+      white-space: nowrap;
+      will-change: transform;
+      animation: ndgTickerScroll 34s linear infinite;
+    }
 
-.ticker-track span{
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  flex: 0 0 auto;
-}
+    .ticker-track span {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
 
-@keyframes ndgTickerScroll{
-  from{
-    transform: translateX(0);
-  }
-  to{
-    transform: translateX(-50%);
-  }
-}
+    @keyframes ndgTickerScroll {
+      from {
+        transform: translateX(0);
+      }
 
-.nav-links .nav-dropdown{
-  position:relative;
-  list-style:none;
-}
+      to {
+        transform: translateX(-50%);
+      }
+    }
 
-.nav-links .nav-dropdown > a{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-}
+    .nav-links .nav-dropdown {
+      position: relative;
+      list-style: none;
+    }
 
-.nav-links .nav-dropdown > a::after{
-  content:"▾";
-  font-size:12px;
-  line-height:1;
-  transform:translateY(1px);
-}
+    .nav-links .nav-dropdown>a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-.nav-links .nav-dropdown-menu{
-  display:none;
-  position:absolute;
-  top:calc(100%);
-  left:0;
-  min-width:240px;
-  margin:0;
-  padding:8px 0;
-  list-style:none;
-  background:rgba(15,15,20,.98);
-  border:1px solid rgba(255,153,0,.18);
-  border-radius:12px;
-  box-shadow:0 12px 28px rgba(0,0,0,.35);
-  z-index:9999;
-}
+    .nav-links .nav-dropdown>a::after {
+      content: "▾";
+      font-size: 12px;
+      line-height: 1;
+      transform: translateY(1px);
+    }
 
-.nav-links .nav-dropdown-menu li{
-  margin:0;
-  padding:0;
-  list-style:none;
-}
+    .nav-links .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100%);
+      left: 0;
+      min-width: 240px;
+      margin: 0;
+      padding: 8px 0;
+      list-style: none;
+      background: rgba(15, 15, 20, .98);
+      border: 1px solid rgba(255, 153, 0, .18);
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+      z-index: 9999;
+    }
 
-.nav-links .nav-dropdown-menu a{
-  display:block;
-  padding:10px 16px;
-  color:#fff;
-  text-decoration:none;
-  white-space:nowrap;
-}
+    .nav-links .nav-dropdown-menu li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-.nav-links .nav-dropdown-menu a:hover{
-  background:rgba(255,153,0,.10);
-  color:#ff9900;
-}
+    .nav-links .nav-dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+    }
 
-.nav-links .nav-dropdown:hover .nav-dropdown-menu{
-  display:block;
-}
-</style>
+    .nav-links .nav-dropdown-menu a:hover {
+      background: rgba(255, 153, 0, .10);
+      color: #ff9900;
+    }
+
+    .nav-links .nav-dropdown:hover .nav-dropdown-menu {
+      display: block;
+    }
+  </style>
 
 </head>
 
 <body class="home-page" id="top">
 
- <!-- INFO TICKER -->
+  <!-- INFO TICKER -->
   <div class="site-ticker" role="region" aria-label="Presale info">
-  <div class="ticker-track">
-    <span>💧 Presale begins&nbsp;<strong>00.00.2026</strong>&nbsp;(00.00.2026).</span>
-    <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
-    <span>🏦 <strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
-    <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
-    <span>⏳ Only <strong>600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
+    <div class="ticker-track">
+      <span>💧 Presale begins&nbsp;<strong>00.00.2026</strong>&nbsp;(00.00.2026).</span>
+      <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
+      <span>🏦 <strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
+      <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
+      <span>⏳ 600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
 
-    <span>💧 Presale begins&nbsp;<strong>00.00.2026</strong>&nbsp;(00.00.2026).</span>
-    <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
-    <span>🏦 <strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
-    <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
-    <span>⏳ Only <strong>600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
+      <span>💧 Presale begins&nbsp;<strong>00.00.2026</strong>&nbsp;(00.00.2026).</span>
+      <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
+      <span>🏦 <strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
+      <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
+      <span>⏳ 600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
+    </div>
   </div>
-</div>
 
   <!-- HEADER -->
   <header class="site-header" role="banner">
@@ -210,20 +215,21 @@
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li class="nav-dropdown">
-  <a href="provenance.html">Provenance App▽</a>
-  <ul class="nav-dropdown-menu">
-     <li><a href="provenance.html#prov-mvp-demo">Partner App Demo</a></li>
-     <li><a href="scan.html">Buyer Scan Page</a></li>
-    <li><a href="provenance-roadmap.html">Infrastructure Roadmap</a></li>
-  </ul>
-</li>
+            <a href="provenance.html">Provenance App▽</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="provenance.html#prov-mvp-demo">Partner App Demo</a></li>
+              <li><a href="scan.html">Buyer Scan Page</a></li>
+              <li><a href="provenance-roadmap.html">Infrastructure Roadmap</a></li>
+            </ul>
+          </li>
           <li><a href="bonding-curve.html">Bonding Curve</a></li>
           <li><a href="guardian.html">Guardian</a></li>
           <li><a href="no-gas.html">Easy Access</a></li>
           <li><a href="menu/whitepaper.html">Whitepaper</a></li>
         </ul>
         <!-- Hamburger menu button -->
-        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-menu"
+          aria-label="Open menu">
           <span class="burger-line" aria-hidden="true"></span>
           <span class="burger-line" aria-hidden="true"></span>
           <span class="burger-line" aria-hidden="true"></span>
@@ -235,220 +241,201 @@
         <a href="stake-ndg.html" class="btn btn-primary">NDG Staking</a>
       </div>
     </div>
-</header>
+  </header>
 
-<div class="header-spacer"></div>
-
-<main>
-  <!-- MENU PANEL (mobile drawer) -->
-  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
-    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
-      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
-      <ul class="menu-list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="provenance.html">Provenance</a></li>
-        <li><a href="bonding-curve.html">Bonding Curve</a></li>
-        <li><a href="guardian.html">Guardian</a></li>
-        <li><a href="no-gas.html">Easy Access</a></li>
-        <li><a href="menu/whitepaper.html">Whitepaper</a></li>
-        <li><a href="menu/about.html">About</a></li>
-        <li><a href="menu/blog.html">Blog</a></li>
-        <li><a href="menu/vision.html">Vision</a></li>
-        <li><a href="menu/tokenomics.html">Tokenomics</a></li>
-        <li><a href="menu/faq.html">FAQ</a></li>
-        <li><a href="menu/roadmap.html">Roadmap</a></li>
-        <li><a href="menu/ambassador.html">Ambassador</a></li>
-        <li><a href="menu/charity.html">Charity</a></li>
-        <li><a href="menu/partners.html">Partners</a></li>
-        <li><a href="menu/legal.html">Legal</a></li>
-      </ul>
-      <div class="mobile-ctas">
-        <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
-        <a href="../stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
-      </div>
-    </div>
-  </div>
+  <div class="header-spacer"></div>
 
   <main>
+    <!-- MENU PANEL (mobile drawer) -->
+    <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+      <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+        <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+        <ul class="menu-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="provenance.html">Provenance</a></li>
+          <li><a href="bonding-curve.html">Bonding Curve</a></li>
+          <li><a href="guardian.html">Guardian</a></li>
+          <li><a href="no-gas.html">Easy Access</a></li>
+          <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+          <li><a href="menu/about.html">About</a></li>
+          <li><a href="menu/blog.html">Blog</a></li>
+          <li><a href="menu/vision.html">Vision</a></li>
+          <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+          <li><a href="menu/faq.html">FAQ</a></li>
+          <li><a href="menu/roadmap.html">Roadmap</a></li>
+          <li><a href="menu/ambassador.html">Ambassador</a></li>
+          <li><a href="menu/charity.html">Charity</a></li>
+          <li><a href="menu/partners.html">Partners</a></li>
+          <li><a href="menu/legal.html">Legal</a></li>
+        </ul>
+        <div class="mobile-ctas">
+          <a href="../purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
+          <a href="../stake-ndg.html" class="btn btn-primary nav-cta">NDG Staking</a>
+        </div>
+      </div>
+    </div>
 
-    <!-- top separator before hero (site separator) -->
-    <div class="site-separator" aria-hidden="true"></div>
+    <main>
+
+      <!-- top separator before hero (site separator) -->
+      <div class="site-separator" aria-hidden="true"></div>
 
       <p class="staking-note">
-  Staking within NetDAG is designed as a protocol participation mechanism.
-  Any protocol rewards are determined by the network model and do not constitute guaranteed returns or financial advice.
-</p>
-<p></p>
+        Staking within NetDAG is designed as a protocol participation mechanism.
+        Any protocol rewards are determined by the network model and do not constitute guaranteed returns or financial
+        advice.
+      </p>
+      <p></p>
 
-    <h1>Staking is coming soon...</h1>
-    <div class="staking-container">
-      <div id="stakingBalance">
-        <h2>Your Staked Balance</h2>
-        <p id="stakedAmount">0 NDAG</p>
-      </div>
-      <div id="stakingRewards">
-        <h2>Rewards Earned</h2>
-        <p id="rewardsAmount">0 NDAG</p>
-      </div>
-      <div class="staking-actions">
-        <button id="stakeBtn" class="btn">Stake Tokens</button>
-        <button id="withdrawBtn" class="btn">Withdraw</button>
-        <button id="claimBtn" class="btn">Claim Rewards</button>
-      </div>
-    </div>
-  </main>
-
-  <!-- site separator after content -->
-  <div class="section-separator" aria-hidden="true"></div>
-
-  <!-- FOOTER - Blue gradient design -->
-  <footer class="site-footer-gray" role="contentinfo">
-    <div class="footer-back-to-top">
-      <a href="#top" class="back-to-top-link">Back to top</a>
-    </div>
-    <div class="footer-banner">
-      <div class="footer-banner-inner">
-        <div class="banner-tagline">
-          <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
-          NetDAG is not another short-term token.  We build next-gen infrastructure for the real world — with math-backed stability and long-term commitment.  Join the ecosystem and let your wealth grow with real utility.
+      <h1>Staking is coming soon...</h1>
+      <div class="staking-container">
+        <div id="stakingBalance">
+          <h2>Your Staked Balance</h2>
+          <p id="stakedAmount">0 NDAG</p>
         </div>
-        <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
+        <div id="stakingRewards">
+          <h2>Rewards Earned</h2>
+          <p id="rewardsAmount">0 NDAG</p>
+        </div>
+        <div class="staking-actions">
+          <button id="stakeBtn" class="btn">Stake Tokens</button>
+          <button id="withdrawBtn" class="btn">Withdraw</button>
+          <button id="claimBtn" class="btn">Claim Rewards</button>
+        </div>
       </div>
-    </div>
-    <div class="footer-main">
-      <div class="footer-columns">
-        <!-- Brand Column -->
-        <div class="footer-col footer-brand-col">
-          <div class="footer-brand-logo">
-            <img src="images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
-            <span class="footer-brand-name">NetDAG</span>
+    </main>
+
+    <!-- site separator after content -->
+    <div class="section-separator" aria-hidden="true"></div>
+
+    <!-- FOOTER - Blue gradient design -->
+    <footer class="site-footer-gray" role="contentinfo">
+      <div class="footer-back-to-top">
+        <a href="#top" class="back-to-top-link">Back to top</a>
+      </div>
+      <div class="footer-banner">
+        <div class="footer-banner-inner">
+          <div class="banner-tagline">
+            <span class="banner-emphasis">BUILT FOR TRUST, NOT HYPE. </span>
+            NetDAG is not another short-term token. We build next-gen infrastructure for the real world — with
+            math-backed stability and long-term commitment. Join the ecosystem and let your wealth grow with real
+            utility.
           </div>
-          <p class="footer-brand-tagline">
-            <em>A stability-first crypto economy:  DAG speed, bonding-curve liquidity, real world on-chain Provenance, Guardian AI, dVPN privacy.</em>
+          <a href="menu/whitepaper.html" class="btn-explore-vision">Explore the Whitepaper</a>
+        </div>
+      </div>
+      <div class="footer-main">
+        <div class="footer-columns">
+          <!-- Brand Column -->
+          <div class="footer-col footer-brand-col">
+            <div class="footer-brand-logo">
+              <img src="images/ndg-logo.png" alt="NetDAG logo" class="footer-logo-img" />
+              <span class="footer-brand-name">NetDAG</span>
+            </div>
+            <p class="footer-brand-tagline">
+              <em>A stability-first crypto economy: DAG speed, bonding-curve liquidity, real world on-chain Provenance,
+                Guardian AI, dVPN privacy.</em>
+            </p>
+          </div>
+          <!-- Products Column -->
+          <div class="footer-col">
+            <h3>PRODUCTS</h3>
+            <ul>
+              <li><a href="provenance.html">Provenance dApp</a></li>
+              <li><a href="bonding-curve.html">Bonding Curve</a></li>
+              <li><a href="guardian.html">Guardian AI</a></li>
+              <li><a href="no-gas.html">Easy Access</a></li>
+            </ul>
+          </div>
+          <!-- Token & Docs Column -->
+          <div class="footer-col">
+            <h3>TOKEN & DOCS</h3>
+            <ul>
+              <li><a href="menu/tokenomics.html">Tokenomics</a></li>
+              <li><a href="menu/whitepaper.html">Whitepaper</a></li>
+              <li><a href="menu/about.html">About</a></li>
+              <li><a href="menu/vision.html">Vision</a></li>
+              <li><a href="menu/faq.html">FAQ</a></li>
+              <li><a href="menu/roadmap.html">Roadmap</a></li>
+            </ul>
+          </div>
+          <!-- Community Column -->
+          <div class="footer-col">
+            <h3>COMMUNITY</h3>
+            <ul>
+              <li><a href="menu/ambassador.html">Ambassador Program</a></li>
+              <li><a href="menu/charity.html">Charity</a></li>
+              <li><a href="menu/blog.html">Blog</a></li>
+              <li><a href="menu/partners.html">Partners</a></li>
+              <li><a href="menu/legal.html">Legal</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="footer-socials-blue">
+
+          <a href="https://www.youtube.com/@NetDAGOfficial" class="social-icon-blue social-yt-blue" aria-label="YouTube"
+            target="_blank" rel="noopener">
+            <i class="fab fa-youtube"></i>
+          </a>
+
+          <a href="https://www.facebook.com/share/1B14RrcR9g/" class="social-icon-blue social-fb-blue"
+            aria-label="NetDAG Facebook" target="_blank" rel="noopener">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a href="https://github.com/JoDa-NetDAG" class="social-icon-blue social-gh-blue" aria-label="GitHub"
+            target="_blank" rel="noopener">
+            <i class="fab fa-github"></i>
+          </a>
+
+          <a href="https://instagram.com/netdagofficial" class="social-icon-blue social-ig-blue"
+            aria-label="NetDAG Instagram" target="_blank" rel="noopener">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a href="https://x.com/NetDAGOfficial" class="social-icon-blue social-x-blue" aria-label="X (Twitter)"
+            target="_blank" rel="noopener">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+
+          <a href="https://t.me/NetDAG" class="social-icon-blue social-tg-blue" aria-label="Telegram" target="_blank"
+            rel="noopener">
+            <i class="fab fa-telegram-plane"></i>
+          </a>
+
+          <a href="https://discord.gg/GycvtzBs" class="social-icon-blue social-ds-blue" aria-label="Discord"
+            target="_blank" rel="noopener">
+            <i class="fab fa-discord"></i>
+          </a>
+
+          <a href="https://medium.com/@NetDAGOfficial" class="social-icon-blue social-md-blue" aria-label="Medium"
+            target="_blank" rel="noopener">
+            <i class="fab fa-medium"></i>
+          </a>
+
+        </div>
+
+        <p class="footer-legal-note">
+          NetDAG tokens are utility tokens intended for use within the NetDAG ecosystem.
+          They do not represent shares, securities, or financial instruments.
+          Nothing on this website constitutes financial, legal, or investment advice.
+        </p>
+
+        <div class="footer-bottom-blue">
+          <p class="footer-bottom-text">
+            <a href="#" data-contact-open class="footer-contact-link">📧 Join the NetDAG Community</a> |
+            Copyright: NetDAG 2026 | Built with care
           </p>
         </div>
-        <!-- Products Column -->
-        <div class="footer-col">
-          <h3>PRODUCTS</h3>
-          <ul>
-            <li><a href="provenance.html">Provenance dApp</a></li>
-            <li><a href="bonding-curve.html">Bonding Curve</a></li>
-            <li><a href="guardian.html">Guardian AI</a></li>
-            <li><a href="no-gas.html">Easy Access</a></li>
-          </ul>
-        </div>
-        <!-- Token & Docs Column -->
-        <div class="footer-col">
-          <h3>TOKEN & DOCS</h3>
-          <ul>
-            <li><a href="menu/tokenomics.html">Tokenomics</a></li>
-            <li><a href="menu/whitepaper.html">Whitepaper</a></li>
-             <li><a href="menu/about.html">About</a></li>
-            <li><a href="menu/vision.html">Vision</a></li>
-            <li><a href="menu/faq.html">FAQ</a></li>
-            <li><a href="menu/roadmap.html">Roadmap</a></li>
-          </ul>
-        </div>
-        <!-- Community Column -->
-        <div class="footer-col">
-          <h3>COMMUNITY</h3>
-          <ul>
-            <li><a href="menu/ambassador.html">Ambassador Program</a></li>
-            <li><a href="menu/charity.html">Charity</a></li>
-            <li><a href="menu/blog.html">Blog</a></li>
-            <li><a href="menu/partners.html">Partners</a></li>
-            <li><a href="menu/legal.html">Legal</a></li>
-          </ul>
-        </div>
+
       </div>
-      
-<!-- Social Icons -->
-<div class="footer-socials-blue">
+    </footer>
 
-  <a href="https://www.youtube.com/@NetDAGOfficial"
-     class="social-icon-blue social-yt-blue"
-     aria-label="YouTube"
-     target="_blank"
-     rel="noopener">
-    <i class="fab fa-youtube"></i>
-  </a>
 
-  <a href="https://www.facebook.com/share/1B14RrcR9g/"
-   class="social-icon-blue social-fb-blue"
-   aria-label="NetDAG Facebook"
-   target="_blank"
-   rel="noopener">
-  <i class="fab fa-facebook-f"></i>
-</a>
-
-  <a href="https://github.com/JoDa-NetDAG"
-     class="social-icon-blue social-gh-blue"
-     aria-label="GitHub"
-     target="_blank"
-     rel="noopener">
-    <i class="fab fa-github"></i>
-  </a>
-
-  <a href="https://instagram.com/netdagofficial"
-   class="social-icon-blue social-ig-blue"
-   aria-label="NetDAG Instagram"
-   target="_blank"
-   rel="noopener">
-  <i class="fab fa-instagram"></i>
-</a>
-
-  <a href="https://x.com/NetDAGOfficial"
-     class="social-icon-blue social-x-blue"
-     aria-label="X (Twitter)"
-     target="_blank"
-     rel="noopener">
-    <i class="fab fa-x-twitter"></i>
-  </a>
-
-  <a href="https://t.me/NetDAG"
-     class="social-icon-blue social-tg-blue"
-     aria-label="Telegram"
-     target="_blank"
-     rel="noopener">
-    <i class="fab fa-telegram-plane"></i>
-  </a>
-
-  <a href="https://discord.gg/GycvtzBs"
-     class="social-icon-blue social-ds-blue"
-     aria-label="Discord"
-     target="_blank"
-     rel="noopener">
-    <i class="fab fa-discord"></i>
-  </a>
-
-  <a href="https://medium.com/@NetDAGOfficial"
-         class="social-icon-blue social-md-blue"
-         aria-label="Medium"
-         target="_blank"
-         rel="noopener">
-        <i class="fab fa-medium"></i>
-      </a>
-
-</div>
-
-<p class="footer-legal-note">
-  NetDAG tokens are utility tokens intended for use within the NetDAG ecosystem.
-  They do not represent shares, securities, or financial instruments.
-  Nothing on this website constitutes financial, legal, or investment advice.
-</p>
-
-<div class="footer-bottom-blue">
-  <p class="footer-bottom-text">
-    <a href="#" data-contact-open class="footer-contact-link">📧 Join the NetDAG Community</a> |
-    Copyright: NetDAG 2026 | Built with care
-  </p>
-</div>
-
-    </div>
-  </footer>
-
-  
-<script src="js/community-modal-inject.js" defer></script>
+    <script src="js/community-modal-inject.js" defer></script>
 
 </body>
+
 </html>
