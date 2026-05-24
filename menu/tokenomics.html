@@ -12,16 +12,21 @@
   <link rel="apple-touch-icon" href="/images/ndg-logo.png">
   
   <script>
-    // Updated Contract Addresses - Version 2.0
-    window.NDG_TOKEN_ADDRESS = "0xf8E886791E26DFD9195C1225b4Ca6458725DAe50";
-    window.NDG_PRESALE_ADDRESS = "[PENDING DEPLOYMENT]";
-    window.NDG_VESTING_ADDRESS = "[PENDING DEPLOYMENT]";
-    window.NDG_STAKING_ADDRESS = "[PENDING DEPLOYMENT]";
-    window.NDG_TREASURY_ADDRESS = "0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318";
+    // NetDAG Current BSC Testnet Contract Addresses
+    // Last updated: 24 May 2026
+    window.NDG_TOKEN_ADDRESS = "0xc0E6b1b7a11DB4d126D009f0F4C19F430bd413d7";
+    window.NDG_PRESALE_ADDRESS = "0xAc9E6f29C78E4a3cDdd3bDDC3d58a8A46224B160";
+    window.NDG_PRICE_FEED_ADDRESS = "0x0111407fC731c09daF493B8Ae4442C9C52b830Ba";
+    window.NDG_STAKING_ADDRESS = "0x7730dCD24b93F171A7B7B85FcDB4193E94614D70";
+    window.NDG_PROVENANCE_ADDRESS = "0x5edd83151c03fad61004214cb895832cde322b67";
+    window.NDG_TREASURY_ADDRESS = "0x4ecF4EfD28b976Dcae835a0a7611595cAd4cC5CD";
     window.NDG_CHAIN_ID_HEX = "0x61"; // BSC Testnet
+    window.NDG_TOKEN_PRICE_USD = "0.006";
+    window.NDG_MIN_BUY_USD = 50;
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
+  <script src="../config/contract-config.js" defer></script>
   <script src="../js/main.js" defer></script>
 
   <style>
@@ -638,6 +643,11 @@
     .contract-address:hover {
       text-decoration: underline;
     }
+
+    .contract-address {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
     
     .contract-address-pending {
       color: #fbbf24;
@@ -974,15 +984,15 @@
   <div class="ticker-track">
     <span>💧 Presale begins&nbsp;<strong>00.00.2026</strong>&nbsp;(00.00.2026).</span>
     <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
-    <span>🏦 <strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
+    <span>🏦 &nbsp;<strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
     <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
-    <span>⏳ 600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
+    <span>⏳ Only&nbsp;<strong>600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
 
     <span>💧 Presale begins&nbsp;<strong>00.00.2026</strong>&nbsp;(00.00.2026).</span>
     <span>🔥 Early participants access the earliest stage of the NetDAG token distribution.</span>
-    <span>🏦 <strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
+    <span>🏦 &nbsp;<strong>22% protocol reserve mechanism</strong>&nbsp;supports ecosystem liquidity design.</span>
     <span>🎯 NetDAG is built around utility, resilience, and long-term ecosystem design.</span>
-    <span>⏳ 600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
+    <span>⏳ Only&nbsp;<strong>600 million NDG tokens</strong>&nbsp;are available during the public presale phase.</span>
   </div>
 </div>
 
@@ -998,9 +1008,9 @@
         <ul class="nav-links">
           <li><a href="../index.html">Home</a></li>
           <li class="nav-dropdown">
-  <a href="provenance.html">Provenance App▽</a>
+  <a href="../provenance.html">Provenance App▽</a>
   <ul class="nav-dropdown-menu">
-     <li><a href="provenance.html#prov-mvp-demo">Partner App Demo</a></li>
+     <li><a href="../provenance.html#prov-mvp-demo">Partner App Demo</a></li>
      <li><a href="scan.html">Buyer Scan Page</a></li>
     <li><a href="provenance-roadmap.html">Infrastructure Roadmap</a></li>
   </ul>
@@ -1101,9 +1111,10 @@
       <article class="tok-card">
         <h2>📊 Presale Structure</h2>
         <p class="mb-24 text-light-gray">
-          NetDAG's presale features a <strong class="text-orange">progressive pricing model</strong> 
-          designed to structure early ecosystem access across defined participation stages while supporting transparent token distribution. 
-          Each tier can lasts 30 days or until sold out, whichever comes first.
+          NetDAG's tokenomics use a <strong class="text-orange">progressive 9-stage pricing model</strong>
+          for the full presale plan. The current active BSC Testnet contract is the simple Stage 1 BNB flow:
+          buyers pay BNB and receive NDG immediately at <strong class="text-orange">$0.006</strong> per NDG.
+          Automatic tier advancement is a future contract feature and should not be treated as active yet.
         </p>
         
         <div class="tier-table-wrap">
@@ -1187,8 +1198,9 @@
           <strong class="key-features-title">📌 Key Features:</strong>
           <ul>
             <li><strong>Structured Rollout:</strong> Each stage is designed to organize ecosystem access over time</li>
-            <li><strong>Automatic Advancement:</strong> Tiers advance after 30 days OR when sold out</li>
-            <li><strong>Rollover Mechanism:</strong> Unsold tokens from each tier roll to the next tier</li>
+            <li><strong>Current Active Test Flow:</strong> Simple BNB purchase at $0.006 with immediate NDG transfer</li>
+            <li><strong>Future Tier Automation:</strong> 30-day / sold-out tier advancement requires a future tier-aware contract</li>
+            <li><strong>Reserve Buffer:</strong> 42M NDG is treated as Referral & Bonus Reserve unless later documentation proves another purpose</li>
             <li><strong>Token Availability:</strong> Distribution mechanics and token availability are defined by the protocol rollout schedule</li>
             
           </ul>
@@ -1202,24 +1214,25 @@
           <div class="referral-icon">🤝</div>
          <div class="referral-title">5% Referral Participation Bonus</div>
           <div class="referral-desc">
-            Share NetDAG with your network and receive a 5% referral participation 
-            bonus in tokens allocated through the referral mechanism.
+            Share NetDAG with your network and qualify for a 5% referral participation
+            bonus according to the active referral mechanism. In the current simple BNB presale contract,
+            referral distribution is not yet automatic and may be tracked or distributed separately.
           </div>
           
           <div class="referral-highlight">
             <strong>Example:</strong> Your friend buys $1,000 worth of NDG<br>
             → They get their tokens based on current tier price<br>
-            → You instantly receive <span class="bonus-highlight">5% bonus tokens</span> ($50 worth)<br>
-            → Both participants receive tokens through the referral participation model. 🚀
+            → You qualify for 5% referral bonus tokens ($50 worth), distributed through the active referral mechanism.<br>
+            → Referral rewards come from the Presale & Referral allocation.
           </div>
           
           <div class="success-highlight">
               <strong>✅ Benefits:</strong>
               <ul>
-              <li><strong>Immediate Allocation:</strong> Referral bonus tokens are allocated according to the active referral mechanism</li>
-              <li><strong>Unlimited Referrals:</strong> No cap on how much you can earn</li>
-              <li><strong>Transparent Tracking:</strong> All referrals recorded on-chain</li>
-              <li><strong>Win-Win Model:</strong> Your referrals don't pay extra bonus. Bonus comes from presale allocation only.</li>
+              <li><strong>Participation Reward:</strong> Referral bonus tokens are allocated according to the active referral mechanism</li>
+              <li><strong>Presale Reserve Source:</strong> Bonus tokens are expected to come from the 42M Referral & Bonus Reserve</li>
+              <li><strong>Tracking Note:</strong> Current simple BNB contract does not yet provide automatic referral distribution</li>
+              <li><strong>Win-Win Model:</strong> Referred buyers should not pay extra. Bonus comes from presale allocation only.</li>
             </ul>
           </div>
         </div>
@@ -1267,7 +1280,7 @@
           <table class="allocation-table">
             <tr>
               <td><strong>Presale (60%)</strong></td>
-              <td>9-tier structure, 5% referral rewards, 40% TGE, 60% vested</td>
+              <td>600M Presale & Referral bucket: 558M direct tier allocation + 42M Referral & Bonus Reserve</td>
             </tr>
             <tr>
               <td><strong>Protocol Reserve (22%)</strong></td>
@@ -1275,7 +1288,7 @@
             </tr>
             <tr>
               <td><strong>Staking (6%)</strong></td>
-               <td>Al located for protocol-based staking participation across defined lock periods</td>
+               <td>Allocated for protocol-based staking participation across defined lock periods</td>
             </tr>
             <tr>
               <td><strong>Partnerships (5%)</strong></td>
@@ -1302,8 +1315,9 @@
         <div class="bonding-highlight">
           <h3>🛡️ 22% Protocol Reserve Mechanism</h3>
           <p>
-            NetDAG includes a protocol reserve mechanism designed to support a more resilient liquidity structure within the ecosystem. 
-            This reserve allocation is intended to reduce structural stress and support continuity in token flow over time.
+            NetDAG includes a 22% protocol reserve mechanism designed to support a more resilient liquidity structure within the ecosystem.
+            The bonding curve is inactive during presale and is planned to activate after presale completion, before listing,
+            as an anti-dump and price-stability mechanism.
           </p>
           <br>
           <p>
@@ -1411,7 +1425,7 @@
 
       <!-- CONTRACT ADDRESSES -->
       <article class="tok-card">
-        <h2>📍 Contract Addresses (BSC Testnet)</h2>
+        <h2>📍 Current Contract Addresses (BSC Testnet)</h2>
         <div class="contract-table-wrap">
           <table class="contract-table">
             <tr>
@@ -1419,46 +1433,69 @@
               <td><strong>Address</strong></td>
             </tr>
             <tr>
-              <td>NDG Token</td>
+              <td>NDG Token Fixed</td>
               <td>
-                <a href="https://testnet.bscscan.com/address/0xf8E886791E26DFD9195C1225b4Ca6458725DAe50" 
+                <a href="https://testnet.bscscan.com/address/0xc0E6b1b7a11DB4d126D009f0F4C19F430bd413d7"
                    target="_blank" rel="noopener noreferrer" class="contract-address">
-                  0xf8E8...DAe50 ↗
+                  0xc0E6...13d7 ↗
                 </a>
               </td>
             </tr>
             <tr>
-              <td>Presale</td>
-              <td class="contract-address-pending">
-                [PENDING DEPLOYMENT]
+              <td>NDGPresaleBNB</td>
+              <td>
+                <a href="https://testnet.bscscan.com/address/0xAc9E6f29C78E4a3cDdd3bDDC3d58a8A46224B160"
+                   target="_blank" rel="noopener noreferrer" class="contract-address">
+                  0xAc9E...B160 ↗
+                </a>
               </td>
             </tr>
             <tr>
-              <td>Vesting Vault</td>
-              <td class="contract-address-pending">
-                [PENDING DEPLOYMENT]
+              <td>Mock BNB/USD Price Feed</td>
+              <td>
+                <a href="https://testnet.bscscan.com/address/0x0111407fC731c09daF493B8Ae4442C9C52b830Ba"
+                   target="_blank" rel="noopener noreferrer" class="contract-address">
+                  0x0111...30Ba ↗
+                </a>
               </td>
             </tr>
             <tr>
               <td>Staking</td>
-              <td class="contract-address-pending">
-                [PENDING DEPLOYMENT]
+              <td>
+                <a href="https://testnet.bscscan.com/address/0x7730dCD24b93F171A7B7B85FcDB4193E94614D70"
+                   target="_blank" rel="noopener noreferrer" class="contract-address">
+                  0x7730...D70 ↗
+                </a>
               </td>
             </tr>
             <tr>
-              <td>Treasury</td>
+              <td>Provenance</td>
               <td>
-                <a href="https://testnet.bscscan.com/address/0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318" 
+                <a href="https://testnet.bscscan.com/address/0x5edd83151c03fad61004214cb895832cde322b67"
+                   target="_blank" rel="noopener noreferrer" class="contract-address">
+                  0x5edd...2b67 ↗
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Treasury / Test Wallet</td>
+              <td>
+                <a href="https://testnet.bscscan.com/address/0x4ecF4EfD28b976Dcae835a0a7611595cAd4cC5CD"
                    target="_blank" rel="noopener noreferrer" class="contract-address contract-address-treasury">
-                  0xF6b3...1B318 ↗
+                  0x4ecF...C5CD ↗
                 </a>
               </td>
             </tr>
           </table>
-          
+
+          <div class="success-highlight">
+            <strong>✅ Current status:</strong> The simple BNB immediate presale flow is active on BSC Testnet.
+            Token price is <strong>$0.006</strong>, minimum buy is <strong>$50</strong>.
+          </div>
+
           <div class="warning-highlight">
-            <strong>⚠️ Note:</strong> New contracts (Presale v2, Vesting v2, Staking v2) 
-            are currently being deployed with enhanced features. Addresses will be updated here immediately after deployment.
+            <strong>⚠️ Note:</strong> VestingVault, stablecoin payments, automatic referrals, and automatic tier advancement are not part of the current simple BNB presale contract.
+            They remain future Phase 2 features unless deliberately rebuilt and redeployed.
           </div>
         </div>
       </article>
@@ -1621,7 +1658,7 @@
     </div>
   </footer>
 
-  <script src="../js/buy-modals.js" defer></script>
+  <script src="../js/buy-modals.js?v=real-buy-004" defer></script>
 <script src="../js/community-modal-inject.js"></script>
 
 </body>

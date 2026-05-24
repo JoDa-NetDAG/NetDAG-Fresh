@@ -1,10 +1,32 @@
 {
+  "lastUpdated": "2026-05-24",
   "network": "bsc-testnet",
   "chainId": 97,
+  "chainIdHex": "0x61",
+  "blockExplorer": "https://testnet.bscscan.com",
+  "presaleMode": "simple-bnb-immediate",
   "contracts": {
-    "token": "0xf8E886791E26DFD9195C1225b4Ca6458725DAe50",
-    "presale": "0x74d469c0eEd89b0F17189c824C95622C680f803E",
-    "vesting": "0x0aC817497d482629879d9c44fF226C033c5f64D4",
-    "staking": "0x7730dCD24b93F171A7B7B85FcDB4193E94614D70"
+    "token": "0xc0E6b1b7a11DB4d126D009f0F4C19F430bd413d7",
+    "presale": "0xAc9E6f29C78E4a3cDdd3bDDC3d58a8A46224B160",
+    "priceFeed": "0x0111407fC731c09daF493B8Ae4442C9C52b830Ba",
+    "treasury": "0x4ecF4EFD28b976Dcae835a0a7611595cAd4cC5CD",
+    "staking": "0x7730dCD24b93F171A7B7B85FcDB4193E94614D70",
+    "provenance": "0x5edd83151c03fad61004214cb895832cde322b67"
+  },
+  "presaleSettings": {
+    "tokenPriceUSD": "0.006",
+    "minBuyUSD": 50,
+    "totalPresaleAllocation": "600000000",
+    "directTierAllocation": "558000000",
+    "referralBonusReserve": "42000000",
+    "vesting": null,
+    "stablecoinPayments": false,
+    "referralAutomation": false,
+    "autoTierAdvance": false
+  },
+  "notes": {
+    "currentFlow": "Buyer pays BNB and receives NDG immediately.",
+    "successfulTest": "First successful $50 BNB test purchase completed on 24 May 2026.",
+    "doNotMixWith": "Old PresaleWithVesting deployments are archived and not active for this flow."
   }
 }

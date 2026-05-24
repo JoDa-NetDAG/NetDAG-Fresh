@@ -8878,3 +8878,125 @@ body {
       rgba(255,255,255,.02)
     );
 }
+
+/* =========================
+   NDG BUY MODAL - CLEAN CLOSE BUTTON
+========================= */
+
+#ndgBuyModal[aria-hidden="true"] {
+  display: none !important;
+}
+
+#ndgBuyModal[aria-hidden="false"] {
+  display: flex !important;
+}
+
+#ndgBuyModal .ndg-modal-card {
+  position: relative !important;
+  padding-top: 58px !important;
+}
+
+#ndgBuyModalClose,
+#ndgBuyModal .ndg-modal-close {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  z-index: 20 !important;
+
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border: 1px solid rgba(255, 153, 0, 0.55) !important;
+  background: rgba(15, 15, 20, 0.95) !important;
+  color: #ffffff !important;
+
+  font-size: 22px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* =========================
+   NDG BUY MODAL WALLET BUTTON
+========================= */
+
+#ndgBuyModal .ndg-disconnect-wallet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 153, 0, 0.45);
+  background: rgba(255, 153, 0, 0.12);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#ndgBuyModal .ndg-disconnect-wallet:hover {
+  background: rgba(255, 153, 0, 0.22);
+}
+
+/* =========================
+   NDG BUY MODAL WALLET BUTTON CLEANUP
+========================= */
+
+#ndgBuyModal #ndgConnectWallet,
+#ndgBuyModal .ndg-connect-wallet,
+#ndgBuyModal .connect-wallet,
+#ndgBuyModal .wallet-connect-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 8px !important;
+  padding: 8px 12px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255, 153, 0, 0.45) !important;
+  background: rgba(255, 153, 0, 0.14) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+
+#ndgBuyModal #ndgConnectWallet:hover,
+#ndgBuyModal .ndg-connect-wallet:hover,
+#ndgBuyModal .connect-wallet:hover,
+#ndgBuyModal .wallet-connect-btn:hover {
+  background: rgba(255, 153, 0, 0.24) !important;
+}
+
+#ndgBuyModal .ndg-disconnect-wallet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 153, 0, 0.45);
+  background: rgba(255, 153, 0, 0.12);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#ndgBuyModal .ndg-disconnect-wallet:hover {
+  background: rgba(255, 153, 0, 0.22);
+}
+
+#ndgBuyModal .ndg-buy-btn:disabled,
+#ndgBuyModal #ndgBuyAction:disabled,
+#ndgBuyModal #buyNDGAction:disabled,
+#ndgBuyModal #ndgConfirmBuy:disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  filter: grayscale(0.35) !important;
+}

@@ -1,209 +1,360 @@
 // ============================================================
 // NetDAG Presale - Contract Configuration
 // BSC Testnet Deployment
+// Simple Presale: BNB -> NDG immediately
+// ============================================================
+//
+// Source of truth:
+// - Project-docs/NetDAG Presale Decision Log.txt
+// - Project-docs/NetDAG Deployed Contracts Registry.md
+// - Project-docs/NetDAG Wallets and Token Allocation Registry.txt
+//
+// Last updated: 24 May 2026
 // ============================================================
 
 const CONTRACT_CONFIG = {
+  // ==========================================================
   // Network Settings
-  NETWORK: 'bscTestnet',
+  // ==========================================================
+  NETWORK: "bscTestnet",
   CHAIN_ID: 97,
-  RPC_URL: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
-  BLOCK_EXPLORER: 'https://testnet.bscscan.com',
-  
-// Contract Addresses (NEW DEPLOYMENT)
-CONTRACT_ADDRESSES: {
-  NDG_TOKEN_ADDRESS: "0x35730a53211cB79186a07B84dc0e6a3412E31A57",
-  STAKING_ADDRESS: "0x7730dCD24b93F171A7B7B85FcDB4193E94614D70",
-  TREASURY_ADDRESS: "0x8834aa98987c170c0f36e087a7ffa08070c1ad4b",
-  PROVENANCE_ADDRESS: "0x5edd83151c03fad61004214cb895832cde322b67"
-},
+  CHAIN_ID_HEX: "0x61",
+  RPC_URL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+  BLOCK_EXPLORER: "https://testnet.bscscan.com",
 
-// Oracle & Price Feeds
-  BNB_PRICE_FEED: '0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526', // Chainlink BNB/USD
-  
-  // Accepted Payment Tokens
-  ACCEPTED_STABLECOINS: {
-    USDT: '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd',
-    USDC: '0x64544969ed7EBf5f083679233325356EbE738930'
+  // ==========================================================
+  // Current Active Contract Addresses
+  // ==========================================================
+  CONTRACT_ADDRESSES: {
+    // Current active NDG token used in the successful simple BNB presale test
+    NDG_TOKEN_ADDRESS: "0xc0E6b1b7a11DB4d126D009f0F4C19F430bd413d7",
+
+    // Current active simple BNB immediate presale contract
+    PRESALE_ADDRESS: "0xAc9E6f29C78E4a3cDdd3bDDC3d58a8A46224B160",
+
+    // Mock BNB/USD price feed used for BSC Testnet testing
+    BNB_PRICE_FEED: "0x0111407fC731c09daF493B8Ae4442C9C52b830Ba",
+
+    // Current testing / treasury reference used in the successful frontend test
+    TREASURY_ADDRESS: "0x4ecF4EfD28b976Dcae835a0a7611595cAd4cC5CD",
+
+    // Known working / existing testnet contracts kept for now
+    STAKING_ADDRESS: "0x7730dCD24b93F171A7B7B85FcDB4193E94614D70",
+    PROVENANCE_ADDRESS: "0x5edd83151c03fad61004214cb895832cde322b67"
   },
-  
-  // Presale Parameters
+
+  // ==========================================================
+  // Presale Settings
+  // ==========================================================
   PRESALE_SETTINGS: {
-    ANCHOR_PRICE: '0.01', // $0.01 USD
-    MIN_CONTRIBUTION_USD: 50, // $50 minimum
-    MAX_CONTRIBUTION_USD: 1000000, // $1M maximum per wallet
-    TOTAL_PRESALE_ALLOCATION: '600000000', // 600M NDG tokens
-    PRESALE_DURATION_DAYS: 270, // 9 months
-    TIER_DURATION_DAYS: 30 // 30 days per tier
+    // Locked Tier 1 / Initial Access Stage price
+    // $0.006 per NDG
+    TOKEN_PRICE_USD: "0.006",
+
+    // Minimum buy confirmed by active presale contract
+    MIN_BUY_USD: 50,
+
+    // Total Presale & Referral allocation
+    TOTAL_PRESALE_ALLOCATION: "600000000",
+
+    // Direct tier allocation from tokenomics rows
+    DIRECT_TIER_ALLOCATION: "558000000",
+
+    // Referral / bonus / buffer reserve
+    REFERRAL_BONUS_RESERVE: "42000000",
+
+    // Current testnet sale status
+    SALE_ACTIVE: true
   },
-  
-  // Tier Pricing (9 tiers)
+
+  // ==========================================================
+  // Tier Pricing Reference
+  // ==========================================================
+  // Note:
+  // The current deployed NDGPresaleBNB contract is a simple single-price
+  // BNB presale contract. It does not yet implement automatic tier advancement.
+  //
+  // These tiers are documentation/frontend reference only until a future
+  // tier-aware contract is deployed.
   TIERS: [
-    { tier: 1, price: '0.006', allocation: '108000000', discount: '40%' },
-    { tier: 2, price: '0.009', allocation: '96000000', discount: '10%' },
-    { tier: 3, price: '0.013', allocation: '84000000', premium: '30%' },
-    { tier: 4, price: '0.017', allocation: '72000000', premium: '70%' },
-    { tier: 5, price: '0.021', allocation: '60000000', premium: '110%' },
-    { tier: 6, price: '0.025', allocation: '60000000', premium: '150%' },
-    { tier: 7, price: '0.028', allocation: '48000000', premium: '180%' },
-    { tier: 8, price: '0.12', allocation: '42000000', premium: '1100%' },
-    { tier: 9, price: '0.16', allocation: '30000000', premium: '1500%' }
+    { tier: 1, price: "0.006", allocation: "108000000", note: "Initial Access Stage / 125x reference" },
+    { tier: 2, price: "0.012", allocation: "84000000", note: "Future tier reference" },
+    { tier: 3, price: "0.018", allocation: "72000000", note: "Future tier reference" },
+    { tier: 4, price: "0.024", allocation: "66000000", note: "Future tier reference" },
+    { tier: 5, price: "0.030", allocation: "60000000", note: "Future tier reference" },
+    { tier: 6, price: "0.054", allocation: "54000000", note: "Future tier reference" },
+    { tier: 7, price: "0.084", allocation: "48000000", note: "Future tier reference" },
+    { tier: 8, price: "0.120", allocation: "36000000", note: "Future tier reference" },
+    { tier: 9, price: "0.160", allocation: "30000000", note: "Future tier reference" }
   ],
-  
-  // Vesting Settings
-  VESTING: {
-    IMMEDIATE_PERCENT: 40, // 40% at TGE
-    VESTING_PERCENT: 60, // 60% vested quarterly
-    DEFAULT_CLIFF_MONTHS: 12, // 12 months default
-    QUARTER_1_DAYS: 91, // 3 months - 20% release
-    QUARTER_2_DAYS: 182, // 6 months - 20% release
-    QUARTER_3_DAYS: 274 // 9 months - 20% release
-  },
-  
-  // Early Access Tiers (unlock before TGE)
-  EARLY_ACCESS: {
-    TIER_1: { hours: 3, fee: 100 }, // 3 hours early, $100
-    TIER_2: { hours: 6, fee: 200 }, // 6 hours early, $200
-    TIER_3: { hours: 9, fee: 250 }  // 9 hours early, $250
-  },
-  
-  // Cliff Reduction Fees (reduce vesting cliff)
-  CLIFF_REDUCTION: {
-    TO_9_MONTHS: { months: 9, fee: 300 }, // Reduce to 9 months, $300
-    TO_6_MONTHS: { months: 6, fee: 500 }, // Reduce to 6 months, $500
-    TO_3_MONTHS: { months: 3, fee: 750 }  // Reduce to 3 months, $750
-  },
-  
-  // Referral System
-  REFERRAL: {
-    BONUS_PERCENT: 5, // 5% bonus for referrer
-    ENABLED: true
-  },
-  
+
+  // ==========================================================
   // Token Information
+  // ==========================================================
   TOKEN_INFO: {
-    NAME: 'NetDAG',
-    SYMBOL: 'NDG',
+    NAME: "NetDAG",
+    SYMBOL: "NDG",
     DECIMALS: 18,
-    TOTAL_SUPPLY: '1000000000', // 1 billion
-    PRESALE_ALLOCATION: '600000000' // 600M for presale (60%)
+    TOTAL_SUPPLY: "1000000000",
+    PRESALE_ALLOCATION: "600000000",
+    PROTOCOL_RESERVE_PERCENT: 22,
+    PROTOCOL_RESERVE_AMOUNT: "220000000"
   },
-  
+
+  // ==========================================================
   // Wallet Addresses
+  // ==========================================================
   WALLETS: {
-    DEPLOYER: '0x8834Aa98987c170C0F36E087a7fFa08070C1aD4B',
-    TREASURY: '0x8834Aa98987c170C0F36E087a7fFa08070C1aD4B',
-    LIQUIDITY_FUND: '0x8834Aa98987c170C0F36E087a7fFa08070C1aD4B'
+    DEPLOYER: "0x4ecF4EfD28b976Dcae835a0a7611595cAd4cC5CD",
+    TREASURY: "0x4ecF4EfD28b976Dcae835a0a7611595cAd4cC5CD",
+    TEST_WALLET: "0x4ecF4EfD28b976Dcae835a0a7611595cAd4cC5CD",
+
+    // Older references kept only for clarity. Do not use as current source of truth.
+    OLD_TREASURY_REFERENCE: "0x8834Aa98987c170C0F36E087a7fFa08070C1aD4B",
+    OLD_DEPLOYER_REFERENCE: "0xF6b3c63722182eD9e7889aDD34A4F97c25e1B318"
   },
-  
-  // Contract ABIs (paths to ABI files)
+
+  // ==========================================================
+  // Simple Presale ABI
+  // ==========================================================
   ABIS: {
-    NDG_TOKEN: './artifacts/contracts/NDGToken.sol/NDGToken.json',
-    PRESALE: './artifacts/contracts/PresaleWithVesting.sol/PresaleWithVesting.json',
-    VESTING_VAULT: './artifacts/contracts/VestingVault.sol/VestingVault.json',
-    ERC20: './artifacts/@openzeppelin/contracts/token/ERC20/IERC20.sol/IERC20.json'
+    NDG_TOKEN: [
+      "function balanceOf(address account) view returns (uint256)",
+      "function transfer(address to, uint256 amount) returns (bool)",
+      "function decimals() view returns (uint8)",
+      "function symbol() view returns (string)",
+      "function name() view returns (string)"
+    ],
+
+    PRESALE: [
+      "function buyWithBNB() payable",
+      "function previewBuy(uint256 bnbAmount) view returns (uint256 usdValue, uint256 ndgAmount)",
+      "function getBNBValueUSD(uint256 bnbAmount) view returns (uint256)",
+      "function remainingTokens() view returns (uint256)",
+      "function totalSold() view returns (uint256)",
+      "function totalRaisedUSD() view returns (uint256)",
+      "function saleActive() view returns (bool)",
+      "function tokenPriceUSD() view returns (uint256)",
+      "function minBuyUSD() view returns (uint256)",
+      "function presaleAllocation() view returns (uint256)",
+      "function treasury() view returns (address)"
+    ]
   },
-  
-  // Gas Settings
-  GAS: {
-    PRICE_GWEI: 10, // 10 Gwei
-    LIMIT_MULTIPLIER: 1.2 // 20% buffer
-  },
-  
-  // Frontend URLs
-  URLS: {
-    WEBSITE: 'https://netdag.io',
-    DOCS: 'https://docs.netdag.io',
-    TELEGRAM: 'https://t.me/netdag',
-    TWITTER: 'https://twitter.com/netdag'
-  },
-  
+
+  // ==========================================================
   // Feature Flags
+  // ==========================================================
   FEATURES: {
+    // Current working flow
     BNB_PAYMENT: true,
-    STABLECOIN_PAYMENT: true,
-    REFERRAL_SYSTEM: true,
-    EARLY_ACCESS: true,
-    CLIFF_REDUCTION: true,
-    AUTO_TIER_ADVANCE: true
+    IMMEDIATE_NDG_TRANSFER: true,
+    METAMASK_FIRST: true,
+
+    // Future / disabled features
+    STABLECOIN_PAYMENT: false,
+    USDT_PAYMENT: false,
+    USDC_PAYMENT: false,
+    BUSD_PAYMENT: false,
+    WALLETCONNECT: false,
+    TRUST_WALLET_QR: false,
+    REFERRAL_SYSTEM: false,
+    EARLY_ACCESS: false,
+    CLIFF_REDUCTION: false,
+    VESTING: false,
+    AUTO_TIER_ADVANCE: false,
+    BONDING_CURVE_ACTIVE_DURING_PRESALE: false
   },
-  
+
+  // ==========================================================
   // Display Settings
+  // ==========================================================
   DISPLAY: {
-    PRICE_DECIMALS: 6, // Show 6 decimal places for prices
-    TOKEN_DECIMALS: 2, // Show 2 decimal places for token amounts
-    USD_DECIMALS: 2 // Show 2 decimal places for USD amounts
+    PRICE_DECIMALS: 3,
+    TOKEN_DECIMALS: 2,
+    USD_DECIMALS: 2,
+    BNB_DECIMALS: 6
+  },
+
+  // ==========================================================
+  // Frontend URLs
+  // ==========================================================
+  URLS: {
+    WEBSITE: "https://netdag.com",
+    TELEGRAM: "https://t.me/NetDAG",
+    TWITTER: "https://x.com/NetDAGOfficial",
+    DISCORD: "https://discord.gg/GycvtzBs",
+    GITHUB: "https://github.com/JoDa-NetDAG",
+    YOUTUBE: "https://www.youtube.com/@NetDAGOfficial",
+    FACEBOOK: "https://www.facebook.com/share/1B14RrcR9g/",
+    INSTAGRAM: "https://instagram.com/netdagofficial",
+    MEDIUM: "https://medium.com/@NetDAGOfficial"
+  },
+
+  // ==========================================================
+  // Current Successful Test Record
+  // ==========================================================
+  TEST_RECORDS: {
+    FIRST_SUCCESSFUL_BNB_BUY: {
+      DATE: "24 May 2026",
+      BUYER: "0x4ecF4EfD28b976Dcae835a0a7611595cAd4cC5CD",
+      USD_AMOUNT: "50",
+      BNB_PAID: "0.076923076923076927",
+      NDG_RECEIVED: "8333.333333333333758333",
+      TX_HASH: "0x88c7202fc85627ff695a5bbb4950e86d2268d96d045621a51f02070a0309e305",
+      RESULT: "Success"
+    }
   }
 };
 
+// ============================================================
+// Backward-Compatible Direct Shortcuts
+// ============================================================
+
+CONTRACT_CONFIG.NDG_TOKEN = CONTRACT_CONFIG.CONTRACT_ADDRESSES.NDG_TOKEN_ADDRESS;
+CONTRACT_CONFIG.NDG_TOKEN_ADDRESS = CONTRACT_CONFIG.CONTRACT_ADDRESSES.NDG_TOKEN_ADDRESS;
+
+CONTRACT_CONFIG.PRESALE_CONTRACT = CONTRACT_CONFIG.CONTRACT_ADDRESSES.PRESALE_ADDRESS;
+CONTRACT_CONFIG.PRESALE_ADDRESS = CONTRACT_CONFIG.CONTRACT_ADDRESSES.PRESALE_ADDRESS;
+
+CONTRACT_CONFIG.TREASURY_ADDRESS = CONTRACT_CONFIG.CONTRACT_ADDRESSES.TREASURY_ADDRESS;
+CONTRACT_CONFIG.BNB_PRICE_FEED = CONTRACT_CONFIG.CONTRACT_ADDRESSES.BNB_PRICE_FEED;
+CONTRACT_CONFIG.STAKING_ADDRESS = CONTRACT_CONFIG.CONTRACT_ADDRESSES.STAKING_ADDRESS;
+CONTRACT_CONFIG.PROVENANCE_ADDRESS = CONTRACT_CONFIG.CONTRACT_ADDRESSES.PROVENANCE_ADDRESS;
+
+// ============================================================
 // Helper Functions
+// ============================================================
+
 const HELPERS = {
-  /**
-   * Get contract address by name
-   */
   getContractAddress(contractName) {
+    const key = String(contractName || "").toUpperCase();
+
     const addresses = {
-      'NDG': CONTRACT_CONFIG.NDG_TOKEN,
-      'PRESALE': CONTRACT_CONFIG.PRESALE_CONTRACT,
-      'VAULT': CONTRACT_CONFIG.VESTING_VAULT,
-      'USDT': CONTRACT_CONFIG.ACCEPTED_STABLECOINS.USDT,
-      'USDC': CONTRACT_CONFIG.ACCEPTED_STABLECOINS.USDC
+      NDG: CONTRACT_CONFIG.CONTRACT_ADDRESSES.NDG_TOKEN_ADDRESS,
+      NDG_TOKEN: CONTRACT_CONFIG.CONTRACT_ADDRESSES.NDG_TOKEN_ADDRESS,
+      TOKEN: CONTRACT_CONFIG.CONTRACT_ADDRESSES.NDG_TOKEN_ADDRESS,
+      PRESALE: CONTRACT_CONFIG.CONTRACT_ADDRESSES.PRESALE_ADDRESS,
+      PRESALE_CONTRACT: CONTRACT_CONFIG.CONTRACT_ADDRESSES.PRESALE_ADDRESS,
+      TREASURY: CONTRACT_CONFIG.CONTRACT_ADDRESSES.TREASURY_ADDRESS,
+      STAKING: CONTRACT_CONFIG.CONTRACT_ADDRESSES.STAKING_ADDRESS,
+      PROVENANCE: CONTRACT_CONFIG.CONTRACT_ADDRESSES.PROVENANCE_ADDRESS,
+      BNB_PRICE_FEED: CONTRACT_CONFIG.CONTRACT_ADDRESSES.BNB_PRICE_FEED
     };
-    return addresses[contractName.toUpperCase()];
+
+    return addresses[key];
   },
-  
-  /**
-   * Get block explorer URL for address
-   */
-  getExplorerUrl(address, type = 'address') {
+
+  getExplorerUrl(address, type = "address") {
     return `${CONTRACT_CONFIG.BLOCK_EXPLORER}/${type}/${address}`;
   },
-  
-  /**
-   * Get current tier info
-   */
-  getTierInfo(tierIndex) {
-    return CONTRACT_CONFIG.TIERS[tierIndex];
+
+  getTxUrl(txHash) {
+    return `${CONTRACT_CONFIG.BLOCK_EXPLORER}/tx/${txHash}`;
   },
-  
-  /**
-   * Calculate tokens for USD amount at specific tier
-   */
-  calculateTokens(usdAmount, tierPrice) {
-    return (parseFloat(usdAmount) / parseFloat(tierPrice)).toFixed(2);
+
+  getAddressUrl(address) {
+    return `${CONTRACT_CONFIG.BLOCK_EXPLORER}/address/${address}`;
   },
-  
-  /**
-   * Format token amount with decimals
-   */
-  formatTokenAmount(amount, decimals = 2) {
-    return parseFloat(amount).toFixed(decimals);
+
+  getCurrentTokenPrice() {
+    return parseFloat(CONTRACT_CONFIG.PRESALE_SETTINGS.TOKEN_PRICE_USD);
   },
-  
-  /**
-   * Format USD amount
-   */
+
+  getMinimumBuyUSD() {
+    return Number(CONTRACT_CONFIG.PRESALE_SETTINGS.MIN_BUY_USD);
+  },
+
+  calculateTokens(usdAmount, tokenPrice = CONTRACT_CONFIG.PRESALE_SETTINGS.TOKEN_PRICE_USD) {
+    const usd = parseFloat(usdAmount || 0);
+    const price = parseFloat(tokenPrice || CONTRACT_CONFIG.PRESALE_SETTINGS.TOKEN_PRICE_USD);
+
+    if (!Number.isFinite(usd) || !Number.isFinite(price) || price <= 0) {
+      return "0.00";
+    }
+
+    return (usd / price).toFixed(2);
+  },
+
+  calculateUsdFromTokens(tokenAmount, tokenPrice = CONTRACT_CONFIG.PRESALE_SETTINGS.TOKEN_PRICE_USD) {
+    const tokens = parseFloat(tokenAmount || 0);
+    const price = parseFloat(tokenPrice || CONTRACT_CONFIG.PRESALE_SETTINGS.TOKEN_PRICE_USD);
+
+    if (!Number.isFinite(tokens) || !Number.isFinite(price) || price <= 0) {
+      return "0.00";
+    }
+
+    return (tokens * price).toFixed(2);
+  },
+
+  formatTokenAmount(amount, decimals = CONTRACT_CONFIG.DISPLAY.TOKEN_DECIMALS) {
+    return Number(amount || 0).toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: decimals
+    });
+  },
+
   formatUSD(amount) {
-    return `$${parseFloat(amount).toFixed(2)}`;
+    return `$${parseFloat(amount || 0).toFixed(CONTRACT_CONFIG.DISPLAY.USD_DECIMALS)}`;
+  },
+
+  formatPrice(amount) {
+    return `$${parseFloat(amount || 0).toFixed(CONTRACT_CONFIG.DISPLAY.PRICE_DECIMALS)}`;
+  },
+
+  isBscTestnet(chainId) {
+    const normalized = String(chainId || "").toLowerCase();
+    return normalized === String(CONTRACT_CONFIG.CHAIN_ID).toLowerCase() ||
+      normalized === String(CONTRACT_CONFIG.CHAIN_ID_HEX).toLowerCase();
   }
 };
 
-// Export for Node.js (backend)
-if (typeof module !== 'undefined' && module.exports) {
+// ============================================================
+// Export for Node.js
+// ============================================================
+
+if (typeof module !== "undefined" && module.exports) {
   module.exports = { CONTRACT_CONFIG, HELPERS };
 }
 
-// Export for Browser (frontend)
-if (typeof window !== 'undefined') {
+// ============================================================
+// Export for Browser
+// ============================================================
+
+if (typeof window !== "undefined") {
   window.CONTRACT_CONFIG = CONTRACT_CONFIG;
   window.CONTRACT_HELPERS = HELPERS;
+
+  // Optional legacy global name support
+  window.NDG_CONFIG = {
+    ...(window.NDG_CONFIG || {}),
+    NETWORK: CONTRACT_CONFIG.NETWORK,
+    CHAIN_ID: CONTRACT_CONFIG.CHAIN_ID,
+    CHAIN_ID_HEX: CONTRACT_CONFIG.CHAIN_ID_HEX,
+    RPC_URL: CONTRACT_CONFIG.RPC_URL,
+    EXPLORER: CONTRACT_CONFIG.BLOCK_EXPLORER,
+    BLOCK_EXPLORER: CONTRACT_CONFIG.BLOCK_EXPLORER,
+
+    NDG_TOKEN_ADDRESS: CONTRACT_CONFIG.CONTRACT_ADDRESSES.NDG_TOKEN_ADDRESS,
+    PRESALE_ADDRESS: CONTRACT_CONFIG.CONTRACT_ADDRESSES.PRESALE_ADDRESS,
+    PRESALE_CONTRACT: CONTRACT_CONFIG.CONTRACT_ADDRESSES.PRESALE_ADDRESS,
+    TREASURY_ADDRESS: CONTRACT_CONFIG.CONTRACT_ADDRESSES.TREASURY_ADDRESS,
+    BNB_PRICE_FEED: CONTRACT_CONFIG.CONTRACT_ADDRESSES.BNB_PRICE_FEED,
+    STAKING_ADDRESS: CONTRACT_CONFIG.CONTRACT_ADDRESSES.STAKING_ADDRESS,
+    PROVENANCE_ADDRESS: CONTRACT_CONFIG.CONTRACT_ADDRESSES.PROVENANCE_ADDRESS,
+
+    TOKEN_PRICE_USD: CONTRACT_CONFIG.PRESALE_SETTINGS.TOKEN_PRICE_USD,
+    MIN_BUY_USD: CONTRACT_CONFIG.PRESALE_SETTINGS.MIN_BUY_USD
+  };
 }
 
-// Log configuration (development only)
-if (process.env.NODE_ENV === 'development') {
-  console.log('📋 NetDAG Contract Configuration Loaded');
-  console.log('🌐 Network:', CONTRACT_CONFIG.NETWORK);
-  console.log('🪙 NDG Token:', CONTRACT_CONFIG.NDG_TOKEN);
-  console.log('🛒 Presale:', CONTRACT_CONFIG.PRESALE_CONTRACT);
-  console.log('🏦 Vault:', CONTRACT_CONFIG.VESTING_VAULT);
+// ============================================================
+// Development Log
+// ============================================================
+
+if (typeof process !== "undefined" && process.env && process.env.NODE_ENV === "development") {
+  console.log("📋 NetDAG Contract Configuration Loaded");
+  console.log("🌐 Network:", CONTRACT_CONFIG.NETWORK);
+  console.log("🪙 NDG Token:", CONTRACT_CONFIG.CONTRACT_ADDRESSES.NDG_TOKEN_ADDRESS);
+  console.log("🛒 Presale:", CONTRACT_CONFIG.CONTRACT_ADDRESSES.PRESALE_ADDRESS);
+  console.log("💵 Token Price:", CONTRACT_CONFIG.PRESALE_SETTINGS.TOKEN_PRICE_USD);
 }
