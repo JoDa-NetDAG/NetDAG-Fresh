@@ -558,7 +558,7 @@ console.log("✅ NDG Buy Modal loaded");
 
     box.style.display = "block";
     box.innerHTML = `
-     <strong>5% referrer bonus detected</strong>
+     <strong>5% referral bonus detected</strong>
      <span>${shortAddress(ref)}</span>
     `;
   }
