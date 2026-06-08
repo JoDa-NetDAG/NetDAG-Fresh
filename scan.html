@@ -89,12 +89,13 @@
       const verifyBtn = document.getElementById("scanVerifyBtn");
       const scanQrCode = document.getElementById("scanQrCode");
 
-     function buildVerifyUrl(recordId) {
+ function buildVerifyUrl(recordId) {
   const cleanId = String(recordId || "").trim().toUpperCase();
 
   return (
-    "https://www.netdag.com/scan.html?id=" +
-    encodeURIComponent(cleanId)
+    "https://www.netdag.com/provenance.html?id=" +
+    encodeURIComponent(cleanId) +
+    "#prov-mvp-demo"
   );
 }
 
