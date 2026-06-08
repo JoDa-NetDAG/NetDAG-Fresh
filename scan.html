@@ -15,9 +15,7 @@
     <div class="scan-top">
       <img src="images/ndg-logo.png" alt="NetDAG Logo" class="scan-logo">
 
-      <h1 class="scan-title">
-        NetDAG Scan
-      </h1>
+      <h1 class="scan-title">NetDAG Scan</h1>
 
       <a href="provenance.html#prov-mvp-demo" class="scan-back-link">
         ← Back to Provenance Demo
@@ -33,92 +31,122 @@
         Scan this QR code with your phone camera, then open the verification link.
       </div>
 
-      <div class="scan-divider">
-        or
-      </div>
+      <div class="scan-divider">or</div>
 
- <input
-  type="text"
-  id="scanRecordInput"
-  class="scan-input"
-  placeholder="Paste Record ID"
-  value="NDG-PROV-MP5NKDPP-LD72EE"
-  autocomplete="off"
-  spellcheck="false"
->
+      <input
+        type="text"
+        id="scanRecordInput"
+        class="scan-input"
+        placeholder="Paste Record ID"
+        value="NDG-PROV-MQ3LDJQS-Y85GOE"
+        autocomplete="off"
+        spellcheck="false"
+      >
 
       <button id="scanVerifyBtn" class="scan-secondary-btn">
-  Verify Record
-</button>
+        Verify Record
+      </button>
 
-<div class="scan-qr-box">
-  <div id="scanQrCode"></div>
-  <div class="scan-live-badge">
-  ● LIVE ON-CHAIN VERIFICATION
-</div>
+      <div class="scan-qr-box">
+        <div id="scanQrCode"></div>
 
-  <p class="scan-qr-note">
-    Scan this QR code with your phone camera 
-    to instantly open the public NetDAG verification page for this demo product record.
-  </p>
-</div>
+        <div class="scan-live-badge">
+          ● LIVE ON-CHAIN VERIFICATION
+        </div>
 
-    <div class="scan-demo-note">
-     Demo Environment — Only NetDAG demo product IDs will return a positive authenticity confirmation during this public test phase.
-    </div>
+        <p class="scan-qr-note">
+          Scan this QR code with your phone camera to instantly open the public
+          NetDAG verification page for this demo product record.
+        </p>
+      </div>
 
-    <div class="scan-note">
-      NetDAG Provenance is currently onboarding manufacturing and supply-chain partners.
-      Public demo verification remains active during rollout.
-    </div>
-   
+      <div class="scan-demo-note">
+        Demo Environment — Only NetDAG demo product IDs will return a positive
+        authenticity confirmation during this public test phase.
+      </div>
+
+      <div class="scan-note">
+        NetDAG Provenance is currently onboarding manufacturing and supply-chain partners.
+        Public demo verification remains active during rollout.
+      </div>
+
       <div class="scan-app-footer">
-  <span>Scan</span>
-  <span>Verify</span>
-  <span>Trust</span>
-</div>
+        <span>Scan</span>
+        <span>Verify</span>
+        <span>Trust</span>
+      </div>
+    </div>
 
   </section>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
-    const scanInput = document.getElementById("scanRecordInput");
-    const verifyBtn = document.getElementById("scanVerifyBtn");
+    document.addEventListener("DOMContentLoaded", function () {
+      const DEMO_RECORD_ID = "NDG-PROV-MQ3LDJQS-Y85GOE";
 
-    function goToVerify(id) {
-      if (!id) {
-        alert("Please enter a Record ID.");
-        return;
+      const scanInput = document.getElementById("scanRecordInput");
+      const verifyBtn = document.getElementById("scanVerifyBtn");
+      const scanQrCode = document.getElementById("scanQrCode");
+
+     function buildVerifyUrl(recordId) {
+  const cleanId = String(recordId || "").trim().toUpperCase();
+
+  return (
+    "https://www.netdag.com/scan.html?id=" +
+    encodeURIComponent(cleanId)
+  );
+}
+
+function buildProvenanceUrl(recordId) {
+  const cleanId = String(recordId || "").trim().toUpperCase();
+
+  return (
+    "provenance.html?id=" +
+    encodeURIComponent(cleanId) +
+    "#prov-mvp-demo"
+  );
+}
+
+      function goToVerify(recordId) {
+        const cleanId = String(recordId || "").trim().toUpperCase();
+
+        if (!cleanId) {
+          alert("Please enter a Record ID.");
+          return;
+        }
+
+       window.location.href = buildProvenanceUrl(cleanId);
       }
 
-      window.location.href =
-        `provenance.html?verify=${encodeURIComponent(id)}#prov-mvp-demo`;
-    }
+      if (scanInput) {
+        const params = new URLSearchParams(window.location.search);
+        const incomingId =
+          params.get("id") ||
+          params.get("record") ||
+          params.get("verify");
 
-    if (verifyBtn) {
-      verifyBtn.addEventListener("click", () => {
-        goToVerify(scanInput.value.trim());
-      });
-    }
+        scanInput.value = incomingId || DEMO_RECORD_ID;
+      }
 
-    const params = new URLSearchParams(window.location.search);
-const autoVerify = params.get("verify");
+      if (verifyBtn && scanInput) {
+        verifyBtn.addEventListener("click", function () {
+          goToVerify(scanInput.value);
+        });
+      }
 
-if (autoVerify && scanInput) {
-  scanInput.value = autoVerify;
-}
+      if (scanQrCode && window.QRCode) {
+        scanQrCode.innerHTML = "";
 
-    const demoRecordId = "NDG-PROV-MP5NKDPP-LD72EE";
-const scanQrCode = document.getElementById("scanQrCode");
-
-if (scanQrCode && window.QRCode) {
-  new QRCode(scanQrCode, {
-    text: `${window.location.origin}/provenance.html?verify=${demoRecordId}#verify-record`,
-    width: 180,
-    height: 180
-  });
-}
+        new QRCode(scanQrCode, {
+          text: buildVerifyUrl(DEMO_RECORD_ID),
+          width: 180,
+          height: 180,
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    });
   </script>
+  
 </body>
 </html>

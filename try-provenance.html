@@ -495,6 +495,107 @@
   margin:10px 0 8px;
 }
 
+.try-prov-steps{
+  margin-top:90px;
+  margin-bottom:80px;
+}
+
+.try-prov-steps-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:20px;
+}
+
+.try-prov-step{
+  background:rgba(14,16,24,.88);
+  border:1px solid rgba(255,153,0,.18);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 14px 38px rgba(0,0,0,.28);
+}
+
+.try-prov-step span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#ff9900;
+  color:#111;
+  font-weight:900;
+  margin-bottom:14px;
+}
+
+.try-prov-step h3{
+  color:#fff;
+  margin:0 0 10px;
+  font-size:1.15rem;
+}
+
+.try-prov-step p{
+  color:rgba(255,255,255,.76);
+  line-height:1.6;
+  margin:0;
+  font-size:.95rem;
+}
+
+@media (max-width: 1050px){
+  .try-prov-steps-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px){
+  .try-prov-steps-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+.try-prov-industries{
+  margin-top:40px;
+  margin-bottom:80px;
+}
+
+.try-prov-industries-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:18px;
+}
+
+.try-prov-industry-card{
+  background:rgba(14,16,24,.88);
+  border:1px solid rgba(255,153,0,.18);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+
+.try-prov-industry-card h3{
+  color:#ffbf49;
+  margin:0 0 10px;
+  font-size:1.05rem;
+}
+
+.try-prov-industry-card p{
+  color:rgba(255,255,255,.74);
+  line-height:1.6;
+  margin:0;
+  font-size:.93rem;
+}
+
+@media (max-width:1050px){
+  .try-prov-industries-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width:720px){
+  .try-prov-industries-grid{
+    grid-template-columns:1fr;
+  }
+}
+
   </style>
 </head>
 
@@ -721,6 +822,123 @@
   </article>
 
 </div>
+
+    <section class="try-prov-steps">
+  <div class="try-prov-section-head">
+    <h2>How NetDAG Provenance Works</h2>
+    <p>
+      A simple verification flow for brands, manufacturers, buyers, and public product checks.
+    </p>
+  </div>
+
+  <div class="try-prov-steps-grid">
+
+    <div class="try-prov-step">
+      <span>1</span>
+      <h3>Manufacturer creates a product record</h3>
+      <p>Product details such as name, batch, origin, serial number, issuer, and shipment route are entered into the Provenance app.</p>
+    </div>
+
+    <div class="try-prov-step">
+      <span>2</span>
+      <h3>Record is anchored on-chain</h3>
+      <p>The product record is converted into a verification hash and anchored as tamper-resistant proof.</p>
+    </div>
+
+    <div class="try-prov-step">
+      <span>3</span>
+      <h3>QR code is attached to the product</h3>
+      <p>The product receives a unique QR code that links directly to its public NetDAG Provenance certificate.</p>
+    </div>
+
+    <div class="try-prov-step">
+      <span>4</span>
+      <h3>Customer scans the QR code</h3>
+      <p>A buyer scans the product with a phone before purchase, resale, delivery, warranty, or inspection.</p>
+    </div>
+
+    <div class="try-prov-step">
+      <span>5</span>
+      <h3>NetDAG verifies authenticity</h3>
+      <p>The app checks whether the Product ID exists as a confirmed on-chain Provenance record.</p>
+    </div>
+
+    <div class="try-prov-step">
+      <span>6</span>
+      <h3>Guardian Confidence is displayed</h3>
+      <p>Verified records show confidence context, helping users quickly understand whether the product proof looks strong.</p>
+    </div>
+
+  </div>
+</section>
+
+    <section class="try-prov-industries">
+  <div class="try-prov-section-head">
+    <h2>Industries That Can Use NetDAG Provenance</h2>
+    <p>
+      NetDAG Provenance can support authenticity checks across products where trust, origin, and proof matter.
+    </p>
+  </div>
+
+  <div class="try-prov-industries-grid">
+
+    <div class="try-prov-industry-card">
+      <h3>Sportswear & Fashion</h3>
+      <p>Verify shoes, apparel, limited editions, and branded products before purchase or resale.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+      <h3>Luxury Watches & Jewellery</h3>
+      <p>Give buyers a public authenticity signal for high-value items and resale markets.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+      <h3>Electronics & Mobile Devices</h3>
+      <p>Confirm product identity, batch origin, warranty status, and distribution history.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+      <h3>Luxury Goods & Handbags</h3>
+      <p>Protect premium bags, accessories, and collectibles from counterfeit circulation.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+      <h3>Automotive Components</h3>
+      <p>Help buyers and workshops verify spare parts, safety components, and supply-chain origin.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+      <h3>Pharmaceutical Products</h3>
+      <p>Support verification of packaging, batches, and certified product movement.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+       <h3>Food & Agricultural Products</h3>
+       <p>Verify the origin, harvest location, processing history, and authenticity of products such as honey, coffee, cocoa, olive oil, spices, and premium farm goods.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+      <h3>Premium Consumer Goods</h3>
+      <p>Verify perfumes, cosmetics, wines, coffee, and other premium retail products.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+      <h3>Art & Collectibles</h3>
+      <p>Attach verifiable proof to rare items, certificates, ownership history, and authenticity records.</p>
+    </div>
+
+    <div class="try-prov-industry-card">
+  <h3>Digital Assets</h3>
+  <p>Support verification of tokenized items, digital certificates, ownership proofs, and asset-linked authenticity records.</p>
+</div>
+
+<div class="try-prov-industry-card">
+  <h3>Toys & Collectibles</h3>
+  <p>Help verify limited-edition toys, collectibles, sealed products, and branded merchandise before resale or purchase.</p>
+</div>
+
+  </div>
+</section>
 
         <div class="try-prov-note">
           <strong>Demo note:</strong> Active demo records open directly inside the NetDAG Provenance certificate viewer.
