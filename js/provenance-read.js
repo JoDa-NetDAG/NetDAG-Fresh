@@ -158,7 +158,7 @@ savedAt: new Date().toISOString()
       productionDate: localRecord.productionDate || "Not provided",
       origin: localRecord.origin || "Not provided",
       shipment: localRecord.shipment || "Not provided",
-      productImage: localRecord.productImage || ""
+      productImage: localRecord.productImage || "images/ProvGeneralLogo.png"
     };
   }
 
@@ -756,12 +756,12 @@ const blob = new Blob(
      const companyLogo = document.getElementById("provCompanyLogo");
 
 if (companyLogo) {
-  if (meta?.productImage) {
-    companyLogo.setAttribute("src", meta.productImage);
-  } else {
-    companyLogo.removeAttribute("src");
-  }
-} 
+  companyLogo.setAttribute(
+    "src",
+    meta?.productImage || "images/ProvGeneralLogo.png"
+  );
+  companyLogo.setAttribute("alt", "Manufacturer logo placeholder");
+}
 
     const richMetaAvailable = hasRichMetadata(meta);
 

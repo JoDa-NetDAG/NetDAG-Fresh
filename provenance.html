@@ -902,6 +902,27 @@
   transform: translateY(-1px);
 }
 
+.prov-company-logo-box{
+  margin:24px auto;
+  max-width:520px;
+  padding:16px;
+  border-radius:22px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,153,0,.22);
+}
+
+.prov-company-logo-box img{
+  width:100%;
+  display:block;
+  border-radius:18px;
+}
+
+.prov-cert-title{
+  text-align:center;
+  width:100%;
+  margin:0 auto 20px;
+}
+
 </style>
 
 </head>
@@ -1649,6 +1670,14 @@
   NetDAG Provenance Certificate
 </h3>
 
+<div class="prov-company-logo-box">
+  <img
+    id="provCompanyLogo"
+    src="images/ProvGeneralLogo.png"
+    alt="Manufacturer logo placeholder"
+  >
+</div>
+
   <div class="prov-cert-meta">
     <div class="prov-cert-meta-item">
       <span class="prov-cert-meta-label">Network:</span>
@@ -1757,13 +1786,6 @@
     </div>
   </section>
 </div>
-
-<img
-  id="provCompanyLogo"
-  src=""
-  alt=""
-  style="display:none;"
->
 
 <!-- top separator before hero (site separator) -->
     <div class="site-separator" aria-hidden="true"></div>
