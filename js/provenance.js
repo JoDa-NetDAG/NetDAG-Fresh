@@ -441,9 +441,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const existingIndex = records.findIndex((item) => item.recordId === record.recordId);
 
       const lightweightRecord = {
-        ...record,
-        productImage: record.productImage || ""
-      };
+  ...record,
+  productImage: record.productImage || "",
+  productPhoto: record.productPhoto || ""
+};
 
       if (
         lightweightRecord.productImage &&
@@ -451,6 +452,13 @@ document.addEventListener("DOMContentLoaded", () => {
       ) {
         lightweightRecord.productImage = "";
       }
+
+    if (
+  lightweightRecord.productPhoto &&
+  lightweightRecord.productPhoto.length > 250000
+) {
+  lightweightRecord.productPhoto = "";
+}
 
       if (existingIndex >= 0) {
         records[existingIndex] = {
@@ -506,6 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
       issuer: String(formData.get("issuer") || "").trim(),
       description: String(formData.get("description") || "").trim(),
       productImage: "",
+      productPhoto: "",
       storageVersion: "mvp-local-v1",
       storageType: "browser-localStorage",
       createdAt: new Date().toISOString()
@@ -533,6 +542,29 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
     }
+
+    const productPhotoFile = document.getElementById("provProductPhoto")?.files?.[0];
+
+if (productPhotoFile) {
+  if (productPhotoFile.size > 250000) {
+    alert("Product image too large. Please use an image below 250KB.");
+    return;
+  }
+
+  try {
+    record.productPhoto = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => resolve(reader.result || "");
+      reader.onerror = () => reject(new Error("Product image could not be read."));
+
+      reader.readAsDataURL(productPhotoFile);
+    });
+  } catch (err) {
+    alert(err.message || "Product image could not be read.");
+    return;
+  }
+}
 
     try {
       const canonicalPayload = buildCanonicalPayload(record);

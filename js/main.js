@@ -169,7 +169,8 @@
     --------------------------- */
     function updatePresaleBar() {
     const root = document.documentElement;
-    const progress = parseFloat(getComputedStyle(root).getPropertyValue('--presale-progress').trim()) || 3.6;
+    const progress = parseFloat(
+  getComputedStyle(root).getPropertyValue('--presale-progress').trim()) || 0;
     
     const barFill = document.getElementById('presaleBarFill');
     const progressText = document.getElementById('progressPercent');

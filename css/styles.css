@@ -32,8 +32,7 @@
   --presale-progress-blue-end: #ae9509;
   --presale-progress-transition: 900ms;
   --presale-count-color: #0561b3;
-  --presale-progress:   3. 6;
-
+  --presale-progress:  0;
   /* Header/ticker heights */
   --ticker-height:   40px;
   --header-height:  68px;
@@ -594,6 +593,7 @@ main {
 
 .presale-bar-fill-modern {
   height: 100%;
+  min-width: 18px;
   background: linear-gradient(90deg, #00d9ff 0%, #00a8cc 100%);
   border-radius: 50px;
   box-shadow: 

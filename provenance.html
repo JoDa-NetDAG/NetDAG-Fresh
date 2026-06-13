@@ -923,6 +923,26 @@
   margin:0 auto 20px;
 }
 
+.prov-product-photo-box{
+  margin:20px auto 24px;
+  max-width:520px;
+  padding:16px;
+  border-radius:22px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,153,0,.22);
+}
+
+.prov-product-photo-box img{
+  width:100%;
+  display:block;
+  border-radius:18px;
+}
+
+.prov-product-photo-hidden{
+  display:none;
+}
+
+
 </style>
 
 </head>
@@ -1477,13 +1497,18 @@
            <div class="prov-field prov-field-full">
               <label for="provProductImage">Manufacturer Logo</label>
            <input type="file" id="provProductImage" accept="image/*" title="Product Image / Logo">
-           
            <small class="prov-upload-note">
              Upload your company logo. It will appear on the public certificate (Transparent 300px PNG logo is recommended).
             </small>
-           
             </div>
-
+          </div>
+   
+          <div class="prov-field prov-field-full">
+          <label for="provProductPhoto">Product Image</label>
+          <input type="file" id="provProductPhoto" accept="image/*" title="Product Image">
+          <small class="prov-upload-note">
+          Upload the product photo. It will appear on the public certificate below the manufacturer logo.
+          </small>
           </div>
 
           <div class="prov-form-actions">
@@ -1677,6 +1702,15 @@
     id="provCompanyLogo"
     src="images/ProvGeneralLogo.png"
     alt="Manufacturer logo placeholder"
+  >
+</div>
+
+<div class="prov-product-photo-box">
+  <img
+    id="provProductPhotoOut"
+    src=""
+    alt="Product Image"
+    class="prov-product-photo-hidden"
   >
 </div>
 

@@ -150,16 +150,17 @@ savedAt: new Date().toISOString()
     if (!localRecord) return null;
 
     return {
-      company: localRecord.manufacturer || localRecord.company || "Not provided",
-      issuer: localRecord.issuer || "Not provided",
-      product: localRecord.productName || localRecord.product || "Not provided",
-      batch: localRecord.batch || "Not provided",
-      serial: localRecord.serial || "Not provided",
-      productionDate: localRecord.productionDate || "Not provided",
-      origin: localRecord.origin || "Not provided",
-      shipment: localRecord.shipment || "Not provided",
-      productImage: localRecord.productImage || "images/ProvGeneralLogo.png"
-    };
+  company: localRecord.manufacturer || localRecord.company || "Not provided",
+  issuer: localRecord.issuer || "Not provided",
+  product: localRecord.productName || localRecord.product || "Not provided",
+  batch: localRecord.batch || "Not provided",
+  serial: localRecord.serial || "Not provided",
+  productionDate: localRecord.productionDate || "Not provided",
+  origin: localRecord.origin || "Not provided",
+  shipment: localRecord.shipment || "Not provided",
+  productImage: localRecord.productImage || "images/ProvGeneralLogo.png",
+  productPhoto: localRecord.productPhoto || ""
+};
   }
 
      function getLocalRecord(recordId) {
@@ -754,6 +755,7 @@ const blob = new Blob(
       null;
 
      const companyLogo = document.getElementById("provCompanyLogo");
+     const productPhoto = document.getElementById("provProductPhotoOut");
 
 if (companyLogo) {
   companyLogo.setAttribute(
@@ -761,6 +763,19 @@ if (companyLogo) {
     meta?.productImage || "images/ProvGeneralLogo.png"
   );
   companyLogo.setAttribute("alt", "Manufacturer logo placeholder");
+}
+
+if (productPhoto) {
+  if (meta?.productPhoto) {
+    productPhoto.src = meta.productPhoto;
+    productPhoto.alt = "Product Image";
+    productPhoto.classList.remove("prov-product-photo-hidden");
+    productPhoto.style.display = "block";
+  } else {
+    productPhoto.removeAttribute("src");
+    productPhoto.classList.add("prov-product-photo-hidden");
+    productPhoto.style.display = "none";
+  }
 }
 
     const richMetaAvailable = hasRichMetadata(meta);
