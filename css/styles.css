@@ -9025,3 +9025,101 @@ body {
     transform: scale(1);
   }
 }
+
+/* ===============================
+   GUARDIAN AI TRUST LAYER
+   =============================== */
+
+.prov-ai-layer{
+  padding:90px 0;
+  background:
+    radial-gradient(circle at top left, rgba(255,153,0,.16), transparent 34%),
+    linear-gradient(180deg, rgba(10,12,18,.98), rgba(18,20,28,.98));
+}
+
+.prov-ai-wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 18px;
+}
+
+.prov-ai-head{
+  max-width:850px;
+  margin:0 auto 36px;
+  text-align:center;
+}
+
+.prov-ai-kicker{
+  display:inline-flex;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,153,0,.12);
+  border:1px solid rgba(255,153,0,.28);
+  color:#ff9900;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+.prov-ai-head h2{
+  margin:0 0 16px;
+  color:#fff;
+  font-size:clamp(2rem,4vw,3.2rem);
+  line-height:1.08;
+}
+
+.prov-ai-head p{
+  color:rgba(255,255,255,.78);
+  line-height:1.7;
+  font-size:1.05rem;
+}
+
+.prov-ai-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.prov-ai-card{
+  padding:26px;
+  border-radius:22px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,153,0,.18);
+  box-shadow:0 14px 34px rgba(0,0,0,.28);
+}
+
+.prov-ai-icon{
+  font-size:2.3rem;
+  margin-bottom:14px;
+}
+
+.prov-ai-card h3{
+  margin:0 0 12px;
+  color:#ff9900;
+  font-size:1.35rem;
+}
+
+.prov-ai-card p{
+  margin:0 0 18px;
+  color:rgba(255,255,255,.78);
+  line-height:1.65;
+}
+
+.prov-ai-card strong{
+  color:#fff;
+  font-weight:800;
+}
+
+@media(max-width:900px){
+  .prov-ai-grid{
+    grid-template-columns:1fr;
+  }
+
+  .prov-ai-layer{
+    padding:64px 0;
+  }
+}
+
+#prov-hero .prov-phone{
+  background: transparent !important;
+  mix-blend-mode: normal;
+}
