@@ -89,6 +89,11 @@ export default function App() {
   const [stakeAmount, setStakeAmount] = useState(100);
   const [stakeLockPeriod, setStakeLockPeriod] = useState("30");
 
+  const availableNdg = Number((account?.ndgBalance || 0).toFixed(2));
+  const stakedNdg = Number((account?.stakedBalance || 0).toFixed(2));
+  const totalNdgBalance = Number((availableNdg + stakedNdg).toFixed(2));
+  const accountValue = Number((totalNdgBalance * NDG_PRICE_USD).toFixed(2));
+
   const buyReceiveAmount = Number(
     (Number(buyUsd || 0) / NDG_PRICE_USD).toFixed(2)
   );
@@ -277,6 +282,23 @@ export default function App() {
             <h2>Welcome</h2>
 
             <p className="ndg-user">{userEmail}</p>
+
+            <div className="ndg-summary">
+              <div className="ndg-summary-card">
+                <span>Available NDG</span>
+                <strong>{availableNdg} NDG</strong>
+              </div>
+
+              <div className="ndg-summary-card">
+                <span>Staked NDG</span>
+                <strong>{stakedNdg} NDG</strong>
+              </div>
+
+              <div className="ndg-summary-card">
+                <span>Account Value</span>
+                <strong>${accountValue}</strong>
+              </div>
+            </div>
 
             <div className="ndg-dashboard">
               <div className="ndg-row">

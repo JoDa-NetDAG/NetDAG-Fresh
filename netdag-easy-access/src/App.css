@@ -264,3 +264,39 @@
   width: 100%;
   margin-top: 18px;
 }
+
+.ndg-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.ndg-summary-card {
+  padding: 16px 12px;
+  border-radius: 16px;
+  background: rgba(255, 153, 0, 0.12);
+  border: 1px solid rgba(255, 153, 0, 0.28);
+  text-align: center;
+}
+
+.ndg-summary-card span {
+  display: block;
+  color: #ff9900;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.ndg-summary-card strong {
+  display: block;
+  color: #ffffff;
+  font-size: 16px;
+  word-break: break-word;
+}
+
+@media (max-width: 640px) {
+  .ndg-summary {
+    grid-template-columns: 1fr;
+  }
+}

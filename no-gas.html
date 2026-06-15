@@ -91,7 +91,7 @@
       margin: 0 auto;
       text-align: center;
       padding: 90px 16px;
-      transform: translateY(-90px); /* more negative = higher */
+      transform: translateY(-180px); /* more negative = higher */
     }
 
     .nogas-hero .nogas-eyebrow{
@@ -900,6 +900,137 @@
     <!-- Bottom separator -->
     <div class="site-separator" aria-hidden="true"></div>
 
+    <!-- EASY ACCESS MVP DEMO -->
+<section id="easy-access-demo" class="section section-content easy-access-demo">
+  <div class="section-inner narrow">
+    <div class="content-block easy-demo-card">
+
+      <header class="easy-demo-header">
+        <span class="easy-demo-kicker">NetDAG Easy Access</span>
+        <h2>Try NetDAG Easy Access</h2>
+        <p>
+          Create a NetDAG account, send NDG, and recover access — without wallet setup,
+          seed phrases, or gas fees.
+        </p>
+      </header>
+
+      <div class="easy-demo-grid">
+
+        <section class="easy-demo-panel">
+          <h3>Create Account</h3>
+          <p>No wallet download. No seed phrase. Just one click.</p>
+
+      <div class="easy-login-row">
+  <span>Continue with:</span>
+
+  <button type="button" class="easy-login-btn easy-login-active" onclick="window.location.href='http://localhost:5176/'">
+  <i class="fab fa-google"></i> Google
+  </button>
+
+  <button type="button" class="easy-login-btn easy-login-active" onclick="window.location.href='http://localhost:5176/'">
+  <i class="fas fa-envelope"></i> Email
+  </button>
+
+  <button type="button" class="easy-login-btn easy-login-active" data-login="Telegram">
+    <i class="fab fa-telegram"></i> Telegram
+  </button>
+
+  <button type="button" class="easy-login-btn easy-login-disabled" disabled>
+    <i class="fab fa-apple"></i> Apple
+  </button>
+
+  <button type="button" class="easy-login-btn easy-login-disabled" disabled>
+    <i class="fab fa-facebook-f"></i> Facebook
+  </button>
+
+  <button type="button" class="easy-login-btn easy-login-disabled" disabled>
+    <i class="fas fa-fingerprint"></i> Biometric
+  </button>
+</div>    
+
+          <button type="button" id="easyCreateAccountBtn" class="btn btn-primary">
+            Create Account
+          </button>
+
+          <div class="easy-account-box">
+            <span class="easy-label">Account ID</span>
+            <strong id="easyAccountId">Ready to create</strong>
+
+            <span class="easy-label">Balance</span>
+            <strong id="easyBalance">0 NDG</strong>
+
+            <span class="easy-label">Status</span>
+            <strong id="easyAccountStatus">Ready</strong>
+          </div>
+        </section>
+
+        <section class="easy-demo-panel">
+          <h3>Send NDG</h3>
+          <p>Simulate a gas-free transfer using an Easy Access account.</p>
+
+          <div class="easy-field">
+           <label for="easyRecipient">Recipient Wallet / Account</label>
+            <input type="text" id="easyRecipient" placeholder="NDG-USER-TEST01 or 0x...">
+          </div>
+
+          <div class="easy-field">
+            <label for="easyAmount">Amount</label>
+            <input type="number" id="easyAmount" placeholder="25" min="1">
+          </div>
+
+          <button type="button" id="easySendBtn" class="btn btn-primary">
+            Send NDG
+          </button>
+        </section>
+
+        <section class="easy-demo-panel">
+          <h3>Access Recovery</h3>
+          <p>Recover access using a familiar identity method.</p>
+
+          <div class="easy-field">
+            <label for="easyRecoveryEmail">Email Address</label>
+            <input type="email" id="easyRecoveryEmail" placeholder="you@example.com">
+          </div>
+
+          <button type="button" id="easyRecoverBtn" class="btn btn-primary">
+            Recover Account
+          </button>
+        </section>
+
+        <section class="easy-demo-panel easy-guardian-panel">
+          <h3>Guardian Protection</h3>
+
+          <ul class="easy-guardian-list">
+            <li>✓ No private keys exposed</li>
+            <li>✓ No seed phrase required</li>
+            <li>✓ Recovery support enabled</li>
+            <li>✓ Gas sponsorship simulated</li>
+          </ul>
+
+          <div class="easy-guardian-status">
+            Guardian Status: <strong>Protected</strong>
+          </div>
+        </section>
+
+      </div>
+
+      <div id="easyDemoStatus" class="easy-demo-status">
+        Create a NetDAG account to begin.
+      </div>
+
+      <div class="easy-history-box">
+  <h3>Recent Easy Access Activity</h3>
+  <div id="easyTxHistory" class="easy-tx-history">
+    No activity yet.
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<div class="site-separator" aria-hidden="true"></div>
+
     <!-- WHY GASLESS MATTERS -->
     <section class="section section-content nogas-why" id="why-gasless">
       <div class="section-inner narrow">
@@ -1561,6 +1692,243 @@
   </p>
 </div>
   </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const STORAGE_KEY = "netdag_easy_access_account_v1";
+
+  const createBtn = document.getElementById("easyCreateAccountBtn");
+  const sendBtn = document.getElementById("easySendBtn");
+  const recoverBtn = document.getElementById("easyRecoverBtn");
+  const loginBtns = document.querySelectorAll(".easy-login-btn.easy-login-active");
+
+  const accountIdEl = document.getElementById("easyAccountId");
+  const balanceEl = document.getElementById("easyBalance");
+  const statusEl = document.getElementById("easyAccountStatus");
+  const demoStatus = document.getElementById("easyDemoStatus");
+  const historyEl = document.getElementById("easyTxHistory");
+
+  const recipientInput = document.getElementById("easyRecipient");
+  const amountInput = document.getElementById("easyAmount");
+  const recoveryEmailInput = document.getElementById("easyRecoveryEmail");
+
+  function generateAccountId() {
+    const code = Math.random().toString(36).slice(2, 8).toUpperCase();
+    return `NDG-USER-${code}`;
+  }
+
+  function loadAccount() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveAccount(account) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(account));
+  }
+
+  function setMessage(message) {
+    if (demoStatus) demoStatus.textContent = message;
+  }
+
+  function renderHistory(account) {
+    if (!historyEl) return;
+
+    if (!account || !account.activity || !account.activity.length) {
+      historyEl.textContent = "No activity yet.";
+      return;
+    }
+
+    historyEl.innerHTML = account.activity
+      .slice(0, 6)
+      .map((item, index) => {
+  return `
+    <div class="easy-tx-item ${index === 0 ? "easy-tx-latest" : ""}">
+            <strong>${item.title}</strong>
+            <span>${item.detail}</span>
+            <small>${new Date(item.time).toLocaleString()}</small>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  function renderAccount(account) {
+    if (!account) {
+      if (accountIdEl) accountIdEl.textContent = "Ready to create";
+      if (balanceEl) balanceEl.textContent = "0 NDG";
+      if (statusEl) statusEl.textContent = "Ready";
+      renderHistory(null);
+      return;
+    }
+
+    if (accountIdEl) accountIdEl.textContent = account.id;
+    if (balanceEl) balanceEl.textContent = `${account.balance} NDG`;
+    if (statusEl) statusEl.textContent = "Active";
+    renderHistory(account);
+  }
+
+  function addActivity(account, title, detail) {
+    account.activity = account.activity || [];
+
+    account.activity.unshift({
+      title,
+      detail,
+      time: new Date().toISOString()
+    });
+
+    account.activity = account.activity.slice(0, 20);
+  }
+
+function createEasyAccessAccount(loginMethod = "One-click") {
+  const existing = loadAccount();
+
+  if (existing) {
+    existing.loginMethod = loginMethod;
+    existing.lastLoginAt = new Date().toISOString();
+
+    addActivity(
+      existing,
+      `${loginMethod} login`,
+      `Access confirmed through ${loginMethod}. No wallet, no seed phrase, no gas fee.`
+    );
+
+    saveAccount(existing);
+    renderAccount(existing);
+    setMessage(`${loginMethod} login confirmed for ${existing.id}.`);
+    return;
+  }
+
+  const account = {
+    id: generateAccountId(),
+    balance: 1000,
+    createdAt: new Date().toISOString(),
+    loginMethod,
+    guardianStatus: "Protected",
+    activity: []
+  };
+
+  addActivity(
+    account,
+    "Account created",
+    `${loginMethod} access enabled. 1000 NDG starter balance assigned. Gas Fee: 0.`
+  );
+
+  saveAccount(account);
+  renderAccount(account);
+  setMessage(`${loginMethod} access created. No wallet, no seed phrase, no gas fee required.`);
+}
+
+  createBtn?.addEventListener("click", () => {
+    createEasyAccessAccount("One-click");
+  });
+
+  loginBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    loginBtns.forEach((item) => item.classList.remove("easy-login-selected"));
+    btn.classList.add("easy-login-selected");
+
+    const method = btn.dataset.login || "Easy Access";
+    createEasyAccessAccount(method);
+  });
+});
+
+  sendBtn?.addEventListener("click", () => {
+    const account = loadAccount();
+
+    if (!account) {
+      setMessage("Create an Easy Access account first.");
+      return;
+    }
+
+    const recipient = recipientInput.value.trim();
+    const amount = Number(amountInput.value);
+
+    if (!recipient) {
+      setMessage("Enter a recipient wallet or account.");
+      return;
+    }
+
+    if (!amount || amount <= 0) {
+      setMessage("Enter a valid NDG amount.");
+      return;
+    }
+
+    if (amount > account.balance) {
+      setMessage("Insufficient NDG balance.");
+      return;
+    }
+
+    account.balance = Number((account.balance - amount).toFixed(2));
+
+    account.lastTransfer = {
+      to: recipient,
+      amount,
+      gasFee: 0,
+      networkFee: 0,
+      time: new Date().toISOString()
+    };
+
+    addActivity(
+      account,
+      `${amount} NDG sent`,
+      `Recipient: ${recipient} • Gas Fee: 0 • Network Fee: 0`
+    );
+
+    saveAccount(account);
+    renderAccount(account);
+
+    setMessage(`${amount} NDG sent to ${recipient}. Gas Fee: 0. Network Fee: 0.`);
+  });
+
+  recoverBtn?.addEventListener("click", () => {
+    const email = recoveryEmailInput.value.trim();
+
+    if (!email) {
+      setMessage("Enter an email address for access recovery.");
+      return;
+    }
+
+    let account = loadAccount();
+
+    if (!account) {
+      account = {
+        id: generateAccountId(),
+        balance: 1000,
+        createdAt: new Date().toISOString(),
+        recoveredAt: new Date().toISOString(),
+        recoveryEmail: email,
+        guardianStatus: "Protected",
+        activity: []
+      };
+
+      addActivity(
+        account,
+        "Account recovered",
+        `Recovery identity confirmed with ${email}. Starter balance restored.`
+      );
+    } else {
+      account.recoveredAt = new Date().toISOString();
+      account.recoveryEmail = email;
+
+      addActivity(
+        account,
+        "Access recovered",
+        `Recovery identity confirmed with ${email}.`
+      );
+    }
+
+    saveAccount(account);
+    renderAccount(account);
+
+    setMessage(`Access recovered for ${account.id}. Guardian Status: Protected.`);
+  });
+
+  renderAccount(loadAccount());
+});
+</script>
 
   <script src="js/main.js" defer></script>
   <script src="/js/buy-modals.js" defer></script>
