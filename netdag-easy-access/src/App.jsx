@@ -86,6 +86,7 @@ export default function App() {
   const [buyUsd, setBuyUsd] = useState(50);
 
   const [stakeOpen, setStakeOpen] = useState(false);
+  const [provenanceOpen, setProvenanceOpen] = useState(false);
   const [stakeAmount, setStakeAmount] = useState(100);
   const [stakeLockPeriod, setStakeLockPeriod] = useState("30");
 
@@ -377,20 +378,27 @@ export default function App() {
             </div>
 
             <div className="ndg-actions">
-              <button
-                className="ndg-secondary-btn"
-                onClick={() => setBuyOpen(true)}
-              >
-                Preview Easy Buy
-              </button>
+  <button
+    className="ndg-secondary-btn"
+    onClick={() => setBuyOpen(true)}
+  >
+    Preview Easy Buy
+  </button>
 
-              <button
-                className="ndg-secondary-btn"
-                onClick={() => setStakeOpen(true)}
-              >
-                Preview Stake NDG
-              </button>
-            </div>
+  <button
+    className="ndg-secondary-btn"
+    onClick={() => setStakeOpen(true)}
+  >
+    Preview Stake NDG
+  </button>
+
+  <button
+    className="ndg-secondary-btn"
+    onClick={() => setProvenanceOpen(true)}
+  >
+    Preview Provenance
+  </button>
+</div>
 
             <button className="ndg-logout-btn" onClick={logout}>
               Logout
@@ -491,6 +499,53 @@ export default function App() {
           </div>
         </div>
       )}
+
+    {provenanceOpen && (
+  <div className="ndg-modal-backdrop">
+    <div className="ndg-modal">
+      <button
+        className="ndg-modal-close"
+        onClick={() => setProvenanceOpen(false)}
+      >
+        ×
+      </button>
+
+      <h2>NetDAG Provenance Preview</h2>
+
+      <p className="ndg-modal-note">
+        Demo product verification powered by NetDAG Provenance.
+      </p>
+
+      <div className="ndg-buy-preview">
+        <span>Product</span>
+        <strong>Demo Sneaker Box</strong>
+      </div>
+
+      <div className="ndg-buy-preview">
+        <span>Status</span>
+        <strong>Authenticity Confirmed</strong>
+      </div>
+
+      <div className="ndg-buy-preview">
+        <span>Guardian Confidence</span>
+        <strong>STRONG</strong>
+      </div>
+
+      <div className="ndg-buy-preview">
+        <span>Record ID</span>
+        <strong>NDG-PROV-DEMO-001</strong>
+      </div>
+
+      <button
+        className="ndg-primary-btn"
+        onClick={() => setProvenanceOpen(false)}
+      >
+        Verified
+      </button>
+    </div>
+  </div>
+)}
+
     </main>
   );
 }
