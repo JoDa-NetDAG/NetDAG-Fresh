@@ -8,6 +8,39 @@ const NDG_PRICE_USD = 0.006;
 const MIN_BUY_USD = 50;
 const STAKE_REWARD_RATE = 0.12;
 
+const PROVENANCE_PRODUCTS = [
+  {
+    name: "Nike Air Max Demo",
+    recordId: "NDG-PROV-NIKE-001",
+    status: "Authenticity Confirmed",
+    guardian: "STRONG",
+  },
+  {
+    name: "Adidas Ultraboost Demo",
+    recordId: "NDG-PROV-ADIDAS-001",
+    status: "Authenticity Confirmed",
+    guardian: "STRONG",
+  },
+  {
+    name: "Apple iPhone Demo",
+    recordId: "NDG-PROV-APPLE-001",
+    status: "Authenticity Confirmed",
+    guardian: "STRONG",
+  },
+  {
+    name: "Nivea Face Cream Demo",
+    recordId: "NDG-PROV-NIVEA-001",
+    status: "Authenticity Confirmed",
+    guardian: "STRONG",
+  },
+  {
+    name: "Pharma Medicine Demo",
+    recordId: "NDG-PROV-PHARMA-001",
+    status: "Authenticity Confirmed",
+    guardian: "STRONG",
+  },
+];
+
 function shortAddress(address) {
   if (!address) return "Creating wallet...";
   return `${address.slice(0, 8)}...${address.slice(-6)}`;
@@ -87,6 +120,8 @@ export default function App() {
 
   const [stakeOpen, setStakeOpen] = useState(false);
   const [provenanceOpen, setProvenanceOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(0);
+  const activeProduct = PROVENANCE_PRODUCTS[selectedProduct];
   const [stakeAmount, setStakeAmount] = useState(100);
   const [stakeLockPeriod, setStakeLockPeriod] = useState("30");
 
@@ -423,6 +458,18 @@ export default function App() {
               Demo only. Presale purchases use MetaMask.
             </p>
 
+            <label>Select Product</label>
+<select
+  value={selectedProduct}
+  onChange={(event) => setSelectedProduct(Number(event.target.value))}
+>
+  {PROVENANCE_PRODUCTS.map((product, index) => (
+    <option value={index} key={product.recordId}>
+      {product.name}
+    </option>
+  ))}
+</select>
+
             <label>USD Amount</label>
             <input
               type="number"
@@ -516,24 +563,36 @@ export default function App() {
         Demo product verification powered by NetDAG Provenance.
       </p>
 
+      <label>Select Product</label>
+<select
+  value={selectedProduct}
+  onChange={(event) => setSelectedProduct(Number(event.target.value))}
+>
+  {PROVENANCE_PRODUCTS.map((product, index) => (
+    <option value={index} key={product.recordId}>
+      {product.name}
+    </option>
+  ))}
+</select>
+
       <div className="ndg-buy-preview">
         <span>Product</span>
-        <strong>Demo Sneaker Box</strong>
+        <strong>{activeProduct.name}</strong>
       </div>
 
       <div className="ndg-buy-preview">
         <span>Status</span>
-        <strong>Authenticity Confirmed</strong>
+        <strong>{activeProduct.status}</strong>
       </div>
 
       <div className="ndg-buy-preview">
         <span>Guardian Confidence</span>
-        <strong>STRONG</strong>
+        <strong>{activeProduct.guardian}</strong>
       </div>
 
       <div className="ndg-buy-preview">
         <span>Record ID</span>
-        <strong>NDG-PROV-DEMO-001</strong>
+        <strong>{activeProduct.recordId}</strong>
       </div>
 
       <button
