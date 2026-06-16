@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useMemo, useState } from "react";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { QRCodeSVG } from "qrcode.react";
 import "./App.css";
 
 const STARTER_BALANCE = 1000;
@@ -120,6 +121,7 @@ export default function App() {
 
   const [stakeOpen, setStakeOpen] = useState(false);
   const [provenanceOpen, setProvenanceOpen] = useState(false);
+  const [qrOpen, setQrOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(0);
   const activeProduct = PROVENANCE_PRODUCTS[selectedProduct];
   const [stakeAmount, setStakeAmount] = useState(100);
@@ -433,6 +435,14 @@ export default function App() {
   >
     Preview Provenance
   </button>
+
+  <button
+  className="ndg-secondary-btn"
+  onClick={() => setQrOpen(true)}
+>
+  Preview QR Scan
+</button>
+
 </div>
 
             <button className="ndg-logout-btn" onClick={logout}>
@@ -598,6 +608,63 @@ export default function App() {
       <button
         className="ndg-primary-btn"
         onClick={() => setProvenanceOpen(false)}
+      >
+        Verified
+      </button>
+    </div>
+  </div>
+)}
+
+{qrOpen && (
+  <div className="ndg-modal-backdrop">
+    <div className="ndg-modal">
+      <button
+        className="ndg-modal-close"
+        onClick={() => setQrOpen(false)}
+      >
+        ×
+      </button>
+
+      <h2>NetDAG QR Scan Preview</h2>
+
+      <p className="ndg-modal-note">
+        Demo QR verification for the selected Provenance product.
+      </p>
+
+     <div className="ndg-qr-box">
+  <QRCodeSVG
+    value={`https://netdag.com/provenance.html?id=${activeProduct.recordId}`}
+    size={180}
+    bgColor="#ffffff"
+    fgColor="#000000"
+  />
+
+  <p>Scan to Verify</p>
+</div>
+
+      <div className="ndg-buy-preview">
+        <span>Selected Product</span>
+        <strong>{activeProduct.name}</strong>
+      </div>
+
+      <div className="ndg-buy-preview">
+        <span>Record ID</span>
+        <strong>{activeProduct.recordId}</strong>
+      </div>
+
+      <div className="ndg-buy-preview">
+        <span>Status</span>
+        <strong>{activeProduct.status}</strong>
+      </div>
+
+      <div className="ndg-buy-preview">
+        <span>Guardian Confidence</span>
+        <strong>{activeProduct.guardian}</strong>
+      </div>
+
+      <button
+        className="ndg-primary-btn"
+        onClick={() => setQrOpen(false)}
       >
         Verified
       </button>

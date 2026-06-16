@@ -300,3 +300,36 @@
     grid-template-columns: 1fr;
   }
 }
+
+.ndg-qr-box {
+  margin: 18px 0;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 153, 0, 0.22);
+  text-align: center;
+}
+
+.ndg-qr-placeholder {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 12px;
+  background: #ffffff;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.ndg-qr-placeholder span {
+  background: #111827;
+  border-radius: 6px;
+}
+
+.ndg-qr-box p {
+  margin: 0;
+  color: #ff9900;
+  font-weight: bold;
+}
