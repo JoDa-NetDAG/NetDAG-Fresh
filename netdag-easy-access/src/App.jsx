@@ -481,20 +481,6 @@ export default function App() {
     Stake NDG
   </button>
 
-  <button
-    className="ndg-secondary-btn"
-    onClick={() => setProvenanceOpen(true)}
-  >
-    Product Verification
-  </button>
-
-  <button
-  className="ndg-secondary-btn"
-  onClick={() => setQrOpen(true)}
->
-  Scan QR Code
-</button>
-
 </div>
 
             <button className="ndg-logout-btn" onClick={logout}>
