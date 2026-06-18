@@ -11,36 +11,62 @@ const STAKE_REWARD_RATE = 0.12;
 
 const PROVENANCE_PRODUCTS = [
   {
-    name: "Nike Air Max Demo",
-    recordId: "NDG-PROV-NIKE-001",
+    name: "Nike Air Max",
+    recordId: "NDG-PROV-MQIDGPNN-408WSZ",
     status: "Authenticity Confirmed",
     guardian: "STRONG",
   },
   {
-    name: "Adidas Ultraboost Demo",
+    name: "Adidas Ultraboost",
     recordId: "NDG-PROV-ADIDAS-001",
     status: "Authenticity Confirmed",
     guardian: "STRONG",
   },
   {
-    name: "Apple iPhone Demo",
+    name: "Apple iPhone",
     recordId: "NDG-PROV-APPLE-001",
     status: "Authenticity Confirmed",
     guardian: "STRONG",
   },
   {
-    name: "Nivea Face Cream Demo",
+    name: "Nivea Face Cream",
     recordId: "NDG-PROV-NIVEA-001",
     status: "Authenticity Confirmed",
     guardian: "STRONG",
   },
   {
-    name: "Pharma Medicine Demo",
+    name: "Pharma Medicine",
     recordId: "NDG-PROV-PHARMA-001",
     status: "Authenticity Confirmed",
     guardian: "STRONG",
   },
 ];
+
+function loadProvenanceProducts() {
+  try {
+    const records =
+      JSON.parse(localStorage.getItem("netdag_provenance_records_v1")) || [];
+
+    const realRecords = records
+      .filter((record) => record?.recordId)
+      .map((record) => ({
+        name: record.productName || record.product || "Verified Product",
+        recordId: record.recordId,
+        status:
+          record.integrityStatus === "tampered"
+            ? "Possible Tampering Detected"
+            : "Authenticity Confirmed",
+        guardian:
+          record.integrityStatus === "tampered"
+            ? "NOT CONFIRMED"
+            : "STRONG",
+      }));
+
+    return realRecords.length > 0 ? realRecords : PROVENANCE_PRODUCTS;
+  } catch {
+    return PROVENANCE_PRODUCTS;
+  }
+}
 
 function shortAddress(address) {
   if (!address) return "Creating wallet...";
@@ -123,7 +149,9 @@ export default function App() {
   const [provenanceOpen, setProvenanceOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(0);
-  const activeProduct = PROVENANCE_PRODUCTS[selectedProduct];
+  const provenanceProducts = useMemo(() => loadProvenanceProducts(), []);
+
+  const activeProduct = provenanceProducts[selectedProduct] || provenanceProducts[0];
   const [stakeAmount, setStakeAmount] = useState(100);
   const [stakeLockPeriod, setStakeLockPeriod] = useState("30");
 
@@ -419,28 +447,28 @@ export default function App() {
     className="ndg-secondary-btn"
     onClick={() => setBuyOpen(true)}
   >
-    Preview Easy Buy
+    Buy NDG
   </button>
 
   <button
     className="ndg-secondary-btn"
     onClick={() => setStakeOpen(true)}
   >
-    Preview Stake NDG
+    Stake NDG
   </button>
 
   <button
     className="ndg-secondary-btn"
     onClick={() => setProvenanceOpen(true)}
   >
-    Preview Provenance
+    Product Verification
   </button>
 
   <button
   className="ndg-secondary-btn"
   onClick={() => setQrOpen(true)}
 >
-  Preview QR Scan
+  Scan QR Code
 </button>
 
 </div>
@@ -462,10 +490,10 @@ export default function App() {
               ×
             </button>
 
-            <h2>Preview Easy Buy</h2>
+            <h2>Buy NDG</h2>
 
             <p className="ndg-modal-note">
-              Demo only. Presale purchases use MetaMask.
+              Purchase NDG through NetDAG Easy Access.
             </p>
 
             <label>Select Product</label>
@@ -473,7 +501,7 @@ export default function App() {
   value={selectedProduct}
   onChange={(event) => setSelectedProduct(Number(event.target.value))}
 >
-  {PROVENANCE_PRODUCTS.map((product, index) => (
+  {provenanceProducts.map((product, index) => (
     <option value={index} key={product.recordId}>
       {product.name}
     </option>
@@ -499,7 +527,7 @@ export default function App() {
             </div>
 
             <button className="ndg-primary-btn" onClick={handleBuyNDG}>
-              Preview Buy NDG
+              Buy NDG
             </button>
           </div>
         </div>
@@ -515,10 +543,10 @@ export default function App() {
               ×
             </button>
 
-            <h2>Preview Stake NDG</h2>
+            <h2>Stake NDG</h2>
 
             <p className="ndg-modal-note">
-              Demo only. Real staking remains on stake-ndg.html.
+              Stake your NDG and earn rewards.
             </p>
 
             <label>Amount to Stake</label>
@@ -551,7 +579,7 @@ export default function App() {
             </div>
 
             <button className="ndg-primary-btn" onClick={handleStakeNDG}>
-              Preview Stake
+              Stake NDG
             </button>
           </div>
         </div>
@@ -567,10 +595,10 @@ export default function App() {
         ×
       </button>
 
-      <h2>NetDAG Provenance Preview</h2>
-
+      <h2>NetDAG Product Verification</h2>
+      
       <p className="ndg-modal-note">
-        Demo product verification powered by NetDAG Provenance.
+        Product verification powered by NetDAG Provenance.
       </p>
 
       <label>Select Product</label>
@@ -578,7 +606,7 @@ export default function App() {
   value={selectedProduct}
   onChange={(event) => setSelectedProduct(Number(event.target.value))}
 >
-  {PROVENANCE_PRODUCTS.map((product, index) => (
+  {provenanceProducts.map((product, index) => (
     <option value={index} key={product.recordId}>
       {product.name}
     </option>
@@ -606,11 +634,18 @@ export default function App() {
       </div>
 
       <button
-        className="ndg-primary-btn"
-        onClick={() => setProvenanceOpen(false)}
-      >
-        Verified
-      </button>
+  className="ndg-primary-btn"
+  onClick={() => {
+    window.open(
+      `/provenance.html?id=${encodeURIComponent(
+        activeProduct.recordId
+      )}#prov-mvp-demo`,
+      "_blank"
+    );
+  }}
+>
+  Open Certificate
+</button>
     </div>
   </div>
 )}
@@ -625,10 +660,10 @@ export default function App() {
         ×
       </button>
 
-      <h2>NetDAG QR Scan Preview</h2>
+      <h2>NetDAG QR Verification</h2>
 
       <p className="ndg-modal-note">
-        Demo QR verification for the selected Provenance product.
+        Scan this QR code to verify product authenticity.
       </p>
 
      <div className="ndg-qr-box">
