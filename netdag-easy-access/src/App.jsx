@@ -4,6 +4,8 @@ import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { QRCodeSVG } from "qrcode.react";
 import "./App.css";
 
+
+
 const STARTER_BALANCE = 1000;
 const NDG_PRICE_USD = 0.006;
 const MIN_BUY_USD = 50;
@@ -88,6 +90,8 @@ function makeAccountId(user) {
 
   return `NDG-USER-${Math.abs(hash).toString(36).slice(0, 6).toUpperCase()}`;
 }
+
+
 
 function getUserEmail(user) {
   return (
@@ -332,6 +336,26 @@ export default function App() {
 
   return (
     <main className="ndg-page">
+
+    <a
+  href="https://www.netdag.com"
+  className="ndg-return-link"
+  style={{
+    position: "fixed",
+    top: "18px",
+    left: "18px",
+    zIndex: 999999,
+    color: "#f5b942",
+    background: "rgba(10,15,30,0.95)",
+    padding: "10px 14px",
+    borderRadius: "999px",
+    textDecoration: "none",
+    fontWeight: 800
+  }}
+>
+  ← Return to NetDAG
+</a>
+
       <section className="ndg-card">
         <img src="/images/ndg-logo.png" alt="NetDAG" className="ndg-logo" />
 
@@ -495,18 +519,6 @@ export default function App() {
             <p className="ndg-modal-note">
               Purchase NDG through NetDAG Easy Access.
             </p>
-
-            <label>Select Product</label>
-<select
-  value={selectedProduct}
-  onChange={(event) => setSelectedProduct(Number(event.target.value))}
->
-  {provenanceProducts.map((product, index) => (
-    <option value={index} key={product.recordId}>
-      {product.name}
-    </option>
-  ))}
-</select>
 
             <label>USD Amount</label>
             <input
