@@ -11,38 +11,6 @@ const NDG_PRICE_USD = 0.006;
 const MIN_BUY_USD = 50;
 const STAKE_REWARD_RATE = 0.12;
 
-const PROVENANCE_PRODUCTS = [
-  {
-    name: "Nike Air Max",
-    recordId: "NDG-PROV-MQIDGPNN-408WSZ",
-    status: "Authenticity Confirmed",
-    guardian: "STRONG",
-  },
-  {
-    name: "Adidas Ultraboost",
-    recordId: "NDG-PROV-ADIDAS-001",
-    status: "Authenticity Confirmed",
-    guardian: "STRONG",
-  },
-  {
-    name: "Apple iPhone",
-    recordId: "NDG-PROV-APPLE-001",
-    status: "Authenticity Confirmed",
-    guardian: "STRONG",
-  },
-  {
-    name: "Nivea Face Cream",
-    recordId: "NDG-PROV-NIVEA-001",
-    status: "Authenticity Confirmed",
-    guardian: "STRONG",
-  },
-  {
-    name: "Pharma Medicine",
-    recordId: "NDG-PROV-PHARMA-001",
-    status: "Authenticity Confirmed",
-    guardian: "STRONG",
-  },
-];
 
 function loadProvenanceProducts() {
   try {
@@ -64,9 +32,9 @@ function loadProvenanceProducts() {
             : "STRONG",
       }));
 
-    return realRecords.length > 0 ? realRecords : PROVENANCE_PRODUCTS;
+    return realRecords.length > 0 ? realRecords : [];
   } catch {
-    return PROVENANCE_PRODUCTS;
+    return [];
   }
 }
 
