@@ -9509,3 +9509,31 @@ body {
     margin-right: 10px;
   }
 }
+
+@media (max-width: 768px) {
+  .brand-text,
+  .site-title,
+  .logo-text {
+    font-size: 36px;
+  }
+
+  .brand-logo,
+  .site-logo,
+  .logo img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .mobile-login-btn {
+    display: inline-flex;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 14px;
+    padding: 7px 12px;
+  }
+
+  .menu-toggle {
+    flex-shrink: 0;
+  }
+}
