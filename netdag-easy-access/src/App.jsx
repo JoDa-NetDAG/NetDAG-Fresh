@@ -4,13 +4,10 @@ import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { QRCodeSVG } from "qrcode.react";
 import "./App.css";
 
-
-
 const STARTER_BALANCE = 1000;
 const NDG_PRICE_USD = 0.006;
 const MIN_BUY_USD = 50;
 const STAKE_REWARD_RATE = 0.12;
-
 
 function loadProvenanceProducts() {
   try {
@@ -27,9 +24,7 @@ function loadProvenanceProducts() {
             ? "Possible Tampering Detected"
             : "Authenticity Confirmed",
         guardian:
-          record.integrityStatus === "tampered"
-            ? "NOT CONFIRMED"
-            : "STRONG",
+          record.integrityStatus === "tampered" ? "NOT CONFIRMED" : "STRONG",
       }));
 
     return realRecords.length > 0 ? realRecords : [];
@@ -51,6 +46,7 @@ function makeAccountId(user) {
     "NETDAG-EASY-ACCESS";
 
   let hash = 0;
+
   for (let i = 0; i < raw.length; i += 1) {
     hash = (hash << 5) - hash + raw.charCodeAt(i);
     hash |= 0;
@@ -58,8 +54,6 @@ function makeAccountId(user) {
 
   return `NDG-USER-${Math.abs(hash).toString(36).slice(0, 6).toUpperCase()}`;
 }
-
-
 
 function getUserEmail(user) {
   return (
@@ -121,9 +115,11 @@ export default function App() {
   const [provenanceOpen, setProvenanceOpen] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(0);
-  const provenanceProducts = useMemo(() => loadProvenanceProducts(), []);
 
-  const activeProduct = provenanceProducts[selectedProduct] || provenanceProducts[0];
+  const provenanceProducts = useMemo(() => loadProvenanceProducts(), []);
+  const activeProduct =
+    provenanceProducts[selectedProduct] || provenanceProducts[0] || null;
+
   const [stakeAmount, setStakeAmount] = useState(100);
   const [stakeLockPeriod, setStakeLockPeriod] = useState("30");
 
@@ -152,6 +148,7 @@ export default function App() {
 
     if (saved) {
       const parsed = JSON.parse(saved);
+
       const updated = {
         ...parsed,
         userEmail,
@@ -299,30 +296,46 @@ export default function App() {
   }
 
   if (!ready) {
-    return <div className="ndg-page">Loading NetDAG Easy Access...</div>;
+    return (
+      <div className="ndg-page ndg-loading">
+        Loading NetDAG Easy Access...
+      </div>
+    );
   }
 
   return (
     <main className="ndg-page">
+      <div className="ndg-ticker">
+        <span>
+          Protected login •  NDG utility from day one •  
+        </span>
+      </div>
 
-    <a
-  href="https://www.netdag.com"
-  className="ndg-return-link"
-  style={{
-    position: "fixed",
-    top: "18px",
-    left: "18px",
-    zIndex: 999999,
-    color: "#f5b942",
-    background: "rgba(10,15,30,0.95)",
-    padding: "10px 14px",
-    borderRadius: "999px",
-    textDecoration: "none",
-    fontWeight: 800
-  }}
->
-  ← Return to NetDAG
-</a>
+      <header className="ndg-site-header">
+        <a href="https://www.netdag.com" className="ndg-brand">
+          <img src="/images/ndg-logo.png" alt="NetDAG logo" />
+          <span>NetDAG</span>
+        </a>
+
+        <nav className="ndg-top-nav" aria-label="NetDAG navigation">
+          <a href="https://www.netdag.com">Home</a>
+          <a href="https://www.netdag.com/provenance.html">Provenance</a>
+          <a href="https://www.netdag.com/no-gas.html">No Gas</a>
+          <a href="https://www.netdag.com/purchase-ndg.html">Access NDG</a>
+        </nav>
+
+        <div className="ndg-header-action">
+          {authenticated ? (
+            <button type="button" onClick={logout}>
+              Logout
+            </button>
+          ) : (
+            <button type="button" onClick={login}>
+              Login
+            </button>
+          )}
+        </div>
+      </header>
 
       <section className="ndg-card">
         <img src="/images/ndg-logo.png" alt="NetDAG" className="ndg-logo" />
@@ -333,7 +346,7 @@ export default function App() {
 
         {!authenticated ? (
           <button className="ndg-primary-btn" onClick={login}>
-            Continue with Google / Email
+            Sign in
           </button>
         ) : (
           <>
@@ -435,21 +448,36 @@ export default function App() {
             </div>
 
             <div className="ndg-actions">
-  <button
-    className="ndg-secondary-btn"
-    onClick={() => setBuyOpen(true)}
-  >
-    Buy NDG
-  </button>
+              <button
+                className="ndg-secondary-btn"
+                onClick={() => setBuyOpen(true)}
+              >
+                Buy NDG
+              </button>
 
-  <button
-    className="ndg-secondary-btn"
-    onClick={() => setStakeOpen(true)}
-  >
-    Stake NDG
-  </button>
+              <button
+                className="ndg-secondary-btn"
+                onClick={() => setStakeOpen(true)}
+              >
+                Stake NDG
+              </button>
 
-</div>
+              <button
+                className="ndg-secondary-btn"
+                onClick={() => setProvenanceOpen(true)}
+                disabled={!activeProduct}
+              >
+                Verify Product
+              </button>
+
+              <button
+                className="ndg-secondary-btn"
+                onClick={() => setQrOpen(true)}
+                disabled={!activeProduct}
+              >
+                QR Verification
+              </button>
+            </div>
 
             <button className="ndg-logout-btn" onClick={logout}>
               Logout
@@ -457,6 +485,20 @@ export default function App() {
           </>
         )}
       </section>
+
+      <footer className="ndg-site-footer">
+        <p>
+          NetDAG Easy Access: Use NDG without seed phrases, gas confusion, or wallet complexity.
+        </p>
+
+        <div>
+          <a href="https://www.netdag.com">Home</a>
+          <a href="https://www.netdag.com/provenance.html">Provenance</a>
+          <a href="https://www.netdag.com/no-gas.html">No Gas</a>
+           <a href="https://www.netdag.com/menu/whitepaper.html">Whitepaper</a>
+        </div>
+
+      </footer>
 
       {buyOpen && (
         <div className="ndg-modal-backdrop">
@@ -511,9 +553,7 @@ export default function App() {
 
             <h2>Stake NDG</h2>
 
-            <p className="ndg-modal-note">
-              Stake your NDG and earn rewards.
-            </p>
+            <p className="ndg-modal-note">Stake your NDG and earn rewards.</p>
 
             <label>Amount to Stake</label>
             <input
@@ -551,128 +591,121 @@ export default function App() {
         </div>
       )}
 
-    {provenanceOpen && (
-  <div className="ndg-modal-backdrop">
-    <div className="ndg-modal">
-      <button
-        className="ndg-modal-close"
-        onClick={() => setProvenanceOpen(false)}
-      >
-        ×
-      </button>
+      {provenanceOpen && activeProduct && (
+        <div className="ndg-modal-backdrop">
+          <div className="ndg-modal">
+            <button
+              className="ndg-modal-close"
+              onClick={() => setProvenanceOpen(false)}
+            >
+              ×
+            </button>
 
-      <h2>NetDAG Product Verification</h2>
-      
-      <p className="ndg-modal-note">
-        Product verification powered by NetDAG Provenance.
-      </p>
+            <h2>NetDAG Product Verification</h2>
 
-      <label>Select Product</label>
-<select
-  value={selectedProduct}
-  onChange={(event) => setSelectedProduct(Number(event.target.value))}
->
-  {provenanceProducts.map((product, index) => (
-    <option value={index} key={product.recordId}>
-      {product.name}
-    </option>
-  ))}
-</select>
+            <p className="ndg-modal-note">
+              Product verification powered by NetDAG Provenance.
+            </p>
 
-      <div className="ndg-buy-preview">
-        <span>Product</span>
-        <strong>{activeProduct.name}</strong>
-      </div>
+            <label>Select Product</label>
+            <select
+              value={selectedProduct}
+              onChange={(event) => setSelectedProduct(Number(event.target.value))}
+            >
+              {provenanceProducts.map((product, index) => (
+                <option value={index} key={product.recordId}>
+                  {product.name}
+                </option>
+              ))}
+            </select>
 
-      <div className="ndg-buy-preview">
-        <span>Status</span>
-        <strong>{activeProduct.status}</strong>
-      </div>
+            <div className="ndg-buy-preview">
+              <span>Product</span>
+              <strong>{activeProduct.name}</strong>
+            </div>
 
-      <div className="ndg-buy-preview">
-        <span>Guardian Confidence</span>
-        <strong>{activeProduct.guardian}</strong>
-      </div>
+            <div className="ndg-buy-preview">
+              <span>Status</span>
+              <strong>{activeProduct.status}</strong>
+            </div>
 
-      <div className="ndg-buy-preview">
-        <span>Record ID</span>
-        <strong>{activeProduct.recordId}</strong>
-      </div>
+            <div className="ndg-buy-preview">
+              <span>Guardian Confidence</span>
+              <strong>{activeProduct.guardian}</strong>
+            </div>
 
-      <button
-  className="ndg-primary-btn"
-  onClick={() => {
-    window.open(
-      `/provenance.html?id=${encodeURIComponent(
-        activeProduct.recordId
-      )}#prov-mvp-demo`,
-      "_blank"
-    );
-  }}
->
-  Open Certificate
-</button>
-    </div>
-  </div>
-)}
+            <div className="ndg-buy-preview">
+              <span>Record ID</span>
+              <strong>{activeProduct.recordId}</strong>
+            </div>
 
-{qrOpen && (
-  <div className="ndg-modal-backdrop">
-    <div className="ndg-modal">
-      <button
-        className="ndg-modal-close"
-        onClick={() => setQrOpen(false)}
-      >
-        ×
-      </button>
+            <button
+              className="ndg-primary-btn"
+              onClick={() => {
+                window.open(
+                  `https://www.netdag.com/provenance.html?id=${encodeURIComponent(
+                    activeProduct.recordId
+                  )}#prov-mvp-demo`,
+                  "_blank"
+                );
+              }}
+            >
+              Open Certificate
+            </button>
+          </div>
+        </div>
+      )}
 
-      <h2>NetDAG QR Verification</h2>
+      {qrOpen && activeProduct && (
+        <div className="ndg-modal-backdrop">
+          <div className="ndg-modal">
+            <button className="ndg-modal-close" onClick={() => setQrOpen(false)}>
+              ×
+            </button>
 
-      <p className="ndg-modal-note">
-        Scan this QR code to verify product authenticity.
-      </p>
+            <h2>NetDAG QR Verification</h2>
 
-     <div className="ndg-qr-box">
-  <QRCodeSVG
-    value={`https://netdag.com/provenance.html?id=${activeProduct.recordId}`}
-    size={180}
-    bgColor="#ffffff"
-    fgColor="#000000"
-  />
+            <p className="ndg-modal-note">
+              Scan this QR code to verify product authenticity.
+            </p>
 
-  <p>Scan to Verify</p>
-</div>
+            <div className="ndg-qr-box">
+              <QRCodeSVG
+                value={`https://www.netdag.com/provenance.html?id=${activeProduct.recordId}`}
+                size={180}
+                bgColor="#ffffff"
+                fgColor="#000000"
+              />
 
-      <div className="ndg-buy-preview">
-        <span>Selected Product</span>
-        <strong>{activeProduct.name}</strong>
-      </div>
+              <p>Scan to Verify</p>
+            </div>
 
-      <div className="ndg-buy-preview">
-        <span>Record ID</span>
-        <strong>{activeProduct.recordId}</strong>
-      </div>
+            <div className="ndg-buy-preview">
+              <span>Selected Product</span>
+              <strong>{activeProduct.name}</strong>
+            </div>
 
-      <div className="ndg-buy-preview">
-        <span>Status</span>
-        <strong>{activeProduct.status}</strong>
-      </div>
+            <div className="ndg-buy-preview">
+              <span>Record ID</span>
+              <strong>{activeProduct.recordId}</strong>
+            </div>
 
-      <div className="ndg-buy-preview">
-        <span>Guardian Confidence</span>
-        <strong>{activeProduct.guardian}</strong>
-      </div>
+            <div className="ndg-buy-preview">
+              <span>Status</span>
+              <strong>{activeProduct.status}</strong>
+            </div>
 
-      <button
-        className="ndg-primary-btn"
-        onClick={() => setQrOpen(false)}
-      >
-        Verified
-      </button>
-    </div>
-  </div>
-)}
+            <div className="ndg-buy-preview">
+              <span>Guardian Confidence</span>
+              <strong>{activeProduct.guardian}</strong>
+            </div>
 
+            <button className="ndg-primary-btn" onClick={() => setQrOpen(false)}>
+              Verified
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
