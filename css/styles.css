@@ -9602,3 +9602,23 @@ body {
     flex-shrink: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .brand-logo {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .brand-text {
+    font-size: 30px !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-login-btn,
+  .menu-toggle {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 8px !important;
+  }
+}
