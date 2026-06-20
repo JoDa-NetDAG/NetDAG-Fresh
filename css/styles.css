@@ -9474,3 +9474,18 @@ body {
   font-weight: 800;
   text-align: center;
 }
+
+.login-icon-card.login-disabled {
+  opacity: 0.35 !important;
+  filter: grayscale(1) !important;
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+}
+
+.login-icon-card.login-disabled .login-icon {
+  filter: grayscale(1) !important;
+}
+
+.login-icon-card.login-disabled .login-label {
+  opacity: 0.65 !important;
+}
