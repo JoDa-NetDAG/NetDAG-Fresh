@@ -9633,3 +9633,9 @@ body {
     margin-right: 14px !important;
   }
 }
+
+.menu-toggle {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
