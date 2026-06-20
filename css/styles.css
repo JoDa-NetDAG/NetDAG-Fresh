@@ -9624,8 +9624,12 @@ body {
 }
 
 @media (max-width: 768px) {
+  .brand {
+    margin-right: auto !important;
+  }
+
   .mobile-login-btn {
-    margin-left: auto !important;
-    margin-right: 18px !important;
+    margin-left: 12px !important;
+    margin-right: 14px !important;
   }
 }
