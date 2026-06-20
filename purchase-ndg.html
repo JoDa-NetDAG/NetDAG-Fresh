@@ -327,11 +327,30 @@
     </div>
   </header>
 
-  <!-- MENU PANEL -->
-  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
-    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+  <a
+  href="https://easy.netdag.com"
+  class="mobile-login-btn"
+  target="_blank"
+  rel="noopener"
+>
+  Login
+</a>
 
-      <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
+<button
+  id="menu-toggle"
+  class="menu-toggle"
+  aria-expanded="false"
+  aria-controls="site-menu"
+  aria-label="Open menu"
+>
+  ☰
+</button>
+
+<div id="site-menu" class="site-menu" hidden aria-hidden="true">
+
+
+    <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
+    <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
 
       <ul class="menu-list">
         <li><a href="index.html">Home</a></li>
@@ -381,7 +400,7 @@
           </h1>
 
           <p class="hero-kicker" style="font-size: 1.4rem; color: #cccccc; margin-bottom: 40px;">
-            Access NDG during the early NetDAG ecosystem distribution phase using BNB on BNB Smart Chain Testnet.
+            Access NDG during the early NetDAG ecosystem distribution phase. No wallet, no seed phrase, and no gas fee features begin after mainnet activation.
           </p>
 
           <button

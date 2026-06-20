@@ -432,8 +432,27 @@
   </div>
 </header>
 
-  <!-- MENU PANEL (mobile drawer) -->
-  <div id="site-menu" class="site-menu" hidden aria-hidden="true">
+ <a
+  href="https://easy.netdag.com"
+  class="mobile-login-btn"
+  target="_blank"
+  rel="noopener"
+>
+  Login
+</a>
+
+<button
+  id="menu-toggle"
+  class="menu-toggle"
+  aria-expanded="false"
+  aria-controls="site-menu"
+  aria-label="Open menu"
+>
+  ☰
+</button>
+
+<div id="site-menu" class="site-menu" hidden aria-hidden="true">
+  
     <div class="site-menu-inner" role="dialog" aria-modal="false" aria-label="Site menu">
       <button id="site-menu-close" class="site-menu-close" aria-label="Close menu">×</button>
 
@@ -456,6 +475,7 @@
         <li><a href="menu/partners.html">Partners</a></li>
         <li><a href="menu/legal.html">Legal</a></li>
       </ul>
+
       <div class="mobile-ctas">
   <!-- Use this on pages inside /menu/ -->
   <a href="purchase-ndg.html" class="btn btn-primary nav-cta">Access NDG</a>
