@@ -9622,3 +9622,10 @@ body {
     padding: 0 8px !important;
   }
 }
+
+@media (max-width: 768px) {
+  .mobile-login-btn {
+    margin-left: auto !important;
+    margin-right: 18px !important;
+  }
+}
