@@ -9557,3 +9557,9 @@ body {
     z-index: 50;
   }
 }
+
+@media (max-width: 768px) {
+  .nav-login {
+    display: none !important;
+  }
+}
