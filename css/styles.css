@@ -9474,10 +9474,3 @@ body {
   font-weight: 800;
   text-align: center;
 }
-
-@media (max-width: 768px) {
-  .mobile-login-btn {
-    margin-left: auto;
-    margin-right: 10px;
-  }
-}
