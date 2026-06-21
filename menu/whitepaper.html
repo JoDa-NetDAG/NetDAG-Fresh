@@ -13,7 +13,7 @@
   <link rel="shortcut icon" type="image/png" href="/images/ndg-logo.png">
 <link rel="apple-touch-icon" href="/images/ndg-logo.png">
   
-  <style>
+   <style>
     /* Whitepaper-specific styling */
     body.whitepaper-page {
       background: var(--bg, #050714);
@@ -225,94 +225,73 @@
       color: var(--muted, #c0c0c0);
       margin-top: 10px;
     }
-  
-    /* MOBILE NAVBAR FIX - CLEAN */
-@media (max-width: 900px) {
-  body.whitepaper-page .site-header .nav-links,
-  body.whitepaper-page .site-header .header-ctas {
-    display: none !important;
-  }
 
-  body.whitepaper-page .site-header .header-inner {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 14px !important;
-    padding: 12px 18px !important;
-    flex-wrap: nowrap !important;
-    box-sizing: border-box !important;
-  }
+    /* MOBILE NAVBAR FIX - CRITICAL */
+    @media (max-width: 900px) {
+      body.whitepaper-page .site-header .nav-links {
+        display: none !important;
+      }
+      
+      body.whitepaper-page .site-header .header-inner {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 12px 20px !important;
+        flex-wrap: nowrap !important;
+        box-sizing: border-box !important;
+      }
+      
+      body.whitepaper-page .site-header .brand {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        flex-shrink: 0 !important;
+      }
+      
+      body.whitepaper-page .site-header .brand-logo {
+        height: 45px !important;
+        width: auto !important;
+      }
+      
+      body.whitepaper-page .site-header .brand-text {
+        font-size: 1.5rem !important;
+        white-space: nowrap !important;
+      }
+      
+      body.whitepaper-page .site-header .nav-right {
+        display: flex !important;
+        align-items: center !important;
+        flex-shrink: 0 !important;
+        margin-left: auto !important;
+      }
+      
+      body.whitepaper-page .site-header .menu-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        gap: 5px !important;
+        padding: 10px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        width: 48px !important;
+        height: 48px !important;
+      }
+      
+      body.whitepaper-page .site-header .menu-toggle .burger-line {
+        display: block !important;
+        width: 28px !important;
+        height: 3px !important;
+        background: #ff9900 !important;
+        border-radius: 2px !important;
+      }
+      
+      body.whitepaper-page .site-header .header-ctas {
+        display: none !important;
+      }
+    }
 
-  body.whitepaper-page .site-header .brand {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    min-width: 0 !important;
-    flex: 1 1 auto !important;
-    overflow: hidden !important;
-  }
-
-  body.whitepaper-page .site-header .brand-logo {
-    width: 52px !important;
-    height: 52px !important;
-    object-fit: contain !important;
-    flex: 0 0 auto !important;
-  }
-
-  body.whitepaper-page .site-header .brand-text {
-    font-size: clamp(2rem, 9vw, 2.35rem) !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: clip !important;
-  }
-
-  body.whitepaper-page .site-header .nav-right {
-    display: flex !important;
-    align-items: center !important;
-    gap: 18px !important;
-    flex: 0 0 auto !important;
-    margin-left: 0 !important;
-  }
-
-  body.whitepaper-page .site-header .mobile-login-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    color: #9fd2ff !important;
-    font-size: 1.25rem !important;
-    font-weight: 700 !important;
-    line-height: 1 !important;
-    text-decoration: none !important;
-    white-space: nowrap !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  body.whitepaper-page .site-header .menu-toggle {
-    display: flex !important;
-    flex: 0 0 auto !important;
-    width: 48px !important;
-    height: 48px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-direction: column !important;
-    gap: 5px !important;
-    padding: 10px !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-  }
-
-  body.whitepaper-page .site-header .menu-toggle .burger-line {
-    display: block !important;
-    width: 28px !important;
-    height: 3px !important;
-    background: #ff9900 !important;
-    border-radius: 2px !important;
-  }
-}
- 
     .footer-legal-note{
   max-width: 980px;
   margin: 16px auto 8px;
