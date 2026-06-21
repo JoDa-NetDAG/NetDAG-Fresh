@@ -9556,3 +9556,19 @@ body {
 .ndg-card {
   margin-top: 55px;
 }
+
+/* Desktop: hide mobile login */
+.mobile-login-btn {
+  display: none;
+}
+
+/* Mobile: show mobile login, hide desktop CTAs */
+@media (max-width: 768px) {
+  .mobile-login-btn {
+    display: inline-flex;
+  }
+
+  .header-ctas {
+    display: none;
+  }
+}
