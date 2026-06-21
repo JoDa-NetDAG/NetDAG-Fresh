@@ -9572,3 +9572,52 @@ body {
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .brand-logo {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 auto;
+  }
+
+  .brand-text {
+    font-size: 2.25rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 0 0 auto;
+  }
+
+  .mobile-login-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #9fd2ff;
+    font-size: 1.45rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 14px;
+  }
+
+  .menu-toggle {
+    flex: 0 0 auto;
+  }
+}
