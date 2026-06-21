@@ -488,7 +488,7 @@ export default function App() {
 
       <footer className="ndg-site-footer">
         <p>
-          NetDAG Easy Access: Use NDG without seed phrases, gas confusion, or wallet complexity.
+        Use NDG without confusion or wallet complexity.
         </p>
 
         <div>

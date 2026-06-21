@@ -9474,3 +9474,85 @@ body {
   font-weight: 800;
   text-align: center;
 }
+
+.gasless-hero-section .login-preview-wrap {
+  width: 100%;
+  max-width: 980px;
+  margin: 170px auto 0;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.gasless-hero-section .login-with-title {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.gasless-hero-section .login-icons-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+.gasless-hero-section .login-icon-card {
+  width: 110px;
+  padding: 12px 8px;
+  border-radius: 16px;
+}
+
+.gasless-hero-section .login-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 8px;
+  font-size: 26px;
+}
+
+.gasless-hero-section .login-label {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .gasless-hero-section .login-preview-wrap {
+    margin: 48px auto 20px;
+  }
+
+  .gasless-hero-section .login-icons-grid {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .gasless-hero-section .login-icon-card {
+    width: 42%;
+  }
+}
+
+/* Disabled login methods */
+.login-disabled {
+  opacity: 0.35;
+  filter: grayscale(100%);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.login-disabled .login-icon {
+  transform: none !important;
+}
+
+.login-disabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.ndg-site-header {
+  margin-top: 40px;
+}
+
+.ndg-card {
+  margin-top: 55px;
+}
