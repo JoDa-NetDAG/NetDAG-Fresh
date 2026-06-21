@@ -16,3 +16,19 @@ https://netdag.com
 ## Community
 Discord: https://discord.gg/GycvtzBs  
 Twitter: https://x.com/NetDAGOfficial
+
+General Push
+
+git status
+git add .
+git commit -m "Describe what changed"
+git push origin main
+
+OR
+
+git status
+git add .
+git commit -m "Update NetDAG site"
+git push origin main
+
+Alwazs check not to push Project Docs
