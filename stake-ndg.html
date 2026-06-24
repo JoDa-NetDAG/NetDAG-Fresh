@@ -180,6 +180,82 @@
     .nav-links .nav-dropdown:hover .nav-dropdown-menu {
       display: block;
     }
+
+    .stake-hero {
+  max-width: 900px;
+  margin: 64px auto 72px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.stake-title {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 34px 0 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.stake-title::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin: 18px auto 0;
+  border-radius: 999px;
+  background: #ff9900;
+}
+
+.stake-description {
+  max-width: 720px;
+  margin: 0 auto 36px;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.stake-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.stake-buttons .btn {
+  min-width: 220px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .stake-hero {
+    margin: 46px auto 56px;
+    padding: 0 18px;
+  }
+
+  .stake-title {
+    font-size: 3rem;
+    margin-top: 28px;
+  }
+
+  .stake-description {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+
+  .stake-buttons {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .stake-buttons .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
   </style>
 
 </head>
@@ -231,7 +307,7 @@
       </ul>
 
       <div class="header-ctas">
-        <a href="purchase-ndg.html" class="btn">Access NDG</a>
+        <a href="purchase-ndg.html" class="btn">Get NDG</a>
         <a href="stake-ndg.html" class="nav-action nav-stake">NDG Staking</a>
         <a href="https://easy.netdag.com" class="nav-action nav-login" target="_blank" rel="noopener">Login</a>
       </div>
@@ -286,35 +362,47 @@
     </div>
     </div>
 
-    <main>
+   <main>
 
-      <!-- top separator before hero (site separator) -->
-      <div class="site-separator" aria-hidden="true"></div>
+  <!-- top separator before hero (site separator) -->
+  <div class="site-separator" aria-hidden="true"></div>
 
-      <p class="staking-note">
-        Staking within NetDAG is designed as a protocol participation mechanism.
-        Any protocol rewards are determined by the network model and do not constitute guaranteed returns or financial
-        advice.
-      </p>
-      <p></p>
+  <section class="stake-hero">
 
-      <h1>Staking is coming soon...</h1>
-      <div class="staking-container">
-        <div id="stakingBalance">
-          <h2>Your Staked Balance</h2>
-          <p id="stakedAmount">0 NDAG</p>
-        </div>
-        <div id="stakingRewards">
-          <h2>Rewards Earned</h2>
-          <p id="rewardsAmount">0 NDAG</p>
-        </div>
-        <div class="staking-actions">
-          <button id="stakeBtn" class="btn">Stake Tokens</button>
-          <button id="withdrawBtn" class="btn">Withdraw</button>
-          <button id="claimBtn" class="btn">Claim Rewards</button>
-        </div>
-      </div>
-    </main>
+    <p class="staking-note">
+      Staking within NetDAG is designed as a protocol participation mechanism.
+      Any protocol rewards are determined by the network model and do not constitute financial advice.
+    </p>
+
+    <h1 class="stake-title">Stake NDG</h1>
+
+    <p class="stake-description">
+      NetDAG staking is available through the Easy Access dashboard.
+      Log in to view your NDG balance, preview staking,
+      and participate through the simplified NetDAG account experience.
+    </p>
+
+    <div class="stake-buttons">
+
+      <a
+        href="https://easy.netdag.com"
+        class="btn"
+        target="_blank"
+        rel="noopener"
+      >
+        Login to Stake NDG
+      </a>
+
+      <a href="purchase-ndg.html" class="btn">
+        Get NDG
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
+
 
     <!-- site separator after content -->
     <div class="section-separator" aria-hidden="true"></div>

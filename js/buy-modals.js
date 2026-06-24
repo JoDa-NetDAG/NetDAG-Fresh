@@ -1049,7 +1049,7 @@ console.log("✅ NDG Buy Modal loaded");
       if (!active) {
         setStatus("Presale is not active yet.", "warning");
       } else {
-        setStatus("Presale is active on BSC Testnet.", "success");
+        setStatus("Presale is active.", "success");
       }
 
       return livePresaleState;
