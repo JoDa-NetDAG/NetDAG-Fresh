@@ -409,6 +409,92 @@
   }
 }
 
+/* ============================================================
+   MOBILE HERO ROTATING HEADLINE — STOP JUMP / SHAKE
+============================================================ */
+
+@media (max-width: 768px) {
+  .section-hero {
+    min-height: 100svh !important;
+    height: auto !important;
+    overflow: hidden !important;
+  }
+
+  .hero-bg-image {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .hero-content {
+    position: relative !important;
+    min-height: 100svh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 120px 18px 48px !important;
+    box-sizing: border-box !important;
+  }
+
+  .rotating-headlines {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 720px !important;
+    min-height: 220px !important;
+    height: 220px !important;
+    margin: 0 auto 18px !important;
+    overflow: hidden !important;
+  }
+
+  .rotating-headlines .headline {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 180px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: none !important;
+    text-align: center !important;
+    font-size: 2.15rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .rotating-headlines .headline.active,
+  .rotating-headlines .headline.is-active,
+  .rotating-headlines .headline:first-child {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .headline-dots {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 0 !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+  }
+
+  .hero-subtitle {
+    min-height: 52px !important;
+    margin: 0 auto 18px !important;
+  }
+
+  .presale-block {
+    width: 100% !important;
+    max-width: 720px !important;
+    margin: 0 auto !important;
+  }
+}
+
 </style>
 
 </head>
