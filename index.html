@@ -367,131 +367,93 @@
   max-width: 260px;
 }
 
-/* FIX HERO ROTATING TEXT JUMP */
-.rotating-headlines {
-  position: relative;
-  min-height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
-}
-
-.rotating-headlines .headline {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0 18px;
-  text-align: center;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.rotating-headlines .headline.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.headline-dots {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-@media (max-width: 768px) {
-  .rotating-headlines {
-    min-height: 220px;
-  }
-}
-
-/* ============================================================
-   MOBILE HERO ROTATING HEADLINE — STOP JUMP / SHAKE
-============================================================ */
-
+/* MOBILE HERO SIZE REDUCTION — SAFE VERSION */
 @media (max-width: 768px) {
   .section-hero {
-    min-height: 100svh !important;
-    height: auto !important;
-    overflow: hidden !important;
-  }
-
-  .hero-bg-image {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+    min-height: auto;
+    padding-top: 20px;
+    padding-bottom: 28px;
   }
 
   .hero-content {
-    position: relative !important;
-    min-height: 100svh !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-    padding: 120px 18px 48px !important;
-    box-sizing: border-box !important;
+    padding: 78px 14px 28px;
   }
 
   .rotating-headlines {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 720px !important;
-    min-height: 220px !important;
-    height: 220px !important;
-    margin: 0 auto 18px !important;
-    overflow: hidden !important;
+    min-height: 135px;
+    margin-bottom: 8px;
   }
 
   .rotating-headlines .headline {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 180px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: 0 !important;
-    padding: 0 10px !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transform: none !important;
-    text-align: center !important;
-    font-size: 2.15rem !important;
+    font-size: 1.75rem !important;
     line-height: 1.18 !important;
-  }
-
-  .rotating-headlines .headline.active,
-  .rotating-headlines .headline.is-active,
-  .rotating-headlines .headline:first-child {
-    opacity: 1;
-    visibility: visible;
+    margin: 0;
   }
 
   .headline-dots {
-    position: absolute !important;
-    left: 50% !important;
-    bottom: 0 !important;
-    transform: translateX(-50%) !important;
-    margin: 0 !important;
+    margin-top: 8px;
   }
 
   .hero-subtitle {
-    min-height: 52px !important;
-    margin: 0 auto 18px !important;
+    font-size: 0.88rem !important;
+    line-height: 1.35 !important;
+    margin: 8px auto 10px;
   }
 
   .presale-block {
-    width: 100% !important;
-    max-width: 720px !important;
-    margin: 0 auto !important;
+    margin-top: 8px;
+  }
+
+  .presale-line {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  .presale-countdown {
+    gap: 8px;
+    margin: 8px auto 10px;
+  }
+
+  .presale-box {
+    min-width: 58px;
+    padding: 8px 6px;
+  }
+
+  .presale-num {
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .presale-lbl {
+    font-size: 0.62rem;
+  }
+
+  .presale-early-message,
+  .presale-tagline {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    margin: 6px auto;
+  }
+
+  .home-pilot-note {
+    margin: 10px auto 12px;
+    padding: 10px 12px;
+  }
+
+  .home-pilot-note p {
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+
+  .preview-buttons {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .preview-buttons a,
+  .gasless-learn-btn {
+    font-size: 0.82rem;
+    padding: 10px 14px;
   }
 }
 
