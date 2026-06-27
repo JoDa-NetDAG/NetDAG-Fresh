@@ -3914,15 +3914,14 @@ img { max-width: 100%; display: block; }
 
 /* Base phone style */
 .prov-phone-zoom {
-  width: min(380px, 70vw);
-  max-width: 420px;
+  width: min(260px, 54vw);
+  max-width: 280px;
   height: auto;
 
   transform-origin: left center;
   will-change: transform, opacity, filter;
 
-  /* 🔁 Single looping animation controls everything */
-  animation: ndgPhoneCycle 22s cubic-bezier(.25,.9,.25,1) infinite;
+  animation: ndgPhoneCycle 12s cubic-bezier(.25,.9,.25,1) infinite;
 }
 
 /* 🔁 Full lifecycle animation */
@@ -3971,14 +3970,16 @@ img { max-width: 100%; display: block; }
 /* Mobile tweaks */
 @media (max-width: 560px) {
   .prov-phone-overlay {
-    padding-left: 16px;
+    padding-left: 10px;
     align-items: flex-start;
-    padding-top: 18px;
+    padding-top: 22px;
+    justify-content: flex-end;
+    padding-right: 8px;
   }
 
   .prov-phone-zoom {
-    width: min(320px, 78vw);
-    max-width: 340px;
+    width: min(190px, 43vw);
+    max-width: 200px;
   }
 }
 
