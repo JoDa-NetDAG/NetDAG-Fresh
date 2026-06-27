@@ -9573,3 +9573,21 @@ body {
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  .prov-demo-kicker {
+    text-align: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .prov-demo-title,
+  .prov-demo-text {
+    text-align: center;
+  }
+
+  .prov-demo-points {
+    display: none;
+  }
+}
