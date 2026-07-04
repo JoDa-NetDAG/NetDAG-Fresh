@@ -752,5 +752,5 @@ contract PresaleWithVesting is Ownable, ReentrancyGuard, Pausable {
 
     receive() external payable {
         revert("Use buyWithBNB()");
-    }
+    }   
 }
