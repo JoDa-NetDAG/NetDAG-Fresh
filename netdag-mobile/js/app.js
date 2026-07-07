@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
       user: `<svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg>`,
       flash: `<svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 10-13h-7l1-7z"/></svg>`,
       box: `<svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.3 5.8 3.2L12 10.7 6.2 7.5 12 4.3zM5 9.2l6 3.3v6.1l-6-3.3V9.2zm8 9.4v-6.1l6-3.3v6.1l-6 3.3z"/></svg>`,
-      brain: `<svg viewBox="0 0 24 24"><path d="M9 2a4 4 0 0 0-4 4v.3A4.5 4.5 0 0 0 6 15v1a4 4 0 0 0 4 4h1V2H9zm6 0h-2v18h1a4 4 0 0 0 4-4v-1a4.5 4.5 0 0 0 1-8.7V6a4 4 0 0 0-4-4z"/></svg>`
+      brain: `<svg viewBox="0 0 24 24"><path d="M9 2a4 4 0 0 0-4 4v.3A4.5 4.5 0 0 0 6 15v1a4 4 0 0 0 4 4h1V2H9zm6 0h-2v18h1a4 4 0 0 0 4-4v-1a4.5 4.5 0 0 0 1-8.7V6a4 4 0 0 0-4-4z"/></svg>`,
+      search: `<svg viewBox="0 0 24 24"><path d="M10 4a6 6 0 0 1 4.8 9.6l4.8 4.8-1.4 1.4-4.8-4.8A6 6 0 1 1 10 4zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>`
     };
 
     return icons[name] || "";
@@ -32,7 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (action === "manual-search") {
-      handleSuccessfulScan("NDG-FASHION-000001");
+      showManualSearchScreen();
+      return;
+    }
+
+    if (action === "submit-search") {
+      submitManualSearch();
       return;
     }
 
@@ -120,15 +126,14 @@ document.addEventListener("DOMContentLoaded", () => {
         <header class="scanner-top overlay-top">
           <button type="button" data-action="back-home">←</button>
           <h1>Scan</h1>
-          <button type="button" class="icon-btn" title="Flash">${icon("flash")}</button>
+          <span></span>
         </header>
 
         <section class="live-camera-view">
-          <div id="reader" class="camera-reader"></div>
-
           <div class="scan-frame">
-            <span></span>
-          </div>
+  <div id="reader" class="camera-reader"></div>
+  <span></span>
+</div>
 
           <p class="scan-instruction">
             Align QR code or barcode within the frame
@@ -144,28 +149,46 @@ document.addEventListener("DOMContentLoaded", () => {
     startCameraScanner();
   }
 
-  function startCameraScanner() {
-    if (!window.Html5Qrcode) {
-      console.error("Scanner library not loaded");
-      return;
-    }
-
-    activeScanner = new Html5Qrcode("reader");
-
-    activeScanner.start(
-      { facingMode: "environment" },
-      {
-        fps: 10,
-        qrbox: { width: 250, height: 250 }
-      },
-      (decodedText) => {
-        handleSuccessfulScan(decodedText);
-      },
-      () => {}
-    ).catch((err) => {
-      console.error("Camera error:", err);
-    });
+ function startCameraScanner() {
+  if (!window.Html5Qrcode) {
+    console.error("Html5Qrcode not loaded");
+    return;
   }
+
+  activeScanner = new Html5Qrcode("reader");
+
+  Html5Qrcode.getCameras()
+    .then((cameras) => {
+      if (!cameras || cameras.length === 0) {
+        console.error("No camera found");
+        return;
+      }
+
+      const backCamera =
+        cameras.find((camera) =>
+          camera.label.toLowerCase().includes("back") ||
+          camera.label.toLowerCase().includes("rear") ||
+          camera.label.toLowerCase().includes("environment")
+        ) || cameras[cameras.length - 1];
+
+      return activeScanner.start(
+        backCamera.id,
+        {
+          fps: 10,
+          qrbox: undefined,
+          aspectRatio: 1.7777778,
+          disableFlip: false
+        },
+        (decodedText) => {
+          handleSuccessfulScan(decodedText);
+        },
+        () => {}
+      );
+    })
+    .catch((err) => {
+      console.error("Camera start failed:", err);
+    });
+}
 
   function stopScanner() {
     if (!activeScanner) return;
@@ -183,8 +206,122 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleSuccessfulScan(scannedCode) {
     stopScanner();
 
-    currentProduct = Guardian.verify(scannedCode);
+    const product = Guardian.verify(scannedCode);
+
+    if (!product) {
+      showProductNotFoundScreen(scannedCode);
+      return;
+    }
+
+    currentProduct = product;
     showVerifyingProductScreen(currentProduct);
+  }
+
+  function showManualSearchScreen() {
+    stopScanner();
+
+    app.innerHTML = `
+      <section class="manual-search-screen">
+        <header class="verification-header">
+          <button type="button" data-action="open-scanner">←</button>
+          <h1>Search Product</h1>
+        </header>
+
+        <section class="manual-search-card">
+          <div class="manual-search-icon">
+            ${icon("search")}
+          </div>
+
+          <h2>Manual Verification</h2>
+          <p>
+            Enter a product code, barcode, QR ID, product name, brand, or on-chain ID.
+          </p>
+
+          <input
+            id="manualSearchInput"
+            class="manual-search-input"
+            type="text"
+            placeholder="e.g. NDG-FASHION-000001"
+            autocomplete="off"
+          />
+
+          <button type="button" class="manual-search-submit" data-action="submit-search">
+            Verify Product
+          </button>
+
+          <p id="manualSearchError" class="manual-search-error"></p>
+        </section>
+      </section>
+    `;
+
+    const input = document.getElementById("manualSearchInput");
+
+    setTimeout(() => {
+      if (input) input.focus();
+    }, 250);
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        submitManualSearch();
+      }
+    });
+  }
+
+  function submitManualSearch() {
+    const input = document.getElementById("manualSearchInput");
+    const error = document.getElementById("manualSearchError");
+
+    if (!input) return;
+
+    const query = input.value.trim();
+
+    if (!query) {
+      if (error) error.textContent = "Please enter a product code or product name.";
+      input.focus();
+      return;
+    }
+
+    const product = Guardian.search(query);
+
+    if (!product) {
+      if (error) {
+       "No trusted product record found. Please check the code, name, barcode, or on-chain ID and try again."; 
+      }
+      return;
+    }
+
+    currentProduct = product;
+    showVerifyingProductScreen(currentProduct);
+  }
+
+  function showProductNotFoundScreen(scannedCode) {
+    app.innerHTML = `
+      <section class="manual-search-screen">
+        <header class="verification-header">
+          <button type="button" data-action="open-scanner">←</button>
+          <h1>Product Not Found</h1>
+        </header>
+
+        <section class="manual-search-card">
+          <div class="manual-search-icon warning-icon">
+            ${icon("shield")}
+          </div>
+
+          <h2>No Trusted Record Found</h2>
+          <p>
+            NetDAG could not find a trusted record for this scan.
+          </p>
+
+          <div class="not-found-code">
+            ${scannedCode || "Unknown scan"}
+          </div>
+
+          <button type="button" class="manual-search-submit" data-action="manual-search">
+            Search Manually
+          </button>
+        </section>
+      </section>
+    `;
   }
 
   function showVerifyingProductScreen(product) {
@@ -269,13 +406,21 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </section>
 
-        <section class="details-card">
-          <h4>${icon("shield")} Authenticity</h4>
+    <section class="details-card">
+  <h4>${icon("shield")} Authenticity</h4>
 
-          <p><strong>Status:</strong> <span>${product.status}</span></p>
-          <p><strong>Risk:</strong> <span>${product.risk}</span></p>
-          <p><strong>Certificate:</strong> <span>Digital Certificate Found</span></p>
-        </section>
+  <p><strong>Status:</strong> <span>${product.status}</span></p>
+  <p><strong>Risk:</strong> <span>${product.risk}</span></p>
+  <p><strong>Trust Level:</strong> <span>${product.trustLabel}</span></p>
+  <p><strong>Trust Score:</strong> <span>${product.trustScore}%</span></p>
+  <p><strong>Trust Band:</strong> <span>${product.trustBand}</span></p>
+  <p><strong>Evidence:</strong> <span>${product.evidenceStrength}</span></p>
+  <p><strong>Evidence Sources:</strong> <span>${product.evidenceCount}</span></p>
+  <p><strong>Guardian:</strong> <span>${product.guardianDecision}</span></p>
+  <p><strong>Public Note:</strong> <span>${product.publicWarning}</span></p>
+  <p><strong>Evidence Summary:</strong> <span>${product.evidenceSummary}</span></p>
+  <p><strong>Certificate:</strong> <span>Digital Certificate Found</span></p>
+</section>   
 
         <section class="details-card">
           <h4>${icon("box")} Product Details</h4>
@@ -292,10 +437,30 @@ document.addEventListener("DOMContentLoaded", () => {
           </p>
         </section>
 
-        <section class="details-card">
-          <h4>${icon("brain")} Guardian Analysis</h4>
-          ${analysisRows}
-        </section>
+    <section class="details-card">
+  <h4>${icon("brain")} Guardian Brain</h4>
+
+  <p><strong>Decision:</strong> <span>${product.guardianDecisionFinal}</span></p>
+  <p><strong>Recommendation:</strong> <span>${product.guardianRecommendation}</span></p>
+  <p><strong>Next Action:</strong> <span>${product.guardianNextAction}</span></p>
+
+  <p><strong>Reasons:</strong></p>
+  <ul>
+    ${product.guardianReasons.map(r => `<li>${r}</li>`).join("")}
+  </ul>
+
+  ${
+    product.guardianWarnings.length
+      ? `
+        <p><strong>Warnings:</strong></p>
+        <ul>
+          ${product.guardianWarnings.map(w => `<li>${w}</li>`).join("")}
+        </ul>
+      `
+      : ""
+  }
+</section>
+
       </section>
     `;
 
@@ -303,55 +468,71 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showCertificateScreen(product) {
-    currentProduct = product;
+  currentProduct = product;
 
-    app.innerHTML = `
-      <section class="certificate-screen">
-        <header class="verification-header">
-          <button type="button" data-action="back-certificate">←</button>
-          <h1>Provenance Certificate</h1>
-        </header>
+  app.innerHTML = `
+    <section class="certificate-screen">
+      <header class="verification-header">
+        <button type="button" data-action="back-certificate">←</button>
+        <h1>Digital Certificate</h1>
+      </header>
 
-        <section class="certificate-card">
-          <div class="certificate-seal">
-            ${icon("shield")}
+      <section class="certificate-hero-card">
+        <div class="certificate-brand">NET<span>DAG</span></div>
+
+        <div class="certificate-seal">
+          ${icon("shield")}
+        </div>
+
+        <h2>Digital Provenance Certificate</h2>
+        <p class="certificate-valid">✓ ${product.certificateStatus}</p>
+
+        <div class="certificate-main-id">
+          ${product.certificateId}
+        </div>
+
+        <div class="certificate-score-row">
+          <div>
+            <strong>${product.trustScore}%</strong>
+            <span>Trust Score</span>
           </div>
-
-          <h2>NetDAG Verified</h2>
-          <p class="certificate-subtitle">Digital Product Certificate</p>
-
-          <div class="certificate-id">
-            ${product.onchainId}
+          <div>
+            <strong>${product.trustBand}</strong>
+            <span>Trust Band</span>
           </div>
-        </section>
-
-        <section class="details-card">
-          <h4>${icon("box")} Provenance Record</h4>
-
-          <p><strong>Record ID:</strong> <span>${product.recordId}</span></p>
-          <p><strong>Product:</strong> <span>${product.name}</span></p>
-          <p><strong>SKU:</strong> <span>${product.sku}</span></p>
-          <p><strong>Batch:</strong> <span>${product.batch}</span></p>
-          <p><strong>Origin:</strong> <span>${product.origin}</span></p>
-          <p><strong>Issuer:</strong> <span>${product.issuer}</span></p>
-          <p><strong>Created:</strong> <span>${product.created}</span></p>
-          <p><strong>Integrity:</strong> <span>${product.integrity}</span></p>
-        </section>
-
-        <section class="details-card">
-          <h4>${icon("shield")} Certificate Status</h4>
-
-          <p><strong>Status:</strong> <span>${product.status}</span></p>
-          <p><strong>Guardian Score:</strong> <span>${product.guardianScore}%</span></p>
-          <p><strong>Risk:</strong> <span>${product.risk}</span></p>
-          <p><strong>Network:</strong> <span>NetDAG Provenance Network</span></p>
-          <p><strong>On-chain ID:</strong> <span>${product.onchainId}</span></p>
-          <p><strong>SHA256 Hash:</strong> <span>Pending Blockchain Anchor</span></p>
-          <p><strong>QR Status:</strong> <span>Ready for Generation</span></p>
-        </section>
+        </div>
       </section>
-    `;
-  }
+
+      <section class="details-card">
+        <h4>${icon("box")} Certified Product</h4>
+        <p><strong>Product:</strong> <span>${product.name}</span></p>
+        <p><strong>Brand:</strong> <span>${product.brand}</span></p>
+        <p><strong>Category:</strong> <span>${product.category}</span></p>
+        <p><strong>Manufacturer:</strong> <span>${product.manufacturer}</span></p>
+        <p><strong>Origin:</strong> <span>${product.origin}</span></p>
+        <p><strong>Batch:</strong> <span>${product.batch}</span></p>
+      </section>
+
+      <section class="details-card">
+        <h4>${icon("shield")} Guardian Verification</h4>
+        <p><strong>Status:</strong> <span>${product.status}</span></p>
+        <p><strong>Evidence:</strong> <span>${product.evidenceStrength}</span></p>
+        <p><strong>Decision:</strong> <span>${product.guardianDecision}</span></p>
+        <p><strong>Public Note:</strong> <span>${product.publicWarning}</span></p>
+      </section>
+
+      <section class="details-card">
+        <h4>${icon("brain")} Certificate Details</h4>
+        <p><strong>On-chain ID:</strong> <span>${product.onchainId}</span></p>
+        <p><strong>Record ID:</strong> <span>${product.recordId}</span></p>
+        <p><strong>Fingerprint:</strong> <span>${product.certificateFingerprint}</span></p>
+        <p><strong>Issued:</strong> <span>${new Date(product.certificateIssuedAt).toLocaleString()}</span></p>
+        <p><strong>Version:</strong> <span>${product.certificateVersion}</span></p>
+        <p><strong>Network:</strong> <span>NetDAG Provenance Network</span></p>
+      </section>
+    </section>
+  `;
+}
 
   function animateGuardianConfidence(targetScore) {
     const scoreEl = document.getElementById("confidenceScore");
