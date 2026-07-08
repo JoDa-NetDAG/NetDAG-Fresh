@@ -295,6 +295,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showProductNotFoundScreen(scannedCode) {
+  const savedScan = ScanStore.save({
+  code: scannedCode || "Unknown scan",
+  type: detectScanType(scannedCode),
+  status: "SUBMITTED",
+  result: "NO_MATCHING_NETDAG_RECORD",
+  scannedAt: new Date().toISOString()
+});
+
   app.innerHTML = `
     <section class="manual-search-screen">
       <header class="verification-header">
@@ -309,6 +317,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <h2>No Matching NetDAG Record</h2>
 
+        <p class="scan-saved-note">
+           Scan record saved to help improve the NetDAG database.
+        </p>
+        <p class="scan-saved-note">
+         Scan count on this device: ${savedScan?.count || 1}
+                       </p>
         <p>
           NetDAG could not find a matching provenance record for this product.
         </p>
@@ -560,4 +574,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   showSplashScreen();
+
+  function detectScanType(value) {
+  const text = String(value || "").trim();
+
+  if (text.startsWith("http://") || text.startsWith("https://")) {
+    return "QR_URL";
+  }
+
+  if (/^\d{8,14}$/.test(text)) {
+    return "BARCODE";
+  }
+
+  return "QR_TEXT";
+}
 });
