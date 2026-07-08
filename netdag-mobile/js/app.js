@@ -295,34 +295,40 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showProductNotFoundScreen(scannedCode) {
-    app.innerHTML = `
-      <section class="manual-search-screen">
-        <header class="verification-header">
-          <button type="button" data-action="open-scanner">←</button>
-          <h1>Product Not Found</h1>
-        </header>
+  app.innerHTML = `
+    <section class="manual-search-screen">
+      <header class="verification-header">
+        <button type="button" data-action="open-scanner">←</button>
+        <h1>No NetDAG Record Found</h1>
+      </header>
 
-        <section class="manual-search-card">
-          <div class="manual-search-icon warning-icon">
-            ${icon("shield")}
-          </div>
+      <section class="manual-search-card">
+        <div class="manual-search-icon warning-icon">
+          ${icon("shield")}
+        </div>
 
-          <h2>No Trusted Record Found</h2>
-          <p>
-            NetDAG could not find a trusted record for this scan.
-          </p>
+        <h2>No Matching NetDAG Record</h2>
 
-          <div class="not-found-code">
-            ${scannedCode || "Unknown scan"}
-          </div>
+        <p>
+          NetDAG could not find a matching provenance record for this product.
+        </p>
 
-          <button type="button" class="manual-search-submit" data-action="manual-search">
-            Search Manually
-          </button>
-        </section>
+        <p>
+          This does not necessarily indicate that the product is counterfeit or unsafe.
+          It only means that no matching NetDAG provenance record was found.
+        </p>
+
+        <div class="not-found-code">
+          ${scannedCode || "Unknown scan"}
+        </div>
+
+        <button type="button" class="manual-search-submit" data-action="manual-search">
+          Search NetDAG Database
+        </button>
       </section>
-    `;
-  }
+    </section>
+  `;
+}
 
   function showVerifyingProductScreen(product) {
     app.innerHTML = `
