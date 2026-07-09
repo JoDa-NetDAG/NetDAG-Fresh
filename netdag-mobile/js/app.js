@@ -37,11 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (action === "submit-search") {
-      submitManualSearch();
-      return;
-    }
-
     if (action === "back-report") {
       showScanScreen();
       return;
@@ -55,6 +50,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (action === "back-certificate") {
       if (currentProduct) showVerificationReportScreen(currentProduct);
     }
+
+    if (action === "open-history") {
+     showHistoryScreen();
+      return;
+    }
+
+    if (action === "open-learning-queue") {
+     showLearningQueueScreen();
+     return;
+   }
+
+   if (action === "open-dev-panel") {
+    showGuardianDevPanel();
+    return;
+   }
+
   }
 
   app.addEventListener("touchend", (event) => {
@@ -97,10 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
     app.innerHTML = `
       <section class="scan-screen">
         <header class="scan-header">
-          <div class="mini-logo wordmark-only">
-            <h1>NET<span>DAG</span></h1>
-          </div>
-        </header>
+         <div class="mini-logo wordmark-only">
+         <h1>NET<span>DAG</span></h1>
+         </div>
+
+        <button type="button" class="dev-panel-btn" data-action="open-dev-panel">
+        DEV
+       </button>
+      </header>
 
         <section class="main-scan-area">
           <button type="button" class="big-scan-button" data-action="open-scanner">
@@ -113,7 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <nav class="bottom-nav">
           <button type="button" class="active">${icon("scan")}<span>Scan</span></button>
           <button type="button">${icon("shield")}<span>Guardian</span></button>
-          <button type="button">${icon("history")}<span>History</span></button>
+          <button type="button" data-action="open-history">
+          ${icon("history")}<span>History</span>
+         </button>
           <button type="button">${icon("user")}<span>Account</span></button>
         </nav>
       </section>
@@ -203,111 +220,116 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  function handleSuccessfulScan(scannedCode) {
-    stopScanner();
+  function verifyCode(code) {
+  const cleanCode = String(code || "").trim();
 
-    const product = Guardian.verify(scannedCode);
+  if (!cleanCode) return;
 
-    if (!product) {
-      showProductNotFoundScreen(scannedCode);
-      return;
-    }
+  const product = Guardian.verify(cleanCode);
 
+  if (product) {
+    ScanStore.saveKnown(product, cleanCode);
     currentProduct = product;
-    showVerifyingProductScreen(currentProduct);
+    showVerifyingProductScreen(product);
+    return;
   }
 
-  function showManualSearchScreen() {
+  const scan = ScanStore.save({
+    code: cleanCode,
+    type: detectScanType(cleanCode),
+    status: "NOT_REGISTERED",
+    result: "NO_MATCHING_NETDAG_RECORD",
+    label: "Unknown Product",
+    scannedAt: new Date().toISOString()
+  });
+
+  if (scan) {
+    LearningQueue.add(scan);
+    LearningQueue.evaluate(scan.code);
+  }
+
+  showProductNotFoundScreen(cleanCode);
+}
+
+ function handleSuccessfulScan(scannedCode) {
     stopScanner();
+    verifyCode(scannedCode);
+}
 
-    app.innerHTML = `
-      <section class="manual-search-screen">
-        <header class="verification-header">
-          <button type="button" data-action="open-scanner">←</button>
-          <h1>Search Product</h1>
-        </header>
-
-        <section class="manual-search-card">
-          <div class="manual-search-icon">
-            ${icon("search")}
-          </div>
-
-          <h2>Manual Verification</h2>
-          <p>
-            Enter a product code, barcode, QR ID, product name, brand, or on-chain ID.
-          </p>
-
-          <input
-            id="manualSearchInput"
-            class="manual-search-input"
-            type="text"
-            placeholder="e.g. NDG-FASHION-000001"
-            autocomplete="off"
-          />
-
-          <button type="button" class="manual-search-submit" data-action="submit-search">
-            Verify Product
-          </button>
-
-          <p id="manualSearchError" class="manual-search-error"></p>
-        </section>
-      </section>
-    `;
-
-    const input = document.getElementById("manualSearchInput");
-
-    setTimeout(() => {
-      if (input) input.focus();
-    }, 250);
-
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        submitManualSearch();
-      }
-    });
-  }
-
-  function submitManualSearch() {
-    const input = document.getElementById("manualSearchInput");
-    const error = document.getElementById("manualSearchError");
-
-    if (!input) return;
-
-    const query = input.value.trim();
-
-    if (!query) {
-      if (error) error.textContent = "Please enter a product code or product name.";
-      input.focus();
-      return;
-    }
-
-    const product = Guardian.search(query);
-
-    if (!product) {
-      if (error) {
-       "No trusted product record found. Please check the code, name, barcode, or on-chain ID and try again."; 
-      }
-      return;
-    }
-
-    currentProduct = product;
-    showVerifyingProductScreen(currentProduct);
-  }
-
-  function showProductNotFoundScreen(scannedCode) {
-  const savedScan = ScanStore.save({
-  code: scannedCode || "Unknown scan",
-  type: detectScanType(scannedCode),
-  status: "SUBMITTED",
-  result: "NO_MATCHING_NETDAG_RECORD",
-  scannedAt: new Date().toISOString()
-});
+ function showManualSearchScreen() {
+  stopScanner();
 
   app.innerHTML = `
     <section class="manual-search-screen">
       <header class="verification-header">
-        <button type="button" data-action="open-scanner">←</button>
-        <h1>No NetDAG Record Found</h1>
+        <button type="button" data-action="back-home">←</button>
+        <h1>Manual Search</h1>
+      </header>
+
+      <section class="manual-search-card">
+        <div class="manual-search-icon">
+          ${icon("search")}
+        </div>
+
+        <h2>Verify Product</h2>
+
+        <p>
+          Enter a QR code, barcode, NFC code, or product identifier.
+        </p>
+
+        <input
+          id="manualSearchInput"
+          class="manual-search-input"
+          type="text"
+          placeholder="Enter product code"
+          autocomplete="off"
+        />
+
+        <button
+          type="button"
+          id="manualVerifyBtn"
+          class="manual-search-submit"
+        >
+          Verify Product
+        </button>
+      </section>
+    </section>
+  `;
+
+  const input = document.getElementById("manualSearchInput");
+  const button = document.getElementById("manualVerifyBtn");
+
+  if (!input || !button) return;
+
+  function submitManualCode() {
+    const code = input.value.trim();
+
+    if (!code) {
+      input.focus();
+      return;
+    }
+
+    verifyCode(code);
+  }
+
+  button.addEventListener("click", submitManualCode);
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      submitManualCode();
+    }
+  });
+
+  setTimeout(() => input.focus(), 50);
+}
+
+  function showProductNotFoundScreen(code) {
+  app.innerHTML = `
+    <section class="manual-search-screen">
+      <header class="verification-header">
+        <button type="button" data-action="back-home">←</button>
+        <h1>Not Registered</h1>
       </header>
 
       <section class="manual-search-card">
@@ -315,33 +337,209 @@ document.addEventListener("DOMContentLoaded", () => {
           ${icon("shield")}
         </div>
 
-        <h2>No Matching NetDAG Record</h2>
-
-        <p class="scan-saved-note">
-           Scan record saved to help improve the NetDAG database.
-        </p>
-        <p class="scan-saved-note">
-         Scan count on this device: ${savedScan?.count || 1}
-                       </p>
-        <p>
-          NetDAG could not find a matching provenance record for this product.
-        </p>
+        <h2>Unknown Product</h2>
 
         <p>
-          This does not necessarily indicate that the product is counterfeit or unsafe.
-          It only means that no matching NetDAG provenance record was found.
+          This product is not yet registered in the NetDAG Provenance Network.
         </p>
 
         <div class="not-found-code">
-          ${scannedCode || "Unknown scan"}
+          ${code}
         </div>
 
-        <button type="button" class="manual-search-submit" data-action="manual-search">
-          Search NetDAG Database
+        <p>
+          Guardian has captured this product and added it to the Learning Queue
+          for immediate evaluation.
+        </p>
+
+        <button
+          type="button"
+          class="manual-search-submit"
+          data-action="open-dev-panel"
+        >
+          Open Guardian Dev
+        </button>
+
+        <button
+          type="button"
+          class="sample-chip"
+          data-action="back-home"
+        >
+          Back to Scan
         </button>
       </section>
     </section>
   `;
+}
+
+  function showLearningQueueScreen() {
+  const queue = LearningQueue.getAll();
+
+  app.innerHTML = `
+    <section class="history-screen">
+
+      <header class="verification-header">
+        <button type="button" data-action="open-history">←</button>
+        <h1>Learning Queue</h1>
+      </header>
+
+      <section class="history-list">
+
+        ${
+          queue.length === 0
+            ? `
+              <div class="history-empty">
+                <h2>No queued products</h2>
+                <p>Guardian has nothing waiting for review.</p>
+              </div>
+            `
+            : queue.map(item => `
+              <article class="history-item">
+
+                <div class="history-left">
+                  <h3>${item.productName || "Unknown Product"}</h3>
+
+                  <p>
+                    Code:
+                    ${item.code}
+                  </p>
+
+                  <p>
+                    Score:
+                    ${item.score ?? "--"}
+                  </p>
+                </div>
+
+                <div class="history-right">
+
+                  <strong>
+                    ${item.status}
+                  </strong>
+
+                  <small>
+                    ${item.guardianStage}
+                  </small>
+
+                </div>
+
+              </article>
+            `).join("")
+        }
+
+      </section>
+
+    </section>
+  `;
+}
+
+function showGuardianDevPanel() {
+  const scans = typeof ScanStore !== "undefined" ? ScanStore.getAll() : [];
+  const queue = typeof LearningQueue !== "undefined" ? LearningQueue.getAll() : [];
+
+  const queueRows = queue.length
+    ? queue.map((item) => `
+        <div class="history-item">
+          <div>
+            <strong>${item.productName || "Unknown Product"}</strong>
+            <span>Code: ${item.code}</span>
+          </div>
+
+          <div>
+            <small>Status: ${item.status || "PENDING"}</small>
+            <small>Stage: ${item.guardianStage || "SUBMITTED"}</small>
+            <small>Decision: ${item.provisionalDecision || "PENDING"}</small>
+            <small>Score: ${item.score ?? "--"}</small>
+            <small>Scans: ${item.scanCount || 1}</small>
+          </div>
+        </div>
+      `).join("")
+    : `
+      <div class="empty-history">
+        <h2>No Learning Queue Items</h2>
+        <p>Unknown scans will appear here.</p>
+      </div>
+    `;
+
+  app.innerHTML = `
+    <section class="history-screen">
+      <header class="verification-header">
+        <button type="button" data-action="back-report">←</button>
+        <h1>Guardian Dev</h1>
+      </header>
+
+      <section class="details-card">
+        <h4>${icon("brain")} System Status</h4>
+        <p><strong>Scan History:</strong> <span>${scans.length}</span></p>
+        <p><strong>Learning Queue:</strong> <span>${queue.length}</span></p>
+      </section>
+
+      <section class="history-card">
+        ${queueRows}
+      </section>
+    </section>
+  `;
+}
+
+function showHistoryScreen() {
+  const queue =
+    typeof LearningQueue !== "undefined"
+      ? LearningQueue.getAll()
+      : [];
+
+  const queueRows = queue.length
+    ? queue.map((item) => {
+        const date = new Date(item.lastSeen || item.firstSeen).toLocaleString();
+
+        return `
+          <div class="history-item">
+            <div>
+              <strong>${item.productName || "Unknown Product"}</strong>
+              <span>Code: ${item.code}</span>
+            </div>
+
+            <div>
+              <small>${item.status || "AWAITING_GUARDIAN_EVALUATION"}</small>
+              <small>Stage: ${item.guardianStage || "SUBMITTED"}</small>
+              <small>Score: ${item.score ?? "--"}</small>
+              <small>${date}</small>
+              <small>Scans: ${item.scanCount || 1}</small>
+            </div>
+          </div>
+        `;
+      }).join("")
+    : `
+      <div class="empty-history">
+        <h2>No Learning Queue Yet</h2>
+        <p>Unknown scans will appear here after Guardian starts learning.</p>
+      </div>
+    `;
+
+  app.innerHTML = `
+    <section class="history-screen">
+      <header class="verification-header">
+        <button type="button" data-action="back-report">←</button>
+        <h1>Guardian Learning Queue</h1>
+      </header>
+
+      <section class="history-card">
+        ${queueRows}
+      </section>
+    </section>
+  `;
+}
+
+function getHistoryStatusLabel(scan) {
+  if (!scan) return "Unknown";
+
+  if (scan.result === "MATCHING_NETDAG_RECORD") {
+    return "Verified";
+  }
+
+  if (scan.result === "NO_MATCHING_NETDAG_RECORD") {
+    return "Not Registered";
+  }
+
+  return scan.type || "Unknown";
 }
 
   function showVerifyingProductScreen(product) {
