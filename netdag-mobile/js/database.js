@@ -424,7 +424,7 @@ const NetDAGDatabase = {
     origin: "Swiss Guarantee Label",
     nutrition: "Nutrition Label Photo"
   },
-  keywords: [
+  keywords: [-
     "milsani",
     "kaffeerahm",
     "coffee cream",
@@ -436,6 +436,68 @@ const NetDAGDatabase = {
     "15 percent",
     "500 ml"
   ]
+},
+
+"NDG-FOOD-REAL-000002": {
+    recordId: "NDG-REC-2026-REAL-000002",
+    productId: "NDG-FOOD-REAL-000002",
+    barcode: "4056489440628",
+
+    name: "Bellarom Gold Classic Instant Coffee",
+    brand: "Bellarom",
+
+    sku: "4056489440628",
+    batch: "LABEL-NOT-CAPTURED",
+
+    category: "Food",
+    subCategory: "Coffee",
+
+    country: "Spain",
+    origin: "Spain",
+
+    manufacturer: "JDEA OUTSPAN IBERIA S.L.U.",
+    issuer: "NetDAG User Evidence Intake",
+
+    created: "2026-07-10",
+
+    integrity: "Evidence Confirmed",
+    trustStatus: "EVIDENCE_CONFIRMED",
+
+    onchainId: "NDG-FOOD-REAL-000002",
+
+    guardianScore: 82,
+
+    status: "WARNING",
+
+    risk: "Label Evidence Confirmed — Manufacturer Verification Pending",
+
+    fraudStatus: "LOW",
+
+    conflictFlag: false,
+    reviewRequired: false,
+    certificateAvailable: false,
+
+    evidence: {
+        barcode: "Physical Product Scan",
+        productName: "Front Label Photo",
+        manufacturer: "Back Label Photo",
+        origin: "Manufacturer Address Photo",
+        nutrition: "Package Photos"
+    },
+
+    keywords: [
+        "bellarom",
+        "gold classic",
+        "instant coffee",
+        "coffee",
+        "caffe soluble",
+        "cafe soluble",
+        "gold",
+        "200 g",
+        "lidl",
+        "spain",
+        "rainforest alliance"
+    ]
 },
 
   }
