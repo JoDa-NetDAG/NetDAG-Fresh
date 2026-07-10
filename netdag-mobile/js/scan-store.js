@@ -13,7 +13,6 @@ const ScanStore = {
 
   save(scan) {
     const scans = this.getAll();
-
     const cleanCode = String(scan.code || "").trim();
 
     if (!cleanCode) return null;
@@ -24,6 +23,7 @@ const ScanStore = {
       existing.count = (existing.count || 1) + 1;
       existing.lastScannedAt = new Date().toISOString();
       existing.status = scan.status || existing.status;
+      existing.result = scan.result || existing.result;
       this.write(scans);
       return existing;
     }
@@ -34,6 +34,7 @@ const ScanStore = {
       type: scan.type || "UNKNOWN",
       status: scan.status || "SUBMITTED",
       result: scan.result || "NO_MATCHING_NETDAG_RECORD",
+      label: scan.label || "Unknown Product",
       firstScannedAt: scan.scannedAt || new Date().toISOString(),
       lastScannedAt: scan.scannedAt || new Date().toISOString(),
       count: 1,
@@ -44,6 +45,19 @@ const ScanStore = {
     this.write(scans);
 
     return newScan;
+  },
+
+  saveKnown(product, scannedCode) {
+    if (!product) return null;
+
+    return this.save({
+      code: scannedCode || product.productId || product.onchainId,
+      type: "NETDAG_RECORD",
+      status: product.status || "VERIFIED",
+      result: "MATCHING_NETDAG_RECORD",
+      label: product.name || "Verified Product",
+      scannedAt: new Date().toISOString()
+    });
   },
 
   write(scans) {
