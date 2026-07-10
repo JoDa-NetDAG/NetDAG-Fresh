@@ -390,7 +390,53 @@ const NetDAGDatabase = {
     certificate: "Revoked Certificate"
   },
   keywords: ["medicine", "antibiotic", "revoked", "medtrust"]
-}
+},
+
+"NDG-FOOD-REAL-000001": {
+  recordId: "NDG-REC-2026-REAL-000001",
+  productId: "NDG-FOOD-REAL-000001",
+  barcode: "4099200403632",
+  name: "Milsani KaffeeRahm 15%",
+  brand: "Milsani",
+  sku: "4099200403632",
+  batch: "LABEL-NOT-CAPTURED",
+  category: "Food",
+  subCategory: "Dairy / Coffee Cream",
+  country: "Switzerland",
+  origin: "Switzerland",
+  manufacturer: "ALDI SUISSE AG",
+  issuer: "NetDAG User Evidence Intake",
+  created: "2026-07-10",
+  integrity: "Evidence Confirmed",
+  trustStatus: "EVIDENCE_CONFIRMED",
+  onchainId: "NDG-FOOD-REAL-000001",
+  guardianScore: 78,
+  status: "WARNING",
+  risk: "Label Evidence Confirmed — Manufacturer Verification Pending",
+  fraudStatus: "LOW",
+  conflictFlag: false,
+  reviewRequired: false,
+  certificateAvailable: false,
+  evidence: {
+    barcode: "Physical Product Scan",
+    productName: "Front Label Photo",
+    manufacturer: "Back Label Photo",
+    origin: "Swiss Guarantee Label",
+    nutrition: "Nutrition Label Photo"
+  },
+  keywords: [
+    "milsani",
+    "kaffeerahm",
+    "coffee cream",
+    "cream",
+    "dairy",
+    "food",
+    "switzerland",
+    "aldi suisse",
+    "15 percent",
+    "500 ml"
+  ]
+},
 
   }
 };
